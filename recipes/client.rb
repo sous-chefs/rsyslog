@@ -19,22 +19,23 @@
 
 include_recipe "rsyslog"
 
-if Chef::Config[:solo]
+if !node['rsyslog']['server'] and node['rsyslog']['server_ip'].nil? and Chef::Config[:solo]
   Chef::Log.info("The rsyslog::client recipe uses search. Chef Solo does not support search.")
-elsif !node.run_list.roles.include?(node['rsyslog']['server_role'])
-  Chef::Log.debug("Searching for an rsyslog server with the role #{node['rsyslog']['server_role']}")
-  rsyslog_server = search(:node, "roles:#{node['rsyslog']['server_role']}")
+elsif !node['rsyslog']['server']
+  rsyslog_server = node['rsyslog']['server_ip'] ||
+                   search(:node, node['rsyslog']['server_search']).first['ipaddress'] rescue nil
 
-  template "/etc/rsyslog.d/remote.conf" do
-    source "remote.conf.erb"
+  template "/etc/rsyslog.d/49-remote.conf" do
+    source "49-remote.conf.erb"
     backup false
     variables(
-      :server => rsyslog_server.first['ipaddress'] || node['rsyslog']['server'],
+      :server => rsyslog_server,
       :protocol => node['rsyslog']['protocol']
     )
     owner "root"
     group "root"
     mode 0644
+    only_if { node['rsyslog']['remote_logs'] && !rsyslog_server.nil? }
     notifies :restart, "service[rsyslog]"
   end
 

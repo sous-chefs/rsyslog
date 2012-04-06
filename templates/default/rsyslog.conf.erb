@@ -12,14 +12,17 @@ $ModLoad imuxsock # provides support for local system logging
 $ModLoad imklog   # provides kernel logging support (previously done by rklogd)
 #$ModLoad immark  # provides --MARK-- message capability
 
-# provides UDP syslog reception
-#$ModLoad imudp
-#$UDPServerRun <%= node['rsyslog']['port'] %>
-
-# provides TCP syslog reception
-#$ModLoad imtcp
-#$InputTCPServerRun <%= node['rsyslog']['port'] %>
-
+<% if node['rsyslog']['server'] -%>
+# Provide <%= @protocol.upcase %> log reception
+<% case @protocol -%>
+<% when "tcp" -%>
+$ModLoad imtcp
+$InputTCPServerRun <%= node['rsyslog']['port'] %>
+<% when "udp" -%>
+$ModLoad imudp
+$UDPServerRun <%= node['rsyslog']['port'] %>
+<% end -%>
+<% end -%>
 
 ###########################
 #### GLOBAL DIRECTIVES ####
@@ -31,12 +34,24 @@ $ModLoad imklog   # provides kernel logging support (previously done by rklogd)
 #
 $ActionFileDefaultTemplate RSYSLOG_TraditionalFileFormat
 
+# Filter duplicated messages
+$RepeatedMsgReduction on
+
+#
+# Set temporary directory to buffer syslog queue
+#
+$WorkDirectory /var/spool/rsyslog
+
 #
 # Set the default permissions for all log files.
 #
-$FileOwner root
+$FileOwner syslog
 $FileGroup adm
 $FileCreateMode 0640
+$DirCreateMode 0755
+$Umask 0022
+$PrivDropToUser syslog
+$PrivDropToGroup adm
 
 #
 # Include all config files in /etc/rsyslog.d/
