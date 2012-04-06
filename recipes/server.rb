@@ -17,26 +17,28 @@
 # limitations under the License.
 #
 
-include_recipe "cron"
 include_recipe "rsyslog"
 
 node.set['rsyslog']['server'] = true
 node.save unless Chef::Config[:solo]
 
-directory node['rsyslog']['log_dir'] do
+directory ::File.dirname(node['rsyslog']['log_dir']) do
   owner "root"
   group "root"
   recursive true
   mode 0755
 end
 
-template "/etc/rsyslog.d/server.conf" do
-  source "server.conf.erb"
+directory node['rsyslog']['log_dir'] do
+  owner "syslog"
+  group "adm"
+  mode 0755
+end
+
+template "/etc/rsyslog.d/35-server-per-host.conf" do
+  source "35-server-per-host.conf.erb"
   backup false
-  variables(
-    :log_dir => node['rsyslog']['log_dir'],
-    :protocol => node['rsyslog']['protocol']
-  )
+  variables(:log_dir => node['rsyslog']['log_dir'])
   owner "root"
   group "root"
   mode 0644
@@ -48,10 +50,4 @@ file "/etc/rsyslog.d/remote.conf" do
   backup false
   notifies :reload, "service[rsyslog]"
   only_if do ::File.exists?("/etc/rsyslog.d/remote.conf") end
-end
-
-cron "rsyslog_gz" do
-  command "find #{node['rsyslog']['log_dir']}/$(date +\\%Y) -type f -mtime +1 -exec gzip -q {} \\;"
-  minute "0"
-  hour "4"
 end

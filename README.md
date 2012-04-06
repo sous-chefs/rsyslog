@@ -3,6 +3,25 @@ Description
 
 Installs rsyslog to replace sysklogd for client and/or server use. By default, server will be set up to log to files.
 
+Changes
+=======
+
+## v1.0.1:
+ * More versitile server resolving mechanism. Now server's ip can be set
+   explicitly or the search operation can be used instead.
+ * Removed cron dependency.
+ * Removed log archivation.
+ * Works with ChefSolo now.
+ * Set debian/ubuntu default user and group. Drop privileges to `syslog.adm`.
+
+## v1.0.0:
+
+* [COOK-836] - use an attribute to specify the role to search for
+  instead of relying on the rsyslog['server'] attribute.
+* Clean up attribute usage to use strings instead of symbols.
+* Update this README.
+* Better handling for chef-solo.
+
 Requirements
 ============
 
@@ -17,16 +36,12 @@ For Ubuntu 8.04, the rsyslog package will be installed from a PPA via the defaul
 
 Ubuntu 8.10 and 9.04 are no longer supported releases and have not been tested with this cookbook.
 
-Cookbooks
----------
-
-* cron (http://community.opscode.com/cookbooks/cron)
-
 Other
 -----
 
-To use the `recipe[rsyslog::client]` recipe, you'll need to set up a
-role to search for. See the __Recipes__, and __Examples__ sections below.
+To use the `recipe[rsyslog::client]` recipe, you'll need to set up the
+`rsyslog.server_search` or `rsyslog.server_ip` attributes.
+See the __Recipes__, and __Examples__ sections below.
 
 Attributes
 ==========
@@ -35,17 +50,19 @@ See `attributes/default.rb` for default values.
 
 * `node['rsyslog']['log_dir']` - If the node is an rsyslog server,
   this specifies the directory where the logs should be stored.
-* `node['rsyslog']['server']` - Used to indicate whether the node
-  running Chef is an rsyslog server. As of cookbook v1.0.0, this is
-  determined automatically through search. The server recipe will set
-  this to true. It is otherwise unused in the current version.
+* `node['rsyslog']['server']` - Determined automaticaly and set to true on
+  the server.
+* `node['rsyslog']['server_ip']` - If not defined then search will be used
+  to determine rsyslog server. Default is `nil`.
+* `node['rsyslog']['server_search']` - Specify the criteria for the server
+  search operation. Default is `role:loghost`.
 * `node['rsyslog']['protocol']` - Specify whether to use `udp` or
-  `tcp` for remote loghost.
+  `tcp` for remote loghost. Default is `tcp`.
 * `node['rsyslog']['port']` - Specify the port which rsyslog should
   connect to a remote loghost.
-* `node['rsyslog']['server_role']` - Role applied to a remote
-  loghost. Used by `recipe[rsyslog::client]` to search for the
-  loghost.
+* `node['rsyslog']['remote_logs']` - Specify wether to send all logs
+  to a remote server (client option). Default is `true`;
+
 
 Recipes
 =======
@@ -61,34 +78,35 @@ client
 
 Includes `recipe[rsyslog]`.
 
-Uses Chef search to find a remote loghost node with the role specified
-by `node['rsyslog']['server_role']` and uses its `ipaddress` attribute
-to send log messages. If the node itself has the `server_role` in the
-expanded roles, then the configuration is skipped. If the node had an
-`/etc/rsyslog.d/server.conf` file previously configured, this file
-gets removed to prevent duplicate logging. Any previous logs are not
+Uses Chef search to find a remote loghost node with the search criteria specified
+by `node['rsyslog']['server_search']` and uses its `ipaddress` attribute
+to send log messages. In case the `rsyslog.server_ip` is explicitly defined then
+it's used instead the search operation. If the node itself is a rsyslog server ie
+it has `rsyslog.server` attribute set to true then the configuration is skipped.
+If the node had an `/etc/rsyslog.d/35-server-per-host.conf` file previously configured,
+this file gets removed to prevent duplicate logging. Any previous logs are not
 cleaned up from the `log_dir`.
 
 server
 ------
 
-Configures the node to be an rsyslog loghost. The node should have the
-role specified by `node['rsyslog']['server_role']` applied so client
-nodes can find it with search. This recipe will create the logs in
+Configures the node to be a rsyslog server. The node should be able to be
+resolved by the specified search criteria `node['rsyslog']['server_search]`
+so that client nodes can find it with search. This recipe will create the logs in
 `node['rsyslog']['log_dir']`, and the configuration is in
 `/etc/rsyslog.d/server.conf`. This recipe also removes any previous
 configuration to a remote server by removing the
 `/etc/rsyslog.d/remote.conf` file. Finally, a cron job is set up to
 compress logs in the `log_dir` that are older than one day.
 
-The server configuration will set up `log_dir` for each client, by
-date. Directory structure:
+The server configuration will set up `log_dir` for each client.
+Directory structure:
 
-    <%= @log_dir %>/YEAR/MONTH/DAY/HOSTNAME/"logfile"
+    <%= @log_dir %>/HOSTNAME/"logfile"
 
 For example:
 
-    /srv/rsyslog/2011/11/19/www/messages
+    /srv/rsyslog/www/messages
 
 At this time, the server can only listen on UDP *or* TCP.
 
@@ -101,7 +119,7 @@ configured service for standalone systems.
 Use `recipe[rsyslog::client]` to have nodes search for the loghost
 automatically to configure remote [r]syslog.
 
-Use `recipe[rsyslog::server]` to set up a loghost. It will listen on
+Use `recipe[rsyslog::server]` to set up a rsyslog server. It will listen on
 `node['rsyslog']['port']` protocol `node['rsyslog']['protocol']`.
 
 If you set up a different kind of centralized loghost (syslog-ng,
@@ -128,28 +146,16 @@ By default this will set up the clients search for a node with the
 `loghost` role to talk to the server on TCP port 514. Change the
 `protocol` and `port` rsyslog attributes to modify this.
 
-If you're using another log server software on your loghost, such as
-graylog2, you can use the role for that loghost for the search
-instead. For example, if the role of your graylog2 server is
-`graylog2_server`, then modify the base role for the server role:
+If you want to specify another syslog compatible server with a role other
+than loghost, simply fill free to use the `server_ip` attribute or
+the `server_search` attribute.
 
-    name "base"
-    description "Base role applied to all nodes
-    run_list("recipe[rsyslog::client]")
-    default_attributes(
-      "rsyslog" => {
-        "server_role" => "graylog2_server"
-      }
-    )
-
-Then make sure you have a role named `graylog2_server` applied to some
-node, and `recipe[rsyslog::client]` will configure the local system to
-send logs to graylog2.
 
 License and Author
 ==================
 
 Author:: Joshua Timberman (<joshua@opscode.com>)
+Author:: Denis Barishev (<denz@twiket.com>)
 
 Copyright:: 2009-2011, Opscode, Inc
 

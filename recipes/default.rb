@@ -33,12 +33,6 @@ package "rsyslog" do
   action :install
 end
 
-service "rsyslog" do
-  service_name "rsyslogd" if platform?("arch")
-  supports :restart => true, :reload => true
-  action [:enable, :start]
-end
-
 cookbook_file "/etc/default/rsyslog" do
   source "rsyslog.default"
   owner "root"
@@ -52,11 +46,18 @@ directory "/etc/rsyslog.d" do
   mode 0755
 end
 
+directory "/var/spool/rsyslog" do
+  owner "syslog"
+  group "adm"
+  mode 0755
+end
+
 template "/etc/rsyslog.conf" do
   source "rsyslog.conf.erb"
   owner "root"
   group "root"
   mode 0644
+  variables(:protocol => node['rsyslog']['protocol'])
   notifies :restart, "service[rsyslog]"
 end
 
@@ -68,4 +69,10 @@ if platform?("ubuntu")
     group "root"
     mode 0644
   end
+end
+
+service "rsyslog" do
+  service_name "rsyslogd" if platform?("arch")
+  supports :restart => true, :reload => true
+  action [:enable, :start]
 end
