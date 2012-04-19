@@ -3,24 +3,10 @@ Description
 
 Installs rsyslog to replace sysklogd for client and/or server use. By default, server will be set up to log to files.
 
-Changes
-=======
-
-## v1.0.1:
- * More versitile server resolving mechanism. Now server's ip can be set
-   explicitly or the search operation can be used instead.
- * Removed cron dependency.
- * Removed log archivation.
- * Works with ChefSolo now.
- * Set debian/ubuntu default user and group. Drop privileges to `syslog.adm`.
-
-## v1.0.0:
-
-* [COOK-836] - use an attribute to specify the role to search for
-  instead of relying on the rsyslog['server'] attribute.
-* Clean up attribute usage to use strings instead of symbols.
-* Update this README.
-* Better handling for chef-solo.
+**Important Changes in 1.1.0**: See the CHANGELOG.md file for
+  important changes to this cookbook. There are some incompatibilities
+  with existing installations. Use version 1.0.0 if you're not ready
+  for these changes.
 
 Requirements
 ============
@@ -61,7 +47,11 @@ See `attributes/default.rb` for default values.
 * `node['rsyslog']['port']` - Specify the port which rsyslog should
   connect to a remote loghost.
 * `node['rsyslog']['remote_logs']` - Specify wether to send all logs
-  to a remote server (client option). Default is `true`;
+  to a remote server (client option). Default is `true`.
+* `node['rsyslog']['per_host_dir']` - "PerHost" directories for
+  template statements in `35-server-per-host.conf`. Default value is
+  the previous cookbook version's value, to preserve compatibility.
+  See __server__ recipe below.
 
 
 Recipes
@@ -96,17 +86,30 @@ so that client nodes can find it with search. This recipe will create the logs i
 `node['rsyslog']['log_dir']`, and the configuration is in
 `/etc/rsyslog.d/server.conf`. This recipe also removes any previous
 configuration to a remote server by removing the
-`/etc/rsyslog.d/remote.conf` file. Finally, a cron job is set up to
-compress logs in the `log_dir` that are older than one day.
+`/etc/rsyslog.d/remote.conf` file.
 
-The server configuration will set up `log_dir` for each client.
+The cron job used in the previous version of this cookbook is removed,
+but it does not remove any existing cron job from your system (so it
+doesn't break anything unexpectedly). We recommend setting up
+logrotate for the logfiles instead.
+
+The `log_dir` will be concatenated with `per_host_dir` to store the
+logs for each client. Modify the attribute to have a value that is
+allowed by rsyslogs template matching values, see the rsyslog
+documentation for this.
+
 Directory structure:
 
-    <%= @log_dir %>/HOSTNAME/"logfile"
+    <%= @log_dir %>/<%= @per_host_dir %>/"logfile"
 
-For example:
+For example for the system with hostname `www`:
 
-    /srv/rsyslog/www/messages
+    /srv/rsyslog/2011/11/19/www/messages
+
+For example, to change this to just the hostname, set the attribute
+`node['rsyslog']['per_host_dir']` via a role:
+
+    "rsyslog" => { "per_host_dir" => "%HOSTNAME%" }
 
 At this time, the server can only listen on UDP *or* TCP.
 
@@ -126,6 +129,7 @@ If you set up a different kind of centralized loghost (syslog-ng,
 graylog2, logstash, etc), you can still send log messages to it as
 long as the port and protocol match up with the server
 software. See __Examples__
+
 
 Examples
 --------
@@ -150,6 +154,14 @@ If you want to specify another syslog compatible server with a role other
 than loghost, simply fill free to use the `server_ip` attribute or
 the `server_search` attribute.
 
+Example role that sets the per host directory:
+
+    name "loghost"
+    description "Central syslog server"
+    run_list("recipe[rsyslog::server]")
+    default_attributes(
+      "rsyslog" => { "per_host_dir" => "%HOSTNAME%" }
+    )
 
 License and Author
 ==================

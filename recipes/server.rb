@@ -38,7 +38,10 @@ end
 template "/etc/rsyslog.d/35-server-per-host.conf" do
   source "35-server-per-host.conf.erb"
   backup false
-  variables(:log_dir => node['rsyslog']['log_dir'])
+  variables(
+    :log_dir => node['rsyslog']['log_dir'],
+    :per_host_dir => node['rsyslog']['per_host_dir']
+  )
   owner "root"
   group "root"
   mode 0644

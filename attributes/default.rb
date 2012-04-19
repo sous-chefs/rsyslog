@@ -24,3 +24,4 @@ default["rsyslog"]["port"]          = "514"
 default["rsyslog"]["server_ip"]     = nil
 default["rsyslog"]["server_search"] = "role:loghost"
 default["rsyslog"]["remote_logs"]   = true
+default["rsyslog"]["per_host_dir"]  = "%$YEAR%/%$MONTH%/%$DAY%/%HOSTNAME%"

@@ -5,22 +5,22 @@ $DirGroup adm
 $DirCreateMode 0755
 $FileGroup adm
 
-$template PerHostAuth,"<%= @log_dir %>/%HOSTNAME%/auth.log"
-$template PerHostCron,"<%= @log_dir %>/%HOSTNAME%/cron.log"
-$template PerHostSyslog,"<%= @log_dir %>/%HOSTNAME%/syslog"
-$template PerHostDaemon,"<%= @log_dir %>/%HOSTNAME%/daemon.log"
-$template PerHostKern,"<%= @log_dir %>/%HOSTNAME%/kern.log"
-$template PerHostLpr,"<%= @log_dir %>/%HOSTNAME%/lpr.log"
-$template PerHostUser,"<%= @log_dir %>/%HOSTNAME%/user.log"
-$template PerHostMail,"<%= @log_dir %>/%HOSTNAME%/mail.log"
-$template PerHostMailInfo,"<%= @log_dir %>/%HOSTNAME%/mail.info"
-$template PerHostMailWarn,"<%= @log_dir %>/%HOSTNAME%/mail.warn"
-$template PerHostMailErr,"<%= @log_dir %>/%HOSTNAME%/mail.err"
-$template PerHostNewsCrit,"<%= @log_dir %>/%HOSTNAME%/news.crit"
-$template PerHostNewsErr,"<%= @log_dir %>/%HOSTNAME%/news.err"
-$template PerHostNewsNotice,"<%= @log_dir %>/%HOSTNAME%/news.notice"
-$template PerHostDebug,"<%= @log_dir %>/%HOSTNAME%/debug"
-$template PerHostMessages,"<%= @log_dir %>/%HOSTNAME%/messages"
+$template PerHostAuth,"<%= @log_dir %>/<%= @per_host_dir %>/auth.log"
+$template PerHostCron,"<%= @log_dir %>/<%= @per_host_dir %>/cron.log"
+$template PerHostSyslog,"<%= @log_dir %>/<%= @per_host_dir %>/syslog"
+$template PerHostDaemon,"<%= @log_dir %>/<%= @per_host_dir %>/daemon.log"
+$template PerHostKern,"<%= @log_dir %>/<%= @per_host_dir %>/kern.log"
+$template PerHostLpr,"<%= @log_dir %>/<%= @per_host_dir %>/lpr.log"
+$template PerHostUser,"<%= @log_dir %>/<%= @per_host_dir %>/user.log"
+$template PerHostMail,"<%= @log_dir %>/<%= @per_host_dir %>/mail.log"
+$template PerHostMailInfo,"<%= @log_dir %>/<%= @per_host_dir %>/mail.info"
+$template PerHostMailWarn,"<%= @log_dir %>/<%= @per_host_dir %>/mail.warn"
+$template PerHostMailErr,"<%= @log_dir %>/<%= @per_host_dir %>/mail.err"
+$template PerHostNewsCrit,"<%= @log_dir %>/<%= @per_host_dir %>/news.crit"
+$template PerHostNewsErr,"<%= @log_dir %>/<%= @per_host_dir %>/news.err"
+$template PerHostNewsNotice,"<%= @log_dir %>/<%= @per_host_dir %>/news.notice"
+$template PerHostDebug,"<%= @log_dir %>/<%= @per_host_dir %>/debug"
+$template PerHostMessages,"<%= @log_dir %>/<%= @per_host_dir %>/messages"
 
 auth,authpriv.*         ?PerHostAuth
 *.*;auth,authpriv.none  -?PerHostSyslog
