@@ -47,8 +47,8 @@ directory "/etc/rsyslog.d" do
 end
 
 directory "/var/spool/rsyslog" do
-  owner "syslog"
-  group "adm"
+  owner node['rsyslog']['user']
+  group node['rsyslog']['group']
   mode 0755
 end
 
