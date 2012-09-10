@@ -54,6 +54,11 @@ $PrivDropToUser syslog
 $PrivDropToGroup adm
 
 #
+# Set max message size
+#
+$MaxMessageSize <%= node['rsyslog']['max_message_size'] %>
+
+#
 # Include all config files in /etc/rsyslog.d/
 #
 $IncludeConfig /etc/rsyslog.d/*.conf
