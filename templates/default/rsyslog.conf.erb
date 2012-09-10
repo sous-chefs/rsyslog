@@ -3,6 +3,10 @@
 #			For more information see
 #			/usr/share/doc/rsyslog-doc/html/rsyslog_conf.html
 
+#
+# Set max message size
+#
+$MaxMessageSize <%= node['rsyslog']['max_message_size'] %>
 
 #################
 #### MODULES ####
