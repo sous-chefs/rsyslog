@@ -52,7 +52,8 @@ See `attributes/default.rb` for default values.
   template statements in `35-server-per-host.conf`. Default value is
   the previous cookbook version's value, to preserve compatibility.
   See __server__ recipe below.
-
+* `node['rsyslog']['max_message_size']` - Specify the maximum allowed
+  message size. Default is 2k.
 
 Recipes
 =======
