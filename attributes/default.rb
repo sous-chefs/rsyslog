@@ -48,3 +48,5 @@ else
   default["rsyslog"]["group"] = "root"
   default["rsyslog"]["priv_seperation"] = false
 end
+
+default["rsyslog"]["max_message_size"] = "2k"
