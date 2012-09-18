@@ -33,6 +33,11 @@ package "rsyslog" do
   action :install
 end
 
+user "syslog" do
+  system true
+  shell "/bin/false"
+end
+
 cookbook_file "/etc/default/rsyslog" do
   source "rsyslog.default"
   owner "root"

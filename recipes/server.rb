@@ -29,11 +29,6 @@ directory ::File.dirname(node['rsyslog']['log_dir']) do
   mode 0755
 end
 
-user "syslog" do
-  system true
-  shell "/bin/false"
-end
-
 directory node['rsyslog']['log_dir'] do
   owner "syslog"
   group "adm"
