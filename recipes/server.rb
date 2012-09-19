@@ -30,8 +30,8 @@ directory ::File.dirname(node['rsyslog']['log_dir']) do
 end
 
 directory node['rsyslog']['log_dir'] do
-  owner "syslog"
-  group "adm"
+  owner node['rsyslog']['user']
+  group node['rsyslog']['group']
   mode 0755
 end
 
