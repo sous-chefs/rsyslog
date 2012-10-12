@@ -26,25 +26,25 @@ default["rsyslog"]["server_search"] = "role:loghost"
 default["rsyslog"]["remote_logs"]   = true
 default["rsyslog"]["per_host_dir"]  = "%$YEAR%/%$MONTH%/%$DAY%/%HOSTNAME%"
 
-case platform
-    when "debian"
-        default["rsyslog"]["user"] = "root"
-        default["rsyslog"]["group"] = "adm"
-        default["rsyslog"]["priv_seperation"] = false
-    when "ubuntu"
-        # syslog user introduced with natty package
-        if  node['platform_version'].to_f >= 10.10 then
-            default["rsyslog"]["user"] = "root"
-            default["rsyslog"]["group"] = "adm"
-            default["rsyslog"]["priv_seperation"] = false
-        else
-            default["rsyslog"]["user"] = "syslog"
-            default["rsyslog"]["group"] = "adm"
-            default["rsyslog"]["priv_seperation"] = true
-        end
-    else
-    #values for fedora at least
-        default["rsyslog"]["user"] = "root"
-        default["rsyslog"]["group"] = "root"
-        default["rsyslog"]["priv_seperation"] = false
+case node["platform"]
+when "debian"
+  default["rsyslog"]["user"] = "root"
+  default["rsyslog"]["group"] = "adm"
+  default["rsyslog"]["priv_seperation"] = false
+when "ubuntu"
+  # syslog user introduced with natty package
+  if  node['platform_version'].to_f >= 10.10 then
+    default["rsyslog"]["user"] = "root"
+    default["rsyslog"]["group"] = "adm"
+    default["rsyslog"]["priv_seperation"] = false
+  else
+    default["rsyslog"]["user"] = "syslog"
+    default["rsyslog"]["group"] = "adm"
+    default["rsyslog"]["priv_seperation"] = true
+  end
+else
+  #values for fedora at least
+  default["rsyslog"]["user"] = "root"
+  default["rsyslog"]["group"] = "root"
+  default["rsyslog"]["priv_seperation"] = false
 end
