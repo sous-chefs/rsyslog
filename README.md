@@ -52,6 +52,11 @@ See `attributes/default.rb` for default values.
   template statements in `35-server-per-host.conf`. Default value is
   the previous cookbook version's value, to preserve compatibility.
   See __server__ recipe below.
+* `node['rsyslog']['user']` - Specify the user to run and write files as.
+* `node['rsyslog']['group']` - Specify the group to run and write files as.
+* `node['rsyslog']['priv_seperation']` - Whether to use privilege seperation or
+   not. 
+
 
 
 Recipes

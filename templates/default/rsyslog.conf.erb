@@ -45,14 +45,15 @@ $WorkDirectory /var/spool/rsyslog
 #
 # Set the default permissions for all log files.
 #
-$FileOwner syslog
-$FileGroup adm
+$FileOwner <%= node['rsyslog']['user'] %>
+$FileGroup <%= node['rsyslog']['group'] %>
 $FileCreateMode 0640
 $DirCreateMode 0755
 $Umask 0022
-$PrivDropToUser syslog
-$PrivDropToGroup adm
-
+<% if node['rsyslog']['priv_seperation'] %>
+$PrivDropToUser <%= node['rsyslog']['user'] %>
+$PrivDropToGroup <%= node['rsyslog']['group'] %>
+<% end %>
 #
 # Include all config files in /etc/rsyslog.d/
 #
