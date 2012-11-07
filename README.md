@@ -55,9 +55,9 @@ See `attributes/default.rb` for default values.
 * `node['rsyslog']['user']` - Specify the user to run and write files as.
 * `node['rsyslog']['group']` - Specify the group to run and write files as.
 * `node['rsyslog']['priv_seperation']` - Whether to use privilege seperation or
-   not. 
-
-
+   not.
+* `node['rsyslog']['max_message_size']` - Specify the maximum allowed
+  message size. Default is 2k.
 
 Recipes
 =======
