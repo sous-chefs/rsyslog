@@ -33,7 +33,7 @@ package "rsyslog" do
   action :install
 end
 
-cookbook_file "/etc/default/rsyslog" do
+cookbook_file "#{node["rsyslog"]["defaults_file"]}" do
   source "rsyslog.default"
   owner "root"
   group "root"
