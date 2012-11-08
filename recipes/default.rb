@@ -17,32 +17,20 @@
 # limitations under the License.
 #
 
-if platform?("ubuntu") && node['platform_version'].to_f == 8.04
-  apt_repository "hardy-rsyslog-ppa" do
-    uri "http://ppa.launchpad.net/a.bono/rsyslog/ubuntu"
-    distribution "hardy"
-    components ["main"]
-    keyserver "keyserver.ubuntu.com"
-    key "C0061A4A"
-    action :add
-    notifies :run, "execute[apt-get update]", :immediately
-  end
-end
-
 package "rsyslog" do
   action :install
 end
 
 cookbook_file "#{node["rsyslog"]["defaults_file"]}" do
   source "rsyslog.default"
-  owner node["rsyslog"]["owner"]
-  group node["rsyslog"]["group"]
+  owner node['rsyslog']['owner']
+  group node['rsyslog']['group']
   mode 0644
 end
 
 directory "/etc/rsyslog.d" do
-  owner node["rsyslog"]["owner"]
-  group node["rsyslog"]["group"]
+  owner node['rsyslog']['owner']
+  group node['rsyslog']['group']
   mode 0755
 end
 
@@ -52,26 +40,26 @@ directory "/var/spool/rsyslog" do
   mode 0755
 end
 
+# Our main stub which then does its own rsyslog-specific
+# include of things in /etc/rsyslog.d/*
 template "/etc/rsyslog.conf" do
-  source "rsyslog.conf.erb"
-  owner node["rsyslog"]["owner"]
-  group node["rsyslog"]["group"]
+  source 'rsyslog.conf.erb'
+  owner node['rsyslog']['owner']
+  group node['rsyslog']['group']
   mode 0644
   variables(:protocol => node['rsyslog']['protocol'])
-  notifies :restart, "service[rsyslog]"
+  notifies :restart, 'service[rsyslog]'
 end
 
-if platform?("ubuntu")
-  template "/etc/rsyslog.d/50-default.conf" do
-    source "50-default.conf.erb"
-    backup false
-    owner node["rsyslog"]["owner"]
-    group node["rsyslog"]["group"]
-    mode 0644
-  end
+template "/etc/rsyslog.d/50-default.conf" do
+  source "50-default.conf.erb"
+  backup false
+  owner node['rsyslog']['owner']
+  group node['rsyslog']['group']
+  mode 0644
 end
 
-service "#{node["rsyslog"]["service_name"]}" do
+service "#{node['rsyslog']['service_name']}" do
   supports :restart => true, :reload => true
   action [:enable, :start]
 end
