@@ -35,14 +35,14 @@ end
 
 cookbook_file "#{node["rsyslog"]["defaults_file"]}" do
   source "rsyslog.default"
-  owner "root"
-  group "root"
+  owner node["rsyslog"]["owner"]
+  group node["rsyslog"]["group"]
   mode 0644
 end
 
 directory "/etc/rsyslog.d" do
-  owner "root"
-  group "root"
+  owner node["rsyslog"]["owner"]
+  group node["rsyslog"]["group"]
   mode 0755
 end
 
@@ -54,8 +54,8 @@ end
 
 template "/etc/rsyslog.conf" do
   source "rsyslog.conf.erb"
-  owner "root"
-  group "root"
+  owner node["rsyslog"]["owner"]
+  group node["rsyslog"]["group"]
   mode 0644
   variables(:protocol => node['rsyslog']['protocol'])
   notifies :restart, "service[rsyslog]"
@@ -65,8 +65,8 @@ if platform?("ubuntu")
   template "/etc/rsyslog.d/50-default.conf" do
     source "50-default.conf.erb"
     backup false
-    owner "root"
-    group "root"
+    owner node["rsyslog"]["owner"]
+    group node["rsyslog"]["group"]
     mode 0644
     notifies :restart, "service[rsyslog]"
   end

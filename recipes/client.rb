@@ -32,8 +32,8 @@ elsif !node['rsyslog']['server']
       :server => rsyslog_server,
       :protocol => node['rsyslog']['protocol']
     )
-    owner "root"
-    group "root"
+    owner node["rsyslog"]["owner"]
+    owner node["rsyslog"]["group"]
     mode 0644
     only_if { node['rsyslog']['remote_logs'] && !rsyslog_server.nil? }
     notifies :restart, "service[rsyslog]"
