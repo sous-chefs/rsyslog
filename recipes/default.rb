@@ -71,8 +71,7 @@ if platform?("ubuntu")
   end
 end
 
-service "rsyslog" do
-  service_name "rsyslogd" if platform?("arch")
+service "#{node["rsyslog"]["service_name"]}" do
   supports :restart => true, :reload => true
   action [:enable, :start]
 end

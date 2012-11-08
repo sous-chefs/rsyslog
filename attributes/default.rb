@@ -26,6 +26,7 @@ default["rsyslog"]["server_search"]    = "role:loghost"
 default["rsyslog"]["remote_logs"]      = true
 default["rsyslog"]["per_host_dir"]     = "%$YEAR%/%$MONTH%/%$DAY%/%HOSTNAME%"
 default["rsyslog"]["max_message_size"] = "2k"
+default["rsyslog"]["service_name"]     = "rsyslog"
 
 # The most likely platform-specific attributes
 default["rsyslog"]["user"] = "root"
@@ -43,4 +44,6 @@ when "ubuntu"
   end
 when "redhat"
   default["rsyslog"]["defaults_file"] = "/etc/sysconfig/rsyslog"
+when "arch"
+  default["rsyslog"]["service_name"] = "rsyslogd"
 end
