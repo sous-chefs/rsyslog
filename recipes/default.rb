@@ -48,7 +48,7 @@ template "/etc/rsyslog.conf" do
   group node['rsyslog']['group']
   mode 0644
   variables(:protocol => node['rsyslog']['protocol'])
-  notifies :restart, 'service[rsyslog]'
+  notifies :restart, "service[#{node['rsyslog']['service_name']}]"
 end
 
 template "/etc/rsyslog.d/50-default.conf" do
@@ -57,6 +57,7 @@ template "/etc/rsyslog.d/50-default.conf" do
   owner node['rsyslog']['owner']
   group node['rsyslog']['group']
   mode 0644
+  notifies :restart, "service[#{node['rsyslog']['service_name']}]"
 end
 
 service "#{node['rsyslog']['service_name']}" do
