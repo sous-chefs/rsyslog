@@ -12,6 +12,7 @@ recipe            "rsyslog::server", "Sets up an rsyslog server"
 
 supports          "ubuntu", ">= 8.04"
 supports          "debian", ">= 5.0"
+supports          "redhat", ">= 6.0"
 
 attribute "rsyslog",
   :display_name => "Rsyslog",
@@ -51,3 +52,33 @@ attribute "rsyslog/remote_logs",
   :display_name => "Remote Logs",
   :description => "Specifies whether redirect all log from client to server",
   :default => "true"
+
+attribute "rsyslog/user",
+  :display_name => "User",
+  :description => "The owner of Rsyslog config files and directories",
+  :default => "root"
+
+attribute "rsyslog/group",
+  :display_name => "Group",
+  :description => "The group-owner of Rsyslog config files and directories",
+  :default => "adm"
+
+attribute "rsyslog/service_name",
+  :display_name => "Service name",
+  :description => "The name of the service for the platform",
+  :default => "rsyslog"
+
+attribute "rsyslog/defaults_file",
+  :display_name => "Defaults file",
+  :description => "The full path to the service's defaults/sysconfig file",
+  :default => "/etc/default/rsyslog"
+
+attribute "rsyslog/max_message_size",
+  :display_name => "Maximum Rsyslog message size",
+  :description => "Specifies the maximum size of allowable Rsyslog messages",
+  :default => "2k"
+
+attribute "rsyslog/priv_seperation",
+  :display_name => "Privilege separation",
+  :description => "Whether or not to make use of Rsyslog privilege separation",
+  :default => "false"
