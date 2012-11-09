@@ -17,36 +17,33 @@
 # limitations under the License.
 #
 
-default["rsyslog"]["log_dir"]       = "/srv/rsyslog"
-default["rsyslog"]["server"]        = false
-default["rsyslog"]["protocol"]      = "tcp"
-default["rsyslog"]["port"]          = "514"
-default["rsyslog"]["server_ip"]     = nil
-default["rsyslog"]["server_search"] = "role:loghost"
-default["rsyslog"]["remote_logs"]   = true
-default["rsyslog"]["per_host_dir"]  = "%$YEAR%/%$MONTH%/%$DAY%/%HOSTNAME%"
+default["rsyslog"]["log_dir"]          = "/srv/rsyslog"
+default["rsyslog"]["server"]           = false
+default["rsyslog"]["protocol"]         = "tcp"
+default["rsyslog"]["port"]             = "514"
+default["rsyslog"]["server_ip"]        = nil
+default["rsyslog"]["server_search"]    = "role:loghost"
+default["rsyslog"]["remote_logs"]      = true
+default["rsyslog"]["per_host_dir"]     = "%$YEAR%/%$MONTH%/%$DAY%/%HOSTNAME%"
+default["rsyslog"]["max_message_size"] = "2k"
+
+# The most likely platform-specific attributes
+default["rsyslog"]["service_name"]     = "rsyslog"
+default["rsyslog"]["user"] = "root"
+default["rsyslog"]["group"] = "adm"
+default["rsyslog"]["priv_seperation"] = false
+default["rsyslog"]["defaults_file"] = "/etc/default/rsyslog"
 
 case node["platform"]
-when "debian"
-  default["rsyslog"]["user"] = "root"
-  default["rsyslog"]["group"] = "adm"
-  default["rsyslog"]["priv_seperation"] = false
 when "ubuntu"
   # syslog user introduced with natty package
-  if  node['platform_version'].to_f >= 10.10 then
-    default["rsyslog"]["user"] = "root"
-    default["rsyslog"]["group"] = "adm"
-    default["rsyslog"]["priv_seperation"] = false
-  else
+  if node['platform_version'].to_f < 10.10 then
     default["rsyslog"]["user"] = "syslog"
     default["rsyslog"]["group"] = "adm"
     default["rsyslog"]["priv_seperation"] = true
   end
-else
-  #values for fedora at least
-  default["rsyslog"]["user"] = "root"
-  default["rsyslog"]["group"] = "root"
-  default["rsyslog"]["priv_seperation"] = false
+when "redhat"
+  default["rsyslog"]["defaults_file"] = "/etc/sysconfig/rsyslog"
+when "arch"
+  default["rsyslog"]["service_name"] = "rsyslogd"
 end
-
-default["rsyslog"]["max_message_size"] = "2k"

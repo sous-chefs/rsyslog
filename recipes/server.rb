@@ -23,8 +23,8 @@ node.set['rsyslog']['server'] = true
 node.save unless Chef::Config[:solo]
 
 directory ::File.dirname(node['rsyslog']['log_dir']) do
-  owner "root"
-  group "root"
+  owner node["rsyslog"]["user"]
+  group node["rsyslog"]["group"]
   recursive true
   mode 0755
 end
@@ -42,15 +42,15 @@ template "/etc/rsyslog.d/35-server-per-host.conf" do
     :log_dir => node['rsyslog']['log_dir'],
     :per_host_dir => node['rsyslog']['per_host_dir']
   )
-  owner "root"
-  group "root"
+  owner node["rsyslog"]["user"]
+  group node["rsyslog"]["group"]
   mode 0644
-  notifies :restart, "service[rsyslog]"
+  notifies :restart, "service[#{node['rsyslog']['service_name']}]"
 end
 
 file "/etc/rsyslog.d/remote.conf" do
   action :delete
   backup false
-  notifies :reload, "service[rsyslog]"
+  notifies :reload, "service[#{node['rsyslog']['service_name']}]"
   only_if do ::File.exists?("/etc/rsyslog.d/remote.conf") end
 end

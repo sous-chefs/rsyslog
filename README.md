@@ -1,7 +1,12 @@
 Description
 ===========
 
-Installs rsyslog to replace sysklogd for client and/or server use. By default, server will be set up to log to files.
+Installs and configures rsyslog to replace sysklogd for client and/or
+server use. By default, the service will be configured to log to
+files on local disk. See the __Recipes__ and __Examples__ sections 
+for other uses.
+
+**Major Changes in 1.2.0**: See CHANGELOG.md
 
 **Important Changes in 1.1.0**: See the CHANGELOG.md file for
   important changes to this cookbook. There are some incompatibilities
@@ -14,20 +19,14 @@ Requirements
 Platform
 --------
 
-Tested on Ubuntu 8.04, 9.10, 10.04.
-
-For Ubuntu 8.04, the rsyslog package will be installed from a PPA via the default.rb recipe in order to get 4.2.0 backported from 10.04.
-
-* https://launchpad.net/~a.bono/+archive/rsyslog
+Tested on Ubuntu 9.10, 10.04 and Red Hat 6.3
 
 Ubuntu 8.10 and 9.04 are no longer supported releases and have not been tested with this cookbook.
 
 Other
 -----
 
-To use the `recipe[rsyslog::client]` recipe, you'll need to set up the
-`rsyslog.server_search` or `rsyslog.server_ip` attributes.
-See the __Recipes__, and __Examples__ sections below.
+To use the `recipe[rsyslog::client]` recipe, you'll need to set up the `rsyslog.server_search` or `rsyslog.server_ip` attributes.  See the __Recipes__ and __Examples__ sections below.
 
 Attributes
 ==========
@@ -58,6 +57,12 @@ See `attributes/default.rb` for default values.
    not.
 * `node['rsyslog']['max_message_size']` - Specify the maximum allowed
   message size. Default is 2k.
+* `node['rsyslog']['user']` - Who should own the configuration files and directories
+* `node['rsyslog']['group']` - Who should group-own the configuration files
+  and directories
+* `node['rsyslog']['defaults_file']` - The full path to the defaults/sysconfig file
+  for the service.
+* `node['rsyslog']['service_name']` - The platform-specific name of the service
 
 Recipes
 =======
@@ -65,32 +70,38 @@ Recipes
 default
 -------
 
-Installs the rsyslog package, manages the rsyslog service and sets up
-basic configuration for a standalone machine.
+Installs the rsyslog package, manages the rsyslog service and sets up basic
+configuration for a standalone machine.
 
 client
 ------
 
 Includes `recipe[rsyslog]`.
 
-Uses Chef search to find a remote loghost node with the search criteria specified
-by `node['rsyslog']['server_search']` and uses its `ipaddress` attribute
-to send log messages. In case the `rsyslog.server_ip` is explicitly defined then
-it's used instead the search operation. If the node itself is a rsyslog server ie
-it has `rsyslog.server` attribute set to true then the configuration is skipped.
+Uses `node['rsyslog']['server_ip']` or Chef search (in that precedence order)
+to determine the remote syslog server's IP address. If search is used, the
+search query will look for the first `ipaddress` returned from the criteria
+specified in `node['rsyslog']['server_search']`.
+
+If the node itself is a rsyslog server ie it has `rsyslog.server` set to true
+then the configuration is skipped.
+
 If the node had an `/etc/rsyslog.d/35-server-per-host.conf` file previously configured,
-this file gets removed to prevent duplicate logging. Any previous logs are not
-cleaned up from the `log_dir`.
+this file gets removed to prevent duplicate logging.
+
+Any previous logs are not cleaned up from the `log_dir`.
 
 server
 ------
 
-Configures the node to be a rsyslog server. The node should be able to be
-resolved by the specified search criteria `node['rsyslog']['server_search]`
-so that client nodes can find it with search. This recipe will create the logs in
-`node['rsyslog']['log_dir']`, and the configuration is in
-`/etc/rsyslog.d/server.conf`. This recipe also removes any previous
-configuration to a remote server by removing the
+Configures the node to be a rsyslog server. The chosen rsyslog server
+node should be defined in the `server_ip` attribute or resolvable by
+the specified search criteria specified in `node['rsyslog']['server_search]`
+(so that nodes making use of the `client` recipe can find the server to log to).
+
+This recipe will create the logs in `node['rsyslog']['log_dir']`, and
+the configuration is in `/etc/rsyslog.d/server.conf`. This recipe also
+removes any previous configuration to a remote server by removing the
 `/etc/rsyslog.d/remote.conf` file.
 
 The cron job used in the previous version of this cookbook is removed,
@@ -124,8 +135,9 @@ Usage
 Use `recipe[rsyslog]` to install and start rsyslog as a basic
 configured service for standalone systems.
 
-Use `recipe[rsyslog::client]` to have nodes search for the loghost
-automatically to configure remote [r]syslog.
+Use `recipe[rsyslog::client]` to have nodes log to a remote server
+(which is found via the `server_ip` attribute or by the recipe's
+search call -- see __client__)
 
 Use `recipe[rsyslog::server]` to set up a rsyslog server. It will listen on
 `node['rsyslog']['port']` protocol `node['rsyslog']['protocol']`.
@@ -174,7 +186,7 @@ License and Author
 Author:: Joshua Timberman (<joshua@opscode.com>)
 Author:: Denis Barishev (<denz@twiket.com>)
 
-Copyright:: 2009-2011, Opscode, Inc
+Copyright:: 2009-2012, Opscode, Inc
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
