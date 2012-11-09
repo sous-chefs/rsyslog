@@ -38,7 +38,7 @@ elsif !node['rsyslog']['server']
       :protocol => node['rsyslog']['protocol']
     )
     owner node["rsyslog"]["user"]
-    owner node["rsyslog"]["group"]
+    group node["rsyslog"]["group"]
     mode 0644
     notifies :restart, "service[#{node['rsyslog']['service_name']}]"
   end

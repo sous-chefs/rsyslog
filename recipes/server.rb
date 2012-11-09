@@ -24,7 +24,7 @@ node.save unless Chef::Config[:solo]
 
 directory ::File.dirname(node['rsyslog']['log_dir']) do
   owner node["rsyslog"]["user"]
-  owner node["rsyslog"]["group"]
+  group node["rsyslog"]["group"]
   recursive true
   mode 0755
 end
@@ -43,7 +43,7 @@ template "/etc/rsyslog.d/35-server-per-host.conf" do
     :per_host_dir => node['rsyslog']['per_host_dir']
   )
   owner node["rsyslog"]["user"]
-  owner node["rsyslog"]["group"]
+  group node["rsyslog"]["group"]
   mode 0644
   notifies :restart, "service[#{node['rsyslog']['service_name']}]"
 end
