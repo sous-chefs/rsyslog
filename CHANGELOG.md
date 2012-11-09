@@ -1,3 +1,17 @@
+## v1.2.0:
+
+* Remove Ubuntu 8.04 code
+* Introduce attributes for `defaults_file` and `service_name`
+* Made code use largely ignored existing attributes for file+dir
+  `owner` and `group`
+* Introduced RHEL 6 support (rsyslog is the OS default at 6.0+)
+* No longer use any form of "complete" `/etc/rsyslog.conf`. Only
+  supporting `$IncludeConfig` + individual `/etc/rsyslog.d conf` files.
+  Previously, the `default` recipe for non-Ubuntu would make a
+  self-contained /etc/rsyslog.conf
+* Raise an exception in the `client` recipe if we cannot determine
+  the server to log to.
+
 ## v1.1.0:
 
 Changes from COOK-1167:
