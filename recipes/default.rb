@@ -68,6 +68,7 @@ if platform?("ubuntu")
     owner "root"
     group "root"
     mode 0644
+    notifies :restart, "service[rsyslog]"
   end
 end
 
