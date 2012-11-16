@@ -118,6 +118,31 @@ For example, to change this to just the hostname, set the attribute
 
 At this time, the server can only listen on UDP *or* TCP.
 
+Resources
+=========
+
+file_input
+----------
+
+Configures a (text file input
+monitor)[http://www.rsyslog.com/doc/imfile.html] to push a log file into
+rsyslog.
+
+Attributes:
+* `name`: name of the resource, also used for the syslog tag. Required.
+* `file`: file path for input file to monitor. Required.
+* `priority`: config order priority. Defaults to `99`.
+* `severity`: syslog severity. Must be one of `emergency`, `alert`,
+`critical`, `error`, `warning`, `notice`, `info` or `debug`. If
+undefined, rsyslog interperets this as `notice`.
+* `facility`: syslog facility. Must be one of `auth`, `authpriv`,
+`daemon`, `cron`, `ftp`, `lpr`, `kern`, `mail`, `news`, `syslog`,
+`user`, `uucp`, `local0`, ... , `local7`. If undefined, rsyslog
+interperets this as `local0`.
+* `cookbook`: cookbook containing the template. Defaults to `rsyslog`.
+* `source`: template file source. Defaults to `file-input.conf.erb`
+
+
 Usage
 =====
 
@@ -134,6 +159,9 @@ If you set up a different kind of centralized loghost (syslog-ng,
 graylog2, logstash, etc), you can still send log messages to it as
 long as the port and protocol match up with the server
 software. See __Examples__
+
+Use `rsyslog_file_input` within your recipes to forward log files to
+your remote syslog server.
 
 
 Examples
