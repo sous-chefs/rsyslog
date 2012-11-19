@@ -58,7 +58,7 @@ template "/etc/rsyslog.conf" do
   group "root"
   mode 0644
   variables(:protocol => node['rsyslog']['protocol'])
-  notifies :restart, "service[rsyslog]"
+  notifies :reload, "service[rsyslog]"
 end
 
 if platform?("ubuntu")
@@ -68,7 +68,7 @@ if platform?("ubuntu")
     owner "root"
     group "root"
     mode 0644
-    notifies :restart, "service[rsyslog]"
+    notifies :reload, "service[rsyslog]"
   end
 end
 
