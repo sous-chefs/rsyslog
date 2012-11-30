@@ -1,0 +1,4 @@
+cookbook "rsyslog" do
+  configuration "default"
+  configuration "server"
+end
