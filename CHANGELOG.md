@@ -1,3 +1,9 @@
+## v1.2.0:
+
+* [COOK-1678] - syslog user does not exist on debian 6.0 and ubuntu
+  versions lower than 11.04
+* [COOK-1650] - enable max message size configuration via attribute
+
 ## v1.1.0:
 
 Changes from COOK-1167:
