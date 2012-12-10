@@ -1,3 +1,10 @@
+## v1.3.0:
+
+* [COOK-1189] - template change does not restart rsyslog on Ubuntu
+
+This actually went into 1.2.0 with action `:reload`, but that change
+has been reverted and the action is back to `:restart`.
+
 ## v1.2.0:
 
 * [COOK-1678] - syslog user does not exist on debian 6.0 and ubuntu
