@@ -1,3 +1,7 @@
+## v1.4.0:
+
+* [COOK-1877] - RHEL 6 support and refactoring
+
 ## v1.3.0:
 
 * [COOK-1189] - template change does not restart rsyslog on Ubuntu
