@@ -78,6 +78,11 @@ attribute "rsyslog/max_message_size",
   :description => "Specifies the maximum size of allowable Rsyslog messages",
   :default => "2k"
 
+attribute "rsyslog/preserve_fqdn",
+  :display_name => "Preserve FQDN",
+  :description => "Specifies if the short or full host name will be used. The default off setting is more compatible.",
+  :default => "off"
+
 attribute "rsyslog/priv_seperation",
   :display_name => "Privilege separation",
   :description => "Whether or not to make use of Rsyslog privilege separation",

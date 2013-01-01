@@ -8,6 +8,11 @@
 #
 $MaxMessageSize <%= node['rsyslog']['max_message_size'] %>
 
+#
+# Preserve FQDN
+#
+$PreserveFQDN <%= node['rsyslog']['preserve_fqdn'] %>
+
 #################
 #### MODULES ####
 #################
