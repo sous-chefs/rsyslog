@@ -57,9 +57,6 @@ See `attributes/default.rb` for default values.
    not.
 * `node['rsyslog']['max_message_size']` - Specify the maximum allowed
   message size. Default is 2k.
-* `node['rsyslog']['user']` - Who should own the configuration files and directories
-* `node['rsyslog']['group']` - Who should group-own the configuration files
-  and directories
 * `node['rsyslog']['defaults_file']` - The full path to the defaults/sysconfig file
   for the service.
 * `node['rsyslog']['service_name']` - The platform-specific name of the service
