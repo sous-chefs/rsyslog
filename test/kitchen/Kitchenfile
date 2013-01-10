@@ -1,4 +1,5 @@
 cookbook "rsyslog" do
   configuration "default"
   configuration "server"
+  configuration "cook-2141"
 end

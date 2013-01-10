@@ -1,8 +1,8 @@
 #
 # Cookbook Name:: rsyslog_test
-# Recipe:: default
+# Recipe:: cook-2141
 #
-# Copyright 2013, Opscode, Inc.
+# Copyright 2012, Opscode, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.

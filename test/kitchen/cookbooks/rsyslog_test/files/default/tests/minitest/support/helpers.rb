@@ -17,4 +17,11 @@
 # limitations under the License.
 #
 
-include_recipe "rsyslog::default"
+module Helpers
+  module RsyslogTest
+    include MiniTest::Chef::Assertions
+    include MiniTest::Chef::Context
+    include MiniTest::Chef::Resources
+
+  end
+end

@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: rsyslog_test
-# Recipe:: default
+# Minitest:: cook-2141
 #
 # Copyright 2013, Opscode, Inc.
 #
@@ -17,4 +17,12 @@
 # limitations under the License.
 #
 
-include_recipe "rsyslog::default"
+require File.expand_path('../support/helpers', __FILE__)
+
+describe "rsyslog_test::cook-2141" do
+  include Helpers::RsyslogTest
+
+  it 'contains the PreserveFQDN configuration directive' do
+    file('/etc/rsyslog.conf').must_include('$PreserveFQDN off')
+  end
+end
