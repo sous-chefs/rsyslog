@@ -1,3 +1,7 @@
+## v1.5.0:
+
+* [COOK-2141] - Add `$PreserveFQDN` configuration directive
+
 ## v1.4.0:
 
 * [COOK-1877] - RHEL 6 support and refactoring
