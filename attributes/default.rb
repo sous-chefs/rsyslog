@@ -38,7 +38,7 @@ default["rsyslog"]["defaults_file"] = "/etc/default/rsyslog"
 case node["platform_family"]
 when "debian"
   # syslog user introduced with natty package
-  if node['platform_version'].to_f < 10.10 then
+  if node['platform'] == 'ubuntu' && node['platform_version'].to_f < 10.10
     default["rsyslog"]["user"] = "syslog"
     default["rsyslog"]["group"] = "adm"
     default["rsyslog"]["priv_seperation"] = true
