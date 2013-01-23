@@ -26,6 +26,7 @@ cookbook_file node["rsyslog"]["defaults_file"] do
   owner node['rsyslog']['user']
   group node['rsyslog']['group']
   mode 0644
+  notifies :restart, "service[#{node['rsyslog']['service_name']}]"
 end
 
 directory "/etc/rsyslog.d" do
