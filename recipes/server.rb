@@ -17,10 +17,9 @@
 # limitations under the License.
 #
 
-include_recipe "rsyslog"
-
 node.set['rsyslog']['server'] = true
-node.save unless Chef::Config[:solo]
+
+include_recipe "rsyslog"
 
 directory ::File.dirname(node['rsyslog']['log_dir']) do
   owner node["rsyslog"]["user"]
