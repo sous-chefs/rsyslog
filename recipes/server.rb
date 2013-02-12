@@ -21,16 +21,10 @@ node.set['rsyslog']['server'] = true
 
 include_recipe "rsyslog"
 
-directory ::File.dirname(node['rsyslog']['log_dir']) do
-  owner node["rsyslog"]["user"]
-  group node["rsyslog"]["group"]
-  recursive true
-  mode 0755
-end
-
 directory node['rsyslog']['log_dir'] do
   owner node['rsyslog']['user']
   group node['rsyslog']['group']
+  recursive true
   mode 0755
 end
 
