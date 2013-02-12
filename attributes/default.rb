@@ -20,7 +20,7 @@
 default["rsyslog"]["log_dir"]          = "/srv/rsyslog"
 default["rsyslog"]["server"]           = false
 default["rsyslog"]["protocol"]         = "tcp"
-default["rsyslog"]["port"]             = "514"
+default["rsyslog"]["port"]             = 514
 default["rsyslog"]["server_ip"]        = nil
 default["rsyslog"]["server_search"]    = "role:loghost"
 default["rsyslog"]["remote_logs"]      = true
