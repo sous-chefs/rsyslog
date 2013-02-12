@@ -10,7 +10,7 @@ recipe            "rsyslog", "Installs rsyslog"
 recipe            "rsyslog::client", "Sets up a client to log to a remote rsyslog server"
 recipe            "rsyslog::server", "Sets up an rsyslog server"
 
-supports          "ubuntu", ">= 10.04"
+supports          "ubuntu"
 supports          "debian", ">= 5.0"
 supports          "redhat", ">= 6.0"
 
