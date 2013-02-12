@@ -53,7 +53,7 @@ template "/etc/rsyslog.d/50-default.conf" do
   notifies :restart, "service[#{node['rsyslog']['service_name']}]"
 end
 
-service "#{node['rsyslog']['service_name']}" do
+service node['rsyslog']['service_name'] do
   supports :restart => true, :reload => true
   action [:enable, :start]
 end
