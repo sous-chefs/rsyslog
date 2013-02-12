@@ -61,6 +61,6 @@ template "/etc/rsyslog.d/50-default.conf" do
 end
 
 service "#{node['rsyslog']['service_name']}" do
-  supports :restart => true, :reload => true
+  supports :restart => true, :reload => true, :status => true
   action [:enable, :start]
 end
