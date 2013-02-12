@@ -33,7 +33,6 @@ default["rsyslog"]["service_name"]     = "rsyslog"
 default["rsyslog"]["user"] = "root"
 default["rsyslog"]["group"] = "adm"
 default["rsyslog"]["priv_seperation"] = false
-default["rsyslog"]["defaults_file"] = "/etc/default/rsyslog"
 
 case node["platform"]
 when "ubuntu"
@@ -43,8 +42,6 @@ when "ubuntu"
     default["rsyslog"]["group"] = "adm"
     default["rsyslog"]["priv_seperation"] = true
   end
-when "redhat"
-  default["rsyslog"]["defaults_file"] = "/etc/sysconfig/rsyslog"
 when "arch"
   default["rsyslog"]["service_name"] = "rsyslogd"
 end

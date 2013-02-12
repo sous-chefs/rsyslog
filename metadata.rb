@@ -68,11 +68,6 @@ attribute "rsyslog/service_name",
   :description => "The name of the service for the platform",
   :default => "rsyslog"
 
-attribute "rsyslog/defaults_file",
-  :display_name => "Defaults file",
-  :description => "The full path to the service's defaults/sysconfig file",
-  :default => "/etc/default/rsyslog"
-
 attribute "rsyslog/max_message_size",
   :display_name => "Maximum Rsyslog message size",
   :description => "Specifies the maximum size of allowable Rsyslog messages",

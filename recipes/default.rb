@@ -21,13 +21,6 @@ package "rsyslog" do
   action :install
 end
 
-cookbook_file "#{node["rsyslog"]["defaults_file"]}" do
-  source "rsyslog.default"
-  owner node['rsyslog']['user']
-  group node['rsyslog']['group']
-  mode 0644
-end
-
 directory "/etc/rsyslog.d" do
   owner node['rsyslog']['user']
   group node['rsyslog']['group']
