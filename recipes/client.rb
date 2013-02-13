@@ -26,7 +26,7 @@ elsif !node['rsyslog']['server']
     search(:node, node['rsyslog']['server_search']).first['ipaddress'] rescue nil
 
   if rsyslog_server.nil?
-    Chef::Log.fatal("The rsyslog::client recipe was unable to determine the remote syslog server. Checked both the server_ip attribute and search()")
+    Chef::Application.fatal!("The rsyslog::client recipe was unable to determine the remote syslog server. Checked both the server_ip attribute and search()")
   end
 
   template "/etc/rsyslog.d/49-remote.conf" do
