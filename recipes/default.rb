@@ -21,13 +21,6 @@ package "rsyslog" do
   action :install
 end
 
-cookbook_file "#{node["rsyslog"]["defaults_file"]}" do
-  source "rsyslog.default"
-  owner node['rsyslog']['user']
-  group node['rsyslog']['group']
-  mode 0644
-end
-
 directory "/etc/rsyslog.d" do
   owner node['rsyslog']['user']
   group node['rsyslog']['group']
@@ -60,7 +53,7 @@ template "/etc/rsyslog.d/50-default.conf" do
   notifies :restart, "service[#{node['rsyslog']['service_name']}]"
 end
 
-service "#{node['rsyslog']['service_name']}" do
+service node['rsyslog']['service_name'] do
   supports :restart => true, :reload => true, :status => true
   action [:enable, :start]
 end

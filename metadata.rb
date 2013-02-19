@@ -10,7 +10,7 @@ recipe            "rsyslog", "Installs rsyslog"
 recipe            "rsyslog::client", "Sets up a client to log to a remote rsyslog server"
 recipe            "rsyslog::server", "Sets up an rsyslog server"
 
-supports          "ubuntu", ">= 10.04"
+supports          "ubuntu"
 supports          "debian", ">= 5.0"
 supports          "redhat", ">= 6.0"
 
@@ -67,11 +67,6 @@ attribute "rsyslog/service_name",
   :display_name => "Service name",
   :description => "The name of the service for the platform",
   :default => "rsyslog"
-
-attribute "rsyslog/defaults_file",
-  :display_name => "Defaults file",
-  :description => "The full path to the service's defaults/sysconfig file",
-  :default => "/etc/default/rsyslog"
 
 attribute "rsyslog/max_message_size",
   :display_name => "Maximum Rsyslog message size",
