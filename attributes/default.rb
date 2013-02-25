@@ -43,8 +43,6 @@ when "debian"
     default["rsyslog"]["group"] = "adm"
     default["rsyslog"]["priv_seperation"] = true
   end
-when "rhel"
-  default["rsyslog"]["defaults_file"] = "/etc/sysconfig/rsyslog"
 when "arch"
   default["rsyslog"]["service_name"] = "rsyslogd"
 end
