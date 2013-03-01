@@ -22,14 +22,10 @@ package "rsyslog" do
 end
 
 directory "/etc/rsyslog.d" do
-  owner node['rsyslog']['user']
-  group node['rsyslog']['group']
   mode 0755
 end
 
 directory "/var/spool/rsyslog" do
-  owner node['rsyslog']['user']
-  group node['rsyslog']['group']
   mode 0755
 end
 
@@ -37,8 +33,6 @@ end
 # include of things in /etc/rsyslog.d/*
 template "/etc/rsyslog.conf" do
   source 'rsyslog.conf.erb'
-  owner node['rsyslog']['user']
-  group node['rsyslog']['group']
   mode 0644
   variables(:protocol => node['rsyslog']['protocol'])
   notifies :restart, "service[#{node['rsyslog']['service_name']}]"
@@ -47,8 +41,6 @@ end
 template "/etc/rsyslog.d/50-default.conf" do
   source "50-default.conf.erb"
   backup false
-  owner node['rsyslog']['user']
-  group node['rsyslog']['group']
   mode 0644
   notifies :restart, "service[#{node['rsyslog']['service_name']}]"
 end
