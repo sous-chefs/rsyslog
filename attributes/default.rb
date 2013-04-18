@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: rsyslog
-# Attributes:: rsyslog
+# Attributes:: default
 #
 # Copyright 2009, Opscode, Inc.
 #

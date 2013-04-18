@@ -45,6 +45,13 @@ template "/etc/rsyslog.d/50-default.conf" do
   notifies :restart, "service[#{node['rsyslog']['service_name']}]"
 end
 
+# syslog needs to be stopped before rsyslog can be started on RHEL versions before 6.0
+if platform_family?('rhel') && node['platform_version'].to_i < 6
+  service "syslog" do
+    action [:stop, :disable]
+  end
+end
+
 service node['rsyslog']['service_name'] do
   supports :restart => true, :reload => true, :status => true
   action [:enable, :start]
