@@ -64,6 +64,8 @@ See `attributes/default.rb` for default values.
 * `node['rsyslog']['preserve_fqdn']` - Value of the `$PreserveFQDN`
   configuration directive in `/etc/rsyslog.conf`. Default is 'off' for
   compatibility purposes.
+* `node['rsyslog']['high_precision_timestamps']` -  Enable high precision
+  timestamps, instead of the "old style" format.  Default is 'false'.
 
 Recipes
 =======
