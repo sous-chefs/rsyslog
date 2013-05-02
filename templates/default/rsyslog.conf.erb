@@ -41,7 +41,7 @@ $UDPServerRun <%= node['rsyslog']['port'] %>
 # Use default timestamp format.
 # To enable high precision timestamps, comment out the following line.
 #
-$ActionFileDefaultTemplate RSYSLOG_TraditionalFileFormat
+$ActionFileDefaultTemplate  <%= node["rsyslog"]["action_default_template"] %>
 
 # Filter duplicated messages
 $RepeatedMsgReduction on
