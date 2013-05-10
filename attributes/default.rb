@@ -17,16 +17,17 @@
 # limitations under the License.
 #
 
-default["rsyslog"]["log_dir"]          = "/srv/rsyslog"
-default["rsyslog"]["server"]           = false
-default["rsyslog"]["protocol"]         = "tcp"
-default["rsyslog"]["port"]             = 514
-default["rsyslog"]["server_ip"]        = nil
-default["rsyslog"]["server_search"]    = "role:loghost"
-default["rsyslog"]["remote_logs"]      = true
-default["rsyslog"]["per_host_dir"]     = "%$YEAR%/%$MONTH%/%$DAY%/%HOSTNAME%"
-default["rsyslog"]["max_message_size"] = "2k"
-default["rsyslog"]["preserve_fqdn"]    = "off"
+default["rsyslog"]["log_dir"]                   = "/srv/rsyslog"
+default["rsyslog"]["server"]                    = false
+default["rsyslog"]["protocol"]                  = "tcp"
+default["rsyslog"]["port"]                      = 514
+default["rsyslog"]["server_ip"]                 = nil
+default["rsyslog"]["server_search"]             = "role:loghost"
+default["rsyslog"]["remote_logs"]               = true
+default["rsyslog"]["per_host_dir"]              = "%$YEAR%/%$MONTH%/%$DAY%/%HOSTNAME%"
+default["rsyslog"]["max_message_size"]          = "2k"
+default["rsyslog"]["preserve_fqdn"]             = "off"
+default["rsyslog"]["high_precision_timestamps"] = false
 
 # The most likely platform-specific attributes
 default["rsyslog"]["service_name"]     = "rsyslog"
