@@ -23,7 +23,9 @@ include_recipe "rsyslog"
 
 directory node['rsyslog']['log_dir'] do
   recursive true
-  mode 0755
+  owner(node['rsyslog']['dir_owner'] || node['rsyslog']['file_owner'] || node['rsyslog']['user'])
+  group(node['rsyslog']['dir_group'] || node['rsyslog']['file_group'] || node['rsyslog']['group'])
+  mode node['rsyslog']['dir_create_mode']
 end
 
 template "/etc/rsyslog.d/35-server-per-host.conf" do

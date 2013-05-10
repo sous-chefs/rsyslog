@@ -31,7 +31,14 @@ default["rsyslog"]["preserve_fqdn"]    = "off"
 # The most likely platform-specific attributes
 default["rsyslog"]["service_name"]     = "rsyslog"
 default["rsyslog"]["service_spec"]     = nil
-default["rsyslog"]["user"] = "root"
+default["rsyslog"]["file_owner"]       = nil
+default["rsyslog"]["file_group"]       = nil
+default["rsyslog"]["dir_owner"]        = nil
+default["rsyslog"]["dir_group"]        = nil
+default["rsyslog"]["file_create_mode"] = "0640"
+default["rsyslog"]["dir_create_mode"]  = "0755"
+default["rsyslog"]["umask"] = "0022"
+default["rsyslog"]["user"]  = "root"
 default["rsyslog"]["group"] = "adm"
 default["rsyslog"]["priv_seperation"] = false
 
@@ -42,7 +49,17 @@ when "ubuntu"
     default["rsyslog"]["user"] = "syslog"
     default["rsyslog"]["group"] = "adm"
     default["rsyslog"]["priv_seperation"] = true
+  else
+    default["rsyslog"]["file_owner"] = "syslog"
+    default["rsyslog"]["file_group"] = "adm"
+    default["rsyslog"]["user"]  = "syslog"
+    default["rsyslog"]["group"] = "syslog"
+    default["rsyslog"]["priv_seperation"] = true
   end
+when "debian"
+  default["rsyslog"]["file_owner"] = "root"
+  default["rsyslog"]["file_group"] = "adm"
+  default["rsyslog"]["priv_seperation"] = false
 when "arch"
   default["rsyslog"]["service_name"] = "rsyslogd"
 end

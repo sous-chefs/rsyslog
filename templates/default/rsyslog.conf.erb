@@ -59,11 +59,15 @@ $WorkDirectory /var/spool/rsyslog
 #
 # Set the default permissions for all log files.
 #
-$FileOwner <%= node['rsyslog']['user'] %>
-$FileGroup <%= node['rsyslog']['group'] %>
-$FileCreateMode 0640
-$DirCreateMode 0755
-$Umask 0022
+<% if node['rsyslog']['priv_seperation'] %>
+$FileOwner <%= node['rsyslog']['file_owner'] || node['rsyslog']['user'] %>
+$FileGroup <%= node['rsyslog']['file_group'] || node['rsyslog']['group'] %>
+$DirOwner <%= node['rsyslog']['dir_owner'] || node['rsyslog']['file_owner'] || node['rsyslog']['user'] %>
+$DirGroup <%= node['rsyslog']['dir_group'] || node['rsyslog']['file_group'] || node['rsyslog']['group'] %>
+<% end %>
+$FileCreateMode <%= node['rsyslog']['file_create_mode'] %>
+$DirCreateMode <%= node['rsyslog']['dir_create_mode'] %>
+$Umask <%= node['rsyslog']['umask'] %>
 <% if node['rsyslog']['priv_seperation'] %>
 $PrivDropToUser <%= node['rsyslog']['user'] %>
 $PrivDropToGroup <%= node['rsyslog']['group'] %>
