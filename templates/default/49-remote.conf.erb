@@ -1,3 +1,10 @@
+# Create on-disk queue for forwarded messages. If the remote host is
+# down, messages are spooled to disk and sent when it is up again.
+$ActionQueueFileName fwd # unique name prefix for spool files
+$ActionQueueMaxDiskSpace 1g   # 1gb space limit (use as much as possible)
+$ActionQueueSaveOnShutdown on # save messages to disk on shutdown
+$ActionQueueType LinkedList   # run asynchronously
+$ActionResumeRetryCount -1    # infinite retries if host is down
 <% case @protocol -%>
 <% when "tcp" -%>
 *.* @@<%= @server %>:<%= node['rsyslog']['port'] %>
