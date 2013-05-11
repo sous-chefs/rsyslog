@@ -28,6 +28,16 @@ default["rsyslog"]["per_host_dir"]     = "%$YEAR%/%$MONTH%/%$DAY%/%HOSTNAME%"
 default["rsyslog"]["max_message_size"] = "2k"
 default["rsyslog"]["preserve_fqdn"]    = "off"
 
+# TLS support
+default["rsyslog"]["tls"] = false
+default["rsyslog"]["tls_ca_file"] = nil
+default["rsyslog"]["tls_certificate_file"] = nil
+default["rsyslog"]["tls_key_file"] = nil
+default["rsyslog"]["tls_authenticate_server"] = true
+default["rsyslog"]["tls_authenticate_clients"] = true
+default["rsyslog"]["tls_server_name"] = nil
+default["rsyslog"]["tls_permitted_clients_names"] = nil
+
 # The most likely platform-specific attributes
 default["rsyslog"]["service_name"]     = "rsyslog"
 default["rsyslog"]["service_spec"]     = nil

@@ -85,6 +85,24 @@ Permissions and security:
 * `node['rsyslog']['dir_create_mode']` - Permissions for newly created log files. The actual permissions depends on the umask. The default is 0755.
 * `node['rsyslog']['umask']` - Sets the process umask. The default is 0022.
 
+TLS:
+
+* `node['rsyslog']['tls']` - Whether TLS support should be enabled. All the
+  other TLS options only have effect if this is true. Defaults to false.
+* `node['rsyslog']['tls_ca_file']` - Path to the Certificate Authority certificate. Required when using TLS.
+* `node['rsyslog']['tls_certificate_file']` - Path to a certificate for the local rsyslog daemon. If nil, no certificate will be used.
+* `node['rsyslog']['tls_key_file']` - Path to a key for the local rsyslog daemon. If nil, no key will be used.
+* `node['rsyslog']['tls_authenticate_clients']` - Whether the server should authenticate clients. Defaults to true.
+* `node['rsyslog']['tls_authenticate_server']` - Whether client should authenticate the server. Defaults to true.
+* `node['rsyslog']['tls_server_name']` - When set, clients will check whether the server's name matches this value. Defaults to nil, meaning that the name is not checked. It is not necessary to set this option because the server is always authenticated using the CA certificate, but setting a name adds extra security.
+* `node['rsyslog']['tls_permitted_clients_names']` - When set, servers will check whether connecting clients' names match any of the values in this array. Defaults to nil, meaning that client names are not checked. It is not necessary to set this option because clients are always authenticated using the CA certificate, but setting a list of names adds extra security.
+
+TLS documentation:
+
+* [Guide 1](http://www.rsyslog.com/doc/rsyslog_secure_tls.html)
+* [Guide 2](http://www.rsyslog.com/doc/rsyslog_tls.html)
+
+
 Recipes
 =======
 

@@ -26,11 +26,35 @@ $ModLoad imuxsock # provides support for local system logging
 $ModLoad imklog   # provides kernel logging support (previously done by rklogd)
 #$ModLoad immark  # provides --MARK-- message capability
 
+<% if node['rsyslog']['tls'] -%>
+$DefaultNetstreamDriver gtls
+$DefaultNetstreamDriverCAFile <%= node['rsyslog']['tls_ca_file'] %>
+<% if node['rsyslog']['tls_certificate_file'] -%>
+$DefaultNetstreamDriverCertFile <%= node['rsyslog']['tls_certificate_file'] %>
+<% end -%>
+<% if node['rsyslog']['tls_key_file'] -%>
+$DefaultNetstreamDriverKeyFile <%= node['rsyslog']['tls_key_file'] %>
+<% end -%>
+<% end -%>
+
 <% if node['rsyslog']['server'] -%>
 # Provide <%= @protocol.upcase %> log reception
 <% case @protocol -%>
 <% when "tcp" -%>
 $ModLoad imtcp
+<% if node['rsyslog']['tls'] -%>
+$InputTCPServerStreamDriverMode 1
+<% if node['rsyslog']['tls_authenticate_clients'] -%>
+<% if node['rsyslog']['tls_permitted_clients_names'] -%>
+$InputTCPServerStreamDriverAuthMode x509/name
+<% for name in node['rsyslog']['tls_permitted_clients_names'] -%>
+$InputTCPServerStreamDriverPermittedPeer <%= name %>
+<% end -%>
+<% end -%>
+<% else -%>
+$InputTCPServerStreamDriverAuthMode anon
+<% end -%>
+<% end -%>
 $InputTCPServerRun <%= node['rsyslog']['port'] %>
 <% when "udp" -%>
 $ModLoad imudp
