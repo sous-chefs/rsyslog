@@ -38,11 +38,11 @@ elsif !node['rsyslog']['server']
       :protocol => node['rsyslog']['protocol']
     )
     mode 0644
-    notifies :restart, "service[#{node['rsyslog']['service_name']}]"
+    notifies :restart, node["rsyslog"]["service_spec"]
   end
 
   file "/etc/rsyslog.d/server.conf" do
     action :delete
-    notifies :reload, "service[#{node['rsyslog']['service_name']}]"
+    notifies :reload, node["rsyslog"]["service_spec"]
   end
 end

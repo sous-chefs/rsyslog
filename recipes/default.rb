@@ -17,6 +17,9 @@
 # limitations under the License.
 #
 
+has_service_spec = !!node["rsyslog"]["service_spec"]
+node["rsyslog"]["service_spec"] ||= "service[#{node['rsyslog']['service_name']}]"
+
 package "rsyslog" do
   action :install
 end
@@ -35,14 +38,14 @@ template "/etc/rsyslog.conf" do
   source 'rsyslog.conf.erb'
   mode 0644
   variables(:protocol => node['rsyslog']['protocol'])
-  notifies :restart, "service[#{node['rsyslog']['service_name']}]"
+  notifies :restart, node["rsyslog"]["service_spec"]
 end
 
 template "/etc/rsyslog.d/50-default.conf" do
   source "50-default.conf.erb"
   backup false
   mode 0644
-  notifies :restart, "service[#{node['rsyslog']['service_name']}]"
+  notifies :restart, node["rsyslog"]["service_spec"]
 end
 
 # syslog needs to be stopped before rsyslog can be started on RHEL versions before 6.0
@@ -52,7 +55,9 @@ if platform_family?('rhel') && node['platform_version'].to_i < 6
   end
 end
 
-service node['rsyslog']['service_name'] do
-  supports :restart => true, :reload => true, :status => true
-  action [:enable, :start]
+if !has_service_spec
+  service node['rsyslog']['service_name'] do
+    supports :restart => true, :reload => true, :status => true
+    action [:enable, :start]
+  end
 end
