@@ -63,7 +63,9 @@ See `attributes/default.rb` for default values.
 * `node['rsyslog']['service_name']` - The platform-specific name of the service
 * `node['rsyslog']['preserve_fqdn']` - Value of the `$PreserveFQDN`
   configuration directive in `/etc/rsyslog.conf`. Default is 'off' for
-  compatibility purposes.
+  compatibility purposes. When set to true, `$LocalHostName` will also be
+  set to the node's FQDN because rsyslog does not always use the correct
+  host name.
 
 Recipes
 =======
