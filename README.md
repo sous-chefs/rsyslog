@@ -19,7 +19,7 @@ Requirements
 Platform
 --------
 
-Tested on Ubuntu 9.10, 10.04 and Red Hat 6.3
+Tested on Ubuntu 9.10, 10.04, 12.04 and Red Hat 6.3
 
 Ubuntu 8.04, 8.10, and 9.04 are no longer supported releases and have not been tested with this cookbook.
 
