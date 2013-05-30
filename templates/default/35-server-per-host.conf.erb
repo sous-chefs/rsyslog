@@ -20,7 +20,6 @@ $template PerHostNewsCrit,"<%= @log_dir %>/<%= @per_host_dir %>/news.crit"
 $template PerHostNewsErr,"<%= @log_dir %>/<%= @per_host_dir %>/news.err"
 $template PerHostNewsNotice,"<%= @log_dir %>/<%= @per_host_dir %>/news.notice"
 $template PerHostDebug,"<%= @log_dir %>/<%= @per_host_dir %>/debug"
-$template PerHostMessages,"<%= @log_dir %>/<%= @per_host_dir %>/messages"
 
 auth,authpriv.*         ?PerHostAuth
 *.*;auth,authpriv.none  -?PerHostSyslog
@@ -42,11 +41,6 @@ news.notice             -?PerHostNewsNotice
 *.=debug;\
   auth,authpriv.none;\
   news.none;mail.none   -?PerHostDebug
-
-*.=info;*.=notice;*.=warn;\
-  auth,authpriv.none;\
-  cron,daemon.none;\
-  mail,news.none        -?PerHostMessages
 
 #
 # Stop processing of all non-local messages. You can process remote messages
