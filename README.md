@@ -38,7 +38,7 @@ See `attributes/default.rb` for default values.
 * `node['rsyslog']['server']` - Determined automaticaly and set to true on
   the server.
 * `node['rsyslog']['server_ip']` - If not defined then search will be used
-  to determine rsyslog server. Default is `nil`.
+  to determine rsyslog server. Default is `nil`.  This can be a string or an array
 * `node['rsyslog']['server_search']` - Specify the criteria for the server
   search operation. Default is `role:loghost`.
 * `node['rsyslog']['protocol']` - Specify whether to use `udp` or
@@ -188,6 +188,7 @@ License and Author
 
 Author:: Joshua Timberman (<joshua@opscode.com>)
 Author:: Denis Barishev (<denz@twiket.com>)
+Author:: Tim Smith (<tsmith@limelight.com>)
 
 Copyright:: 2009-2012, Opscode, Inc
 
