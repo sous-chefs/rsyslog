@@ -68,6 +68,8 @@ See `attributes/default.rb` for default values.
   timestamps, instead of the "old style" format.  Default is 'false'.
 * `node['rsyslog']['repeated_msg_reduction']` -  Value of `$RepeatedMsgReduction`
   configuration directive in `/etc/rsyslog.conf`. Default is 'on' 
+* `node['rsyslog']['logs_to_forward']` -  Specifies what logs should be sent to the 
+  remote rsyslog server. Default is all ( \*.\* ). 
 
 Recipes
 =======
