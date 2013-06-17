@@ -1,6 +1,6 @@
 <% case @protocol -%>
 <% when "tcp" -%>
-<%= node['rsyslog']['logs_to_watch'] %> @@<%= @server %>:<%= node['rsyslog']['port'] %>
+<%= node['rsyslog']['logs_to_forward'] %> @@<%= @server %>:<%= node['rsyslog']['port'] %>
 <% when "udp" -%>
-<%= node['rsyslog']['logs_to_watch'] %> @<%= @server %>:<%= node['rsyslog']['port'] %>
+<%= node['rsyslog']['logs_to_forward'] %> @<%= @server %>:<%= node['rsyslog']['port'] %>
 <% end -%>
