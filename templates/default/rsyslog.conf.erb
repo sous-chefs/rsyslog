@@ -46,7 +46,7 @@ $ActionFileDefaultTemplate RSYSLOG_TraditionalFileFormat
 <% end -%>
 
 # Filter duplicated messages
-$RepeatedMsgReduction on
+$RepeatedMsgReduction <%= node['rsyslog']['repeated_msg_reduction'] %>
 
 #
 # Set temporary directory to buffer syslog queue
