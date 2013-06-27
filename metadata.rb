@@ -78,6 +78,11 @@ attribute "rsyslog/preserve_fqdn",
   :description => "Specifies if the short or full host name will be used. The default off setting is more compatible.",
   :default => "off"
 
+attribute "rsyslog/repeated_msg_reduction",
+  :display_name => "Filter duplicated messages",
+  :description => "Specifies whether or not repeated messages should be reduced.",
+  :default => "on"
+
 attribute "rsyslog/priv_seperation",
   :display_name => "Privilege separation",
   :description => "Whether or not to make use of Rsyslog privilege separation",

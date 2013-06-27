@@ -28,6 +28,7 @@ default["rsyslog"]["per_host_dir"]              = "%$YEAR%/%$MONTH%/%$DAY%/%HOST
 default["rsyslog"]["max_message_size"]          = "2k"
 default["rsyslog"]["preserve_fqdn"]             = "off"
 default["rsyslog"]["high_precision_timestamps"] = false
+default["rsyslog"]["repeated_msg_reduction"]    = "on"
 
 # The most likely platform-specific attributes
 default["rsyslog"]["service_name"]     = "rsyslog"
