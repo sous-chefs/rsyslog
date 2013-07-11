@@ -66,6 +66,8 @@ See `attributes/default.rb` for default values.
   compatibility purposes.
 * `node['rsyslog']['high_precision_timestamps']` -  Enable high precision
   timestamps, instead of the "old style" format.  Default is 'false'.
+* `node['rsyslog']['repeated_msg_reduction']` -  Value of `$RepeatedMsgReduction`
+  configuration directive in `/etc/rsyslog.conf`. Default is 'on' 
 
 Recipes
 =======
