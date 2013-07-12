@@ -29,7 +29,7 @@ directory node['rsyslog']['log_dir'] do
   recursive true
 end
 
-template '/etc/rsyslog.d/35-server-per-host.conf' do
+template "#{node['rsyslog']['config_prefix']}/rsyslog.d/35-server-per-host.conf" do
   source   '35-server-per-host.conf.erb'
   owner    'root'
   group    'root'
@@ -37,8 +37,8 @@ template '/etc/rsyslog.d/35-server-per-host.conf' do
   notifies :restart, "service[#{node['rsyslog']['service_name']}]"
 end
 
-file '/etc/rsyslog.d/remote.conf' do
+file "#{node['rsyslog']['config_prefix']}/rsyslog.d/remote.conf" do
   action   :delete
   notifies :reload, "service[#{node['rsyslog']['service_name']}]"
-  only_if  { ::File.exists?('/etc/rsyslog.d/remote.conf') }
+  only_if  { ::File.exists?("#{node['rsyslog']['config_prefix']}/rsyslog.d/remote.conf") }
 end
