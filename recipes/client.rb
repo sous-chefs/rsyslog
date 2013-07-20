@@ -23,10 +23,10 @@ rsyslog_servers = []
 
 if !node['rsyslog']['server'] and node['rsyslog']['server_ip'].nil? and Chef::Config[:solo]
   Chef::Log.fatal("Chef Solo does not support search, therefore it is a requirement of the rsyslog::client recipe that the attribute 'server_ip' is set when using Chef Solo. 'server_ip' is not set.")
-elsif !node['rsyslog']['server']
-  # handle node['rsyslog']['server_ip'] being a string or an array
-  if !node['rsyslog']['server_ip'].nil?
-    node['rsyslog']['server_ip'].is_a?(String) ? rsyslog_servers << node['rsyslog']['server_ip'] : rsyslog_servers = rsyslog_servers + node['rsyslog']['server_ip']
+elsif !node['rsyslog']['server'] 
+  if node['rsyslog']['server_ip']
+    # handle node['rsyslog']['server_ip'] being a string or an array
+    rsyslog_servers = Array(node['rsyslog']['server_ip'])
   end
 
   # add all syslog servers to the syslog_servers array
@@ -34,12 +34,12 @@ elsif !node['rsyslog']['server']
     syslog_servers << result['ipaddress']
   end
 
-  if rsyslog_servers.nil?
+  if rsyslog_servers.empty?
     Chef::Application.fatal!("The rsyslog::client recipe was unable to determine the remote syslog server. Checked both the server_ip attribute and search()")
   end
 
   template "/etc/rsyslog.d/49-remote.conf" do
-    only_if { node['rsyslog']['remote_logs'] && !rsyslog_servers.nil? }
+    only_if { node['rsyslog']['remote_logs'] && !rsyslog_servers.empty? }
     source "49-remote.conf.erb"
     backup false
     variables(
