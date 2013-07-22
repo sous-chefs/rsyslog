@@ -31,10 +31,10 @@ default["rsyslog"]["high_precision_timestamps"] = false
 default["rsyslog"]["repeated_msg_reduction"]    = "on"
 
 # The most likely platform-specific attributes
-default["rsyslog"]["service_name"]     = "rsyslog"
-default["rsyslog"]["user"] = "root"
-default["rsyslog"]["group"] = "adm"
-default["rsyslog"]["priv_seperation"] = false
+default["rsyslog"]["service_name"]              = "rsyslog"
+default["rsyslog"]["user"]                      = "root"
+default["rsyslog"]["group"]                     = "adm"
+default["rsyslog"]["priv_seperation"]           = false
 
 case node["platform"]
 when "ubuntu"
