@@ -38,9 +38,11 @@ elsif !node['rsyslog']['server']
     Chef::Application.fatal!("The rsyslog::client recipe was unable to determine the remote syslog server. Checked both the server_ip attribute and search()")
   end
 
+  remote_type = node['rsyslog']['use_relp'] ? 'relp' : 'remote'
+
   template "/etc/rsyslog.d/49-remote.conf" do
     only_if { node['rsyslog']['remote_logs'] && !rsyslog_servers.empty? }
-    source "49-remote.conf.erb"
+    source "49-#{remote_type}.conf.erb"
     backup false
     variables(
       :servers => rsyslog_servers,
