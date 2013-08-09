@@ -1,4 +1,4 @@
-<% case @protocol -%>
+<% case node['rsyslog']['protocol'] -%>
 <% when "tcp" -%>
 *.* @@<%= @server %>:<%= node['rsyslog']['port'] %>
 <% when "udp" -%>
