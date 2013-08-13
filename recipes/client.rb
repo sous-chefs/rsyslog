@@ -29,13 +29,9 @@ elsif !node['rsyslog']['server']
     rsyslog_servers = Array(node['rsyslog']['server_ip'])
   end
 
-  # add all syslog servers to the syslog_servers array
-  search(:node, node["rsyslog"]["server_search"]) do |result|
-    syslog_servers << result['ipaddress']
-  end
-
-  if rsyslog_servers.empty?
-    Chef::Application.fatal!("The rsyslog::client recipe was unable to determine the remote syslog server. Checked both the server_ip attribute and search()")
+  if rsyslog_server.nil?
+    Chef::Log.warn("The rsyslog::client recipe was unable to determine the remote syslog server. Checked both the server_ip attribute and search(), defaulting to 127.0.0.1")
+    rsyslog_server = "127.0.0.1"
   end
 
   template "/etc/rsyslog.d/49-remote.conf" do
