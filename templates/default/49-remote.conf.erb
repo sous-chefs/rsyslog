@@ -4,3 +4,6 @@
 <% when "udp" -%>
 *.* @<%= @server %>:<%= node['rsyslog']['port'] %>
 <% end -%>
+<% node.rsyslog["forward_custom_config"].sort.each do |key, value| %>
+<%= key %>: <%= value %>
+<% end %>
