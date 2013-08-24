@@ -38,7 +38,7 @@ See `attributes/default.rb` for default values.
 * `node['rsyslog']['server']` - Determined automaticaly and set to true on
   the server.
 * `node['rsyslog']['server_ip']` - If not defined then search will be used
-  to determine rsyslog server. Default is `nil`.
+  to determine rsyslog server. Default is `nil`.  This can be a string or an array.
 * `node['rsyslog']['server_search']` - Specify the criteria for the server
   search operation. Default is `role:loghost`.
 * `node['rsyslog']['protocol']` - Specify whether to use `udp` or
@@ -67,9 +67,9 @@ See `attributes/default.rb` for default values.
 * `node['rsyslog']['high_precision_timestamps']` -  Enable high precision
   timestamps, instead of the "old style" format.  Default is 'false'.
 * `node['rsyslog']['repeated_msg_reduction']` -  Value of `$RepeatedMsgReduction`
-  configuration directive in `/etc/rsyslog.conf`. Default is 'on' 
-* `node['rsyslog']['logs_to_forward']` -  Specifies what logs should be sent to the 
-  remote rsyslog server. Default is all ( \*.\* ). 
+  configuration directive in `/etc/rsyslog.conf`. Default is 'on'
+* `node['rsyslog']['logs_to_forward']` -  Specifies what logs should be sent to the
+  remote rsyslog server. Default is all ( \*.\* ).
 
 Recipes
 =======
@@ -192,6 +192,7 @@ License and Author
 
 Author:: Joshua Timberman (<joshua@opscode.com>)
 Author:: Denis Barishev (<denz@twiket.com>)
+Author:: Tim Smith (<tsmith@limelight.com>)
 
 Copyright:: 2009-2012, Opscode, Inc
 

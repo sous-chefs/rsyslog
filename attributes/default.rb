@@ -32,10 +32,10 @@ default["rsyslog"]["repeated_msg_reduction"]    = "on"
 default["rsyslog"]["logs_to_forward"]           = "*.*"
 
 # The most likely platform-specific attributes
-default["rsyslog"]["service_name"]     = "rsyslog"
-default["rsyslog"]["user"] = "root"
-default["rsyslog"]["group"] = "adm"
-default["rsyslog"]["priv_seperation"] = false
+default["rsyslog"]["service_name"]              = "rsyslog"
+default["rsyslog"]["user"]                      = "root"
+default["rsyslog"]["group"]                     = "adm"
+default["rsyslog"]["priv_seperation"]           = false
 
 case node["platform"]
 when "ubuntu"
