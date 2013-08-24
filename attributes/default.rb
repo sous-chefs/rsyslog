@@ -29,6 +29,7 @@ default["rsyslog"]["max_message_size"]          = "2k"
 default["rsyslog"]["preserve_fqdn"]             = "off"
 default["rsyslog"]["high_precision_timestamps"] = false
 default["rsyslog"]["repeated_msg_reduction"]    = "on"
+default["rsyslog"]["logs_to_forward"]           = "*.*"
 
 # The most likely platform-specific attributes
 default["rsyslog"]["service_name"]     = "rsyslog"
