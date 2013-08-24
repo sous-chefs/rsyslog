@@ -23,7 +23,7 @@ rsyslog_servers = []
 
 if !node['rsyslog']['server'] and node['rsyslog']['server_ip'].nil? and Chef::Config[:solo]
   Chef::Log.fatal("Chef Solo does not support search, therefore it is a requirement of the rsyslog::client recipe that the attribute 'server_ip' is set when using Chef Solo. 'server_ip' is not set.")
-elsif !node['rsyslog']['server'] 
+elsif !node['rsyslog']['server']
   if node['rsyslog']['server_ip']
     # handle node['rsyslog']['server_ip'] being a string or an array
     rsyslog_servers = Array(node['rsyslog']['server_ip'])
