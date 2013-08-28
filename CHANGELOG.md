@@ -3,6 +3,13 @@ rsyslog Cookbook CHANGELOG
 This file is used to list changes made in each version of the rsyslog cookbook.
 
 
+v1.7.0
+------
+### Improvement
+- **[COOK-3253](https://tickets.opscode.com/browse/COOK-3253)** - Enable repeated message reduction
+- **[COOK-3190](https://tickets.opscode.com/browse/COOK-3190)** - Allow specifying which logs to send to remote server
+- **[COOK-2355](https://tickets.opscode.com/browse/COOK-2355)** - Support forwarding events to more than one server
+
 v1.6.0
 ------
 ### New Feature
