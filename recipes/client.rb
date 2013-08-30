@@ -29,7 +29,7 @@ elsif !node['rsyslog']['server']
     rsyslog_servers = Array(node['rsyslog']['server_ip'])
   end
 
-  # add all syslog servers to the syslog_servers array
+  # add all rsyslog servers to the rsyslog_servers array
   search(:node, node["rsyslog"]["server_search"]) do |result|
     Chef::Log.debug("Adding rsyslog_server: #{result.name}/" +
       "#{result['ipaddress']}")
