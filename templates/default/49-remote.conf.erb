@@ -2,8 +2,8 @@
 <% @servers.each do |server| -%>
 <% case @protocol -%>
 <% when "tcp" -%>
-<%= node['rsyslog']['logs_to_forward'] %> @@<%= @server %>:<%= @port %>
+<%= node['rsyslog']['logs_to_forward'] %> @@<%= server %>:<%= @port %>
 <% when "udp" -%>
-<%= node['rsyslog']['logs_to_forward'] %> @<%= @server %>:<%= @port %>
+<%= node['rsyslog']['logs_to_forward'] %> @<%= server %>:<%= @port %>
 <% end -%>
 <% end -%>
