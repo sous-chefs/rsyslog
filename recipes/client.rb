@@ -31,7 +31,7 @@ elsif !node['rsyslog']['server']
 
   # add all syslog servers to the syslog_servers array
   search(:node, node["rsyslog"]["server_search"]) do |result|
-    syslog_servers << result['ipaddress']
+    rsyslog_servers << result['ipaddress']
   end
 
   if rsyslog_servers.empty?
