@@ -1,18 +1,15 @@
-rsyslog Cookbook CHANGELOG
-==========================
-Installs and configures rsyslog to replace sysklogd for client and/or server use. By default, the service will be configured to log to files on local disk. See the __Recipes__ and __Examples__ sections for other uses.
-
-**Major Changes in 1.2.0**: See CHANGELOG.md
-
-**Important Changes in 1.1.0**: See the CHANGELOG.md file for important changes to this cookbook. There are some incompatibilities with existing installations. Use version 1.0.0 if you're not ready for these changes.
+rsyslog Cookbook
+================
+Installs and configures rsyslog to replace sysklogd for client and/or server use. By default, the service will be configured to log to files on local disk. See the Recipes and Examples sections for other uses.
 
 
 Requirements
 ------------
 ### Platforms
-Tested on Ubuntu 9.10, 10.04 and Red Hat 6.3
-
-Ubuntu 8.04, 8.10, and 9.04 are no longer supported releases and have not been tested with this cookbook.
+Tested on:
+- Ubuntu 9.10
+- Ubuntu 10.04
+- RedHat 6.3
 
 ### Other
 To use the `recipe[rsyslog::client]` recipe, you'll need to set up the `rsyslog.server_search` or `rsyslog.server_ip` attributes.  See the __Recipes__ and __Examples__ sections below.
@@ -131,6 +128,40 @@ default_attributes(
 )
 ```
 
+
+Development
+-----------
+This section details "quick development" steps. For a detailed explanation, see [[Contributing.md]].
+
+1. Clone this repository from GitHub:
+
+    $ git clone git@github.com:opscode-cookbooks/rsyslog.git
+
+2. Create a git branch
+
+    $ git checkout -b my_bug_fix
+
+3. Install dependencies:
+
+    $ bundle install
+
+4. Make your changes/patches/fixes, committing appropiately
+5. **Write tests**
+6. Run the tests:
+
+    - bundle exec foodcritic -f any .
+    - bundle exec rspec
+    - bundle exec rubocop
+    - bundle exec kitchen test
+
+    In detail:
+
+    - Foodcritic will catch any Chef-specific style errors
+    - RSpec will run the unit tests
+    - Rubocop will check for Ruby-specific style errors
+    - Test Kitchen will run and converge the recipes
+
+
 License & Authors
 -----------------
 - Author:: Joshua Timberman (<joshua@opscode.com>)
@@ -138,7 +169,7 @@ License & Authors
 - Author:: Tim Smith (<tsmith@limelight.com>)
 
 ```text
-Copyright:: 2009-2012, Opscode, Inc
+Copyright:: 2009-2013, Opscode, Inc
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

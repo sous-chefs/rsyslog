@@ -1,4 +1,5 @@
-.bundle
-.cache
 .kitchen
-bin
+Berksfile.lock
+Gemfile.lock
+
+vendor/

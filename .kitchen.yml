@@ -1,0 +1,27 @@
+driver_plugin: 'vagrant'
+driver_config:
+  require_chef_omnibus: true
+
+platforms:
+  - name: ubuntu-12.04
+    run_list:
+      - recipe[apt]
+  - name: ubuntu-10.04
+    run_list:
+      - recipe[apt]
+  - name: centos-6.4
+  - name: centos-5.9
+
+suites:
+  - name: default
+    run_list:
+      - recipe[rsyslog::default]
+  - name: client
+    run_list:
+      - recipe[rsyslog::client]
+    attributes:
+      rsyslog:
+        server_ip: 10.0.0.50
+  - name: server
+    run_list:
+      - recipe[rsyslog::server]

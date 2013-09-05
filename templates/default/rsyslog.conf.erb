@@ -22,8 +22,8 @@ $ModLoad imklog   # provides kernel logging support (previously done by rklogd)
 #$ModLoad immark  # provides --MARK-- message capability
 
 <% if node['rsyslog']['server'] -%>
-# Provide <%= @protocol.upcase %> log reception
-<% case @protocol -%>
+# Provide <%= node['rsyslog']['protocol'].upcase %> log reception
+<% case node['rsyslog']['protocol'] -%>
 <% when "tcp" -%>
 $ModLoad imtcp
 $InputTCPServerRun <%= node['rsyslog']['port'] %>
