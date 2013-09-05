@@ -21,6 +21,11 @@ package "rsyslog" do
   action :install
 end
 
+
+if node['rsyslog']['use_relp']
+  package 'rsyslog-relp'
+end
+
 directory "/etc/rsyslog.d" do
   mode 0755
 end
