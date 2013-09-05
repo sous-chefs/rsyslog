@@ -19,6 +19,10 @@
 
 package 'rsyslog'
 
+if node['rsyslog']['use_relp']
+  package 'rsyslog-relp'
+end
+
 directory '/etc/rsyslog.d' do
   owner 'root'
   group 'root'

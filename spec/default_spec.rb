@@ -9,6 +9,18 @@ describe 'rsyslog::default' do
     expect(chef_run).to install_package('rsyslog')
   end
 
+  context "when node['rsyslog']['relp'] is true" do
+    let(:chef_run) do
+      ChefSpec::ChefRunner.new(platform: 'ubuntu', version: '12.04') do |node|
+        node.set['rsyslog']['use_relp'] = true
+      end.converge('rsyslog::default')
+    end
+
+    it 'installs the rsyslog-relp package' do
+      expect(chef_run).to install_package('rsyslog-relp')
+    end
+  end
+
   context '/etc/rsyslog.d directory' do
     let(:directory) { chef_run.directory('/etc/rsyslog.d') }
 

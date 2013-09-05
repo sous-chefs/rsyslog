@@ -16,6 +16,14 @@ suites:
   - name: default
     run_list:
       - recipe[rsyslog::default]
+  - name: relp
+    run_list:
+      - recipe[rsyslog::default]
+    attributes:
+      rsyslog:
+        use_relp: true
+    excludes:
+      - centos-5.9 # Centos5 does not support relp
   - name: client
     run_list:
       - recipe[rsyslog::client]
