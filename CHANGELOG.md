@@ -3,6 +3,14 @@ rsyslog Cookbook CHANGELOG
 This file is used to list changes made in each version of the rsyslog cookbook.
 
 
+v1.8.0
+------
+### Improvement
+- **[COOK-3573](https://tickets.opscode.com/browse/COOK-3573)** -  Add Test Kitchen, Specs, and Travis CI
+
+### New Feature
+- **[COOK-3435](https://tickets.opscode.com/browse/COOK-3435)** - Add support for relp
+
 v1.7.0
 ------
 ### Improvement
