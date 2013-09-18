@@ -80,7 +80,7 @@ describe 'rsyslog::default' do
     let(:template) { chef_run.template('/etc/rsyslog.d/50-default.conf') }
 
     it 'creates the template' do
-      expect(chef_run).to create_file_with_content('/etc/rsyslog.d/50-default.conf', 'Default rules for rsyslog.')
+      expect(chef_run).to create_file_with_content('/etc/rsyslog.d/50-default.conf', '*.emerg    *')
     end
 
     it 'is owned by root:root' do
