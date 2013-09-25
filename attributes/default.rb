@@ -53,36 +53,36 @@ end
 
 # 50-default template attributes
 
-default['rsyslog']['50default']['log_dir'] = '/var/log'
+default['rsyslog']['default_log_dir'] = '/var/log'
 case node['platform_family']
 when 'rhel'
   # format { facility => destination }
-  default['rsyslog']['50default']['facility_logs'] = {
-    '*.info;mail.none;authpriv.none;cron.none' => "#{node['rsyslog']['50default']['log_dir']}/messages",
-    'authpriv' => "#{node['rsyslog']['50default']['log_dir']}/secure",
-    'mail.*' => "-#{node['rsyslog']['50default']['log_dir']}/maillog",
-    'cron.*' => "#{node['rsyslog']['50default']['log_dir']}/cron",
+  default['rsyslog']['default_facility_logs'] = {
+    '*.info;mail.none;authpriv.none;cron.none' => "#{node['rsyslog']['default_log_dir']}/messages",
+    'authpriv' => "#{node['rsyslog']['default_log_dir']}/secure",
+    'mail.*' => "-#{node['rsyslog']['default_log_dir']}/maillog",
+    'cron.*' => "#{node['rsyslog']['default_log_dir']}/cron",
     '*.emerg' => '*',
-    'uucp,news.crit' => "#{node['rsyslog']['50default']['log_dir']}/spooler",
-    'local7.' => "#{node['rsyslog']['50default']['log_dir']}/boot.log"
+    'uucp,news.crit' => "#{node['rsyslog']['default_log_dir']}/spooler",
+    'local7.' => "#{node['rsyslog']['default_log_dir']}/boot.log"
   }
 else
   # format { facility => destination }
-  default['rsyslog']['50default']['facility_logs'] = {
-    'auth,authpriv.*' => "#{node['rsyslog']['50default']['log_dir']}/auth.log",
-    '*.*;auth,authpriv.none' => "-#{node['rsyslog']['50default']['log_dir']}/syslog",
-    'daemon.*' => "-#{node['rsyslog']['50default']['log_dir']}/daemon.log",
-    'kern.*' => "-#{node['rsyslog']['50default']['log_dir']}/kern.log",
-    'mail.*' => "-#{node['rsyslog']['50default']['log_dir']}/mail.log",
-    'user.*' => "-#{node['rsyslog']['50default']['log_dir']}/user.log",
-    'mail.info' => "-#{node['rsyslog']['50default']['log_dir']}/mail.info",
-    'mail.warn' => "-#{node['rsyslog']['50default']['log_dir']}/mail.warn",
-    'mail.err' => "#{node['rsyslog']['50default']['log_dir']}/mail.err",
-    'news.crit' => "#{node['rsyslog']['50default']['log_dir']}/news/news.crit",
-    'news.err' => "#{node['rsyslog']['50default']['log_dir']}/news/news.err",
-    'news.notice' => "-#{node['rsyslog']['50default']['log_dir']}/news/news.notice",
-    '*.=debug;auth,authpriv.none;news.none;mail.none' => "-#{node['rsyslog']['50default']['log_dir']}/debug",
-    '*.=info;*.=notice;*.=warn;auth,authpriv.none;cron,daemon.none;mail,news.none' => "-#{node['rsyslog']['50default']['log_dir']}/messages",
+  default['rsyslog']['default_facility_logs'] = {
+    'auth,authpriv.*' => "#{node['rsyslog']['default_log_dir']}/auth.log",
+    '*.*;auth,authpriv.none' => "-#{node['rsyslog']['default_log_dir']}/syslog",
+    'daemon.*' => "-#{node['rsyslog']['default_log_dir']}/daemon.log",
+    'kern.*' => "-#{node['rsyslog']['default_log_dir']}/kern.log",
+    'mail.*' => "-#{node['rsyslog']['default_log_dir']}/mail.log",
+    'user.*' => "-#{node['rsyslog']['default_log_dir']}/user.log",
+    'mail.info' => "-#{node['rsyslog']['default_log_dir']}/mail.info",
+    'mail.warn' => "-#{node['rsyslog']['default_log_dir']}/mail.warn",
+    'mail.err' => "#{node['rsyslog']['default_log_dir']}/mail.err",
+    'news.crit' => "#{node['rsyslog']['default_log_dir']}/news/news.crit",
+    'news.err' => "#{node['rsyslog']['default_log_dir']}/news/news.err",
+    'news.notice' => "-#{node['rsyslog']['default_log_dir']}/news/news.notice",
+    '*.=debug;auth,authpriv.none;news.none;mail.none' => "-#{node['rsyslog']['default_log_dir']}/debug",
+    '*.=info;*.=notice;*.=warn;auth,authpriv.none;cron,daemon.none;mail,news.none' => "-#{node['rsyslog']['default_log_dir']}/messages",
     '*.emerg' => '*',
     'daemon.*;mail.*;news.err;*.=debug;*.=info;*.=notice;*.=warn' => '|/dev/xconsole'
   }

@@ -47,7 +47,7 @@ template '/etc/rsyslog.d/50-default.conf' do
   owner   'root'
   group   'root'
   mode    '0644'
-  variables(:facility_logs => node['rsyslog']['50default']['facility_logs'])
+  variables(:facility_logs => node['rsyslog']['default_facility_logs'])
   notifies :restart, "service[#{node['rsyslog']['service_name']}]"
 end
 
