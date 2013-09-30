@@ -41,17 +41,17 @@ end
 
 remote_type = node['rsyslog']['use_relp'] ? 'relp' : 'remote'
 
-template '/etc/rsyslog.d/49-remote.conf' do
+template "#{node['rsyslog']['config_prefix']}/rsyslog.d/49-remote.conf" do
   source    "49-#{remote_type}.conf.erb"
   owner     'root'
   group     'root'
   mode      '0644'
-  variables :servers => rsyslog_servers
+  variables(:servers => rsyslog_servers)
   notifies  :restart, "service[#{node['rsyslog']['service_name']}]"
   only_if   { node['rsyslog']['remote_logs'] }
 end
 
-file '/etc/rsyslog.d/server.conf' do
+file "#{node['rsyslog']['config_prefix']}/rsyslog.d/server.conf" do
   action   :delete
   notifies :reload, "service[#{node['rsyslog']['service_name']}]"
 end
