@@ -198,6 +198,16 @@ describe 'rsyslog::default' do
     end
   end
 
+  context 'COOK-3608 maillog regression test' do
+    let(:chef_run) do
+      ChefSpec::ChefRunner.new(platform: 'redhat', version: '6.3').converge('rsyslog::default')
+    end
+
+    it 'outputs mail.* to /var/log/maillog' do
+      expect(chef_run).to create_file_with_content('/etc/rsyslog.d/50-default.conf', 'mail.*    -/var/log/maillog')
+    end
+  end
+
   context 'syslog service' do
     let(:chef_run) do
       ChefSpec::ChefRunner.new(platform: 'redhat', version: '5.8').converge('rsyslog::default')
