@@ -142,7 +142,7 @@ describe 'rsyslog::default' do
     let(:template) { chef_run.template('/etc/rsyslog.d/50-default.conf') }
 
     it 'creates the template' do
-      expect(chef_run).to create_file_with_content(template.path, 'Default rules for rsyslog.')
+      expect(chef_run).to create_file_with_content('/etc/rsyslog.d/50-default.conf', '*.emerg    *')
     end
 
     it 'is owned by root:root' do
@@ -185,6 +185,16 @@ describe 'rsyslog::default' do
       it 'uses the SmartOS-specific template' do
         expect(chef_run).to create_file_with_content(template.path, %r{/var/adm/messages$})
       end
+    end
+  end
+
+  context 'COOK-3608 maillog regression test' do
+    let(:chef_run) do
+      ChefSpec::ChefRunner.new(platform: 'redhat', version: '6.3').converge('rsyslog::default')
+    end
+
+    it 'outputs mail.* to /var/log/maillog' do
+      expect(chef_run).to create_file_with_content('/etc/rsyslog.d/50-default.conf', 'mail.*    -/var/log/maillog')
     end
   end
 

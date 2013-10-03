@@ -39,7 +39,8 @@ See `attributes/default.rb` for default values.
 * `node['rsyslog']['high_precision_timestamps']` -  Enable high precision timestamps, instead of the "old style" format.  Default is 'false'.
 * `node['rsyslog']['repeated_msg_reduction']` -  Value of `$RepeatedMsgReduction` configuration directive in `/etc/rsyslog.conf`. Default is 'on'
 * `node['rsyslog']['logs_to_forward']` -  Specifies what logs should be sent to the remote rsyslog server. Default is all ( \*.\* ).
-
+* `node['rsyslog']['default_log_dir']` - log directory used in `50-default.conf` template, defaults to `/var/log`
+* `node['rsyslog']['default_facility_logs']` - Hash containing log facilities and destinations used in `50-default.conf` template.
 
 Recipes
 -------
@@ -130,6 +131,24 @@ default_attributes(
 )
 ```
 
+Default rsyslog options are rendered for RHEL family platforms, in `/etc/rsyslog.d/50-default.conf`
+with other platforms using a configuration like Debian family defaults.  You can override these
+log facilities and destinations using the `rsyslog['default_facility_logs']` hash.
+
+```ruby
+name "facility_log_example"
+run_list("recipe[rsyslog::default]")
+default_attributes(
+  "rsyslog" => {
+    "facility_logs" => {
+      '*.info;mail.none;authpriv.none;cron.none' => "/var/log/messages",
+      'authpriv' => '/var/log/secure',
+      'mail.*' => '-/var/log/maillog',
+      '*.emerg' => '*'
+    }
+  }
+)
+```
 
 Development
 -----------
