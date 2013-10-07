@@ -12,6 +12,7 @@ Tested on:
 - Ubuntu 9.10
 - Ubuntu 10.04
 - RedHat 6.3
+- OmniOS r151006c
 
 ### Other
 To use the `recipe[rsyslog::client]` recipe, you'll need to set up the `rsyslog.server_search` or `rsyslog.server_ip` attributes.  See the __Recipes__ and __Examples__ sections below.

@@ -52,3 +52,27 @@ Development
 9. Mark the JIRA ticket as "Fix Provided"
 
 For more information, see [Opscode's Contribution Guidelines](https://wiki.opscode.com/display/chef/How+to+Contribute).
+
+Testing OmniOS
+--------------
+
+This patch to test-kitchen is required to test using the OmniOS box,
+as the path to `pkgadd` (`/usr/sbin`) is not in the default `vagrant`
+user's path when logging in without a TTY.
+
+https://github.com/opscode/test-kitchen/pull/164
+
+If your local version of Vagrant is 1.2.0 or higher, you may need to
+install the `vagrant-guest-omnios` plugin to get OS detection for
+OmniOS to work properly.
+
+https://github.com/clintoncwolfe/vagrant-guest-omnios
+
+TL;DR:
+
+    vagrant plugin install vagrant-guest-omnios
+
+The Solaris package which is installed on OmniOS does not create
+symlinks in `/usr/bin` for the various Chef binaries.
+
+https://github.com/opscode/test-kitchen/issues/213

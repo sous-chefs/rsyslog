@@ -7,7 +7,7 @@ describe 'rsyslog::client' do
       $stdout.stub(:puts)
     end
 
-    it 'exists fatally' do
+    it 'exits fatally' do
       expect { ChefSpec::ChefRunner.new.converge('rsyslog::client') }.to raise_error(SystemExit)
     end
   end
