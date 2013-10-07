@@ -210,12 +210,35 @@ describe 'rsyslog::default' do
   end
 
   context 'system-log service' do
+    {'omnios' => '151002', 'smartos' => 'joyent_20130111T180733Z'}.each do |p, pv|
+      let(:chef_run) do
+        ChefSpec::ChefRunner.new(platform: p, version: pv).converge('rsyslog::default')
+      end
+
+      it "stops the system-log service on #{p}" do
+        expect(chef_run).to disable_service('system-log')
+      end
+    end
+  end
+
+  context 'on OmniOS' do
     let(:chef_run) do
-      ChefSpec::ChefRunner.new(platform: 'smartos', version: 'joyent_20130111T180733Z').converge('rsyslog::default')
+      ChefSpec::ChefRunner.new(platform: 'omnios', version: '151002').converge('rsyslog::default')
     end
 
-    it 'stops the system-log service on SmartOS' do
-      expect(chef_run).to disable_service('system-log')
+    let(:template) { chef_run.template('/var/svc/manifest/system/rsyslogd.xml') }
+    let(:execute) { chef_run.execute('import rsyslog manifest') }
+
+    it 'creates the custom SMF manifest' do
+      expect(chef_run).to create_file(template.path)
+    end
+
+    it 'notifies svccfg to import the manifest' do
+      expect(template).to notify('execute[import rsyslog manifest]', :run)
+    end
+
+    it 'notifies rsyslog to restart when importing the manifest' do
+      expect(execute).to notify('service[system/rsyslogd]', :restart)
     end
   end
 

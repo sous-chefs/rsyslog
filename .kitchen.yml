@@ -11,6 +11,10 @@ platforms:
       - recipe[apt]
   - name: centos-6.4
   - name: centos-5.9
+  - name: omnios-r151006c
+    driver_config:
+      box: omnios-r151006c
+      box_url: http://omnios.omniti.com/media/OmniOS_r151006c-r1.box
 
 suites:
   - name: default
@@ -22,8 +26,10 @@ suites:
     attributes:
       rsyslog:
         use_relp: true
+    # CentOS and OmniOS do not support relp
     excludes:
-      - centos-5.9 # Centos5 does not support relp
+      - centos-5.9
+      - omnios-r151006c
   - name: client
     run_list:
       - recipe[rsyslog::client]

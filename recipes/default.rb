@@ -56,10 +56,27 @@ if platform_family?('rhel') && node['platform_version'].to_i < 6
   service 'syslog' do
     action [:stop, :disable]
   end
-# syslog needs to be stopped before rsyslog can be started on SmartOS
-elsif platform_family?('smartos')
+elsif platform_family?('smartos', 'omnios')
+  # syslog needs to be stopped before rsyslog can be started on SmartOS, OmniOS
   service 'system-log' do
     action :disable
+  end
+end
+
+if platform_family?('omnios')
+  # manage the SMF manifest on OmniOS
+  template '/var/svc/manifest/system/rsyslogd.xml' do
+    source 'omnios-manifest.xml.erb'
+    owner 'root'
+    group 'root'
+    mode '0644'
+    notifies :run, "execute[import rsyslog manifest]", :immediately
+  end
+
+  execute "import rsyslog manifest" do
+    action :nothing
+    command "svccfg import /var/svc/manifest/system/rsyslogd.xml"
+    notifies :restart, "service[#{node['rsyslog']['service_name']}]"
   end
 end
 
