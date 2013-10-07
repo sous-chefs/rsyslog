@@ -70,12 +70,12 @@ if platform_family?('omnios')
     owner 'root'
     group 'root'
     mode '0644'
-    notifies :run, "execute[import rsyslog manifest]", :immediately
+    notifies :run, 'execute[import rsyslog manifest]', :immediately
   end
 
-  execute "import rsyslog manifest" do
+  execute 'import rsyslog manifest' do
     action :nothing
-    command "svccfg import /var/svc/manifest/system/rsyslogd.xml"
+    command 'svccfg import /var/svc/manifest/system/rsyslogd.xml'
     notifies :restart, "service[#{node['rsyslog']['service_name']}]"
   end
 end

@@ -210,7 +210,7 @@ describe 'rsyslog::default' do
   end
 
   context 'system-log service' do
-    {'omnios' => '151002', 'smartos' => 'joyent_20130111T180733Z'}.each do |p, pv|
+    { 'omnios' => '151002', 'smartos' => 'joyent_20130111T180733Z' }.each do |p, pv|
       let(:chef_run) do
         ChefSpec::ChefRunner.new(platform: p, version: pv).converge('rsyslog::default')
       end
