@@ -3,6 +3,19 @@ rsyslog Cookbook CHANGELOG
 This file is used to list changes made in each version of the rsyslog cookbook.
 
 
+v1.9.0
+------
+### New Feature
+- **[COOK-3736](https://tickets.opscode.com/browse/COOK-3736)** - Support OmniOS
+
+### Improvement
+- **[COOK-3609](https://tickets.opscode.com/browse/COOK-3609)** - Add actionqueue to remote rsyslog configurations
+
+### Bug
+- **[COOK-3608](https://tickets.opscode.com/browse/COOK-3608)** - Add 50-default template knobs
+- **[COOK-3600](https://tickets.opscode.com/browse/COOK-3600)** - SmartOS support
+
+
 v1.8.0
 ------
 ### Improvement
