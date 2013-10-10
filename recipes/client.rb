@@ -36,7 +36,8 @@ else
 end
 
 if rsyslog_servers.empty?
-  Chef::Application.fatal!('The rsyslog::client recipe was unable to determine the remote syslog server. Checked both the server_ip attribute and search!')
+  Chef::Log.warn('The rsyslog::client recipe was unable to determine the remote syslog server. Checked both the server_ip attribute and search!')
+  rsyslog_server = "127.0.0.1"
 end
 
 remote_type = node['rsyslog']['use_relp'] ? 'relp' : 'remote'
