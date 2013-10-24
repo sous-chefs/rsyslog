@@ -34,6 +34,8 @@ default['rsyslog']['repeated_msg_reduction']    = 'on'
 default['rsyslog']['logs_to_forward']           = '*.*'
 default['rsyslog']['enable_imklog']             = true
 default['rsyslog']['config_prefix']             = '/etc'
+default['rsyslog']['rate_limit_interval']       = nil
+default['rsyslog']['rate_limit_burst']          = nil
 
 # The most likely platform-specific attributes
 default['rsyslog']['service_name']              = 'rsyslog'

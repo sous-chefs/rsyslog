@@ -67,6 +67,19 @@ $Umask 0022
 $PrivDropToUser <%= node['rsyslog']['user'] %>
 $PrivDropToGroup <%= node['rsyslog']['group'] %>
 <% end %>
+<% unless node['rsyslog']['rate_limit_interval'].nil? %>
+#
+# Set the amount of time that is being measured for rate limiting
+#
+$SystemLogRateLimitInterval <%= node['rsyslog']['rate_limit_interval'] %>
+<% end %>
+<% unless node['rsyslog']['rate_limit_burst'].nil? %>
+#
+# Set the amount of messages, that have to occur in the time limit of
+#   SystemLogRateLimitInterval, to trigger rate limiting
+#
+$SystemLogRateLimitBurst <%= node['rsyslog']['rate_limit_burst'] %>
+<% end %>
 #
 # Include all config files in <%= node['rsyslog']['config_prefix'] %>/rsyslog.d/
 #
