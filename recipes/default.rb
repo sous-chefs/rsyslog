@@ -20,6 +20,11 @@
 package 'rsyslog'
 package 'rsyslog-relp' if node['rsyslog']['use_relp']
 
+if node['rsyslog']['enable_tls'] && node['rsyslog']['tls_ca_file']
+  package 'rsyslog-gnutls'
+  node.override['rsyslog']['protocol'] = 'tcp'
+end
+
 directory "#{node['rsyslog']['config_prefix']}/rsyslog.d" do
   owner 'root'
   group 'root'
