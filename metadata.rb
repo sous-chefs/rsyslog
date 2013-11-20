@@ -87,3 +87,25 @@ attribute 'rsyslog/priv_seperation',
   :display_name => 'Privilege separation',
   :description => 'Whether or not to make use of Rsyslog privilege separation',
   :default => 'false'
+
+attribute 'rsyslog/enable_tls',
+  :display_name => 'Enable TLS',
+  :description => 'Whether or not to enable TLS encryption. When enabled, forces protocol to "tcp"',
+  :default => 'false'
+
+attribute 'rsyslog/tls_ca_file',
+  :display_name => 'TLS CA file',
+  :description => 'Path to TLS CA file. Required for both server and clients.'
+
+attribute 'rsyslog/tls_certificate_file',
+  :display_name => 'TLS certificate file',
+  :description => 'Path to TLS certificate file. Required for server, optional for clients.'
+
+attribute 'rsyslog/tls_key_file',
+  :display_name => 'TLS key file',
+  :description => 'Path to TLS key file. Required for server, optional for clients.'
+
+attribute 'rsyslog/tls_auth_mode',
+  :display_name => 'TLS auth mode',
+  :description => 'Value for "$InputTCPServerStreamDriverAuthMode"/"$ActionSendStreamDriverAuthMode", determines whether client certs are validated.',
+  :default => 'anon'

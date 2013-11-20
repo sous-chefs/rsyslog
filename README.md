@@ -42,6 +42,11 @@ See `attributes/default.rb` for default values.
 * `node['rsyslog']['logs_to_forward']` -  Specifies what logs should be sent to the remote rsyslog server. Default is all ( \*.\* ).
 * `node['rsyslog']['default_log_dir']` - log directory used in `50-default.conf` template, defaults to `/var/log`
 * `node['rsyslog']['default_facility_logs']` - Hash containing log facilities and destinations used in `50-default.conf` template.
+* `node['rsyslog']['enable_tls']` - Whether or not to enable TLS encryption.  When enabled, forces protocol to `tcp`. Default is `false`.
+* `node['rsyslog']['tls_ca_file']` - Path to TLS CA file. Required for both server and clients.
+* `node['rsyslog']['tls_certificate_file']` - Path to TLS certificate file. Required for server, optional for clients.
+* `node['rsyslog']['tls_key_file']` - Path to TLS key file. Required for server, optional for clients.
+* `node['rsyslog']['tls_auth_mode']` - Value for `$InputTCPServerStreamDriverAuthMode`/`$ActionSendStreamDriverAuthMode`, determines whether client certs are validated. Defaults to `anon` (no validation).
 
 Recipes
 -------
