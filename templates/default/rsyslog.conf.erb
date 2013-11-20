@@ -24,7 +24,20 @@ $ModLoad <%= mod %>
 <% end %>
 
 <% if node['rsyslog']['server'] -%>
+  <% if node['rsyslog']['enable_tls'] && node['rsyslog']['tls_ca_file'] &&
+        node['rsyslog']['tls_key_file'] && node['rsyslog']['tls_certificate_file'] -%>
+$DefaultNetstreamDriver gtls
+$DefaultNetstreamDriverCAFile <%= node['rsyslog']['tls_ca_file'] %>
+$DefaultNetstreamDriverCertFile <%= node['rsyslog']['tls_certificate_file'] %>
+$DefaultNetstreamDriverKeyFile <%= node['rsyslog']['tls_key_file'] %>
+
+$ModLoad imtcp
+
+$InputTCPServerStreamDriverMode 1 # run driver in TLS-only mode
+$InputTCPServerStreamDriverAuthMode <%= node['rsyslog']['tls_auth_mode'] || 'anon' %>
+$InputTCPServerRun <%= node['rsyslog']['port'] %>
 # Provide <%= node['rsyslog']['protocol'].upcase %> log reception
+  <% else -%>
 <% case node['rsyslog']['protocol'] -%>
 <% when "tcp" -%>
 $ModLoad imtcp
@@ -33,6 +46,7 @@ $InputTCPServerRun <%= node['rsyslog']['port'] %>
 $ModLoad imudp
 $UDPServerRun <%= node['rsyslog']['port'] %>
 <% end -%>
+  <% end -%>
 <% end -%>
 
 ###########################
