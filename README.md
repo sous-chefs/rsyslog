@@ -42,6 +42,8 @@ See `attributes/default.rb` for default values.
 * `node['rsyslog']['logs_to_forward']` -  Specifies what logs should be sent to the remote rsyslog server. Default is all ( \*.\* ).
 * `node['rsyslog']['default_log_dir']` - log directory used in `50-default.conf` template, defaults to `/var/log`
 * `node['rsyslog']['default_facility_logs']` - Hash containing log facilities and destinations used in `50-default.conf` template.
+* `node['rsyslog']['default_file_template']` - The name of a pre-defined log format template (ie - `RSYSLOG_FileFormat`), used for local log files.
+* `node['rsyslog']['default_remote_template']` - The name of a pre-defined log format template (ie - `RSYSLOG_SyslogProtocol23Format`), used for remote log forwarding.
 
 Recipes
 -------
