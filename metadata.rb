@@ -87,3 +87,8 @@ attribute 'rsyslog/priv_seperation',
   :display_name => 'Privilege separation',
   :description => 'Whether or not to make use of Rsyslog privilege separation',
   :default => 'false'
+
+attribute 'rsyslog/use_local_ipv4',
+  :display_name => 'Try to use local IPv4 address',
+  :description => 'Whether or not to make use the remote local IPv4 address on cloud systems when searching for servers (where available).',
+  :default => 'false'
