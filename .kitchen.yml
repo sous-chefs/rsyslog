@@ -35,11 +35,11 @@ platforms:
     region_id: 4
     ssh_key_ids: <%= ENV['DIGITAL_OCEAN_SSH_KEY_IDS'] %>
 
-- name: amazon-2013.09
-  driver_plugin: ec2
-  driver_config:
-    image_id: ami-3be4bc52
-    username: ec2-user
+# - name: amazon-2013.09
+#   driver_plugin: ec2
+#   driver_config:
+#     image_id: ami-3be4bc52
+#     username: ec2-user
 
 - name: ubuntu-1004
   driver_plugin: digitalocean
@@ -73,7 +73,7 @@ suites:
         use_relp: true
     # CentOS and OmniOS do not support relp
     excludes:
-      - centos-5.9
+      - centos-5.
       - omnios-r151006c
   - name: client
     run_list:
