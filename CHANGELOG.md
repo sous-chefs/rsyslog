@@ -6,6 +6,11 @@ This file is used to list changes made in each version of the rsyslog cookbook.
 
 
 
+v1.10.2
+-------
+No change. Version bump for toolchain.
+
+
 v1.10.0
 -------
 ### New Feature
