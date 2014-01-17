@@ -5,9 +5,9 @@ $ActionResumeRetryCount -1 # infinite retries on insert failure
 $ActionQueueSaveOnShutdown on # save in-memory data if rsyslog shuts down
 <% @servers.each do |server| -%>
 <% case node['rsyslog']['protocol'] -%>
-<% when "tcp" -%>
-<%= node['rsyslog']['logs_to_forward'] %> @@<%= server %>:<%= node['rsyslog']['port'] %>
+<% when "tcp", "dual" -%>
+<%= node['rsyslog']['logs_to_forward'] %> @@<%= server %>:<%= node['rsyslog']['tcp']['port'] %>
 <% when "udp" -%>
-<%= node['rsyslog']['logs_to_forward'] %> @<%= server %>:<%= node['rsyslog']['port'] %>
+<%= node['rsyslog']['logs_to_forward'] %> @<%= server %>:<%= node['rsyslog']['udp']['port'] %>
 <% end -%>
 <% end -%>

@@ -3,16 +3,6 @@
 #			For more information see
 #			/usr/share/doc/rsyslog-doc/html/rsyslog_conf.html
 
-#
-# Set max message size
-#
-$MaxMessageSize <%= node['rsyslog']['max_message_size'] %>
-
-#
-# Preserve FQDN
-#
-$PreserveFQDN <%= node['rsyslog']['preserve_fqdn'] %>
-
 #################
 #### MODULES ####
 #################
@@ -24,20 +14,39 @@ $ModLoad <%= mod %>
 <% end %>
 
 <% if node['rsyslog']['server'] -%>
-# Provide <%= node['rsyslog']['protocol'].upcase %> log reception
 <% case node['rsyslog']['protocol'] -%>
 <% when "tcp" -%>
+# Provide <%= node['rsyslog']['protocol'].upcase %> log reception
 $ModLoad imtcp
-$InputTCPServerRun <%= node['rsyslog']['port'] %>
+$InputTCPServerRun <%= node['rsyslog']['tcp']['port'] %>
 <% when "udp" -%>
+# Provide <%= node['rsyslog']['protocol'].upcase %> log reception
 $ModLoad imudp
-$UDPServerRun <%= node['rsyslog']['port'] %>
+$UDPServerRun <%= node['rsyslog']['udp']['port'] %>
+<% when "dual" -%>
+# Provide TCP log reception
+$ModLoad imtcp
+$InputTCPServerRun <%= node['rsyslog']['tcp']['port'] %>
+
+# Provide UDP log reception
+$ModLoad imudp
+$UDPServerRun <%= node['rsyslog']['udp']['port'] %>
 <% end -%>
 <% end -%>
 
 ###########################
 #### GLOBAL DIRECTIVES ####
 ###########################
+
+#
+# Set max message size
+#
+$MaxMessageSize <%= node['rsyslog']['max_message_size'] %>
+
+#
+# Preserve FQDN
+#
+$PreserveFQDN <%= node['rsyslog']['preserve_fqdn'] %>
 
 <% unless node["rsyslog"]["high_precision_timestamps"] -%>
 #
