@@ -26,8 +26,9 @@ See `attributes/default.rb` for default values.
 * `node['rsyslog']['server']` - Determined automaticaly and set to true on the server.
 * `node['rsyslog']['server_ip']` - If not defined then search will be used to determine rsyslog server. Default is `nil`.  This can be a string or an array.
 * `node['rsyslog']['server_search']` - Specify the criteria for the server search operation. Default is `role:loghost`.
-* `node['rsyslog']['protocol']` - Specify whether to use `udp` or `tcp` for remote loghost. Default is `tcp`.
-* `node['rsyslog']['port']` - Specify the port which rsyslog should connect to a remote loghost.
+* `node['rsyslog']['protocol']` - Specify whether to use `udp`, `tcp` or `dual` for remote loghost. Default is `tcp`.
+* `node['rsyslog']['tcp']['port']` - Specify the tcp port which rsyslog should connect to a remote loghost.
+* `node['rsyslog']['udp']['port']` - Specify the udp port which rsyslog should connect to a remote loghost.
 * `node['rsyslog']['remote_logs']` - Specify wether to send all logs to a remote server (client option). Default is `true`.
 * `node['rsyslog']['per_host_dir']` - "PerHost" directories for template statements in `35-server-per-host.conf`. Default value is the previous cookbook version's value, to preserve compatibility. See __server__ recipe below.
 * `node['rsyslog']['priv_seperation']` - Whether to use privilege seperation or not.
@@ -65,7 +66,7 @@ Any previous logs are not cleaned up from the `log_dir`.
 ### server
 Configures the node to be a rsyslog server. The chosen rsyslog server node should be defined in the `server_ip` attribute or resolvable by the specified search criteria specified in `node['rsyslog']['server_search]` (so that nodes making use of the `client` recipe can find the server to log to).
 
-This recipe will create the logs in `node['rsyslog']['log_dir']`, and the configuration is in `/etc/rsyslog.d/server.conf`. This recipe also removes any previous configuration to a remote server by removing the `/etc/rsyslog.d/remote.conf` file.
+This recipe will create the logs in `node['rsyslog']['log_dir']`, and the main configuration is in `node['rsyslog']['config_prefix']`. The rsyslog.conf contains an IncludeConfig directive, allowing for more specific and granular configs to be added. This recipe also removes any previous configuration to a remote server by removing the `/etc/rsyslog.d/remote.conf` file.
 
 The cron job used in the previous version of this cookbook is removed, but it does not remove any existing cron job from your system (so it doesn't break anything unexpectedly). We recommend setting up logrotate for the logfiles instead.
 
@@ -89,7 +90,7 @@ For example, to change this to just the hostname, set the attribute `node['rsysl
 "rsyslog" => { "per_host_dir" => "%HOSTNAME%" }
 ```
 
-At this time, the server can only listen on UDP *or* TCP.
+The server can listen on UDP, TCP or both.
 
 
 Usage
@@ -98,7 +99,7 @@ Use `recipe[rsyslog]` to install and start rsyslog as a basic configured service
 
 Use `recipe[rsyslog::client]` to have nodes log to a remote server (which is found via the `server_ip` attribute or by the recipe's search call -- see __client__)
 
-Use `recipe[rsyslog::server]` to set up a rsyslog server. It will listen on `node['rsyslog']['port']` protocol `node['rsyslog']['protocol']`.
+Use `recipe[rsyslog::server]` to set up a rsyslog server. It is configurable to listen on TCP, UDP or both.  If set to accept logs on both protocols, clients default to TCP.
 
 If you set up a different kind of centralized loghost (syslog-ng, graylog2, logstash, etc), you can still send log messages to it as long as the port and protocol match up with the server software. See __Examples__
 
@@ -122,7 +123,7 @@ run_list("recipe[rsyslog::server]")
 
 By default this will set up the clients search for a node with the `loghost` role to talk to the server on TCP port 514. Change the `protocol` and `port` rsyslog attributes to modify this.
 
-If you want to specify another syslog compatible server with a role other than loghost, simply fill free to use the `server_ip` attribute or the `server_search` attribute.
+If you want to specify another syslog compatible server with a role other than loghost, simply feel free to use the `server_ip` attribute or the `server_search` attribute.
 
 Example role that sets the per host directory:
 
@@ -156,7 +157,7 @@ default_attributes(
 
 Development
 -----------
-This section details "quick development" steps. For a detailed explanation, see [[Contributing.md]].
+This section details "quick development" steps. For a detailed explanation, see [[CONTRIBUTING.md]].
 
 1. Clone this repository from GitHub:
 
