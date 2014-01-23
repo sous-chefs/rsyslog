@@ -72,12 +72,12 @@ when 'rhel'
   # format { facility => destination }
   default['rsyslog']['default_facility_logs'] = {
     '*.info;mail.none;authpriv.none;cron.none' => "#{node['rsyslog']['default_log_dir']}/messages",
-    'authpriv' => "#{node['rsyslog']['default_log_dir']}/secure",
+    'authpriv.*' => "#{node['rsyslog']['default_log_dir']}/secure",
     'mail.*' => "-#{node['rsyslog']['default_log_dir']}/maillog",
     'cron.*' => "#{node['rsyslog']['default_log_dir']}/cron",
     '*.emerg' => '*',
     'uucp,news.crit' => "#{node['rsyslog']['default_log_dir']}/spooler",
-    'local7.' => "#{node['rsyslog']['default_log_dir']}/boot.log"
+    'local7.*' => "#{node['rsyslog']['default_log_dir']}/boot.log"
   }
 else
   # format { facility => destination }
