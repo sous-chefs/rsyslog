@@ -7,5 +7,5 @@
 # Ignore blank lines
 # ensure facility is in proper format - x.x
 @test "ensure default.conf is valid" {
-  awk '$1 !~ /(^(#|\$)|^$|(.+\..+)+)/ { exit 1 }' /etc/rsyslog.d/50-default.conf
+  awk '$1 !~ /(^(#|\$|:)|^$|(.+\..+)+)/ { exit 1 }' /etc/rsyslog.d/50-default.conf
 }
