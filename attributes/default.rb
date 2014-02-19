@@ -36,6 +36,11 @@ default['rsyslog']['enable_imklog']             = true
 default['rsyslog']['config_prefix']             = '/etc'
 default['rsyslog']['rate_limit_interval']       = nil
 default['rsyslog']['rate_limit_burst']          = nil
+default['rsyslog']['enable_tls']                = false
+default['rsyslog']['tls_ca_file']               = nil
+default['rsyslog']['tls_certificate_file']      = nil
+default['rsyslog']['tls_key_file']              = nil
+default['rsyslog']['tls_auth_mode']             = 'anon'
 
 # The most likely platform-specific attributes
 default['rsyslog']['service_name']              = 'rsyslog'
