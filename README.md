@@ -49,6 +49,7 @@ See `attributes/default.rb` for default values.
 * `node['rsyslog']['tls_certificate_file']` - Path to TLS certificate file. Required for server, optional for clients.
 * `node['rsyslog']['tls_key_file']` - Path to TLS key file. Required for server, optional for clients.
 * `node['rsyslog']['tls_auth_mode']` - Value for `$InputTCPServerStreamDriverAuthMode`/`$ActionSendStreamDriverAuthMode`, determines whether client certs are validated. Defaults to `anon` (no validation).
+* `node['rsyslog']['use_local_ipv4']` - Whether or not to make use the remote local IPv4 address on cloud systems when searching for servers (where available).  Default is 'false'.
 
 Recipes
 -------

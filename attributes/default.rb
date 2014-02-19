@@ -41,6 +41,7 @@ default['rsyslog']['tls_ca_file']               = nil
 default['rsyslog']['tls_certificate_file']      = nil
 default['rsyslog']['tls_key_file']              = nil
 default['rsyslog']['tls_auth_mode']             = 'anon'
+default['rsyslog']['use_local_ipv4']            = false
 
 # The most likely platform-specific attributes
 default['rsyslog']['service_name']              = 'rsyslog'
