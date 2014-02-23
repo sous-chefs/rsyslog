@@ -85,6 +85,8 @@ if platform_family?('omnios')
 end
 
 service node['rsyslog']['service_name'] do
+  restart_command "service #{node['rsyslog']['service_name']} restart"
+
   supports :restart => true, :reload => true, :status => true
   action   [:enable, :start]
 end
