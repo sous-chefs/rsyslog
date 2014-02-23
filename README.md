@@ -11,6 +11,7 @@ Requirements
 Tested on:
 - Ubuntu 9.10
 - Ubuntu 10.04
+- Ubuntu 13.10
 - RedHat 6.3
 - OmniOS r151006c
 
