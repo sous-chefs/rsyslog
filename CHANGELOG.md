@@ -6,6 +6,12 @@ This file is used to list changes made in each version of the rsyslog cookbook.
 
 
 
+v1.12.0 (2014-02-27)
+--------------------
+- [COOK-4021] Allow specifying default templates for local and remote
+- [COOK-4126] rsyslog cookbook fails restarts due to not using upstart
+
+
 v1.11.0 (2014-02-19)
 --------------------
 ### Bug
