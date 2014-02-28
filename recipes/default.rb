@@ -85,9 +85,9 @@ if platform_family?('omnios')
 end
 
 if node['platform'] == 'ubuntu' && node['platform_version'].to_f >= 12.04
-   service_provider = Chef::Provider::Service::Upstart
+  service_provider = Chef::Provider::Service::Upstart
 else
-   service_provider = nil
+  service_provider = nil
 end
 
 service node['rsyslog']['service_name'] do

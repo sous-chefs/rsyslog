@@ -63,7 +63,7 @@ describe 'rsyslog::default' do
         end
 
         it 'exits fatally' do
-          expect{ chef_run }.to raise_error(SystemExit)
+          expect { chef_run }.to raise_error(SystemExit)
         end
       end
     end
