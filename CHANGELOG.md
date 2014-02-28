@@ -6,6 +6,11 @@ This file is used to list changes made in each version of the rsyslog cookbook.
 
 
 
+v1.12.2 (2014-02-28)
+--------------------
+Fixing bug fix in rsyslog.conf
+
+
 v1.12.0 (2014-02-27)
 --------------------
 - [COOK-4021] Allow specifying default templates for local and remote
