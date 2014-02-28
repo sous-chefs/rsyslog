@@ -20,8 +20,8 @@ $ActionSendStreamDriverAuthMode <%= node['rsyslog']['tls_auth_mode'] %>
 <% @servers.each do |server| -%>
 <%   case node['rsyslog']['protocol'] -%>
 <%   when "tcp" -%>
-<%= node['rsyslog']['logs_to_forward'] %> @@<%= server %>:<%= node['rsyslog']['port'] %>
+<%= node['rsyslog']['logs_to_forward'] %> @@<%= server %>:<%= node['rsyslog']['port'] %><%= node["rsyslog"]["default_remote_template"] ? ';' + node["rsyslog"]["default_remote_template"] : nil %>
 <%   when "udp" -%>
-<%= node['rsyslog']['logs_to_forward'] %> @<%= server %>:<%= node['rsyslog']['port'] %>
+<%= node['rsyslog']['logs_to_forward'] %> @<%= server %>:<%= node['rsyslog']['port'] %><%= node["rsyslog"]["default_remote_template"] ? ';' + node["rsyslog"]["default_remote_template"] : nil %>
 <%   end -%>
 <% end -%>
