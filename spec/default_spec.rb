@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'rsyslog::default' do
   let(:chef_run) do
-    ChefSpec::Runner.new(platform: 'ubuntu', version: '12.04').converge('rsyslog::default')
+    ChefSpec::Runner.new(platform: 'ubuntu', version: '12.04').converge(described_recipe)
   end
 
   let(:service_resource) { 'service[rsyslog]' }
@@ -15,7 +15,7 @@ describe 'rsyslog::default' do
     let(:chef_run) do
       ChefSpec::Runner.new(platform: 'ubuntu', version: '12.04') do |node|
         node.set['rsyslog']['use_relp'] = true
-      end.converge('rsyslog::default')
+      end.converge(described_recipe)
     end
 
     it 'installs the rsyslog-relp package' do
@@ -28,7 +28,7 @@ describe 'rsyslog::default' do
       let(:chef_run) do
         ChefSpec::Runner.new(platform: 'ubuntu', version: '12.04') do |node|
           node.set['rsyslog']['enable_tls'] = true
-        end.converge('rsyslog::default')
+        end.converge(described_recipe)
       end
 
       it 'does not install the rsyslog-gnutls package' do
@@ -41,7 +41,7 @@ describe 'rsyslog::default' do
         ChefSpec::Runner.new(platform: 'ubuntu', version: '12.04') do |node|
           node.set['rsyslog']['enable_tls'] = true
           node.set['rsyslog']['tls_ca_file'] = '/etc/path/to/ssl-ca.crt'
-        end.converge('rsyslog::default')
+        end.converge(described_recipe)
       end
 
       it 'installs the rsyslog-gnutls package' do
@@ -59,7 +59,7 @@ describe 'rsyslog::default' do
             node.set['rsyslog']['enable_tls'] = true
             node.set['rsyslog']['tls_ca_file'] = '/etc/path/to/ssl-ca.crt'
             node.set['rsyslog']['protocol'] = 'udp'
-          end.converge('rsyslog::default')
+          end.converge(described_recipe)
         end
 
         it 'exits fatally' do
@@ -88,7 +88,7 @@ describe 'rsyslog::default' do
 
     context 'on SmartOS' do
       let(:chef_run) do
-        ChefSpec::Runner.new(platform: 'smartos', version: 'joyent_20130111T180733Z').converge('rsyslog::default')
+        ChefSpec::Runner.new(platform: 'smartos', version: 'joyent_20130111T180733Z').converge(described_recipe)
       end
 
       let(:directory) { chef_run.directory('/opt/local/etc/rsyslog.d') }
@@ -154,7 +154,7 @@ describe 'rsyslog::default' do
 
     context 'on SmartOS' do
       let(:chef_run) do
-        ChefSpec::Runner.new(platform: 'smartos', version: 'joyent_20130111T180733Z').converge('rsyslog::default')
+        ChefSpec::Runner.new(platform: 'smartos', version: 'joyent_20130111T180733Z').converge(described_recipe)
       end
 
       let(:template) { chef_run.template('/opt/local/etc/rsyslog.conf') }
@@ -207,7 +207,7 @@ describe 'rsyslog::default' do
 
     context 'on SmartOS' do
       let(:chef_run) do
-        ChefSpec::Runner.new(platform: 'smartos', version: 'joyent_20130111T180733Z').converge('rsyslog::default')
+        ChefSpec::Runner.new(platform: 'smartos', version: 'joyent_20130111T180733Z').converge(described_recipe)
       end
 
       let(:template) { chef_run.template('/opt/local/etc/rsyslog.d/50-default.conf') }
@@ -237,7 +237,7 @@ describe 'rsyslog::default' do
 
   context 'COOK-3608 maillog regression test' do
     let(:chef_run) do
-      ChefSpec::Runner.new(platform: 'redhat', version: '6.3').converge('rsyslog::default')
+      ChefSpec::Runner.new(platform: 'redhat', version: '6.3').converge(described_recipe)
     end
 
     it 'outputs mail.* to /var/log/maillog' do
@@ -247,7 +247,7 @@ describe 'rsyslog::default' do
 
   context 'syslog service' do
     let(:chef_run) do
-      ChefSpec::Runner.new(platform: 'redhat', version: '5.8').converge('rsyslog::default')
+      ChefSpec::Runner.new(platform: 'redhat', version: '5.8').converge(described_recipe)
     end
 
     it 'stops and starts the syslog service on RHEL' do
@@ -259,7 +259,7 @@ describe 'rsyslog::default' do
   context 'system-log service' do
     { 'omnios' => '151002', 'smartos' => 'joyent_20130111T180733Z' }.each do |p, pv|
       let(:chef_run) do
-        ChefSpec::Runner.new(platform: p, version: pv).converge('rsyslog::default')
+        ChefSpec::Runner.new(platform: p, version: pv).converge(described_recipe)
       end
 
       it "stops the system-log service on #{p}" do
@@ -270,7 +270,7 @@ describe 'rsyslog::default' do
 
   context 'on OmniOS' do
     let(:chef_run) do
-      ChefSpec::Runner.new(platform: 'omnios', version: '151002').converge('rsyslog::default')
+      ChefSpec::Runner.new(platform: 'omnios', version: '151002').converge(described_recipe)
     end
 
     let(:template) { chef_run.template('/var/svc/manifest/system/rsyslogd.xml') }

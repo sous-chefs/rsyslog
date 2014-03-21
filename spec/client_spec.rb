@@ -8,14 +8,14 @@ describe 'rsyslog::client' do
     end
 
     it 'exits fatally' do
-      expect { ChefSpec::Runner.new.converge('rsyslog::client') }.to raise_error(SystemExit)
+      expect { ChefSpec::Runner.new.converge(described_recipe) }.to raise_error(SystemExit)
     end
   end
 
   let(:chef_run) do
     ChefSpec::Runner.new(platform: 'ubuntu', version: '12.04') do |node|
       node.set['rsyslog']['server_ip'] = server_ip
-    end.converge('rsyslog::client')
+    end.converge(described_recipe)
   end
 
   let(:server_ip) { "10.#{rand(1..9)}.#{rand(1..9)}.50" }
@@ -49,7 +49,7 @@ describe 'rsyslog::client' do
       let(:chef_run) do
         ChefSpec::Runner.new(platform: 'smartos', version: 'joyent_20130111T180733Z') do |node|
           node.set['rsyslog']['server_ip'] = server_ip
-        end.converge('rsyslog::client')
+        end.converge(described_recipe)
       end
 
       let(:template) { chef_run.template('/opt/local/etc/rsyslog.d/49-remote.conf') }
@@ -88,7 +88,7 @@ describe 'rsyslog::client' do
       let(:chef_run) do
         ChefSpec::Runner.new(platform: 'smartos', version: 'joyent_20130111T180733Z') do |node|
           node.set['rsyslog']['server_ip'] = server_ip
-        end.converge('rsyslog::client')
+        end.converge(described_recipe)
       end
 
       let(:file) { chef_run.file('/opt/local/etc/rsyslog.d/server.conf') }

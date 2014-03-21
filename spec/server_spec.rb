@@ -4,7 +4,7 @@ describe 'rsyslog::server' do
   let(:chef_run) do
     ChefSpec::Runner.new(platform: 'ubuntu', version: '12.04') do |node|
       node.set['rsyslog']['server'] = false
-    end.converge('rsyslog::server')
+    end.converge(described_recipe)
   end
 
   let(:service_resource) { 'service[rsyslog]' }
@@ -58,7 +58,7 @@ describe 'rsyslog::server' do
       let(:chef_run) do
         ChefSpec::Runner.new(platform: 'smartos', version: 'joyent_20130111T180733Z') do |node|
           node.set['rsyslog']['server'] = false
-        end.converge('rsyslog::server')
+        end.converge(described_recipe)
       end
 
       let(:template) { chef_run.template('/opt/local/etc/rsyslog.d/35-server-per-host.conf') }
@@ -98,7 +98,7 @@ describe 'rsyslog::server' do
       let(:chef_run) do
         ChefSpec::Runner.new(platform: 'smartos', version: 'joyent_20130111T180733Z') do |node|
           node.set['rsyslog']['server'] = false
-        end.converge('rsyslog::server')
+        end.converge(described_recipe)
       end
 
       let(:file) { chef_run.file('/opt/local/etc/rsyslog.d/remote.conf') }
