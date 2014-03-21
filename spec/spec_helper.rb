@@ -1,3 +1,4 @@
+require 'chef/application'
 require 'chefspec'
 require 'chefspec/berkshelf'
 
