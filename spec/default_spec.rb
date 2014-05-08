@@ -23,6 +23,53 @@ describe 'rsyslog::default' do
     end
   end
 
+  context "when node['rsyslog']['enable_tls'] is true" do
+    context "when node['rsyslog']['tls_ca_file'] is not set" do
+      let(:chef_run) do
+        ChefSpec::ChefRunner.new(platform: 'ubuntu', version: '12.04') do |node|
+          node.set['rsyslog']['enable_tls'] = true
+        end.converge('rsyslog::default')
+      end
+
+      it 'does not install the rsyslog-gnutls package' do
+        expect(chef_run).not_to install_package('rsyslog-gnutls')
+      end
+    end
+
+    context "when node['rsyslog']['tls_ca_file'] is set" do
+      let(:chef_run) do
+        ChefSpec::ChefRunner.new(platform: 'ubuntu', version: '12.04') do |node|
+          node.set['rsyslog']['enable_tls'] = true
+          node.set['rsyslog']['tls_ca_file'] = '/etc/path/to/ssl-ca.crt'
+        end.converge('rsyslog::default')
+      end
+
+      it 'installs the rsyslog-gnutls package' do
+        expect(chef_run).to install_package('rsyslog-gnutls')
+      end
+
+      context "when protocol is not 'tcp'" do
+        before do
+          Chef::Log.stub(:fatal)
+          $stdout.stub(:puts)
+        end
+
+        let(:chef_run) do
+          ChefSpec::ChefRunner.new(platform: 'ubuntu', version: '12.04') do |node|
+            node.set['rsyslog']['enable_tls'] = true
+            node.set['rsyslog']['tls_ca_file'] = '/etc/path/to/ssl-ca.crt'
+            node.set['rsyslog']['protocol'] = 'udp'
+          end.converge('rsyslog::default')
+        end
+
+        it 'exits fatally' do
+          expect { chef_run }.to raise_error(SystemExit)
+        end
+      end
+    end
+
+  end
+
   context '/etc/rsyslog.d directory' do
     let(:directory) { chef_run.directory('/etc/rsyslog.d') }
 

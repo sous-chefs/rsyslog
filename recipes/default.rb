@@ -20,6 +20,11 @@
 package 'rsyslog'
 package 'rsyslog-relp' if node['rsyslog']['use_relp']
 
+if node['rsyslog']['enable_tls'] && node['rsyslog']['tls_ca_file']
+  Chef::Application.fatal!("Recipe rsyslog::default can not use 'enable_tls' with protocol '#{node['rsyslog']['protocol']}' (requires 'tcp')") unless node['rsyslog']['protocol'] == 'tcp'
+  package 'rsyslog-gnutls'
+end
+
 directory "#{node['rsyslog']['config_prefix']}/rsyslog.d" do
   owner 'root'
   group 'root'
@@ -79,7 +84,14 @@ if platform_family?('omnios')
   end
 end
 
+if node['platform'] == 'ubuntu' && node['platform_version'].to_f >= 12.04
+  service_provider = Chef::Provider::Service::Upstart
+else
+  service_provider = nil
+end
+
 service node['rsyslog']['service_name'] do
   supports :restart => true, :reload => true, :status => true
   action   [:enable, :start]
+  provider service_provider
 end

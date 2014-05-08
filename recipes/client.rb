@@ -38,7 +38,15 @@ if Chef::Config[:solo] && !chef_solo_search_installed?
     Chef::Application.fatal!("Chef Solo does not support search. You must set node['rsyslog']['server_ip'] or use the chef-solo-search cookbook!")
   end
 else
-  results = search(:node, node['rsyslog']['server_search']).map { |n| n['ipaddress'] }
+  results = search(:node, node['rsyslog']['server_search']).map do |server|
+    ipaddress = server['ipaddress']
+    # If both server and client are on the same cloud and local network, they may be
+    # instructed to communicate via the internal interface by enabling `use_local_ipv4`
+    if node['rsyslog']['use_local_ipv4'] && server.attribute?('cloud') && server['cloud']['local_ipv4']
+      ipaddress = server['cloud']['local_ipv4']
+    end
+    ipaddress
+  end
   rsyslog_servers = Array(node['rsyslog']['server_ip']) + Array(results)
 end
 
