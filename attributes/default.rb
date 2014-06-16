@@ -39,6 +39,7 @@ default['rsyslog']['default_remote_template']   = nil
 default['rsyslog']['rate_limit_interval']       = nil
 default['rsyslog']['rate_limit_burst']          = nil
 default['rsyslog']['enable_tls']                = false
+default['rsyslog']['action_queue_max_disk_space'] = '1G'
 default['rsyslog']['tls_ca_file']               = nil
 default['rsyslog']['tls_certificate_file']      = nil
 default['rsyslog']['tls_key_file']              = nil
