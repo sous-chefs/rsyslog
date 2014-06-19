@@ -25,6 +25,18 @@ if node['rsyslog']['enable_tls'] && node['rsyslog']['tls_ca_file']
   package 'rsyslog-gnutls'
 end
 
+user node['rsyslog']['user'] do
+  system true
+  home '/dev/null'
+  shell '/bin/false'
+  not_if { node['rsyslog']['user'] == 'root' }
+end
+
+group node['rsyslog']['group'] do
+  system true
+  not_if { node['rsyslog']['group'] == 'root' }
+end
+
 directory "#{node['rsyslog']['config_prefix']}/rsyslog.d" do
   owner 'root'
   group 'root'
