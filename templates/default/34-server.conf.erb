@@ -1,0 +1,4 @@
+<% if node['rsyslog']['use_relp'] -%>
+$ModLoad imrelp
+$InputRELPServerRun <%= node['rsyslog']['relp_port'] %>
+<% end -%>

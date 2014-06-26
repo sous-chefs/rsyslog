@@ -1,0 +1,1 @@
+../../default/bats/verify_installed.bats

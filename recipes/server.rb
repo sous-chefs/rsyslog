@@ -22,23 +22,36 @@ node.set['rsyslog']['server'] = true
 
 include_recipe 'rsyslog::default'
 
+confd = "#{node['rsyslog']['config_prefix']}/rsyslog.d"
+service = "service[#{node['rsyslog']['service_name']}]"
+
 directory node['rsyslog']['log_dir'] do
   owner    'root'
   group    'root'
   mode     '0755'
   recursive true
+  only_if { node['rsyslog']['log_dir'] }
 end
 
-template "#{node['rsyslog']['config_prefix']}/rsyslog.d/35-server-per-host.conf" do
+template "#{confd}/34-server.conf" do
+  source   '34-server.conf.erb'
+  owner    'root'
+  group    'root'
+  mode     '0644'
+  action   :create
+  notifies :restart, service
+end
+
+template "#{confd}/35-server-per-host.conf" do
   source   '35-server-per-host.conf.erb'
   owner    'root'
   group    'root'
   mode     '0644'
-  notifies :restart, "service[#{node['rsyslog']['service_name']}]"
+  action   node['rsyslog']['log_dir'] ? :create : :delete
+  notifies :restart, service
 end
 
-file "#{node['rsyslog']['config_prefix']}/rsyslog.d/remote.conf" do
+file "#{confd}/remote.conf" do
   action   :delete
-  notifies :reload, "service[#{node['rsyslog']['service_name']}]"
-  only_if  { ::File.exists?("#{node['rsyslog']['config_prefix']}/rsyslog.d/remote.conf") }
+  notifies :reload, service
 end

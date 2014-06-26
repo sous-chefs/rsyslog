@@ -1,0 +1,7 @@
+$ModLoad ompgsql
+
+$ActionQueueType LinkedList # use asynchronous processing
+$ActionQueueFileName dbq    # set file name, also enables disk mode
+$ActionResumeRetryCount -1  # infinite retries on insert failure
+
+*.* :ompgsql:<%= @host %>,Syslog,<%= @username %>,<%= @password %>
