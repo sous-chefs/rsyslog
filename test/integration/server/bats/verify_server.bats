@@ -1,5 +1,5 @@
 @test "the server is configured" {
-  test /etc/rsyslog.d/35-server-per-host.conf
+  test /etc/rsyslog.d/34-server.conf
 }
 
 @test "the remote.conf does not exist" {

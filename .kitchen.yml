@@ -32,3 +32,6 @@ suites:
   - name: server
     run_list:
       - recipe[rsyslog::server]
+  - name: postgresql
+    run_list:
+      - recipe[rsyslog::postgresql]
