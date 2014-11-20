@@ -55,7 +55,7 @@ default['rsyslog']['modules']                   = %w(imuxsock imklog)
 case node['platform']
 when 'ubuntu'
   # syslog user introduced with natty package
-  if node['platform_version'].to_f < 10.10
+  if node['platform_version'].to_f >= 11.04
     default['rsyslog']['user'] = 'syslog'
     default['rsyslog']['group'] = 'adm'
     default['rsyslog']['priv_seperation'] = true
