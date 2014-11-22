@@ -86,7 +86,7 @@ describe 'rsyslog::server' do
     let(:file) { chef_run.file('/etc/rsyslog.d/remote.conf') }
 
     it 'deletes the file' do
-      pending "Stubbing class methods without breaking everything is hard"
+      pending 'Stubbing class methods without breaking everything is hard'
       expect(chef_run).to delete_file(file.path)
     end
 
@@ -104,7 +104,7 @@ describe 'rsyslog::server' do
       let(:file) { chef_run.file('/opt/local/etc/rsyslog.d/remote.conf') }
 
       it 'deletes the file' do
-        pending "Stubbing class methods without breaking everything is hard"
+        pending 'Stubbing class methods without breaking everything is hard'
         expect(chef_run).to delete_file(file.path)
       end
 
