@@ -70,6 +70,8 @@ when 'omnios'
   default['rsyslog']['service_name'] = 'system/rsyslogd'
   default['rsyslog']['modules'] = %w(immark imsolaris imtcp imudp)
   default['rsyslog']['group'] = 'root'
+when 'suse'
+  default['rsyslog']['service_name'] = 'syslog'
 end
 
 # 50-default template attributes
