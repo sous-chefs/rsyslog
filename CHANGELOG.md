@@ -3,8 +3,21 @@ rsyslog Cookbook CHANGELOG
 This file is used to list changes made in each version of the rsyslog cookbook.
 
 
-
-
+Unreleased
+----------
+- Rsyslog's working directory is now an attribute and is set to the appropriate directory on RHEL based distros
+- The working directory is now 0700 vs 0755 for additional security
+- Add the ActionQueueMaxDiskSpace directive with a default of 1GB to prevent out of disk events during large buffering
+- Updated RHEL facilities to match those shipped by the distro
+- Added basic SUSE support
+- Fixed logic that prevented Ubuntu from properly dropping privileges in Ubuntu >= 11.04
+- Added a chefignore file
+- Updated Gemfile with newer releases of Test Kitchen, Rubocop, and Berkshelf
+- Added Fedora 20, Debian 6/7, CentOS 7, and Ubuntu 12.04/14.04 to the Test Kitchen config
+- Removed an attribute that was in the Readme twice
+- Updated Travis to Ruby 2.1.1 to better match Chef 12
+- Updated the Berksfile to point to Supermarket
+- Refactored the specs to be more dry
 
 v1.12.2 (2014-02-28)
 --------------------
