@@ -195,7 +195,7 @@ License & Authors
 -----------------
 - Author:: Joshua Timberman (<joshua@opscode.com>)
 - Author:: Denis Barishev (<denz@twiket.com>)
-- Author:: Tim Smith (<tsmith@limelight.com>)
+- Author:: Tim Smith (<tsmith84@gmail.com>)
 
 ```text
 Copyright:: 2009-2013, Opscode, Inc
