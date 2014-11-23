@@ -18,6 +18,7 @@
 #
 
 default['rsyslog']['log_dir']                   = '/srv/rsyslog'
+default['rsyslog']['working_dir']               = '/var/spool/rsyslog'
 default['rsyslog']['server']                    = false
 default['rsyslog']['use_relp']                  = false
 default['rsyslog']['relp_port']                 = 20_514

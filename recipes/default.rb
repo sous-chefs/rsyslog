@@ -31,7 +31,7 @@ directory "#{node['rsyslog']['config_prefix']}/rsyslog.d" do
   mode  '0755'
 end
 
-directory '/var/spool/rsyslog' do
+directory node['rsyslog']['working_dir']  do
   owner 'root'
   group 'root'
   mode  '0755'

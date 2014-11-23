@@ -72,7 +72,7 @@ $RepeatedMsgReduction <%= node['rsyslog']['repeated_msg_reduction'] %>
 #
 # Set temporary directory to buffer syslog queue
 #
-$WorkDirectory /var/spool/rsyslog
+$WorkDirectory <%= node['rsyslog']['working_dir'] %>
 
 #
 # Set the default permissions for all log files.
