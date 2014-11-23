@@ -17,6 +17,7 @@
 # limitations under the License.
 #
 
+default['rsyslog']['default_log_dir']           = '/var/log'
 default['rsyslog']['log_dir']                   = '/srv/rsyslog'
 default['rsyslog']['working_dir']               = '/var/spool/rsyslog'
 default['rsyslog']['server']                    = false
@@ -54,31 +55,7 @@ default['rsyslog']['group']                     = 'adm'
 default['rsyslog']['priv_seperation']           = false
 default['rsyslog']['modules']                   = %w(imuxsock imklog)
 
-case node['platform']
-when 'ubuntu'
-  # syslog user introduced with natty package
-  if node['platform_version'].to_f >= 11.04
-    default['rsyslog']['user'] = 'syslog'
-    default['rsyslog']['group'] = 'adm'
-    default['rsyslog']['priv_seperation'] = true
-  end
-when 'arch'
-  default['rsyslog']['service_name'] = 'rsyslogd'
-when 'smartos'
-  default['rsyslog']['config_prefix'] = '/opt/local/etc'
-  default['rsyslog']['modules'] = %w(immark imsolaris imtcp imudp)
-  default['rsyslog']['group'] = 'root'
-when 'omnios'
-  default['rsyslog']['service_name'] = 'system/rsyslogd'
-  default['rsyslog']['modules'] = %w(immark imsolaris imtcp imudp)
-  default['rsyslog']['group'] = 'root'
-when 'suse'
-  default['rsyslog']['service_name'] = 'syslog'
-end
-
-# 50-default template attributes
-
-default['rsyslog']['default_log_dir'] = '/var/log'
+# platform family specific attributes
 case node['platform_family']
 when 'rhel'
   # format { facility => destination }
@@ -111,4 +88,27 @@ else
     '*.emerg' => '*',
     'daemon.*;mail.*;news.err;*.=debug;*.=info;*.=notice;*.=warn' => '|/dev/xconsole'
   }
+end
+
+# platform specific attributes
+case node['platform']
+when 'ubuntu'
+  # syslog user introduced with natty package
+  if node['platform_version'].to_f >= 11.04
+    default['rsyslog']['user'] = 'syslog'
+    default['rsyslog']['group'] = 'adm'
+    default['rsyslog']['priv_seperation'] = true
+  end
+when 'arch'
+  default['rsyslog']['service_name'] = 'rsyslogd'
+when 'smartos'
+  default['rsyslog']['config_prefix'] = '/opt/local/etc'
+  default['rsyslog']['modules'] = %w(immark imsolaris imtcp imudp)
+  default['rsyslog']['group'] = 'root'
+when 'omnios'
+  default['rsyslog']['service_name'] = 'system/rsyslogd'
+  default['rsyslog']['modules'] = %w(immark imsolaris imtcp imudp)
+  default['rsyslog']['group'] = 'root'
+when 'suse'
+  default['rsyslog']['service_name'] = 'syslog'
 end
