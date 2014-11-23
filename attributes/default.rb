@@ -69,6 +69,8 @@ when 'rhel'
     'uucp,news.crit' => "#{node['rsyslog']['default_log_dir']}/spooler",
     'local7.*' => "#{node['rsyslog']['default_log_dir']}/boot.log"
   }
+  # RHEL >= 7 use journald in systemd
+  default['rsyslog']['modules'] = %w(imuxsock imjournal) if node['platform_version'].to_i >= 7
 else
   # format { facility => destination }
   default['rsyslog']['default_facility_logs'] = {
