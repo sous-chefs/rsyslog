@@ -34,7 +34,7 @@ end
 directory node['rsyslog']['working_dir']  do
   owner 'root'
   group 'root'
-  mode  '0755'
+  mode  '0700'
 end
 
 # Our main stub which then does its own rsyslog-specific
