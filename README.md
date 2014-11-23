@@ -193,7 +193,7 @@ This section details "quick development" steps. For a detailed explanation, see 
 
 License & Authors
 -----------------
-- Author:: Joshua Timberman (<joshua@opscode.com>)
+- Author:: Joshua Timberman (<joshua@getchef.com>)
 - Author:: Denis Barishev (<denz@twiket.com>)
 - Author:: Tim Smith (<tsmith84@gmail.com>)
 

@@ -1,6 +1,6 @@
 name              'rsyslog'
 maintainer        'Opscode, Inc.'
-maintainer_email  'cookbooks@opscode.com'
+maintainer_email  'cookbooks@getchef.com'
 license           'Apache 2.0'
 description       'Installs and configures rsyslog'
 long_description  IO.read(File.join(File.dirname(__FILE__), 'README.md'))
