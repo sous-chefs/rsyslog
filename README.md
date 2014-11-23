@@ -9,9 +9,8 @@ Requirements
 ------------
 ### Platforms
 Tested on:
-- Ubuntu 9.10
-- Ubuntu 10.04
-- RedHat 6.3
+- Ubuntu 10.04+
+- RedHat 5+
 - OmniOS r151006c
 
 ### Other
