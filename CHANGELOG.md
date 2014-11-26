@@ -2,6 +2,11 @@ rsyslog Cookbook CHANGELOG
 ==========================
 This file is used to list changes made in each version of the rsyslog cookbook.
 
+Unreleased
+----------
+- Removed node name from the comment block in the config files
+- Added  a new file_input LWRP for defining configs
+- Add support for chef solo search
 
 v1.13.0 (2014-11-25)
 --------------------
