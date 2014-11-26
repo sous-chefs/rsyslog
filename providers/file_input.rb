@@ -18,16 +18,16 @@
 
 action :create do
   template "/etc/rsyslog.d/#{new_resource.priority}-#{new_resource.name}.conf" do
-    mode 0664
+    mode '0664'
     owner node['rsyslog']['user']
     group node['rsyslog']['group']
     source new_resource.source
     cookbook new_resource.cookbook
     variables 'file_name' => new_resource.file,
-      'tag' => new_resource.name,
-      'state_file' => new_resource.name,
-      'severity' => new_resource.severity,
-      'facility' => new_resource.facility
-    notifies :restart, resources(:service => "rsyslog")
+              'tag' => new_resource.name,
+              'state_file' => new_resource.name,
+              'severity' => new_resource.severity,
+              'facility' => new_resource.facility
+    notifies :restart, resources(:service => 'rsyslog')
   end
 end
