@@ -101,3 +101,6 @@ $SystemLogRateLimitBurst <%= node['rsyslog']['rate_limit_burst'] %>
 # Include all config files in <%= node['rsyslog']['config_prefix'] %>/rsyslog.d/
 #
 $IncludeConfig <%= node['rsyslog']['config_prefix'] %>/rsyslog.d/*.conf
+<% node['rsyslog']['additional_directives'].each_pair do |k,v| %>
+$<%= k %> <%= v %>
+<% end %>

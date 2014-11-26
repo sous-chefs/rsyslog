@@ -47,6 +47,7 @@ default['rsyslog']['tls_certificate_file']      = nil
 default['rsyslog']['tls_key_file']              = nil
 default['rsyslog']['tls_auth_mode']             = 'anon'
 default['rsyslog']['use_local_ipv4']            = false
+default['rsyslog']['additional_directives'] = {}
 
 # The most likely platform-specific attributes
 default['rsyslog']['service_name']              = 'rsyslog'
@@ -70,7 +71,10 @@ when 'rhel', 'fedora'
     'local7.*' => "#{node['rsyslog']['default_log_dir']}/boot.log"
   }
   # RHEL >= 7 and Fedora >= 19 use journald in systemd
-  default['rsyslog']['modules'] = %w(imuxsock imjournal) if node['platform_version'].to_i == 7 || node['platform_version'].to_i >= 19
+  if node['platform_version'].to_i == 7 || node['platform_version'].to_i >= 19
+    default['rsyslog']['modules'] = %w(imuxsock imjournal)
+    default['rsyslog']['additional_directives'] = { 'OmitLocalLogging' => 'on', 'IMJournalStateFile' => 'imjournal.state' }
+  end
 else
   # format { facility => destination }
   default['rsyslog']['default_facility_logs'] = {
