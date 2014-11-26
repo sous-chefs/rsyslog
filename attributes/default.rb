@@ -57,7 +57,7 @@ default['rsyslog']['modules']                   = %w(imuxsock imklog)
 
 # platform family specific attributes
 case node['platform_family']
-when 'rhel'
+when 'rhel', 'fedora'
   default['rsyslog']['working_dir'] = '/var/lib/rsyslog'
   # format { facility => destination }
   default['rsyslog']['default_facility_logs'] = {
