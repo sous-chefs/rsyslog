@@ -12,6 +12,7 @@ platforms:
   - name: debian-7.7
   - name: fedora-19
   - name: fedora-20
+  - name: ubuntu-10.04
   - name: ubuntu-12.04
   - name: ubuntu-14.04
 
