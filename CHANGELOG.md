@@ -3,8 +3,8 @@ rsyslog Cookbook CHANGELOG
 This file is used to list changes made in each version of the rsyslog cookbook.
 
 
-Unreleased
-----------
+v1.13.0 (2014-11-25)
+--------------------
 - Rsyslog's working directory is now an attribute and is set to the appropriate directory on RHEL based distros
 - The working directory is now 0700 vs 0755 for additional security
 - Add the ActionQueueMaxDiskSpace directive with a default of 1GB to prevent out of disk events during large buffering
