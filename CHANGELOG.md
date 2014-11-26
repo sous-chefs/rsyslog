@@ -8,9 +8,12 @@ Unreleased
 - Rsyslog's working directory is now an attribute and is set to the appropriate directory on RHEL based distros
 - The working directory is now 0700 vs 0755 for additional security
 - Add the ActionQueueMaxDiskSpace directive with a default of 1GB to prevent out of disk events during large buffering
-- Updated RHEL facilities to match those shipped by the distro
+- Updated RHEL / Fedora facilities to match those shipped by the distros
+- Updated modules to match those used by journald (systemd) on Fedora 19+ and CentOS 7
+- Added an attribute additional_directives to pass a hash of configs.  This is currently only being used to pass directives necessary for journald support on RHEL 7 / Fedora 19+
 - Added basic SUSE support
 - Fixed logic that prevented Ubuntu from properly dropping privileges in Ubuntu >= 11.04
+- Removed references to rsyslog v3 in the config template
 - Added a chefignore file
 - Updated Gemfile with newer releases of Test Kitchen, Rubocop, and Berkshelf
 - Added Fedora 20, Debian 6/7, CentOS 7, and Ubuntu 12.04/14.04 to the Test Kitchen config
