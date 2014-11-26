@@ -69,8 +69,8 @@ when 'rhel', 'fedora'
     'uucp,news.crit' => "#{node['rsyslog']['default_log_dir']}/spooler",
     'local7.*' => "#{node['rsyslog']['default_log_dir']}/boot.log"
   }
-  # RHEL >= 7 use journald in systemd
-  default['rsyslog']['modules'] = %w(imuxsock imjournal) if node['platform_version'].to_i >= 7
+  # RHEL >= 7 and Fedora >= 19 use journald in systemd
+  default['rsyslog']['modules'] = %w(imuxsock imjournal) if node['platform_version'].to_i == 7 || node['platform_version'].to_i >= 19
 else
   # format { facility => destination }
   default['rsyslog']['default_facility_logs'] = {
