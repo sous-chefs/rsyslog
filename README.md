@@ -140,13 +140,10 @@ Use `recipe[rsyslog::client]` to have nodes log to a remote server (which is fou
 
 Use `recipe[rsyslog::server]` to set up a rsyslog server. It will listen on `node['rsyslog']['port']` protocol `node['rsyslog']['protocol']`.
 
-<<<<<<< HEAD
 If you set up a different kind of centralized loghost (syslog-ng, graylog2, logstash, etc), you can still send log messages to it as long as the port and protocol match up with the server software. See __Examples__
 =======
 Use `rsyslog_file_input` within your recipes to forward log files to
 your remote syslog server.
-
->>>>>>> add file_input lwrp
 
 
 ### Examples
