@@ -100,7 +100,6 @@ For example, to change this to just the hostname, set the attribute `node['rsysl
 
 At this time, the server can only listen on UDP *or* TCP.
 
-<<<<<<< HEAD
 =======
 Resources
 =========
@@ -132,7 +131,6 @@ Usage
 
 Use `recipe[rsyslog]` to install and start rsyslog as a basic
 configured service for standalone systems.
->>>>>>> add file_input lwrp
 
 Usage
 -----
