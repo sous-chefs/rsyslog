@@ -68,5 +68,5 @@ end
 
 file "#{node['rsyslog']['config_prefix']}/rsyslog.d/server.conf" do
   action   :delete
-  notifies :reload, "service[#{node['rsyslog']['service_name']}]"
+  notifies :restart, "service[#{node['rsyslog']['service_name']}]"
 end

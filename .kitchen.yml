@@ -32,10 +32,10 @@ suites:
       - omnios-r151006c
   - name: client
     run_list:
-      - recipe[rsyslog::client]
+      - recipe[rsyslog_test::client]
     attributes:
       rsyslog:
         server_ip: 10.0.0.50
   - name: server
     run_list:
-      - recipe[rsyslog::server]
+      - recipe[rsyslog_test::server]

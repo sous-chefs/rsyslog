@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'rsyslog::server' do
   let(:chef_run) do
-    ChefSpec::Runner.new(platform: 'ubuntu', version: '12.04') do |node|
+    ChefSpec::SoloRunner.new(platform: 'ubuntu', version: '12.04') do |node|
       node.set['rsyslog']['server'] = false
     end.converge(described_recipe)
   end
@@ -10,7 +10,7 @@ describe 'rsyslog::server' do
   let(:service_resource) { 'service[rsyslog]' }
 
   it "sets node['rsyslog']['server'] to true" do
-    expect(chef_run.node['rsyslog']['server']).to be_true
+    expect(chef_run.node['rsyslog']['server']).to be(true)
   end
 
   it 'includes the default recipe' do
@@ -56,7 +56,7 @@ describe 'rsyslog::server' do
 
     context 'on SmartOS' do
       let(:chef_run) do
-        ChefSpec::Runner.new(platform: 'smartos', version: 'joyent_20130111T180733Z') do |node|
+        ChefSpec::SoloRunner.new(platform: 'smartos', version: 'joyent_20130111T180733Z') do |node|
           node.set['rsyslog']['server'] = false
         end.converge(described_recipe)
       end
@@ -91,12 +91,12 @@ describe 'rsyslog::server' do
     end
 
     it 'notifies restarting the service' do
-      expect(file).to notify(service_resource).to(:reload)
+      expect(file).to notify(service_resource).to(:restart)
     end
 
     context 'on SmartOS' do
       let(:chef_run) do
-        ChefSpec::Runner.new(platform: 'smartos', version: 'joyent_20130111T180733Z') do |node|
+        ChefSpec::SoloRunner.new(platform: 'smartos', version: 'joyent_20130111T180733Z') do |node|
           node.set['rsyslog']['server'] = false
         end.converge(described_recipe)
       end
@@ -109,7 +109,7 @@ describe 'rsyslog::server' do
       end
 
       it 'notifies restarting the service' do
-        expect(file).to notify(service_resource).to(:reload)
+        expect(file).to notify(service_resource).to(:restart)
       end
     end
   end

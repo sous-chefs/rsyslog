@@ -3,17 +3,17 @@ require 'spec_helper'
 describe 'rsyslog::client' do
   context "when node['rsyslog']['server_ip'] is not set" do
     before do
-      Chef::Log.stub(:fatal)
-      $stdout.stub(:puts)
+      allow(Chef::Log).to receive(:fatal)
+      allow($stdout).to receive(:puts)
     end
 
     it 'exits fatally' do
-      expect { ChefSpec::Runner.new.converge(described_recipe) }.to raise_error(SystemExit)
+      expect { ChefSpec::SoloRunner.new.converge(described_recipe) }.to raise_error(SystemExit)
     end
   end
 
   let(:chef_run) do
-    ChefSpec::Runner.new(platform: 'ubuntu', version: '12.04') do |node|
+    ChefSpec::SoloRunner.new(platform: 'ubuntu', version: '12.04') do |node|
       node.set['rsyslog']['server_ip'] = server_ip
     end.converge(described_recipe)
   end
@@ -47,7 +47,7 @@ describe 'rsyslog::client' do
 
     context 'on SmartOS' do
       let(:chef_run) do
-        ChefSpec::Runner.new(platform: 'smartos', version: 'joyent_20130111T180733Z') do |node|
+        ChefSpec::SoloRunner.new(platform: 'smartos', version: 'joyent_20130111T180733Z') do |node|
           node.set['rsyslog']['server_ip'] = server_ip
         end.converge(described_recipe)
       end
@@ -81,12 +81,12 @@ describe 'rsyslog::client' do
     end
 
     it 'notifies restarting the service' do
-      expect(file).to notify(service_resource).to(:reload)
+      expect(file).to notify(service_resource).to(:restart)
     end
 
     context 'on SmartOS' do
       let(:chef_run) do
-        ChefSpec::Runner.new(platform: 'smartos', version: 'joyent_20130111T180733Z') do |node|
+        ChefSpec::SoloRunner.new(platform: 'smartos', version: 'joyent_20130111T180733Z') do |node|
           node.set['rsyslog']['server_ip'] = server_ip
         end.converge(described_recipe)
       end
@@ -98,7 +98,7 @@ describe 'rsyslog::client' do
       end
 
       it 'notifies restarting the service' do
-        expect(file).to notify(service_resource).to(:reload)
+        expect(file).to notify(service_resource).to(:restart)
       end
     end
   end

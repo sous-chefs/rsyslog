@@ -91,7 +91,7 @@ else
 end
 
 service node['rsyslog']['service_name'] do
-  supports :restart => true, :reload => true, :status => true
+  supports :restart => true, :status => true
   action   [:enable, :start]
   provider service_provider
 end
