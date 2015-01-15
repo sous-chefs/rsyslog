@@ -16,8 +16,10 @@
 # limitations under the License.
 #
 
+use_inline_resources
+
 action :create do
-  template "/etc/rsyslog.d/#{new_resource.priority}-#{new_resource.name}.conf" do
+  t = template "/etc/rsyslog.d/#{new_resource.priority}-#{new_resource.name}.conf" do
     mode '0664'
     owner node['rsyslog']['user']
     group node['rsyslog']['group']
@@ -28,6 +30,8 @@ action :create do
               'state_file' => new_resource.name,
               'severity' => new_resource.severity,
               'facility' => new_resource.facility
-    notifies :restart, resources(:service => 'rsyslog')
+    notifies :restart, resources('service[rsyslog]')
   end
+
+  new_resource.updated_by_last_action(t.updated_by_last_action?)
 end
