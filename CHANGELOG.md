@@ -2,11 +2,16 @@ rsyslog Cookbook CHANGELOG
 ==========================
 This file is used to list changes made in each version of the rsyslog cookbook.
 
-Unreleased
-----------
-- Removed node name from the comment block in the config files
-- Added  a new file_input LWRP for defining configs
-- Add support for chef solo search
+v.1.14.0 (2015-01-30)
+---------------------
+- Don't attempt to use journald on Amazon Linux since Amazon Linux doesn't use systemd
+- Fixed setting bad permissions on the working directory by using the rsyslog user/group variables.
+- Fixed bad variable in the 49-relp.conf template that prevented Chef converges from completing.
+- Removed the 'reload' action from the rsyslog service as newer rsyslog releases don't support reload.
+- Updated Chefspecs to remove deprecation warnings and added additional tests.
+- Removed node name from the comment block in the config files. 
+- Added a new file_input LWRP for defining configs.
+- Added support for chef solo search cookbook.
 
 v1.13.0 (2014-11-25)
 --------------------
