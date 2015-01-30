@@ -100,7 +100,6 @@ For example, to change this to just the hostname, set the attribute `node['rsysl
 
 At this time, the server can only listen on UDP *or* TCP.
 
-=======
 Resources
 =========
 
@@ -128,12 +127,6 @@ interperets this as `local0`.
 
 Usage
 =====
-
-Use `recipe[rsyslog]` to install and start rsyslog as a basic
-configured service for standalone systems.
-
-Usage
------
 Use `recipe[rsyslog]` to install and start rsyslog as a basic configured service for standalone systems.
 
 Use `recipe[rsyslog::client]` to have nodes log to a remote server (which is found via the `server_ip` attribute or by the recipe's search call -- see __client__)
@@ -141,7 +134,7 @@ Use `recipe[rsyslog::client]` to have nodes log to a remote server (which is fou
 Use `recipe[rsyslog::server]` to set up a rsyslog server. It will listen on `node['rsyslog']['port']` protocol `node['rsyslog']['protocol']`.
 
 If you set up a different kind of centralized loghost (syslog-ng, graylog2, logstash, etc), you can still send log messages to it as long as the port and protocol match up with the server software. See __Examples__
-=======
+
 Use `rsyslog_file_input` within your recipes to forward log files to
 your remote syslog server.
 
@@ -230,12 +223,12 @@ This section details "quick development" steps. For a detailed explanation, see 
 
 License & Authors
 -----------------
-- Author:: Joshua Timberman (<joshua@getchef.com>)
+- Author:: Joshua Timberman (<joshua@chef.io>)
 - Author:: Denis Barishev (<denz@twiket.com>)
 - Author:: Tim Smith (<tsmith84@gmail.com>)
 
 ```text
-Copyright:: 2009-2014, Chef Software, Inc
+Copyright:: 2009-2015, Chef Software, Inc
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
