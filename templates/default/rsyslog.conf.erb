@@ -81,8 +81,8 @@ $FileCreateMode 0640
 $DirCreateMode 0755
 $Umask 0022
 <% if node['rsyslog']['priv_seperation'] %>
-$PrivDropToUser <%= node['rsyslog']['user'] %>
-$PrivDropToGroup <%= node['rsyslog']['group'] %>
+$PrivDropToUser <%= node['rsyslog']['priv_user'] || node['rsyslog']['user'] %>
+$PrivDropToGroup <%= node['rsyslog']['priv_group'] || node['rsyslog']['group'] %>
 <% end %>
 <% unless node['rsyslog']['rate_limit_interval'].nil? %>
 #

@@ -32,6 +32,8 @@ See `attributes/default.rb` for default values.
 * `node['rsyslog']['remote_logs']` - Specify wether to send all logs to a remote server (client option). Default is `true`.
 * `node['rsyslog']['per_host_dir']` - "PerHost" directories for template statements in `35-server-per-host.conf`. Default value is the previous cookbook version's value, to preserve compatibility. See __server__ recipe below.
 * `node['rsyslog']['priv_seperation']` - Whether to use privilege separation or not.
+* `node['rsyslog']['priv_user']` - User to run as when using privilege separation. Defult is  `node['rsyslog']['user']`
+* `node['rsyslog']['priv_group']` - Group to run as when using privilege separation. Defult is  `node['rsyslog']['group']`
 * `node['rsyslog']['max_message_size']` - Specify the maximum allowed message size. Default is 2k.
 * `node['rsyslog']['user']` - Who should own the configuration files and directories
 * `node['rsyslog']['group']` - Who should group-own the configuration files and directories
