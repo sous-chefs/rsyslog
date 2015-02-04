@@ -17,7 +17,7 @@
 # limitations under the License.
 #
 
-::Chef::Recipe.send(:include, RsyslogCookbook::Helpers)
+extend RsyslogCookbook::Helpers
 
 package 'rsyslog'
 package 'rsyslog-relp' if node['rsyslog']['use_relp']
