@@ -1,6 +1,6 @@
 rsyslog Cookbook
 ================
-[![Build Status](https://secure.travis-ci.org/opscode-cookbooks/rsyslog.png?branch=master)](http://travis-ci.org/opscode-cookbooks/rsyslog)
+[![Build Status](https://secure.travis-ci.org/chef-cookbooks/rsyslog.png?branch=master)](http://travis-ci.org/chef-cookbooks/rsyslog)
 
 Installs and configures rsyslog to replace sysklogd for client and/or server use. By default, the service will be configured to log to files on local disk. See the Recipes and Examples sections for other uses.
 
@@ -196,7 +196,7 @@ This section details "quick development" steps. For a detailed explanation, see 
 
 1. Clone this repository from GitHub:
 
-    $ git clone git@github.com:opscode-cookbooks/rsyslog.git
+    $ git clone git@github.com:chef-cookbooks/rsyslog.git
 
 2. Create a git branch
 
