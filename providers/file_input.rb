@@ -28,6 +28,7 @@ action :create do
               'state_file' => new_resource.name,
               'severity' => new_resource.severity,
               'facility' => new_resource.facility
+    notifies :run, 'execute[validate_config]'
     notifies :restart, resources(:service => 'rsyslog')
   end
 end
