@@ -39,3 +39,6 @@ suites:
   - name: server
     run_list:
       - recipe[rsyslog_test::server]
+  - name: input_file_provider
+    run_list:
+      - recipe[rsyslog_test::input_file_provider]

@@ -16,7 +16,13 @@
 # limitations under the License.
 #
 
+use_inline_resources
+
+include RsyslogCookbook::Helpers
+
 action :create do
+  declare_rsyslog_service
+
   template "/etc/rsyslog.d/#{new_resource.priority}-#{new_resource.name}.conf" do
     mode '0664'
     owner node['rsyslog']['user']
@@ -28,6 +34,6 @@ action :create do
               'state_file' => new_resource.name,
               'severity' => new_resource.severity,
               'facility' => new_resource.facility
-    notifies :restart, resources(:service => 'rsyslog')
+    notifies :restart, resources('service[rsyslog]')
   end
 end
