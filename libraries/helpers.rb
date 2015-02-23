@@ -1,4 +1,5 @@
 module RsyslogCookbook
+  # helpers for the various service providers on Ubuntu systems
   module Helpers
     def declare_rsyslog_service
       if node['platform'] == 'ubuntu' && node['platform_version'].to_f >= 12.04
