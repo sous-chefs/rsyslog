@@ -28,7 +28,7 @@ suites:
         use_relp: true
     # CentOS and OmniOS do not support relp
     excludes:
-      - centos-5.8
+      - centos-5.10
       - omnios-r151006c
   - name: client
     run_list:
