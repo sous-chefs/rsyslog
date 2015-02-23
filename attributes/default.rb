@@ -71,7 +71,7 @@ when 'rhel', 'fedora'
     'local7.*' => "#{node['rsyslog']['default_log_dir']}/boot.log"
   }
   # RHEL >= 7 and Fedora >= 19 use journald in systemd. Amazon Linux doesn't.
-  if node['platform'] != "amazon" && (node['platform_version'].to_i == 7 || node['platform_version'].to_i >= 19)
+  if node['platform'] != 'amazon' && (node['platform_version'].to_i == 7 || node['platform_version'].to_i >= 19)
     default['rsyslog']['modules'] = %w(imuxsock imjournal)
     default['rsyslog']['additional_directives'] = { 'OmitLocalLogging' => 'on', 'IMJournalStateFile' => 'imjournal.state' }
   end

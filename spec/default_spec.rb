@@ -67,7 +67,6 @@ describe 'rsyslog::default' do
         end
       end
     end
-
   end
 
   context '/etc/rsyslog.d directory' do
