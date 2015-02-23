@@ -13,7 +13,7 @@ recipe            'rsyslog::server', 'Sets up an rsyslog server'
 supports          'ubuntu', '>= 10.04'
 supports          'debian', '>= 5.0'
 supports          'redhat', '>= 5.0'
-supports          'fedora', '>= 19.0'
+supports          'fedora', '>= 20.0'
 
 attribute 'rsyslog',
   :display_name => 'Rsyslog',
