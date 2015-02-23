@@ -9,7 +9,7 @@ Requirements
 ------------
 ### Platforms
 Tested on:
-- Ubuntu 10.04+
+- Ubuntu 10.04+is
 - Red Hat / CentOS 5+
 - Fedora 20+
 - OmniOS r151006c
@@ -24,14 +24,14 @@ See `attributes/default.rb` for default values.
 
 * `node['rsyslog']['log_dir']` - If the node is an rsyslog server, this specifies the directory where the logs should be stored.
 * `node['rsyslog']['working_dir']` - The temporary working directory where messages are buffered
-* `node['rsyslog']['server']` - Determined automaticaly and set to true on the server.
+* `node['rsyslog']['server']` - Determined automatically and set to true on the server.
 * `node['rsyslog']['server_ip']` - If not defined then search will be used to determine rsyslog server. Default is `nil`.  This can be a string or an array.
 * `node['rsyslog']['server_search']` - Specify the criteria for the server search operation. Default is `role:loghost`.
 * `node['rsyslog']['protocol']` - Specify whether to use `udp` or `tcp` for remote loghost. Default is `tcp`.
 * `node['rsyslog']['port']` - Specify the port which rsyslog should connect to a remote loghost.
 * `node['rsyslog']['remote_logs']` - Specify wether to send all logs to a remote server (client option). Default is `true`.
 * `node['rsyslog']['per_host_dir']` - "PerHost" directories for template statements in `35-server-per-host.conf`. Default value is the previous cookbook version's value, to preserve compatibility. See __server__ recipe below.
-* `node['rsyslog']['priv_seperation']` - Whether to use privilege seperation or not.
+* `node['rsyslog']['priv_seperation']` - Whether to use privilege separation or not.
 * `node['rsyslog']['max_message_size']` - Specify the maximum allowed message size. Default is 2k.
 * `node['rsyslog']['user']` - Who should own the configuration files and directories
 * `node['rsyslog']['group']` - Who should group-own the configuration files and directories
@@ -116,11 +116,11 @@ Attributes:
 * `priority`: config order priority. Defaults to `99`.
 * `severity`: syslog severity. Must be one of `emergency`, `alert`,
 `critical`, `error`, `warning`, `notice`, `info` or `debug`. If
-undefined, rsyslog interperets this as `notice`.
+undefined, rsyslog interprets this as `notice`.
 * `facility`: syslog facility. Must be one of `auth`, `authpriv`,
 `daemon`, `cron`, `ftp`, `lpr`, `kern`, `mail`, `news`, `syslog`,
 `user`, `uucp`, `local0`, ... , `local7`. If undefined, rsyslog
-interperets this as `local0`.
+interprets this as `local0`.
 * `cookbook`: cookbook containing the template. Defaults to `rsyslog`.
 * `source`: template file source. Defaults to `file-input.conf.erb`
 
@@ -206,7 +206,7 @@ This section details "quick development" steps. For a detailed explanation, see 
 
     $ bundle install
 
-4. Make your changes/patches/fixes, committing appropiately
+4. Make your changes/patches/fixes, committing appropriately
 5. **Write tests**
 6. Run the tests:
     - bundle exec foodcritic -f any .
