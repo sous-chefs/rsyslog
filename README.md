@@ -9,7 +9,7 @@ Requirements
 ------------
 ### Platforms
 Tested on:
-- Ubuntu 10.04+is
+- Ubuntu 10.04+
 - Red Hat / CentOS 5+
 - Fedora 20+
 - OmniOS r151006c
