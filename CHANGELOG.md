@@ -2,6 +2,15 @@ rsyslog Cookbook CHANGELOG
 ==========================
 This file is used to list changes made in each version of the rsyslog cookbook.
 
+v.1.15.0 (2015-02-23)
+---------------------
+- Change minimum supported Fedora release to 20 to align with the Fedora product lifecycle
+- Add supports CentOS to metadata
+- Update Rubocop and Test Kitchen dependencies to the latest versions
+- Update Chefspec to 4.0
+- Fix CentOS 5 support in the Kitchen config
+- Fix rsyslog service notification in the file_input LWRP
+
 v.1.14.0 (2015-01-30)
 ---------------------
 - Don't attempt to use journald on Amazon Linux since Amazon Linux doesn't use systemd
