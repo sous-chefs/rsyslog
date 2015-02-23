@@ -10,8 +10,8 @@ Requirements
 ### Platforms
 Tested on:
 - Ubuntu 10.04+
-- RedHat 5+
-- Fedora 19+
+- Red Hat / CentOS 5+
+- Fedora 20+
 - OmniOS r151006c
 
 ### Other
