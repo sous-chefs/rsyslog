@@ -54,6 +54,8 @@ default['rsyslog']['service_name']              = 'rsyslog'
 default['rsyslog']['user']                      = 'root'
 default['rsyslog']['group']                     = 'adm'
 default['rsyslog']['priv_seperation']           = false
+default['rsyslog']['priv_user']                 = nil
+default['rsyslog']['priv_group']                = nil
 default['rsyslog']['modules']                   = %w(imuxsock imklog)
 
 # platform family specific attributes
@@ -105,6 +107,7 @@ when 'ubuntu'
     default['rsyslog']['user'] = 'syslog'
     default['rsyslog']['group'] = 'adm'
     default['rsyslog']['priv_seperation'] = true
+    default['rsyslog']['priv_group'] = 'syslog'
   end
 when 'arch'
   default['rsyslog']['service_name'] = 'rsyslogd'
