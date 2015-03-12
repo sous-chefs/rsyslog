@@ -23,8 +23,8 @@ node.set['rsyslog']['server'] = true
 include_recipe 'rsyslog::default'
 
 directory node['rsyslog']['log_dir'] do
-  owner    'root'
-  group    'root'
+  owner    node['rsyslog']['user'] ? node['rsyslog']['user']  : 'root'
+  group    node['rsyslog']['group'] ? node['rsyslog']['group']  : 'root'
   mode     '0755'
   recursive true
 end
