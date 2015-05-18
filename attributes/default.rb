@@ -95,8 +95,7 @@ else
     'news.notice' => "-#{node['rsyslog']['default_log_dir']}/news/news.notice",
     '*.=debug;auth,authpriv.none;news.none;mail.none' => "-#{node['rsyslog']['default_log_dir']}/debug",
     '*.=info;*.=notice;*.=warn;auth,authpriv.none;cron,daemon.none;mail,news.none' => "-#{node['rsyslog']['default_log_dir']}/messages",
-    '*.emerg' => '*',
-    'daemon.*;mail.*;news.err;*.=debug;*.=info;*.=notice;*.=warn' => '|/dev/xconsole'
+    '*.emerg' => '*'
   }
 end
 
