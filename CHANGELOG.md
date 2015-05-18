@@ -2,6 +2,16 @@ rsyslog Cookbook CHANGELOG
 ==========================
 This file is used to list changes made in each version of the rsyslog cookbook.
 
+v.2.0.0 (2015-05-18)
+Note: This version includes several breaking changes for Ubuntu users. Be sure to take care when deploying these changes to production systems.
+
+- 49-relp.conf now properly uses the list of servers discovered in the client recipe
+- Fixed a typo that prevented file-input.conf from properly templating
+- Added allow_non_local attribute to allow non-local messages. This defaults to false, which preserves the previous functionality
+- The rsyslog directory permissions are now properly set using the user/group attributes instead of root/root
+- Properly drop permissions on Ubuntu systems to syslog/syslog.  Introduces 2 new attributes to control the user/group: priv_user and priv_group
+- Remove logging to /dev/xconsole in 50-default.conf on Ubuntu systems.  This is generally not something you'd want to do and produces error messages at startup.
+
 v.1.15.0 (2015-02-23)
 ---------------------
 - Change minimum supported Fedora release to 20 to align with the Fedora product lifecycle
@@ -18,7 +28,7 @@ v.1.14.0 (2015-01-30)
 - Fixed bad variable in the 49-relp.conf template that prevented Chef converges from completing.
 - Removed the 'reload' action from the rsyslog service as newer rsyslog releases don't support reload.
 - Updated Chefspecs to remove deprecation warnings and added additional tests.
-- Removed node name from the comment block in the config files. 
+- Removed node name from the comment block in the config files.
 - Added a new file_input LWRP for defining configs.
 - Added support for chef solo search cookbook.
 
