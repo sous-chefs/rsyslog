@@ -109,8 +109,8 @@ Resources
 file_input
 ----------
 
-Configures a (text file input
-monitor)[http://www.rsyslog.com/doc/imfile.html] to push a log file into
+Configures a [text file input
+monitor](http://www.rsyslog.com/doc/imfile.html) to push a log file into
 rsyslog.
 
 Attributes:
