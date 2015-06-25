@@ -28,6 +28,7 @@ See `attributes/default.rb` for default values.
 * `node['rsyslog']['server_ip']` - If not defined then search will be used to determine rsyslog server. Default is `nil`.  This can be a string or an array.
 * `node['rsyslog']['server_search']` - Specify the criteria for the server search operation. Default is `role:loghost`.
 * `node['rsyslog']['protocol']` - Specify whether to use `udp` or `tcp` for remote loghost. Default is `tcp`.
+* `node['rsyslog']['bind']` - Specify the address to which the server should be listening; only use with `node['rsyslog']['protocol'] = 'udp'` because the feature does not work with the `tcp` protocol ([more info](http://www.rsyslog.com/doc/master/configuration/modules/imtcp.html#caveats-known-bugs)).
 * `node['rsyslog']['port']` - Specify the port which rsyslog should connect to a remote loghost.
 * `node['rsyslog']['remote_logs']` - Specify wether to send all logs to a remote server (client option). Default is `true`.
 * `node['rsyslog']['per_host_dir']` - "PerHost" directories for template statements in `35-server-per-host.conf`. Default value is the previous cookbook version's value, to preserve compatibility. See __server__ recipe below.
