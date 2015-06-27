@@ -24,6 +24,7 @@ default['rsyslog']['server']                    = false
 default['rsyslog']['use_relp']                  = false
 default['rsyslog']['relp_port']                 = 20_514
 default['rsyslog']['protocol']                  = 'tcp'
+default['rsyslog']['bind']                      = '*'
 default['rsyslog']['port']                      = 514
 default['rsyslog']['server_ip']                 = nil
 default['rsyslog']['server_search']             = 'role:loghost'
