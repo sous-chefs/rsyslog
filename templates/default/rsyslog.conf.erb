@@ -36,6 +36,7 @@ $InputTCPServerStreamDriverAuthMode <%= node['rsyslog']['tls_auth_mode'] || 'ano
 $InputTCPServerRun <%= node['rsyslog']['port'] %>
 # Provide <%= node['rsyslog']['protocol'].upcase %> log reception
   <% else -%>
+<<<<<<< HEAD
 <% if node['rsyslog']['protocol'] =~ /tcp/ %>
   $ModLoad imtcp
   $InputTCPServerRun <%= node['rsyslog']['port'] %>
@@ -43,6 +44,16 @@ $InputTCPServerRun <%= node['rsyslog']['port'] %>
 <% if node['rsyslog']['protocol'] =~ /udp/ %>
   $ModLoad imudp
   $UDPServerRun <%= node['rsyslog']['port'] %>
+=======
+<% case node['rsyslog']['protocol'] -%>
+<% when "tcp" -%>
+$ModLoad imtcp
+$InputTCPServerRun <%= node['rsyslog']['port'] %>
+<% when "udp" -%>
+$ModLoad imudp
+$UDPServerAddress <%= node['rsyslog']['bind'] %>
+$UDPServerRun <%= node['rsyslog']['port'] %>
+>>>>>>> 03a54a9893fc72293ff7dbd9880d012080a2d00e
 <% end -%>
   <% end -%>
 <% end -%>
