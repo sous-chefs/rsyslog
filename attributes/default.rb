@@ -70,7 +70,7 @@ when 'rhel', 'fedora'
     'authpriv.*' => "#{node['rsyslog']['default_log_dir']}/secure",
     'mail.*' => "-#{node['rsyslog']['default_log_dir']}/maillog",
     'cron.*' => "#{node['rsyslog']['default_log_dir']}/cron",
-    '*.emerg' => '*',
+    '*.emerg' => ':omusrmsg:*',
     'uucp,news.crit' => "#{node['rsyslog']['default_log_dir']}/spooler",
     'local7.*' => "#{node['rsyslog']['default_log_dir']}/boot.log"
   }
