@@ -3,6 +3,7 @@ rsyslog Cookbook CHANGELOG
 This file is used to list changes made in each version of the rsyslog cookbook.
 
 v.2.0.0 (2015-05-18)
+--------------------
 Note: This version includes several breaking changes for Ubuntu users. Be sure to take care when deploying these changes to production systems.
 
 - 49-relp.conf now properly uses the list of servers discovered in the client recipe
