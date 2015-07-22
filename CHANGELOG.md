@@ -5,7 +5,7 @@ This file is used to list changes made in each version of the rsyslog cookbook.
 v.2.1.0 (2015-07-22)
 ----------
 - Fixed minor markdown errors in the readme
-- Alow the server to listen on both TCP and UDP.  For both set node['rsyslog']['protocol'] to 'udptcp'
+- Allow the server to listen on both TCP and UDP.  For both set node['rsyslog']['protocol'] to 'udptcp'
 - Move the include for /etc/rsyslog.d/ to the very end of the rsyslog.conf config
 - Added the ability to bind to a specific IP when running the server on UDP with node['rsyslog']['bind']
 - Sync the comments in the rsyslog.conf file with the latest upstream rsyslog release
