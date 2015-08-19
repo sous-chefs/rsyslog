@@ -185,7 +185,7 @@ name "facility_log_example"
 run_list("recipe[rsyslog::default]")
 default_attributes(
   "rsyslog" => {
-    "facility_logs" => {
+    "default_facility_logs" => {
       '*.info;mail.none;authpriv.none;cron.none' => "/var/log/messages",
       'authpriv' => '/var/log/secure',
       'mail.*' => '-/var/log/maillog',
