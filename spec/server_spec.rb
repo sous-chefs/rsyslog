@@ -25,8 +25,8 @@ describe 'rsyslog::server' do
     end
 
     it 'is owned by root:root' do
-      expect(directory.owner).to eq('root')
-      expect(directory.group).to eq('root')
+      expect(directory.owner).to eq('syslog')
+      expect(directory.group).to eq('adm')
     end
 
     it 'has 0755 permissions' do
