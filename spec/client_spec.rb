@@ -15,10 +15,12 @@ describe 'rsyslog::client' do
   let(:chef_run) do
     ChefSpec::SoloRunner.new(platform: 'ubuntu', version: '12.04') do |node|
       node.set['rsyslog']['server_ip'] = server_ip
+      node.set['rsyslog']['custom_remote'] = custom_remote
     end.converge(described_recipe)
   end
 
   let(:server_ip) { "10.#{rand(1..9)}.#{rand(1..9)}.50" }
+  let(:custom_remote) { [{ 'server' => '10.0.0.1', 'port' => 555, 'protocol' => 'tcp', 'logs' => 'auth.*,mail.*', 'remote_template' => 'RSYSLOG_SyslogProtocol23Format' }] }
   let(:service_resource) { 'service[rsyslog]' }
 
   it 'includes the default recipe' do
@@ -29,7 +31,10 @@ describe 'rsyslog::client' do
     let(:template) { chef_run.template('/etc/rsyslog.d/49-remote.conf') }
 
     it 'creates the template' do
-      expect(chef_run).to render_file(template.path).with_content("*.* @@#{server_ip}:514")
+      expect(chef_run).to render_file(template.path).with_content { |content| 
+          expect(content).to include("*.* @@#{server_ip}:514")
+          expect(content).to include("#{custom_remote.first['logs']} @@#{custom_remote.first['server']}:#{custom_remote.first['port']};#{custom_remote.first['remote_template']}")
+      }
     end
 
     it 'is owned by root:root' do
@@ -49,13 +54,17 @@ describe 'rsyslog::client' do
       let(:chef_run) do
         ChefSpec::SoloRunner.new(platform: 'smartos', version: 'joyent_20130111T180733Z') do |node|
           node.set['rsyslog']['server_ip'] = server_ip
+          node.set['rsyslog']['custom_remote'] = custom_remote
         end.converge(described_recipe)
       end
 
       let(:template) { chef_run.template('/opt/local/etc/rsyslog.d/49-remote.conf') }
 
       it 'creates the template' do
-        expect(chef_run).to render_file(template.path).with_content("*.* @@#{server_ip}:514")
+          expect(chef_run).to render_file(template.path).with_content { |content| 
+              expect(content).to include("*.* @@#{server_ip}:514")
+              expect(content).to include("#{custom_remote.first['logs']} @@#{custom_remote.first['server']}:#{custom_remote.first['port']};#{custom_remote.first['remote_template']}")
+          }
       end
 
       it 'is owned by root:root' do

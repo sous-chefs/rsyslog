@@ -33,7 +33,7 @@ end
 # normal Chef, we leverage the search query.
 if Chef::Config[:solo] && !chef_solo_search_installed?
   if node['rsyslog']['server_ip']
-    rsyslog_servers = Array(node['rsyslog']['server_ip'])
+    server_ips = Array(node['rsyslog']['server_ip'])
   else
     Chef::Application.fatal!("Chef Solo does not support search. You must set node['rsyslog']['server_ip'] or use the chef-solo-search cookbook!")
   end
@@ -47,7 +47,22 @@ else
     end
     ipaddress
   end
-  rsyslog_servers = Array(node['rsyslog']['server_ip']) + Array(results)
+  server_ips = Array(node['rsyslog']['server_ip']) + Array(results)
+end
+
+rsyslog_servers = []
+
+server_ips.each do |ip|
+  rsyslog_servers << { 'server' => ip, 'port' => node['rsyslog']['port'], 'logs' => node['rsyslog']['logs_to_forward'], 'protocol' => node['rsyslog']['protocol'], 'remote_template' => node['rsyslog']['default_remote_template'] }
+end
+
+unless node['rsyslog']['custom_remote'].first.empty?
+  node['rsyslog']['custom_remote'].each do |server|
+    if server['server'].nil?
+      Chef::Application.fatal!('Found a custom_remote server with no IP. Check your custom_remote attribute definition!')
+    end
+  end
+  rsyslog_servers += node['rsyslog']['custom_remote']
 end
 
 if rsyslog_servers.empty?
