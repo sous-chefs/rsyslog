@@ -31,9 +31,9 @@ describe 'rsyslog::client' do
     let(:template) { chef_run.template('/etc/rsyslog.d/49-remote.conf') }
 
     it 'creates the template' do
-      expect(chef_run).to render_file(template.path).with_content { |content| 
-          expect(content).to include("*.* @@#{server_ip}:514")
-          expect(content).to include("#{custom_remote.first['logs']} @@#{custom_remote.first['server']}:#{custom_remote.first['port']};#{custom_remote.first['remote_template']}")
+      expect(chef_run).to render_file(template.path).with_content { |content|
+        expect(content).to include("*.* @@#{server_ip}:514")
+        expect(content).to include("#{custom_remote.first['logs']} @@#{custom_remote.first['server']}:#{custom_remote.first['port']};#{custom_remote.first['remote_template']}")
       }
     end
 
@@ -61,10 +61,10 @@ describe 'rsyslog::client' do
       let(:template) { chef_run.template('/opt/local/etc/rsyslog.d/49-remote.conf') }
 
       it 'creates the template' do
-          expect(chef_run).to render_file(template.path).with_content { |content| 
-              expect(content).to include("*.* @@#{server_ip}:514")
-              expect(content).to include("#{custom_remote.first['logs']} @@#{custom_remote.first['server']}:#{custom_remote.first['port']};#{custom_remote.first['remote_template']}")
-          }
+        expect(chef_run).to render_file(template.path).with_content { |content|
+          expect(content).to include("*.* @@#{server_ip}:514")
+          expect(content).to include("#{custom_remote.first['logs']} @@#{custom_remote.first['server']}:#{custom_remote.first['port']};#{custom_remote.first['remote_template']}")
+        }
       end
 
       it 'is owned by root:root' do
