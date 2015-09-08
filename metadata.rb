@@ -17,7 +17,7 @@ supports          'centos', '>= 5.0'
 supports          'fedora', '>= 20.0'
 
 source_url 'https://github.com/chef-cookbooks/rsyslog' if respond_to?(:source_url)
-issues_url 'https://github.com/chef-cookbooks/rsyslog/issues' if respond_to?(:source_url)
+issues_url 'https://github.com/chef-cookbooks/rsyslog/issues' if respond_to?(:issues_url)
 
 attribute 'rsyslog',
   :display_name => 'Rsyslog',
