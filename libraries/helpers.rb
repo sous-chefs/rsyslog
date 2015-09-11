@@ -16,7 +16,7 @@ module RsyslogCookbook
       service_provider = 'ubuntu' == node['platform'] ? find_provider : nil
 
       service node['rsyslog']['service_name'] do
-        supports :restart => true, :status => true
+        supports restart: true, status: true
         action   [:enable, :start]
         provider service_provider
       end
