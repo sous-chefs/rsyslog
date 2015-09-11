@@ -1,34 +1,28 @@
----
 driver:
   name: vagrant
 
 provisioner:
   name: chef_zero
 
-driver_config:
-  require_chef_omnibus: true
-
 platforms:
-  - name: centos-5.10
-  - name: centos-6.6
+  - name: centos-6.7
   - name: centos-7.1
-  - name: debian-6.0.10
-    run_list:
-    - recipe[apt]
   - name: debian-7.8
     run_list:
     - recipe[apt]
-  - name: fedora-20
+  - name: debian-8.1
+    run_list:
+    - recipe[apt]
   - name: fedora-21
   - name: ubuntu-12.04
     run_list:
-      - recipe[apt]
+      - recipe[apt::default]
   - name: ubuntu-14.04
     run_list:
-      - recipe[apt]
+      - recipe[apt::default]
   - name: ubuntu-15.04
     run_list:
-      - recipe[apt]
+      - recipe[apt::default]
 
 suites:
   - name: default
@@ -40,10 +34,6 @@ suites:
     attributes:
       rsyslog:
         use_relp: true
-    # CentOS and OmniOS do not support relp
-    excludes:
-      - centos-5.10
-      - omnios-r151006c
   - name: client
     run_list:
       - recipe[rsyslog_test::client]

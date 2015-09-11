@@ -24,12 +24,14 @@ _Store
 *.bk
 *.bkup
 .ruby-version
-.idea
+.ruby-gemset
+.rvmrc
 
 # YARD artifacts
 .yardoc
 _yardoc
 doc/
+.idea
 
 #chef stuff
 Berksfile.lock
@@ -41,3 +43,4 @@ vendor/
 #vagrant stuff
 .vagrant/
 .vagrant.d/
+.kitchen/

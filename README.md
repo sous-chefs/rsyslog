@@ -79,7 +79,7 @@ Available attributes:
     'port': Port to send logs to
     'logs': Syslog log facilities to send (auth, authpriv, daemon, etc)
     'protocol': Can be tcp or udp
-    'remote_template': Rsyslog template used for the messages 
+    'remote_template': Rsyslog template used for the messages
 ```
 
 Example:
@@ -223,7 +223,7 @@ This section details "quick development" steps. For a detailed explanation, see 
 
 1. Clone this repository from GitHub:
 
-    $ git clone git@github.com:opscode-cookbooks/rsyslog.git
+    $ git clone git@github.com:chef-cookbooks/rsyslog.git
 
 2. Create a git branch
 
