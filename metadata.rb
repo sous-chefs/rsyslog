@@ -15,6 +15,9 @@ supports          'debian', '>= 5.0'
 supports          'redhat', '>= 5.0'
 supports          'centos', '>= 5.0'
 supports          'fedora', '>= 20.0'
+supports          'scientific'
+supports          'amazon'
+supports          'oracle'
 
 source_url 'https://github.com/chef-cookbooks/rsyslog' if respond_to?(:source_url)
 issues_url 'https://github.com/chef-cookbooks/rsyslog/issues' if respond_to?(:issues_url)

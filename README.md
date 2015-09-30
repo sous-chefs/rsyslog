@@ -8,14 +8,19 @@ Installs and configures rsyslog to replace sysklogd for client and/or server use
 
 Requirements
 ------------
-### Platforms
-Tested on:
-- Ubuntu 10.04+
-- Red Hat / CentOS 5+
+#### Platforms
+- Debian/Ubuntu
+- RHEL/CentOS/Scientific/Amazon/Oracle
 - Fedora 20+
 - OmniOS r151006c
 
-### Other
+#### Chef
+- Chef 11+
+
+#### Cookbooks
+- none
+
+#### Other
 To use the `recipe[rsyslog::client]` recipe, you'll need to set up the `rsyslog.server_search` or `rsyslog.server_ip` attributes.  See the __Recipes__ and __Examples__ sections below.
 
 
