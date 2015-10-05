@@ -77,6 +77,8 @@ if !rsyslog_servers.empty?
     notifies  :restart, "service[#{node['rsyslog']['service_name']}]"
     only_if   { node['rsyslog']['remote_logs'] }
   end
+else
+  Chef::Log.warn('The rsyslog::client recipe was unable to determine the remote syslog server. Checked both the server_ip attribute and search! Not forwarding logs.')
 end
 
 file "#{node['rsyslog']['config_prefix']}/rsyslog.d/server.conf" do
