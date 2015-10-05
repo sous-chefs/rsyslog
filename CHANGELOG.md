@@ -2,6 +2,22 @@ rsyslog Cookbook CHANGELOG
 ==========================
 This file is used to list changes made in each version of the rsyslog cookbook.
 
+v.2.2.0 (2015-10-05)
+----------
+- Add why-run support to the file_input LWRP
+- Added support for rsyslog under systemd on Ubuntu 15.04+
+- Added new attribute node['rsyslog']['custom_remote'].  See readme for additional information
+- Added source_url and issues_url metadata for Supermarket
+- Fixed 49-relp.conf to honor logs_to_forward so it didn't just forward everything
+- Updated contributing and testing docs
+- Set the minimum supported Chef release to 11.0
+- Added maintainers.toml and maintainers.md files
+- Added Amazon Linux, Oracle, and Scientific Linux to the metadata
+- Removed all pre-Ruby 1.9 hash rockets
+- Updated development dependencies in the
+- Fix a bad example attribute in the readme
+- Updated Travis CI config to test on all modern Ruby releases
+
 v.2.1.0 (2015-07-22)
 ----------
 - Fixed minor markdown errors in the readme
