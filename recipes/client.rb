@@ -65,7 +65,9 @@ unless node['rsyslog']['custom_remote'].first.empty?
   rsyslog_servers += node['rsyslog']['custom_remote']
 end
 
-if !rsyslog_servers.empty?
+if rsyslog_servers.empty?
+  Chef::Log.warn('The rsyslog::client recipe was unable to determine the remote syslog server. Checked both the server_ip attribute and search! Not forwarding logs.')
+else
   remote_type = node['rsyslog']['use_relp'] ? 'relp' : 'remote'
 
   template "#{node['rsyslog']['config_prefix']}/rsyslog.d/49-remote.conf" do
@@ -77,8 +79,6 @@ if !rsyslog_servers.empty?
     notifies  :restart, "service[#{node['rsyslog']['service_name']}]"
     only_if   { node['rsyslog']['remote_logs'] }
   end
-else
-  Chef::Log.warn('The rsyslog::client recipe was unable to determine the remote syslog server. Checked both the server_ip attribute and search! Not forwarding logs.')
 end
 
 file "#{node['rsyslog']['config_prefix']}/rsyslog.d/server.conf" do
