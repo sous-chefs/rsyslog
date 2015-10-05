@@ -16,6 +16,11 @@
 # limitations under the License.
 #
 
+# support whyrun
+def whyrun_supported?
+  true
+end
+
 use_inline_resources
 
 include RsyslogCookbook::Helpers
