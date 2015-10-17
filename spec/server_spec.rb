@@ -83,11 +83,14 @@ describe 'rsyslog::server' do
   end
 
   context '/etc/rsyslog.d/remote.conf file' do
+    before do
+      allow(File).to receive(:exist?).and_return(true)
+    end
+
     let(:file) { chef_run.file('/etc/rsyslog.d/remote.conf') }
 
     it 'deletes the file' do
-      pending 'Stubbing class methods without breaking everything is hard'
-      expect(chef_run).to delete_file(file.path)
+      expect(chef_run).to delete_file('/etc/rsyslog.d/remote.conf')
     end
 
     it 'notifies restarting the service' do
@@ -95,6 +98,10 @@ describe 'rsyslog::server' do
     end
 
     context 'on SmartOS' do
+      before do
+        allow(File).to receive(:exist?).and_return(true)
+      end
+
       let(:chef_run) do
         ChefSpec::SoloRunner.new(platform: 'smartos', version: 'joyent_20130111T180733Z') do |node|
           node.set['rsyslog']['server'] = false
@@ -104,8 +111,7 @@ describe 'rsyslog::server' do
       let(:file) { chef_run.file('/opt/local/etc/rsyslog.d/remote.conf') }
 
       it 'deletes the file' do
-        pending 'Stubbing class methods without breaking everything is hard'
-        expect(chef_run).to delete_file(file.path)
+        expect(chef_run).to delete_file('/opt/local/etc/rsyslog.d/remote.conf')
       end
 
       it 'notifies restarting the service' do
