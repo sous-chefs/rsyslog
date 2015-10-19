@@ -19,6 +19,8 @@ supports          'scientific'
 supports          'amazon'
 supports          'oracle'
 
+depends           'compat_resource'
+
 source_url 'https://github.com/chef-cookbooks/rsyslog' if respond_to?(:source_url)
 issues_url 'https://github.com/chef-cookbooks/rsyslog/issues' if respond_to?(:issues_url)
 

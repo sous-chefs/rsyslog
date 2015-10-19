@@ -17,12 +17,37 @@
 #
 
 actions :create
-default_action :create
 
-attribute :name, kind_of: String, name_attribute: true, required: true
-attribute :file, kind_of: String, required: true
-attribute :priority, kind_of: Integer, default: 99
-attribute :severity, kind_of: String
-attribute :facility, kind_of: String
-attribute :cookbook, kind_of: String, default: 'rsyslog'
-attribute :source, kind_of: String, default: 'file-input.conf.erb'
+property :name, kind_of: String, name_attribute: true, required: true
+property :file, kind_of: String, required: true
+property :priority, kind_of: Integer, default: 99
+property :severity, kind_of: String
+property :facility, kind_of: String
+property :cookbook, kind_of: String, default: 'rsyslog'
+property :source, kind_of: String, default: 'file-input.conf.erb'
+
+include RsyslogCookbook::Helpers
+
+action :create do
+  service_provider = 'ubuntu' == node['platform'] ? find_provider : nil
+
+  service node['rsyslog']['service_name'] do
+    supports restart: true, status: true
+    action   [:enable, :start]
+    provider service_provider
+  end
+
+  template "/etc/rsyslog.d/#{new_resource.priority}-#{new_resource.name}.conf" do
+    mode '0664'
+    owner node['rsyslog']['user']
+    group node['rsyslog']['group']
+    source new_resource.source
+    cookbook new_resource.cookbook
+    variables 'file_name' => new_resource.file,
+              'tag' => new_resource.name,
+              'state_file' => new_resource.name,
+              'severity' => new_resource.severity,
+              'facility' => new_resource.facility
+    notifies :restart, resources('service[rsyslog]')
+  end
+end

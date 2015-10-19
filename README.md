@@ -15,10 +15,10 @@ Requirements
 - OmniOS r151006c
 
 #### Chef
-- Chef 11+
+- Chef 12+
 
 #### Cookbooks
-- none
+- compat_resource
 
 #### Other
 To use the `recipe[rsyslog::client]` recipe, you'll need to set up the `rsyslog.server_search` or `rsyslog.server_ip` attributes.  See the __Recipes__ and __Examples__ sections below.
