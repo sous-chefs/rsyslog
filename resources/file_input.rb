@@ -29,13 +29,7 @@ property :source, kind_of: String, default: 'file-input.conf.erb'
 include RsyslogCookbook::Helpers
 
 action :create do
-  service_provider = 'ubuntu' == node['platform'] ? find_provider : nil
-
-  service node['rsyslog']['service_name'] do
-    supports restart: true, status: true
-    action   [:enable, :start]
-    provider service_provider
-  end
+  declare_rsyslog_service
 
   template "/etc/rsyslog.d/#{new_resource.priority}-#{new_resource.name}.conf" do
     mode '0664'
