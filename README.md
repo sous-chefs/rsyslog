@@ -11,7 +11,7 @@ Requirements
 #### Platforms
 - Debian/Ubuntu
 - RHEL/CentOS/Scientific/Amazon/Oracle
-- Fedora 20+
+- Fedora 21+
 - OmniOS r151006c
 
 #### Chef
