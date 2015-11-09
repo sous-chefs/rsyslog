@@ -19,15 +19,9 @@
 
 # Do not run this recipe if the server attribute is set
 return if node['rsyslog']['server']
-
 include_recipe 'rsyslog::default'
 
-def chef_solo_search_installed?
-  klass = ::Search.const_get('Helper')
-  return klass.is_a?(Class)
-rescue NameError
-  return false
-end
+extend RsyslogCookbook::Helpers
 
 # On Chef Solo, we use the node['rsyslog']['server_ip'] attribute, and on
 # normal Chef, we leverage the search query.
