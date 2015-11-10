@@ -1,6 +1,6 @@
 require_relative './spec_helper'
 
-describe service('rsyslogd') do
+describe service('rsyslog') do
   it { should be_running }
 end
 
