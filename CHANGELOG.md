@@ -7,6 +7,7 @@ UNRELEASED
 - Breaking change: The file_input LWRP has been updated to be a Chef 12.5 custom_resource, with backwards compatibility to all Chef 12.x released provided by compat_resource. Additionally the 'source' and 'cookbook' attributes in the file_input resource have been renamed to 'template_source' and 'cookbook_source' to prevent failures.
 - Helpers for determining the service provider on Ubuntu have been removed since Chef 12 does the right thing with Init, Upstart, and systemd.
 - rsyslog::client no longer fails if there are no servers to forward logs to. Instead forwarding isn't configuring and a warning is written to the chef client log
+- Test Kitchen integration tests are now run via Travis so all PRs will be fully tested
 
 v.2.2.0 (2015-10-05)
 ----------
