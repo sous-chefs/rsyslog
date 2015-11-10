@@ -39,10 +39,20 @@ suites:
       - recipe[rsyslog::default]
   - name: relp
     run_list:
-      - recipe[rsyslog::default]
+      - recipe[rsyslog::client]
     attributes:
       rsyslog:
         use_relp: true
+        custom_remote:
+            - server: 10.0.0.45
+              logs: auth.*,mail.*
+              port: 555
+              protocol: udp
+            - server: 10.1.1.33
+              logs: authpriv.*,cron.*,daemon.*
+              port: 654
+              protocol: tcp
+              remote_template: RSYSLOG_SyslogProtocol23Format
   - name: client
     run_list:
       - recipe[rsyslog_test::client]
