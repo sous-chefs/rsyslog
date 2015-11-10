@@ -2,6 +2,11 @@ rsyslog Cookbook CHANGELOG
 ==========================
 This file is used to list changes made in each version of the rsyslog cookbook.
 
+UNRELEASED
+--------------------
+- Breaking change: The file_input LWRP has been updated to be a Chef 12.5 custom_resource, with backwards compatibility to all Chef 12.x released provided by compat_resource. Additionally the 'source' and 'cookbook' attributes in the file_input resource have been renamed to 'template_source' and 'cookbook_source' to prevent failures.
+- Helpers for determining the service provider on Ubuntu have been removed since Chef 12 does the right thing with Init, Upstart, and systemd.
+
 v.2.2.0 (2015-10-05)
 ----------
 - Add why-run support to the file_input LWRP

@@ -140,9 +140,9 @@ file_input
 
 Configures a [text file input
 monitor](http://www.rsyslog.com/doc/imfile.html) to push a log file into
-rsyslog.
+rsyslog.  Rsyslog must be installed to use this custom resource either using your own wrapper cookbook or the rsyslog::default recipe
 
-Attributes:
+Properties:
 * `name`: name of the resource, also used for the syslog tag. Required.
 * `file`: file path for input file to monitor. Required.
 * `priority`: config order priority. Defaults to `99`.
@@ -153,8 +153,8 @@ undefined, rsyslog interprets this as `notice`.
 `daemon`, `cron`, `ftp`, `lpr`, `kern`, `mail`, `news`, `syslog`,
 `user`, `uucp`, `local0`, ... , `local7`. If undefined, rsyslog
 interprets this as `local0`.
-* `cookbook`: cookbook containing the template. Defaults to `rsyslog`.
-* `source`: template file source. Defaults to `file-input.conf.erb`
+* `cookbook_source`: cookbook containing the template. Defaults to `rsyslog`.
+* `template_source`: template file source. Defaults to `file-input.conf.erb`
 
 
 Usage
@@ -222,42 +222,11 @@ default_attributes(
 )
 ```
 
-Development
------------
-This section details "quick development" steps. For a detailed explanation, see [[Contributing.md]].
-
-1. Clone this repository from GitHub:
-
-    $ git clone git@github.com:chef-cookbooks/rsyslog.git
-
-2. Create a git branch
-
-    $ git checkout -b my_bug_fix
-
-3. Install dependencies:
-
-    $ bundle install
-
-4. Make your changes/patches/fixes, committing appropriately
-5. **Write tests**
-6. Run the tests:
-    - bundle exec foodcritic -f any .
-    - bundle exec rspec
-    - bundle exec rubocop
-    - bundle exec kitchen test
-
-  In detail:
-    - Foodcritic will catch any Chef-specific style errors
-    - RSpec will run the unit tests
-    - Rubocop will check for Ruby-specific style errors
-    - Test Kitchen will run and converge the recipes
-
-
 License & Authors
 -----------------
 - Author:: Joshua Timberman (<joshua@chef.io>)
 - Author:: Denis Barishev (<denz@twiket.com>)
-- Author:: Tim Smith (<tsmith84@gmail.com>)
+- Author:: Tim Smith (<tsmith@chef.io>)
 
 ```text
 Copyright:: 2009-2015, Chef Software, Inc
