@@ -1,17 +1,6 @@
 require 'spec_helper'
 
 describe 'rsyslog::client' do
-  context "when node['rsyslog']['server_ip'] is not set" do
-    before do
-      allow(Chef::Log).to receive(:fatal)
-      allow($stdout).to receive(:puts)
-    end
-
-    it 'exits fatally' do
-      expect { ChefSpec::SoloRunner.new.converge(described_recipe) }.to raise_error(SystemExit)
-    end
-  end
-
   let(:chef_run) do
     ChefSpec::SoloRunner.new(platform: 'ubuntu', version: '12.04') do |node|
       node.set['rsyslog']['server_ip'] = server_ip
