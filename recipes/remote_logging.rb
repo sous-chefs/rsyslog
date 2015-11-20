@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: rsyslog
-# Recipe:: client
+# Recipe:: remote_logging
 #
 # Copyright 2009-2015, Chef Software, Inc.
 #
@@ -17,26 +17,7 @@
 # limitations under the License.
 #
 
-# Do not run this recipe if the server attribute is set
-return if node['rsyslog']['server']
 include_recipe 'rsyslog::default'
-
-results = search(:node, node['rsyslog']['server_search']).map do |server|
-  ipaddress = server['ipaddress']
-  # If both server and client are on the same cloud and local network, they may be
-  # instructed to communicate via the internal interface by enabling `use_local_ipv4`
-  if node['rsyslog']['use_local_ipv4'] && server.attribute?('cloud') && server['cloud']['local_ipv4']
-    ipaddress = server['cloud']['local_ipv4']
-  end
-  ipaddress
-end
-server_ips = Array(node['rsyslog']['server_ip']) + Array(results)
-
-rsyslog_servers = []
-
-server_ips.each do |ip|
-  rsyslog_servers << { 'server' => ip, 'port' => node['rsyslog']['port'], 'logs' => node['rsyslog']['logs_to_forward'], 'protocol' => node['rsyslog']['protocol'], 'remote_template' => node['rsyslog']['default_remote_template'] }
-end
 
 unless node['rsyslog']['custom_remote'].first.empty?
   node['rsyslog']['custom_remote'].each do |server|
@@ -48,7 +29,7 @@ unless node['rsyslog']['custom_remote'].first.empty?
 end
 
 if rsyslog_servers.empty?
-  Chef::Log.warn('The rsyslog::client recipe was unable to determine the remote syslog server. Checked both the server_ip attribute and search! Not forwarding logs.')
+  Chef::Log.warn('The rsyslog::client recipe was unable to determine the remote syslog server from the custom_remote attribute. Not forwarding logs.')
 else
   remote_type = node['rsyslog']['use_relp'] ? 'relp' : 'remote'
 
@@ -61,9 +42,4 @@ else
     notifies  :restart, "service[#{node['rsyslog']['service_name']}]"
     only_if   { node['rsyslog']['remote_logs'] }
   end
-end
-
-file "#{node['rsyslog']['config_prefix']}/rsyslog.d/server.conf" do
-  action   :delete
-  notifies :restart, "service[#{node['rsyslog']['service_name']}]"
 end
