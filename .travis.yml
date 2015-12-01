@@ -1,5 +1,3 @@
-rvm: 2.2
-
 sudo: required
 
 # install the pre-release chef-dk.  Use chef-stable-precise to install the stable release
@@ -14,18 +12,22 @@ services: docker
 
 env:
   matrix:
-  - INSTANCE=default-ubuntu-1404
   - INSTANCE=default-ubuntu-1204
-  - INSTANCE=default-centos-71
-  - INSTANCE=input-file-provider-ubuntu-1404
+  - INSTANCE=default-ubuntu-1404
+  - INSTANCE=default-centos-6
+  - INSTANCE=default-centos-7
   - INSTANCE=input-file-provider-ubuntu-1204
-  - INSTANCE=input-file-provider-centos-71
-  - INSTANCE=client-ubuntu-1404
-  - INSTANCE=client-ubuntu-1204
-  - INSTANCE=client-centos-71
-  - INSTANCE=server-ubuntu-1404
+  - INSTANCE=input-file-provider-ubuntu-1404
+  - INSTANCE=input-file-provider-centos-6
+  - INSTANCE=input-file-provider-centos-7
+  - INSTANCE=remote_logging-ubuntu-1204
+  - INSTANCE=remote_logging-ubuntu-1404
+  - INSTANCE=remote_logging-centos-6
+  - INSTANCE=remote_logging-centos-7
   - INSTANCE=server-ubuntu-1204
-  - INSTANCE=server-centos-71
+  - INSTANCE=server-ubuntu-1404
+  - INSTANCE=server-centos-6
+  - INSTANCE=server-centos-7
 
 # Don't `bundle install`
 install: echo "skip bundle install"

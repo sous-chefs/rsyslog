@@ -6,8 +6,8 @@ description       'Installs and configures rsyslog'
 long_description  IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version           '3.0.0'
 
-recipe            'rsyslog', 'Installs rsyslog'
-recipe            'rsyslog::client', 'Sets up a client to log to a remote rsyslog server'
+recipe            'rsyslog', 'Sets up rsyslog for local logging'
+recipe            'rsyslog::remote_logging', 'Sets up logging to a remote syslog server'
 recipe            'rsyslog::server', 'Sets up an rsyslog server'
 
 supports          'ubuntu', '>= 10.04'
