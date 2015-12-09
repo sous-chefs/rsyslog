@@ -1,6 +1,12 @@
 # rsyslog Cookbook CHANGELOG
 This file is used to list changes made in each version of the rsyslog cookbook.
 
+## v.4.0.0 (2015-12-09)
+- Removed support for Chef Solo. Since this cookbook now supports Chef 12+ only it makes far more sense to use Chef Zero (local mode) if a Chef server is not available.
+- Removed yum from the Berksfile as it wasn't being used
+- Fixed bad variables being passed in the file_input custom resource
+- Added Chefspec matchers
+
 ## v.3.0.0 (2015-11-09)
 - Breaking change: The file_input LWRP has been updated to be a Chef 12.5 custom_resource, with backwards compatibility to all Chef 12.x released provided by compat_resource. Additionally the 'source' and 'cookbook' attributes in the file_input resource have been renamed to 'template_source' and 'cookbook_source' to prevent failures.
 - Helpers for determining the service provider on Ubuntu have been removed since Chef 12 does the right thing with Init, Upstart, and systemd.
