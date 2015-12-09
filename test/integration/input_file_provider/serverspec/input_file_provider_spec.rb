@@ -11,3 +11,11 @@ end
 describe file('/etc/rsyslog.d/99-test-file.conf') do
   its(:content) { should match /InputFileName \/var\/log\/boot/ }
 end
+
+describe file('/etc/rsyslog.d/99-test-file.conf') do
+  its(:content) { should match /InputFileTag test-file/ }
+end
+
+describe file('/etc/rsyslog.d/99-test-file.conf') do
+  its(:content) { should match /InputFileStateFile test-file/ }
+end
