@@ -27,6 +27,7 @@ property :cookbook_source, String, default: 'rsyslog'
 property :template_source, String, default: 'file-input.conf.erb'
 
 action :create do
+  log_name = name
   template "/etc/rsyslog.d/#{priority}-#{name}.conf" do
     mode '0664'
     owner node['rsyslog']['user']
@@ -34,8 +35,8 @@ action :create do
     source template_source
     cookbook cookbook_source
     variables 'file_name' => file,
-              'tag' => name,
-              'state_file' => name,
+              'tag' => log_name,
+              'state_file' => log_name,
               'severity' => severity,
               'facility' => facility
     notifies :restart, "service[#{node['rsyslog']['service_name']}]"
