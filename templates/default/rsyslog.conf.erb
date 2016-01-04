@@ -9,7 +9,9 @@
 #
 # Set hostname
 #
+<% if node['rsyslog']['local_host_name'] -%>
 $LocalHostName <%= node['rsyslog']['local_host_name'] %>
+<% end %>
 #
 # Set max message size
 #
