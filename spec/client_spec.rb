@@ -100,4 +100,21 @@ describe 'rsyslog::client' do
       end
     end
   end
+
+  context '/etc/rsyslog.d/server.conf file' do
+    let(:chef_run) do
+      ChefSpec::SoloRunner.new do |node|
+        node.set['rsyslog']['server_ip'] = server_ip
+        node.set['rsyslog']['search_for_servers'] = false
+      end.converge(described_recipe)
+    end
+
+    let(:template) { chef_run.template('/etc/rsyslog.d/49-remote.conf') }
+
+    it 'creates the template' do
+      expect(chef_run).to render_file(template.path).with_content { |content|
+        expect(content).to include("*.* @@#{server_ip}:514")
+      }
+    end
+  end
 end

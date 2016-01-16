@@ -21,16 +21,19 @@
 return if node['rsyslog']['server']
 include_recipe 'rsyslog::default'
 
-results = search(:node, node['rsyslog']['server_search']).map do |server|
-  ipaddress = server['ipaddress']
-  # If both server and client are on the same cloud and local network, they may be
-  # instructed to communicate via the internal interface by enabling `use_local_ipv4`
-  if node['rsyslog']['use_local_ipv4'] && server.attribute?('cloud') && server['cloud']['local_ipv4']
-    ipaddress = server['cloud']['local_ipv4']
+server_ips = Array(node['rsyslog']['server_ip'])
+if node['rsyslog']['search_for_servers']
+  results = search(:node, node['rsyslog']['server_search']).map do |server|
+    ipaddress = server['ipaddress']
+    # If both server and client are on the same cloud and local network, they may be
+    # instructed to communicate via the internal interface by enabling `use_local_ipv4`
+    if node['rsyslog']['use_local_ipv4'] && server.attribute?('cloud') && server['cloud']['local_ipv4']
+      ipaddress = server['cloud']['local_ipv4']
+    end
+    ipaddress
   end
-  ipaddress
+  server_ips += Array(results)
 end
-server_ips = Array(node['rsyslog']['server_ip']) + Array(results)
 
 rsyslog_servers = []
 
