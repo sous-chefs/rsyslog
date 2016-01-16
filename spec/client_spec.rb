@@ -71,7 +71,6 @@ describe 'rsyslog::client' do
     end
   end
 
-
   context '/etc/rsyslog.d/server.conf file' do
     let(:file) { chef_run.file('/etc/rsyslog.d/server.conf') }
 
