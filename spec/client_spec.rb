@@ -104,7 +104,7 @@ describe 'rsyslog::client' do
 
   context '/etc/rsyslog.d/server.conf file' do
     let(:chef_run) do
-      ChefSpec::SoloRunner.new() do |node|
+      ChefSpec::SoloRunner.new do |node|
         node.set['rsyslog']['server_ip'] = server_ip
         node.set['rsyslog']['search_for_servers'] = false
       end.converge(described_recipe)
