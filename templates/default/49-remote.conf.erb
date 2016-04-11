@@ -16,6 +16,9 @@ $DefaultNetstreamDriverKeyFile <%= node['rsyslog']['tls_key_file'] %>
 $DefaultNetstreamDriver gtls
 $ActionSendStreamDriverMode 1
 $ActionSendStreamDriverAuthMode <%= node['rsyslog']['tls_auth_mode'] %>
+<% if node['rsyslog']['tls_permitted_peer'] -%>
+$ActionSendStreamDriverPermittedPeer <%= node['rsyslog']['tls_permitted_peer'] %>
+<% end -%>
 <% end -%>
 
 <% @servers.each do |server| -%>

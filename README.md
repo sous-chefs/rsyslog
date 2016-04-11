@@ -62,6 +62,7 @@ See `attributes/default.rb` for default values.
 * `node['rsyslog']['tls_certificate_file']` - Path to TLS certificate file. Required for server, optional for clients.
 * `node['rsyslog']['tls_key_file']` - Path to TLS key file. Required for server, optional for clients.
 * `node['rsyslog']['tls_auth_mode']` - Value for `$InputTCPServerStreamDriverAuthMode`/`$ActionSendStreamDriverAuthMode`, determines whether client certs are validated. Defaults to `anon` (no validation).
+* `node['rsyslog']['tls_permitted_peer']` - Value for `ActionSendStreamDriverPermittedPeer`, it narrows the list of the allowed hosts. Works with TLS only. Defaults to `nil`.
 * `node['rsyslog']['use_local_ipv4']` - Whether or not to make use the remote local IPv4 address on cloud systems when searching for servers (where available).  Default is 'false'.
 * `node['rsyslog']['allow_non_local']` - Whether or not to allow non-local messages. If 'false', incoming messages are only allowed from 127.0.0.1. Default is 'false'.
 * `node['rsyslog']['custom_remote']` - Array of hashes for configuring custom remote server targets
