@@ -16,16 +16,20 @@ env:
   matrix:
   - INSTANCE=default-ubuntu-1404
   - INSTANCE=default-ubuntu-1204
-  - INSTANCE=default-centos-71
+  - INSTANCE=default-centos-7
+  - INSTANCE=default-centos-6
   - INSTANCE=input-file-provider-ubuntu-1404
   - INSTANCE=input-file-provider-ubuntu-1204
-  - INSTANCE=input-file-provider-centos-71
+  - INSTANCE=input-file-provider-centos-7
+  - INSTANCE=input-file-provider-centos-6
   - INSTANCE=client-ubuntu-1404
   - INSTANCE=client-ubuntu-1204
-  - INSTANCE=client-centos-71
+  - INSTANCE=client-centos-7
+  - INSTANCE=client-centos-6
   - INSTANCE=server-ubuntu-1404
   - INSTANCE=server-ubuntu-1204
-  - INSTANCE=server-centos-71
+  - INSTANCE=server-centos-7
+  - INSTANCE=server-centos-6
 
 # Don't `bundle install`
 install: echo "skip bundle install"
@@ -41,6 +45,6 @@ script:
   - /opt/chefdk/embedded/bin/rubocop --version
   - /opt/chefdk/embedded/bin/rubocop
   - /opt/chefdk/embedded/bin/foodcritic --version
-  - /opt/chefdk/embedded/bin/foodcritic . --exclude spec
+  - /opt/chefdk/embedded/bin/foodcritic . --exclude spec -f any
   - /opt/chefdk/embedded/bin/rspec
   - KITCHEN_LOCAL_YAML=.kitchen.docker.yml /opt/chefdk/embedded/bin/kitchen verify ${INSTANCE}
