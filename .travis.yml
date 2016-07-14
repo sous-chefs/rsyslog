@@ -1,6 +1,7 @@
 rvm: 2.2
 
 sudo: required
+dist: trusty
 
 # install the pre-release chef-dk.  Use chef-stable-precise to install the stable release
 addons:
