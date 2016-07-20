@@ -39,6 +39,11 @@ directory node['rsyslog']['working_dir'] do
   mode  '0700'
 end
 
+execute 'validate_config' do
+  command "rsyslogd -N 1 -f #{node['rsyslog']['config_prefix']}/rsyslog.conf"
+  action  :nothing
+end
+
 # Our main stub which then does its own rsyslog-specific
 # include of things in /etc/rsyslog.d/*
 template "#{node['rsyslog']['config_prefix']}/rsyslog.conf" do
@@ -46,6 +51,7 @@ template "#{node['rsyslog']['config_prefix']}/rsyslog.conf" do
   owner   'root'
   group   'root'
   mode    '0644'
+  notifies :run, 'execute[validate_config]'
   notifies :restart, "service[#{node['rsyslog']['service_name']}]"
 end
 
@@ -54,6 +60,7 @@ template "#{node['rsyslog']['config_prefix']}/rsyslog.d/50-default.conf" do
   owner   'root'
   group   'root'
   mode    '0644'
+  notifies :run, 'execute[validate_config]'
   notifies :restart, "service[#{node['rsyslog']['service_name']}]"
 end
 
