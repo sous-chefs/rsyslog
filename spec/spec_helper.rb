@@ -1,4 +1,4 @@
-require 'chef/application'
+#require 'chef/application'
 require 'chefspec'
 require 'chefspec/berkshelf'
 
