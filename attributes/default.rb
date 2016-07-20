@@ -61,6 +61,31 @@ default['rsyslog']['priv_user']                 = nil
 default['rsyslog']['priv_group']                = nil
 default['rsyslog']['modules']                   = %w(imuxsock imklog)
 
+# platform specific attributes
+case node['platform']
+when 'suse'
+  default['rsyslog']['service_name'] = 'syslog'
+  default['rsyslog']['group'] = 'root'
+when 'ubuntu'
+  # syslog user introduced with natty package
+  if node['platform_version'].to_f >= 11.04
+    default['rsyslog']['user'] = 'syslog'
+    default['rsyslog']['group'] = 'adm'
+    default['rsyslog']['priv_seperation'] = true
+    default['rsyslog']['priv_group'] = 'syslog'
+  end
+when 'arch'
+  default['rsyslog']['service_name'] = 'rsyslogd'
+when 'smartos'
+  default['rsyslog']['config_prefix'] = '/opt/local/etc'
+  default['rsyslog']['modules'] = %w(immark imsolaris imtcp imudp)
+  default['rsyslog']['group'] = 'root'
+when 'omnios'
+  default['rsyslog']['service_name'] = 'system/rsyslogd'
+  default['rsyslog']['modules'] = %w(immark imsolaris imtcp imudp)
+  default['rsyslog']['group'] = 'root'
+end
+
 # platform family specific attributes
 case node['platform_family']
 when 'rhel', 'fedora'
@@ -106,26 +131,4 @@ if (node['platform'] == 'ubuntu' && node['platform_version'].to_i < 12) || (node
   default['rsyslog']['default_facility_logs']['*.emerg'] = '*'
 end
 
-# platform specific attributes
-case node['platform']
-when 'ubuntu'
-  # syslog user introduced with natty package
-  if node['platform_version'].to_f >= 11.04
-    default['rsyslog']['user'] = 'syslog'
-    default['rsyslog']['group'] = 'adm'
-    default['rsyslog']['priv_seperation'] = true
-    default['rsyslog']['priv_group'] = 'syslog'
-  end
-when 'arch'
-  default['rsyslog']['service_name'] = 'rsyslogd'
-when 'smartos'
-  default['rsyslog']['config_prefix'] = '/opt/local/etc'
-  default['rsyslog']['modules'] = %w(immark imsolaris imtcp imudp)
-  default['rsyslog']['group'] = 'root'
-when 'omnios'
-  default['rsyslog']['service_name'] = 'system/rsyslogd'
-  default['rsyslog']['modules'] = %w(immark imsolaris imtcp imudp)
-  default['rsyslog']['group'] = 'root'
-when 'suse'
-  default['rsyslog']['service_name'] = 'syslog'
-end
+

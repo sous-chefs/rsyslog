@@ -16,6 +16,7 @@ platforms:
     run_list: yum::dnf_yum_compat
   - name: fedora-23
     run_list: yum::dnf_yum_compat
+  - name: opensuse-13.2
   - name: ubuntu-12.04
     run_list: apt::default
   - name: ubuntu-14.04
