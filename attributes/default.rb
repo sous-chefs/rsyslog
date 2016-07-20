@@ -132,5 +132,3 @@ end
 if (node['platform'] == 'ubuntu' && node['platform_version'].to_i < 12) || (node['platform_family'] == 'rhel' && node['platform_version'].to_i < 6)
   default['rsyslog']['default_facility_logs']['*.emerg'] = '*'
 end
-
-
