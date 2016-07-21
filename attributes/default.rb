@@ -65,9 +65,6 @@ default['rsyslog']['modules']                   = %w(imuxsock imklog)
 
 # platform specific attributes
 case node['platform']
-when 'suse'
-  default['rsyslog']['service_name'] = 'syslog'
-  default['rsyslog']['group'] = 'root'
 when 'ubuntu'
   # syslog user introduced with natty package
   if node['platform_version'].to_f >= 11.04
@@ -90,6 +87,26 @@ end
 
 # platform family specific attributes
 case node['platform_family']
+when 'suse'
+  default['rsyslog']['service_name'] = 'syslog'
+  default['rsyslog']['group'] = 'root'
+  default['rsyslog']['default_facility_logs'] = {
+    '*.emerg' => ':omusrmsg:*',
+    'mail.*' => "-#{node['rsyslog']['default_log_dir']}/mail.log",
+    'mail.info' => "-#{node['rsyslog']['default_log_dir']}/mail.info",
+    'mail.warning' => "-#{node['rsyslog']['default_log_dir']}/mail.warn",
+    'mail.err' => "#{node['rsyslog']['default_log_dir']}/mail.err",
+    'news.crit' => "#{node['rsyslog']['default_log_dir']}/news/news.crit",
+    'news.err' => "#{node['rsyslog']['default_log_dir']}/news/news.err",
+    'news.notice' => "-#{node['rsyslog']['default_log_dir']}/news/news.notice",
+    '*.=warning;*.=err' => "-#{node['rsyslog']['default_log_dir']}/warn",
+    '*.crit' => "#{node['rsyslog']['default_log_dir']}/warn",
+    '*.*;mail.none;news.none' => "#{node['rsyslog']['default_log_dir']}/messages",
+    'local0.*;local1.*' => "-#{node['rsyslog']['default_log_dir']}/localmessages",
+    'local2.*;local3.*' => "-#{node['rsyslog']['default_log_dir']}/localmessages",
+    'local4.*;local5.*' => "-#{node['rsyslog']['default_log_dir']}/localmessages",
+    'local6.*;local7.*' => "-#{node['rsyslog']['default_log_dir']}/localmessages"
+  }
 when 'rhel', 'fedora'
   default['rsyslog']['working_dir'] = '/var/lib/rsyslog'
   # format { facility => destination }
