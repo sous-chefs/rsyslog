@@ -7,7 +7,7 @@ Installs and configures rsyslog to replace sysklogd for client and/or server use
 ### Platforms
 - Debian/Ubuntu
 - RHEL/CentOS/Scientific/Amazon/Oracle
-- Fedora 21+
+- Fedora
 - OmniOS r151006c
 - OpenSUSE
 
