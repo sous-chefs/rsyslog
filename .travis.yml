@@ -1,5 +1,3 @@
-rvm: 2.2
-
 sudo: required
 dist: trusty
 
@@ -10,6 +8,10 @@ addons:
       - chef-current-precise
     packages:
       - chefdk
+
+branches:
+  only:
+  - master
 
 services: docker
 
@@ -40,12 +42,13 @@ before_script:
   # https://github.com/zuazo/kitchen-in-travis-native/issues/1#issuecomment-142230889
   - sudo iptables -L DOCKER || ( echo "DOCKER iptables chain missing" ; sudo iptables -N DOCKER )
   - eval "$(/opt/chefdk/bin/chef shell-init bash)"
-  - /opt/chefdk/embedded/bin/chef gem install kitchen-docker
+  - /opt/chefdk/embedded/bin/chef gem install kitchen-dokken
+
 script:
   - /opt/chefdk/embedded/bin/chef --version
-  - /opt/chefdk/embedded/bin/rubocop --version
-  - /opt/chefdk/embedded/bin/rubocop
+  - /opt/chefdk/embedded/bin/cookstyle --version
+  - /opt/chefdk/embedded/bin/cookstyle
   - /opt/chefdk/embedded/bin/foodcritic --version
   - /opt/chefdk/embedded/bin/foodcritic . --exclude spec -f any
-  - /opt/chefdk/embedded/bin/rspec
+  #- /opt/chefdk/embedded/bin/rspec
   - KITCHEN_LOCAL_YAML=.kitchen.docker.yml /opt/chefdk/embedded/bin/kitchen verify ${INSTANCE}

@@ -21,7 +21,7 @@ package 'rsyslog'
 package 'rsyslog-relp' if node['rsyslog']['use_relp']
 
 if node['rsyslog']['enable_tls'] && node['rsyslog']['tls_ca_file']
-  Chef::Application.fatal!("Recipe rsyslog::default can not use 'enable_tls' with protocol '#{node['rsyslog']['protocol']}' (requires 'tcp')") unless node['rsyslog']['protocol'] == 'tcp'
+  Chef::Log.fatal("Recipe rsyslog::default can not use 'enable_tls' with protocol '#{node['rsyslog']['protocol']}' (requires 'tcp')") unless node['rsyslog']['protocol'] == 'tcp'
   package 'rsyslog-gnutls'
 end
 
@@ -31,10 +31,17 @@ directory "#{node['rsyslog']['config_prefix']}/rsyslog.d" do
   mode  '0755'
 end
 
+log node['rsyslog']['group']
+
 directory node['rsyslog']['working_dir'] do
   owner node['rsyslog']['user']
   group node['rsyslog']['group']
   mode  '0700'
+end
+
+execute 'validate_config' do
+  command "rsyslogd -N 1 -f #{node['rsyslog']['config_prefix']}/rsyslog.conf"
+  action  :nothing
 end
 
 # Our main stub which then does its own rsyslog-specific
@@ -44,6 +51,7 @@ template "#{node['rsyslog']['config_prefix']}/rsyslog.conf" do
   owner   'root'
   group   'root'
   mode    '0644'
+  notifies :run, 'execute[validate_config]'
   notifies :restart, "service[#{node['rsyslog']['service_name']}]"
 end
 
@@ -52,6 +60,7 @@ template "#{node['rsyslog']['config_prefix']}/rsyslog.d/50-default.conf" do
   owner   'root'
   group   'root'
   mode    '0644'
+  notifies :run, 'execute[validate_config]'
   notifies :restart, "service[#{node['rsyslog']['service_name']}]"
 end
 

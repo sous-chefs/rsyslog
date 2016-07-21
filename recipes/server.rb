@@ -18,7 +18,7 @@
 #
 
 # Manually set this attribute
-node.set['rsyslog']['server'] = true
+node.normal['rsyslog']['server'] = true
 
 include_recipe 'rsyslog::default'
 
@@ -34,12 +34,14 @@ template "#{node['rsyslog']['config_prefix']}/rsyslog.d/35-server-per-host.conf"
   owner    'root'
   group    'root'
   mode     '0644'
+  notifies :run, 'execute[validate_config]'
   notifies :restart, "service[#{node['rsyslog']['service_name']}]"
 end
 
 # if we're a server we shouldn't be sending logs to a remote like a client
-file "#{node['rsyslog']['config_prefix']}/rsyslog.d/remote.conf" do
+file "#{node['rsyslog']['config_prefix']}/rsyslog.d/49-remote.conf" do
   action   :delete
+  notifies :run, 'execute[validate_config]'
   notifies :restart, "service[#{node['rsyslog']['service_name']}]"
-  only_if  { ::File.exist?("#{node['rsyslog']['config_prefix']}/rsyslog.d/remote.conf") }
+  only_if  { ::File.exist?("#{node['rsyslog']['config_prefix']}/rsyslog.d/49-remote.conf") }
 end

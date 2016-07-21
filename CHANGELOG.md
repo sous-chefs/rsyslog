@@ -1,6 +1,15 @@
 # rsyslog Cookbook CHANGELOG
 This file is used to list changes made in each version of the rsyslog cookbook.
 
+## v.4.0.1 (UNRELEASED)
+- PR #76 Validate the config file using `rsyslogd -N 1` via eherot
+- PR #105 Use correct file name for remote.conf via mfenner
+- PR #105 Add $LocalHostName directive via mfenner
+- PR #105 Change directive `:fromhost-ip,!isequal,"127.0.0.1"` from using ~ to stop via mfenner
+- PR #110 Add support for permitted peer via dastergon
+- Add SUSE support
+- Clean up travis configuration
+
 ## v.4.0.0 (2015-12-09)
 - Removed support for Chef Solo. Since this cookbook now supports Chef 12+ only it makes far more sense to use Chef Zero (local mode) if a Chef server is not available.
 - Removed yum from the Berksfile as it wasn't being used

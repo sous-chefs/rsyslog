@@ -3,7 +3,7 @@ require 'spec_helper'
 describe 'rsyslog::server' do
   let(:chef_run) do
     ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '12.04') do |node|
-      node.set['rsyslog']['server'] = false
+      node.normal['rsyslog']['server'] = false
     end.converge(described_recipe)
   end
 
@@ -57,7 +57,7 @@ describe 'rsyslog::server' do
     context 'on SmartOS' do
       let(:chef_run) do
         ChefSpec::ServerRunner.new(platform: 'smartos', version: 'joyent_20130111T180733Z') do |node|
-          node.set['rsyslog']['server'] = false
+          node.normal['rsyslog']['server'] = false
         end.converge(described_recipe)
       end
 
@@ -82,15 +82,15 @@ describe 'rsyslog::server' do
     end
   end
 
-  context '/etc/rsyslog.d/remote.conf file' do
+  context '/etc/rsyslog.d/49-remote.conf file' do
     before do
       allow(File).to receive(:exist?).and_return(true)
     end
 
-    let(:file) { chef_run.file('/etc/rsyslog.d/remote.conf') }
+    let(:file) { chef_run.file('/etc/rsyslog.d/49-remote.conf') }
 
     it 'deletes the file' do
-      expect(chef_run).to delete_file('/etc/rsyslog.d/remote.conf')
+      expect(chef_run).to delete_file('/etc/rsyslog.d/49-remote.conf')
     end
 
     it 'notifies restarting the service' do
@@ -104,14 +104,14 @@ describe 'rsyslog::server' do
 
       let(:chef_run) do
         ChefSpec::ServerRunner.new(platform: 'smartos', version: 'joyent_20130111T180733Z') do |node|
-          node.set['rsyslog']['server'] = false
+          node.normal['rsyslog']['server'] = false
         end.converge(described_recipe)
       end
 
-      let(:file) { chef_run.file('/opt/local/etc/rsyslog.d/remote.conf') }
+      let(:file) { chef_run.file('/opt/local/etc/rsyslog.d/49-remote.conf') }
 
       it 'deletes the file' do
-        expect(chef_run).to delete_file('/opt/local/etc/rsyslog.d/remote.conf')
+        expect(chef_run).to delete_file('/opt/local/etc/rsyslog.d/49-remote.conf')
       end
 
       it 'notifies restarting the service' do

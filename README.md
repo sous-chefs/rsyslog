@@ -9,6 +9,7 @@ Installs and configures rsyslog to replace sysklogd for client and/or server use
 - RHEL/CentOS/Scientific/Amazon/Oracle
 - Fedora 21+
 - OmniOS r151006c
+- OpenSUSE
 
 ### Chef
 - Chef 12+
@@ -55,10 +56,12 @@ See `attributes/default.rb` for default values.
 - `node['rsyslog']['tls_certificate_file']` - Path to TLS certificate file. Required for server, optional for clients.
 - `node['rsyslog']['tls_key_file']` - Path to TLS key file. Required for server, optional for clients.
 - `node['rsyslog']['tls_auth_mode']` - Value for `$InputTCPServerStreamDriverAuthMode`/`$ActionSendStreamDriverAuthMode`, determines whether client certs are validated. Defaults to `anon` (no validation).
+- `node['rsyslog']['tls_permitted_peer']` - Value for `ActionSendStreamDriverPermittedPeer`, it narrows the list of the allowed hosts. Works with TLS only. Defaults to `nil`.
 - `node['rsyslog']['use_local_ipv4']` - Whether or not to make use the remote local IPv4 address on cloud systems when searching for servers (where available).  Default is 'false'.
 - `node['rsyslog']['allow_non_local']` - Whether or not to allow non-local messages. If 'false', incoming messages are only allowed from 127.0.0.1. Default is 'false'.
 - `node['rsyslog']['custom_remote']` - Array of hashes for configuring custom remote server targets
 - `node['rsyslog']['additional_directives']` - Hash of additional directives and their values to place in the main rsyslog config file
+- `node['rsyslog']['local_host_name']` -  permits to overwrite the system hostname with the one specified in the directive
 
 ## Recipes
 ### default
@@ -97,7 +100,7 @@ Any previous logs are not cleaned up from the `log_dir`.
 ### server
 Configures the node to be a rsyslog server. The chosen rsyslog server node should be defined in the `server_ip` attribute or resolvable by the specified search criteria specified in `node['rsyslog']['server_search]` (so that nodes making use of the `client` recipe can find the server to log to).
 
-This recipe will create the logs in `node['rsyslog']['log_dir']`, and the configuration is in `/etc/rsyslog.d/server.conf`. This recipe also removes any previous configuration to a remote server by removing the `/etc/rsyslog.d/remote.conf` file.
+The `server` recipe will create the logs in attribute `node['rsyslog']['log_dir']`, and the configuration in `/etc/rsyslog.d/server.conf`. This recipe also removes any previous configuration to a remote server by removing the file `/etc/rsyslog.d/49-remote.conf`.
 
 The cron job used in the previous version of this cookbook is removed, but it does not remove any existing cron job from your system (so it doesn't break anything unexpectedly). We recommend setting up logrotate for the logfiles instead.
 

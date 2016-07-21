@@ -14,7 +14,7 @@ describe 'rsyslog::default' do
   context "when node['rsyslog']['relp'] is true" do
     let(:chef_run) do
       ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '12.04') do |node|
-        node.set['rsyslog']['use_relp'] = true
+        node.normal['rsyslog']['use_relp'] = true
       end.converge(described_recipe)
     end
 
@@ -27,7 +27,7 @@ describe 'rsyslog::default' do
     context "when node['rsyslog']['tls_ca_file'] is not set" do
       let(:chef_run) do
         ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '12.04') do |node|
-          node.set['rsyslog']['enable_tls'] = true
+          node.normal['rsyslog']['enable_tls'] = true
         end.converge(described_recipe)
       end
 
@@ -39,8 +39,8 @@ describe 'rsyslog::default' do
     context "when node['rsyslog']['tls_ca_file'] is set" do
       let(:chef_run) do
         ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '12.04') do |node|
-          node.set['rsyslog']['enable_tls'] = true
-          node.set['rsyslog']['tls_ca_file'] = '/etc/path/to/ssl-ca.crt'
+          node.normal['rsyslog']['enable_tls'] = true
+          node.normal['rsyslog']['tls_ca_file'] = '/etc/path/to/ssl-ca.crt'
         end.converge(described_recipe)
       end
 
@@ -56,9 +56,9 @@ describe 'rsyslog::default' do
 
         let(:chef_run) do
           ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '12.04') do |node|
-            node.set['rsyslog']['enable_tls'] = true
-            node.set['rsyslog']['tls_ca_file'] = '/etc/path/to/ssl-ca.crt'
-            node.set['rsyslog']['protocol'] = 'udp'
+            node.normal['rsyslog']['enable_tls'] = true
+            node.normal['rsyslog']['tls_ca_file'] = '/etc/path/to/ssl-ca.crt'
+            node.normal['rsyslog']['protocol'] = 'udp'
           end.converge(described_recipe)
         end
 
