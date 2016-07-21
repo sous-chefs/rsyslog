@@ -34,27 +34,30 @@ platforms:
   driver:
     image: centos:5
     platform: rhel
-    run_command: /sbin/init
-    provision_command:
+    pid_one_command: /sbin/init
+    intermediate_instructions:
       - /usr/bin/yum install -y initscripts net-tools wget
 
 - name: centos-6
   driver:
     image: centos:6
+    platform: rhel
+    pid_one_command: /sbin/init
     intermediate_instructions:
       - RUN yum -y install tar which initscripts
 
 - name: centos-7
   driver:
     image: centos:7
+    platform: rhel
     pid_one_command: /usr/lib/systemd/systemd
     intermediate_instructions:
       - RUN yum clean all
       - RUN yum -y install net-tools lsof
 
-- name: fedora-23
+- name: fedora-latest
   driver:
-    image: fedora:23
+    image: fedora:latest
     pid_one_command: /usr/lib/systemd/systemd
     intermediate_instructions:
       - RUN dnf -y install tar yum

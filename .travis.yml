@@ -5,9 +5,12 @@ dist: trusty
 addons:
   apt:
     sources:
-      - chef-current-precise
+      - chef-current-trusty
     packages:
       - chefdk
+
+# Don't `bundle install` which takes about 1.5 mins
+install: echo "skip bundle install"
 
 branches:
   only:
@@ -17,32 +20,52 @@ services: docker
 
 env:
   matrix:
-  - INSTANCE=default-ubuntu-1404
   - INSTANCE=default-ubuntu-1204
-  - INSTANCE=default-centos-7
+  - INSTANCE=default-ubuntu-1404
+  - INSTANCE=default-ubuntu-1604
   - INSTANCE=default-centos-6
-  - INSTANCE=input-file-provider-ubuntu-1404
+  - INSTANCE=default-centos-7
+  - INSTANCE=default-debian-7
+  - INSTANCE=default-debian-8
+  - INSTANCE=default-fedora-latest
+  - INSTANCE=default-opensuse-132
+  - INSTANCE=default-opensuse-421
   - INSTANCE=input-file-provider-ubuntu-1204
-  - INSTANCE=input-file-provider-centos-7
+  - INSTANCE=input-file-provider-ubuntu-1404
+  - INSTANCE=input-file-provider-ubuntu-1604
   - INSTANCE=input-file-provider-centos-6
-  - INSTANCE=client-ubuntu-1404
+  - INSTANCE=input-file-provider-centos-7
+  - INSTANCE=input-file-provider-debian-7
+  - INSTANCE=input-file-provider-debian-8
+  - INSTANCE=input-file-provider-fedora-latest
+  - INSTANCE=input-file-provider-opensuse-132
+  - INSTANCE=input-file-provider-opensuse-421
   - INSTANCE=client-ubuntu-1204
-  - INSTANCE=client-centos-7
+  - INSTANCE=client-ubuntu-1404
+  - INSTANCE=client-ubuntu-1604
   - INSTANCE=client-centos-6
-  - INSTANCE=server-ubuntu-1404
+  - INSTANCE=client-centos-7
+  - INSTANCE=client-debian-7
+  - INSTANCE=client-debian-8
+  - INSTANCE=client-fedora-latest
+  - INSTANCE=client-opensuse-132
+  - INSTANCE=client-opensuse-421
   - INSTANCE=server-ubuntu-1204
-  - INSTANCE=server-centos-7
+  - INSTANCE=server-ubuntu-1404
+  - INSTANCE=server-ubuntu-1604
   - INSTANCE=server-centos-6
+  - INSTANCE=server-centos-7
+  - INSTANCE=server-debian-7
+  - INSTANCE=server-debian-8
+  - INSTANCE=server-fedora-latest
+  - INSTANCE=server-opensuse-132
+  - INSTANCE=server-opensuse-421
 
-# Don't `bundle install`
-install: echo "skip bundle install"
+  fast_finish: true
 
-# Ensure we make ChefDK's Ruby the default
 before_script:
-  # https://github.com/zuazo/kitchen-in-travis-native/issues/1#issuecomment-142230889
   - sudo iptables -L DOCKER || ( echo "DOCKER iptables chain missing" ; sudo iptables -N DOCKER )
   - eval "$(/opt/chefdk/bin/chef shell-init bash)"
-  - /opt/chefdk/embedded/bin/chef gem install kitchen-dokken
 
 script:
   - /opt/chefdk/embedded/bin/chef --version
