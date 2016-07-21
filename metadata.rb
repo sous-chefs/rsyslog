@@ -10,16 +10,18 @@ recipe            'rsyslog', 'Sets up rsyslog for local logging'
 recipe            'rsyslog::client', 'Sets up a client to log to a remote rsyslog server'
 recipe            'rsyslog::server', 'Sets up an rsyslog server'
 
-supports          'ubuntu', '>= 10.04'
+supports          'ubuntu', '>= 12.04'
 supports          'debian', '>= 5.0'
 supports          'redhat', '>= 5.0'
 supports          'centos', '>= 5.0'
-supports          'fedora', '>= 20.0'
+supports          'fedora'
 supports          'scientific'
 supports          'amazon'
 supports          'oracle'
 
 depends           'compat_resource'
 
-source_url 'https://github.com/chef-cookbooks/rsyslog' if respond_to?(:source_url)
-issues_url 'https://github.com/chef-cookbooks/rsyslog/issues' if respond_to?(:issues_url)
+source_url 'https://github.com/chef-cookbooks/rsyslog'
+issues_url 'https://github.com/chef-cookbooks/rsyslog/issues'
+
+chef_version '>= 12.0' if respond_to?(:chef_version)
