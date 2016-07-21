@@ -3,7 +3,7 @@ require 'spec_helper'
 describe 'rsyslog::server' do
   let(:chef_run) do
     ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '12.04') do |node|
-      node.set['rsyslog']['server'] = false
+      node.normal['rsyslog']['server'] = false
     end.converge(described_recipe)
   end
 
@@ -57,7 +57,7 @@ describe 'rsyslog::server' do
     context 'on SmartOS' do
       let(:chef_run) do
         ChefSpec::ServerRunner.new(platform: 'smartos', version: 'joyent_20130111T180733Z') do |node|
-          node.set['rsyslog']['server'] = false
+          node.normal['rsyslog']['server'] = false
         end.converge(described_recipe)
       end
 
@@ -104,7 +104,7 @@ describe 'rsyslog::server' do
 
       let(:chef_run) do
         ChefSpec::ServerRunner.new(platform: 'smartos', version: 'joyent_20130111T180733Z') do |node|
-          node.set['rsyslog']['server'] = false
+          node.normal['rsyslog']['server'] = false
         end.converge(described_recipe)
       end
 

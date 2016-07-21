@@ -3,8 +3,8 @@ require 'spec_helper'
 describe 'rsyslog::client' do
   let(:chef_run) do
     ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '12.04') do |node|
-      node.set['rsyslog']['server_ip'] = server_ip
-      node.set['rsyslog']['custom_remote'] = custom_remote
+      node.normal['rsyslog']['server_ip'] = server_ip
+      node.normal['rsyslog']['custom_remote'] = custom_remote
     end.converge(described_recipe)
   end
 
@@ -42,8 +42,8 @@ describe 'rsyslog::client' do
     context 'on SmartOS' do
       let(:chef_run) do
         ChefSpec::ServerRunner.new(platform: 'smartos', version: 'joyent_20130111T180733Z') do |node|
-          node.set['rsyslog']['server_ip'] = server_ip
-          node.set['rsyslog']['custom_remote'] = custom_remote
+          node.normal['rsyslog']['server_ip'] = server_ip
+          node.normal['rsyslog']['custom_remote'] = custom_remote
         end.converge(described_recipe)
       end
 
@@ -85,7 +85,7 @@ describe 'rsyslog::client' do
     context 'on SmartOS' do
       let(:chef_run) do
         ChefSpec::ServerRunner.new(platform: 'smartos', version: 'joyent_20130111T180733Z') do |node|
-          node.set['rsyslog']['server_ip'] = server_ip
+          node.normal['rsyslog']['server_ip'] = server_ip
         end.converge(described_recipe)
       end
 

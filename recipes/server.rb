@@ -18,7 +18,7 @@
 #
 
 # Manually set this attribute
-node.set['rsyslog']['server'] = true
+node.normal['rsyslog']['server'] = true
 
 include_recipe 'rsyslog::default'
 
