@@ -1,7 +1,7 @@
 # rsyslog Cookbook CHANGELOG
 This file is used to list changes made in each version of the rsyslog cookbook.
 
-## v.4.0.1 (UNRELEASED)
+## v.4.0.1 (2016-07-20)
 - PR #76 Validate the config file using `rsyslogd -N 1` via eherot
 - PR #105 Use correct file name for remote.conf via mfenner
 - PR #105 Add $LocalHostName directive via mfenner
