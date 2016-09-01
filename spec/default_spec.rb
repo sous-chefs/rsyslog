@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'rsyslog::default' do
   let(:chef_run) do
-    ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '12.04').converge(described_recipe)
+    ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '16.04').converge(described_recipe)
   end
 
   let(:service_resource) { 'service[rsyslog]' }
@@ -13,7 +13,7 @@ describe 'rsyslog::default' do
 
   context "when node['rsyslog']['relp'] is true" do
     let(:chef_run) do
-      ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '12.04') do |node|
+      ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '16.04') do |node|
         node.normal['rsyslog']['use_relp'] = true
       end.converge(described_recipe)
     end
@@ -26,7 +26,7 @@ describe 'rsyslog::default' do
   context "when node['rsyslog']['enable_tls'] is true" do
     context "when node['rsyslog']['tls_ca_file'] is not set" do
       let(:chef_run) do
-        ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '12.04') do |node|
+        ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '16.04') do |node|
           node.normal['rsyslog']['enable_tls'] = true
         end.converge(described_recipe)
       end
@@ -38,7 +38,7 @@ describe 'rsyslog::default' do
 
     context "when node['rsyslog']['tls_ca_file'] is set" do
       let(:chef_run) do
-        ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '12.04') do |node|
+        ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '16.04') do |node|
           node.normal['rsyslog']['enable_tls'] = true
           node.normal['rsyslog']['tls_ca_file'] = '/etc/path/to/ssl-ca.crt'
         end.converge(described_recipe)
@@ -55,7 +55,7 @@ describe 'rsyslog::default' do
         end
 
         let(:chef_run) do
-          ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '12.04') do |node|
+          ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '16.04') do |node|
             node.normal['rsyslog']['enable_tls'] = true
             node.normal['rsyslog']['tls_ca_file'] = '/etc/path/to/ssl-ca.crt'
             node.normal['rsyslog']['protocol'] = 'udp'

@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'rsyslog::client' do
   let(:chef_run) do
-    ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '12.04') do |node|
+    ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '16.04') do |node|
       node.normal['rsyslog']['server_ip'] = server_ip
       node.normal['rsyslog']['custom_remote'] = custom_remote
     end.converge(described_recipe)

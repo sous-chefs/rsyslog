@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'rsyslog::server' do
   let(:chef_run) do
-    ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '12.04') do |node|
+    ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '16.04') do |node|
       node.normal['rsyslog']['server'] = false
     end.converge(described_recipe)
   end
