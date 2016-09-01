@@ -12,7 +12,7 @@ Installs and configures rsyslog to replace sysklogd for client and/or server use
 - OpenSUSE
 
 ### Chef
-- Chef 12+
+- Chef 12.1+
 
 ### Cookbooks
 - compat_resource
