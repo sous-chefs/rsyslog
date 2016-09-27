@@ -73,8 +73,6 @@ when 'ubuntu'
     default['rsyslog']['priv_seperation'] = true
     default['rsyslog']['priv_group'] = 'syslog'
   end
-when 'arch'
-  default['rsyslog']['service_name'] = 'rsyslogd'
 when 'smartos'
   default['rsyslog']['config_prefix'] = '/opt/local/etc'
   default['rsyslog']['modules'] = %w(immark imsolaris imtcp imudp)
