@@ -25,7 +25,7 @@ include_recipe 'rsyslog::default'
 directory node['rsyslog']['log_dir'] do
   owner    node['rsyslog']['user']
   group    node['rsyslog']['group']
-  mode     '0755'
+  mode     node['rsyslog']['directory_create_mode']
   recursive true
 end
 
