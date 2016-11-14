@@ -31,8 +31,6 @@ directory "#{node['rsyslog']['config_prefix']}/rsyslog.d" do
   mode  '0755'
 end
 
-log node['rsyslog']['group']
-
 directory node['rsyslog']['working_dir'] do
   owner node['rsyslog']['user']
   group node['rsyslog']['group']
