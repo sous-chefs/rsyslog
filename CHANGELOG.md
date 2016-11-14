@@ -1,6 +1,15 @@
 # rsyslog Cookbook CHANGELOG
 This file is used to list changes made in each version of the rsyslog cookbook.
 
+## 5.0.0 (2016-11-14)
+- Make rsyslog only restart once if you define multiple file_input resources.
+- Remove debugging log statement
+- Require chef 12.1
+- Require compat_resource 12.10+
+- Remove chef 11 compat
+- Remove support for arch
+- Depend on the recent compat_resource cookbook
+
 ## v.4.0.1 (2016-07-20)
 - PR #76 Validate the config file using `rsyslogd -N 1` via eherot
 - PR #105 Use correct file name for remote.conf via mfenner
