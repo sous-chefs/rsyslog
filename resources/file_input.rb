@@ -39,7 +39,7 @@ action :create do
               'state_file' => log_name,
               'severity' => severity,
               'facility' => facility
-    notifies :restart, "service[#{node['rsyslog']['service_name']}]"
+    notifies :restart, "service[#{node['rsyslog']['service_name']}]", :delayed
   end
 
   service node['rsyslog']['service_name'] do
