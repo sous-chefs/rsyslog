@@ -144,6 +144,6 @@ else
 end
 
 # rsyslog 3/4 do not support the new :omusrmsg:* format and need * instead
-if (node['platform'] == 'ubuntu' && node['platform_version'].to_i < 12) || (node['platform_family'] == 'rhel' && node['platform_version'].to_i < 6)
+if node['platform_family'] == 'rhel' && node['platform_version'].to_i < 6
   default['rsyslog']['default_facility_logs']['*.emerg'] = '*'
 end
