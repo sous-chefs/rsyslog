@@ -1,6 +1,12 @@
 # rsyslog Cookbook CHANGELOG
 This file is used to list changes made in each version of the rsyslog cookbook.
 
+## 5.0.1 (2016-12-06)
+
+- Remove support for Ubuntu 10.04
+- Simplify logic in the attributes file around Fedora
+- Fix comment headers to be yard compatible
+
 ## 5.0.0 (2016-11-14)
 - Make rsyslog only restart once if you define multiple file_input resources.
 - Remove debugging log statement
