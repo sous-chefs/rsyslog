@@ -66,13 +66,10 @@ default['rsyslog']['modules']                   = %w(imuxsock imklog)
 # platform specific attributes
 case node['platform']
 when 'ubuntu'
-  # syslog user introduced with natty package
-  if node['platform_version'].to_f >= 11.04
-    default['rsyslog']['user'] = 'syslog'
-    default['rsyslog']['group'] = 'adm'
-    default['rsyslog']['priv_seperation'] = true
-    default['rsyslog']['priv_group'] = 'syslog'
-  end
+  default['rsyslog']['user'] = 'syslog'
+  default['rsyslog']['group'] = 'adm'
+  default['rsyslog']['priv_seperation'] = true
+  default['rsyslog']['priv_group'] = 'syslog'
 when 'smartos'
   default['rsyslog']['config_prefix'] = '/opt/local/etc'
   default['rsyslog']['modules'] = %w(immark imsolaris imtcp imudp)
