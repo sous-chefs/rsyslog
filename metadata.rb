@@ -11,7 +11,7 @@ recipe            'rsyslog::client', 'Sets up a client to log to a remote rsyslo
 recipe            'rsyslog::server', 'Sets up an rsyslog server'
 
 supports          'ubuntu', '>= 12.04'
-supports          'debian', '>= 5.0'
+supports          'debian', '>= 7.0'
 supports          'redhat', '>= 5.0'
 supports          'centos', '>= 5.0'
 supports          'fedora'
