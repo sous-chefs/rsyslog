@@ -51,7 +51,7 @@ default['rsyslog']['tls_auth_mode']             = 'anon'
 default['rsyslog']['tls_permitted_peer']        = nil
 default['rsyslog']['use_local_ipv4']            = false
 default['rsyslog']['allow_non_local']           = false
-default['rsyslog']['custom_remote']             = [{}]
+default['rsyslog']['custom_remote']             = []
 default['rsyslog']['additional_directives'] = {}
 
 # The most likely platform-specific attributes
