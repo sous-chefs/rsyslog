@@ -81,10 +81,10 @@ $ActionFileDefaultTemplate RSYSLOG_TraditionalFileFormat
 #
 # Additional Log templates
 #
-<% if node['rsyslog']['templates'] -%>
-  <% node['rsyslog']['templates'].each_pair do |k,v| %>
-    $<%= k %> <%= v %>
-  <% end %>
+<% if node['rsyslog']['templates'] && !node['rsyslog']['templates'].empty? -%>
+<% [*node['rsyslog']['templates']].each do |template| %>
+$Template <%= template %>
+<% end %>
 <% end %>
 # Filter duplicated messages
 $RepeatedMsgReduction <%= node['rsyslog']['repeated_msg_reduction'] %>
