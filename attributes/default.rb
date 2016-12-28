@@ -62,6 +62,11 @@ default['rsyslog']['priv_seperation']           = false
 default['rsyslog']['priv_user']                 = nil
 default['rsyslog']['priv_group']                = nil
 default['rsyslog']['modules']                   = %w(imuxsock imklog)
+default['rsyslog']['file_create_mode']          = '0640'
+default['rsyslog']['dir_create_mode']           = '0755'
+default['rsyslog']['umask']                     = '0022'
+default['rsyslog']['dir_owner']                 = 'root'
+default['rsyslog']['dir_group']                 = 'adm'
 
 # platform specific attributes
 case node['platform']
