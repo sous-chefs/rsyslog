@@ -100,7 +100,7 @@ when 'suse'
     'local0.*;local1.*' => "-#{node['rsyslog']['default_log_dir']}/localmessages",
     'local2.*;local3.*' => "-#{node['rsyslog']['default_log_dir']}/localmessages",
     'local4.*;local5.*' => "-#{node['rsyslog']['default_log_dir']}/localmessages",
-    'local6.*;local7.*' => "-#{node['rsyslog']['default_log_dir']}/localmessages"
+    'local6.*;local7.*' => "-#{node['rsyslog']['default_log_dir']}/localmessages",
   }
 when 'rhel', 'fedora'
   default['rsyslog']['working_dir'] = '/var/lib/rsyslog'
@@ -112,7 +112,7 @@ when 'rhel', 'fedora'
     'cron.*' => "#{node['rsyslog']['default_log_dir']}/cron",
     '*.emerg' => ':omusrmsg:*',
     'uucp,news.crit' => "#{node['rsyslog']['default_log_dir']}/spooler",
-    'local7.*' => "#{node['rsyslog']['default_log_dir']}/boot.log"
+    'local7.*' => "#{node['rsyslog']['default_log_dir']}/boot.log",
   }
   # RHEL >= 7 and Fedora use journald in systemd. Amazon Linux doesn't.
   if node['platform'] != 'amazon' && node['platform_version'].to_i >= 7
@@ -136,7 +136,7 @@ else
     'news.notice' => "-#{node['rsyslog']['default_log_dir']}/news/news.notice",
     '*.=debug;auth,authpriv.none;news.none;mail.none' => "-#{node['rsyslog']['default_log_dir']}/debug",
     '*.=info;*.=notice;*.=warn;auth,authpriv.none;cron,daemon.none;mail,news.none' => "-#{node['rsyslog']['default_log_dir']}/messages",
-    '*.emerg' => ':omusrmsg:*'
+    '*.emerg' => ':omusrmsg:*',
   }
 end
 
