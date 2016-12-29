@@ -53,6 +53,8 @@ default['rsyslog']['use_local_ipv4']            = false
 default['rsyslog']['allow_non_local']           = false
 default['rsyslog']['custom_remote']             = []
 default['rsyslog']['additional_directives'] = {}
+default['rsyslog']['directory_create_mode']     = '0755'
+default['rsyslog']['file_create_mode']          = '0644'
 
 # The most likely platform-specific attributes
 default['rsyslog']['service_name']              = 'rsyslog'

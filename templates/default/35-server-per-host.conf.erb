@@ -6,8 +6,9 @@ $ModLoad imrelp
 $InputRELPServerRun <%= node['rsyslog']['relp_port'] %>
 <% end -%>
 $DirGroup <%= node['rsyslog']['group'] %>
-$DirCreateMode 0755
+$DirCreateMode <%= node['rsyslog']['directory_create_mode'] %>
 $FileGroup <%= node['rsyslog']['group'] %>
+$FileCreateMode <%= node['rsyslog']['file_create_mode'] %>
 
 $template PerHostAuth,"<%= node['rsyslog']['log_dir'] %>/<%= node['rsyslog']['per_host_dir'] %>/auth.log"
 $template PerHostCron,"<%= node['rsyslog']['log_dir'] %>/<%= node['rsyslog']['per_host_dir'] %>/cron.log"
