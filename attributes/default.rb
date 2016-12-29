@@ -52,8 +52,8 @@ default['rsyslog']['tls_permitted_peer']        = nil
 default['rsyslog']['use_local_ipv4']            = false
 default['rsyslog']['allow_non_local']           = false
 default['rsyslog']['custom_remote']             = []
-default['rsyslog']['additional_directives'] = {}
-default['rsyslog']['templates'] = %w()
+default['rsyslog']['additional_directives']     = {}
+default['rsyslog']['templates']                 = %w()
 
 # The most likely platform-specific attributes
 default['rsyslog']['service_name']              = 'rsyslog'

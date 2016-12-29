@@ -6,8 +6,6 @@
 #     /usr/share/doc/rsyslog-doc/html/rsyslog_conf.html
 #
 #  Default logging rules can be found in /etc/rsyslog.d/50-default.conf
-# Umask should be set at the top of the file
-$Umask <%= node['rsyslog']['umask']%>
 #
 # Set hostname
 #
@@ -97,6 +95,7 @@ $WorkDirectory <%= node['rsyslog']['working_dir'] %>
 #
 # Set the default permissions for all log files.
 #
+$Umask <%= node['rsyslog']['umask'] %>
 $FileOwner <%= node['rsyslog']['user'] %>
 $FileGroup <%= node['rsyslog']['group'] %>
 $FileCreateMode <%= node['rsyslog']['file_create_mode'] %>
