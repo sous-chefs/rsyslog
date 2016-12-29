@@ -62,8 +62,8 @@ describe 'rsyslog::default' do
           end.converge(described_recipe)
         end
 
-        it 'exits fatally' do
-          expect { chef_run }.to raise_error(SystemExit)
+        it 'raises RuntimeError' do
+          expect { chef_run }.to raise_error(RuntimeError)
         end
       end
     end
