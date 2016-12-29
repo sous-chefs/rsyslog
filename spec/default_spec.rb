@@ -49,11 +49,6 @@ describe 'rsyslog::default' do
       end
 
       context "when protocol is not 'tcp'" do
-        before do
-          allow(Chef::Log).to receive(:fatal)
-          allow($stdout).to receive(:puts)
-        end
-
         let(:chef_run) do
           ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '16.04') do |node|
             node.normal['rsyslog']['enable_tls'] = true
@@ -63,7 +58,9 @@ describe 'rsyslog::default' do
         end
 
         it 'exits fatally' do
-          expect { chef_run }.to raise_error(SystemExit)
+          expect do
+            chef_run
+          end.to raise_error
         end
       end
     end
