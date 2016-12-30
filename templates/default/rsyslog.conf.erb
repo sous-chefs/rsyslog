@@ -76,11 +76,11 @@ $ActionFileDefaultTemplate <%= node["rsyslog"]["default_file_template"] %>
 $ActionFileDefaultTemplate RSYSLOG_TraditionalFileFormat
 <% end -%>
 
+<% if node['rsyslog']['templates'] && !node['rsyslog']['templates'].empty? -%>
+<% [*node['rsyslog']['templates']].each do |template| %>
 #
 # Additional Log templates
 #
-<% if node['rsyslog']['templates'] && !node['rsyslog']['templates'].empty? -%>
-<% [*node['rsyslog']['templates']].each do |template| %>
 $Template <%= template %>
 <% end %>
 <% end %>
