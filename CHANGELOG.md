@@ -1,6 +1,13 @@
 # rsyslog Cookbook CHANGELOG
 This file is used to list changes made in each version of the rsyslog cookbook.
 
+## 5.1.0 (2016-12-30)
+
+- Removed empty value from default custom_remote in attributes
+- don't break if custom_remote is not set
+- adding ability to override more options
+- adding ability to set multiple log templates
+
 ## 5.0.1 (2016-12-06)
 
 - Remove support for Ubuntu 10.04
