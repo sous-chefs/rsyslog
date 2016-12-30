@@ -76,6 +76,14 @@ $ActionFileDefaultTemplate <%= node["rsyslog"]["default_file_template"] %>
 $ActionFileDefaultTemplate RSYSLOG_TraditionalFileFormat
 <% end -%>
 
+<% if node['rsyslog']['templates'] && !node['rsyslog']['templates'].empty? -%>
+<% [*node['rsyslog']['templates']].each do |template| %>
+#
+# Additional Log templates
+#
+$Template <%= template %>
+<% end %>
+<% end %>
 # Filter duplicated messages
 $RepeatedMsgReduction <%= node['rsyslog']['repeated_msg_reduction'] %>
 
@@ -87,11 +95,14 @@ $WorkDirectory <%= node['rsyslog']['working_dir'] %>
 #
 # Set the default permissions for all log files.
 #
+$Umask <%= node['rsyslog']['umask'] %>
 $FileOwner <%= node['rsyslog']['user'] %>
 $FileGroup <%= node['rsyslog']['group'] %>
-$FileCreateMode 0640
-$DirCreateMode 0755
-$Umask 0022
+$FileCreateMode <%= node['rsyslog']['file_create_mode'] %>
+$DirOwner <%= node['rsyslog']['dir_owner'] %>
+$DirGroup <%= node['rsyslog']['dir_group'] %>
+$DirCreateMode <%= node['rsyslog']['dir_create_mode'] %>
+
 <% if node['rsyslog']['priv_seperation'] %>
 $PrivDropToUser <%= node['rsyslog']['priv_user'] || node['rsyslog']['user'] %>
 $PrivDropToGroup <%= node['rsyslog']['priv_group'] || node['rsyslog']['group'] %>

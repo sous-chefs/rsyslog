@@ -52,7 +52,8 @@ default['rsyslog']['tls_permitted_peer']        = nil
 default['rsyslog']['use_local_ipv4']            = false
 default['rsyslog']['allow_non_local']           = false
 default['rsyslog']['custom_remote']             = []
-default['rsyslog']['additional_directives'] = {}
+default['rsyslog']['additional_directives']     = {}
+default['rsyslog']['templates']                 = %w()
 
 # The most likely platform-specific attributes
 default['rsyslog']['service_name']              = 'rsyslog'
@@ -62,6 +63,11 @@ default['rsyslog']['priv_seperation']           = false
 default['rsyslog']['priv_user']                 = nil
 default['rsyslog']['priv_group']                = nil
 default['rsyslog']['modules']                   = %w(imuxsock imklog)
+default['rsyslog']['file_create_mode']          = '0640'
+default['rsyslog']['dir_create_mode']           = '0755'
+default['rsyslog']['umask']                     = '0022'
+default['rsyslog']['dir_owner']                 = 'root'
+default['rsyslog']['dir_group']                 = 'adm'
 
 # platform specific attributes
 case node['platform']

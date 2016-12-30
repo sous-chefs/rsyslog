@@ -38,6 +38,11 @@ See `attributes/default.rb` for default values.
 - `node['rsyslog']['max_message_size']` - Specify the maximum allowed message size. Default is 2k.
 - `node['rsyslog']['user']` - Who should own the configuration files and directories
 - `node['rsyslog']['group']` - Who should group-own the configuration files and directories
+- `node['rsyslog']['dir_owner']` - Who should own the log directories
+- `node['rsyslog']['dir_group']` - Who should group-own the log directories
+- `node['rsyslog']['file_create_mode']` - Mode that should be set when creating log files
+- `node['rsyslog']['dir_create_mode']` - Mode that should be set when creating log directories
+- `node['rsyslog']['umask']` - Specify the processes umask
 - `node['rsyslog']['defaults_file']` - The full path to the defaults/sysconfig file for the service.
 - `node['rsyslog']['service_name']` - The platform-specific name of the service
 - `node['rsyslog']['preserve_fqdn']` - Value of the `$PreserveFQDN` configuration directive in `/etc/rsyslog.conf`. Default is 'off' for compatibility purposes.
@@ -48,6 +53,7 @@ See `attributes/default.rb` for default values.
 - `node['rsyslog']['default_facility_logs']` - Hash containing log facilities and destinations used in `50-default.conf` template.
 - `node['rsyslog']['default_file_template']` - The name of a pre-defined log format template (ie - RSYSLOG_FileFormat), used for local log files.
 - `node['rsyslog']['default_remote_template']` - The name of a pre-defined log format template (ie - RSYSLOG_FileFormat), used for sending to remote servers.
+- `node['rsyslog']['templates']` - Allows a user to specify a dynamic filename and the format of the logs
 - `node['rsyslog']['rate_limit_interval']` - Value of the $SystemLogRateLimitInterval configuration directive in `/etc/rsyslog.conf`. Default is nil, leaving it to the platform default.
 - `node['rsyslog']['rate_limit_burst']` - Value of the $SystemLogRateLimitBurst configuration directive in `/etc/rsyslog.conf`. Default is nil, leaving it to the platform default.
 - `node['rsyslog']['action_queue_max_disk_space']` - Max amount of disk space the disk-assisted queue is allowed to use ([more info](http://www.rsyslog.com/doc/queues.html)).
