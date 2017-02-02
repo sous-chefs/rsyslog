@@ -81,7 +81,20 @@ $ActionFileDefaultTemplate RSYSLOG_TraditionalFileFormat
 #
 # Additional Log templates
 #
-$Template <%= template %>
+<% if template.is_a?(String) -%>
+ $Template <%= template %>
+<% else -%>
+template(
+<% template.each do |key,val| -%>
+<%  next if key == 'list-descriptions' -%>
+         <%= key %>="<%= val %>"
+<% end -%>
+        ) <% if template['type'] == 'list' %>{
+<% template['list-descriptions'].each do |item| -%>
+          <%= item %>
+<% end -%>
+        }<% end %>
+<% end -%>
 <% end %>
 <% end %>
 # Filter duplicated messages

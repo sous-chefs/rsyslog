@@ -60,7 +60,7 @@ describe 'rsyslog::default' do
         it 'exits fatally' do
           expect do
             chef_run
-          end.to raise_error
+          end.to raise_error(RuntimeError, "Recipe rsyslog::default can not use 'enable_tls' with protocol 'udp' (requires 'tcp')")
         end
       end
     end
@@ -145,6 +145,23 @@ describe 'rsyslog::default' do
     it 'includes the right modules' do
       modules.each do |mod|
         expect(chef_run).to render_file(template.path).with_content(/^\$ModLoad #{mod}/)
+      end
+    end
+
+    context 'when custom teplate is defined' do
+      let(:chef_run) do
+        ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '16.04') do |node|
+          node.normal['rsyslog']['templates'] = [{ 'name' => 'TestTemplate', 'type' => 'list', 'list-descriptions' => ['test_item'] }]
+        end.converge(described_recipe)
+      end
+      it 'creates the template' do
+        expect(chef_run).to render_file(template.path).with_content { |content|
+          expect(content).to include('template(')
+          expect(content).to include('name="TestTemplate"')
+          expect(content).to include('type="list"')
+          expect(content).to include(') {')
+          expect(content).to include('test_item')
+        }
       end
     end
 

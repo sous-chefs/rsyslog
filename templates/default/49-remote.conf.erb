@@ -22,6 +22,16 @@ $ActionSendStreamDriverPermittedPeer <%= node['rsyslog']['tls_permitted_peer'] %
 <% end -%>
 
 <% @servers.each do |server| -%>
+<%  if server['style'] == 'RainerScript' -%>
+<%=   server['logs'] ? server['logs'] : node['rsyslog']['logs_to_forward'] %> action(
+<%    server.each do |key,val| -%>
+<%     next if ['style','logs'].include?(key) -%>
+<%     key = 'Target' if key == 'server' -%>
+  <%= key %>="<%= val %>"
+<%    end -%>
+)
+<%  else -%>
+# Be warned that legacy action format is hard to get right. It is recommended to use RainerScript-Style action format whenever possible!
 <%   case server['protocol'] -%>
 <%     when "tcp" -%>
 <%=      server['logs'] ? server['logs'] : node['rsyslog']['logs_to_forward'] %> @@<%= server['server']  %>:<%= server['port'] ? server['port'] : node['rsyslog']['port'] %><%= server['remote_template'] ? ';' + server['remote_template'] : nil %>
@@ -30,4 +40,5 @@ $ActionSendStreamDriverPermittedPeer <%= node['rsyslog']['tls_permitted_peer'] %
 <%     else -%>
 <%=      server['logs'] ? server['logs'] : node['rsyslog']['logs_to_forward'] %><%= node['rsyslog']['protocol'] == "tcp" ? " @@" : " @" %><%= server['server']  %>:<%= server['port'] ? server['port'] : node['rsyslog']['port'] %><%= server['remote_template'] ? ';' + server['remote_template'] : nil %>
 <%   end -%>
+<%  end -%>
 <% end -%>

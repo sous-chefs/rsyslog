@@ -39,6 +39,20 @@ describe 'rsyslog::client' do
       expect(template).to notify(service_resource).to(:restart)
     end
 
+    context 'using RainerScript' do
+      let(:custom_remote) { [{ 'style' => 'RainerScript', 'type' => 'omfwd', 'server' => '10.0.0.1', 'Port' => 555, 'Protocol' => 'tcp', 'logs' => 'auth.*,mail.*', 'Template' => 'RSYSLOG_SyslogProtocol23Format' }] }
+
+      it 'creates the template' do
+        expect(chef_run).to render_file(template.path).with_content { |content|
+          expect(content).to include("#{custom_remote.first['logs']} action(")
+          expect(content).to include("type=\"#{custom_remote.first['type']}\"")
+          expect(content).to include("Target=\"#{custom_remote.first['server']}\"")
+          expect(content).to include("Protocol=\"#{custom_remote.first['Protocol']}\"")
+          expect(content).to include("Port=\"#{custom_remote.first['Port']}\"")
+          expect(content).to include("Template=\"#{custom_remote.first['Template']}\"")
+        }
+      end
+    end
     context 'on SmartOS' do
       let(:chef_run) do
         ChefSpec::ServerRunner.new(platform: 'smartos', version: 'joyent_20130111T180733Z') do |node|

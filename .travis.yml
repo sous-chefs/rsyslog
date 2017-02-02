@@ -74,4 +74,7 @@ matrix:
   include:
     - script:
       - /opt/chefdk/bin/chef exec rake
-      env: UNIT_AND_LINT=1
+      env:
+      - UNIT_AND_LINT=1
+      - CHEF_FIPS=''
+
