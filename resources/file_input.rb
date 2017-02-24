@@ -16,8 +16,6 @@
 # limitations under the License.
 #
 
-actions :create
-
 property :name, String, name_attribute: true, required: true
 property :file, String, required: true
 property :priority, Integer, default: 99

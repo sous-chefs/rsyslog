@@ -19,8 +19,6 @@ supports          'scientific'
 supports          'amazon'
 supports          'oracle'
 
-depends           'compat_resource', '>= 12.14.6'
-
 source_url 'https://github.com/chef-cookbooks/rsyslog'
 issues_url 'https://github.com/chef-cookbooks/rsyslog/issues'
-chef_version '>= 12.1'
+chef_version '>= 12.5'
