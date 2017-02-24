@@ -20,7 +20,6 @@ services: docker
 
 env:
   matrix:
-  - INSTANCE=default-ubuntu-1204
   - INSTANCE=default-ubuntu-1404
   - INSTANCE=default-ubuntu-1604
   - INSTANCE=default-centos-6
@@ -29,8 +28,7 @@ env:
   - INSTANCE=default-debian-8
   - INSTANCE=default-fedora-latest
   - INSTANCE=default-opensuse-132
-  - INSTANCE=default-opensuse-421
-  - INSTANCE=input-file-provider-ubuntu-1204
+  - INSTANCE=default-opensuse-leap
   - INSTANCE=input-file-provider-ubuntu-1404
   - INSTANCE=input-file-provider-ubuntu-1604
   - INSTANCE=input-file-provider-centos-6
@@ -39,8 +37,7 @@ env:
   - INSTANCE=input-file-provider-debian-8
   - INSTANCE=input-file-provider-fedora-latest
   - INSTANCE=input-file-provider-opensuse-132
-  - INSTANCE=input-file-provider-opensuse-421
-  - INSTANCE=client-ubuntu-1204
+  - INSTANCE=input-file-provider-opensuse-leap
   - INSTANCE=client-ubuntu-1404
   - INSTANCE=client-ubuntu-1604
   - INSTANCE=client-centos-6
@@ -49,8 +46,7 @@ env:
   - INSTANCE=client-debian-8
   - INSTANCE=client-fedora-latest
   - INSTANCE=client-opensuse-132
-  - INSTANCE=client-opensuse-421
-  - INSTANCE=server-ubuntu-1204
+  - INSTANCE=client-opensuse-leap
   - INSTANCE=server-ubuntu-1404
   - INSTANCE=server-ubuntu-1604
   - INSTANCE=server-centos-6
@@ -59,7 +55,7 @@ env:
   - INSTANCE=server-debian-8
   - INSTANCE=server-fedora-latest
   - INSTANCE=server-opensuse-132
-  - INSTANCE=server-opensuse-421
+  - INSTANCE=server-opensuse-leap
 
 before_script:
   - sudo iptables -L DOCKER || ( echo "DOCKER iptables chain missing" ; sudo iptables -N DOCKER )
