@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version of the rsyslog cookbook.
 
+## 6.0.1 (2017-02-28)
+
+- Fix Issue #126 multiple remote server configuration template which requires $ActionQueueFileName to be different for each remote server
+
 ## 6.0.0 (2017-02-23)
 
 - Require Chef 12.5+ and remove dependency on compat_resource
