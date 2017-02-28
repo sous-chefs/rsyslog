@@ -16,11 +16,7 @@ Installs and configures rsyslog to replace syslogd for client and/or server use.
 
 ### Chef
 
-- Chef 12.1+
-
-### Cookbooks
-
-- compat_resource
+- Chef 12.5 +
 
 ### Other
 
@@ -234,7 +230,7 @@ default_attributes(
 - Author:: Tim Smith ([tsmith@chef.io](mailto:tsmith@chef.io))
 
 ```text
-Copyright:: 2009-2015, Chef Software, Inc
+Copyright:: 2009-2017, Chef Software, Inc
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
