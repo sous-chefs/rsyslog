@@ -56,6 +56,7 @@ default['rsyslog']['additional_directives']     = {}
 default['rsyslog']['templates']                 = %w()
 
 # The most likely platform-specific attributes
+default['rsyslog']['package_name']              = 'rsyslog'
 default['rsyslog']['service_name']              = 'rsyslog'
 default['rsyslog']['user']                      = 'root'
 default['rsyslog']['group']                     = 'adm'
