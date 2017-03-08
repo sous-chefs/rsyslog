@@ -48,6 +48,7 @@ See `attributes/default.rb` for default values.
 - `node['rsyslog']['dir_create_mode']` - Mode that should be set when creating log directories
 - `node['rsyslog']['umask']` - Specify the processes umask
 - `node['rsyslog']['defaults_file']` - The full path to the defaults/sysconfig file for the service.
+- `node['rsyslog']['package_name']` - Specify rsyslog package name
 - `node['rsyslog']['service_name']` - The platform-specific name of the service
 - `node['rsyslog']['preserve_fqdn']` - Value of the `$PreserveFQDN` configuration directive in `/etc/rsyslog.conf`. Default is 'off' for compatibility purposes.
 - `node['rsyslog']['high_precision_timestamps']` - Enable high precision timestamps, instead of the "old style" format. Default is 'false'.
