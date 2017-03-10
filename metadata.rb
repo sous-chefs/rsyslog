@@ -21,4 +21,4 @@ supports          'oracle'
 
 source_url 'https://github.com/chef-cookbooks/rsyslog'
 issues_url 'https://github.com/chef-cookbooks/rsyslog/issues'
-chef_version '>= 12.5'
+chef_version '>= 12.5' if respond_to?(:chef_version)
