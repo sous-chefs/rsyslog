@@ -151,3 +151,4 @@ end
 if node['platform_family'] == 'rhel' && node['platform_version'].to_i < 6
   default['rsyslog']['default_facility_logs']['*.emerg'] = '*'
 end
+default["rsyslog"]["forward_custom_config"] = {}

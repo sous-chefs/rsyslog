@@ -32,3 +32,6 @@ $ActionSendStreamDriverPermittedPeer <%= node['rsyslog']['tls_permitted_peer'] %
 <%   end -%>
 
 <% end -%>
+<% node.rsyslog["forward_custom_config"].sort.each do |key, value| %>
+<%= key %>: <%= value %>
+<% end %>
