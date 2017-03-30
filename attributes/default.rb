@@ -54,6 +54,7 @@ default['rsyslog']['allow_non_local']           = false
 default['rsyslog']['custom_remote']             = []
 default['rsyslog']['additional_directives']     = {}
 default['rsyslog']['templates']                 = %w()
+default['rsyslog']['default_conf_file']         = true
 
 # The most likely platform-specific attributes
 default['rsyslog']['package_name']              = 'rsyslog'

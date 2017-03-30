@@ -60,7 +60,7 @@ template "#{node['rsyslog']['config_prefix']}/rsyslog.d/50-default.conf" do
   mode    '0644'
   notifies :run, 'execute[validate_config]'
   notifies :restart, "service[#{node['rsyslog']['service_name']}]"
-end
+end unless node['rsyslog']['default_conf_file'] == false
 
 # syslog needs to be stopped before rsyslog can be started on RHEL versions before 6.0
 if platform_family?('rhel') && node['platform_version'].to_i < 6
