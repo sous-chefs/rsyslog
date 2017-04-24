@@ -25,6 +25,16 @@ property :cookbook_source, String, default: 'rsyslog'
 property :template_source, String, default: 'file-input.conf.erb'
 
 action :create do
+  template "/etc/rsyslog.d/49-imfile.conf" do
+    mode '0664'
+    owner node['rsyslog']['user']
+    group node['rsyslog']['group']
+    source '49-imfile.conf.erb'
+    cookbook cookbook_source
+    notifies :run, 'execute[validate_config]'
+    action :create_if_missing
+  end
+
   log_name = name
   template "/etc/rsyslog.d/#{priority}-#{name}.conf" do
     mode '0664'
