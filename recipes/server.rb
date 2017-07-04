@@ -31,9 +31,9 @@ end
 
 template "#{node['rsyslog']['config_prefix']}/rsyslog.d/35-server-per-host.conf" do
   source   '35-server-per-host.conf.erb'
-  owner    'root'
-  group    'root'
-  mode     '0644'
+  owner    node['rsyslog']['config_files']['owner']
+  group    node['rsyslog']['config_files']['group']
+  mode     node['rsyslog']['config_files']['mode']
   notifies :run, 'execute[validate_config]'
   notifies :restart, "service[#{node['rsyslog']['service_name']}]"
 end
