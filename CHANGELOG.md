@@ -2,6 +2,15 @@
 
 This file is used to list changes made in each version of the rsyslog cookbook.
 
+## 6.0.2 (2017-07-04)
+
+- Updating README to reflect current Chef software version dependency and remove compat_resource cookbook dependency.
+- Update kitchen configs and use delivery local mode instead of Rake
+- Don’t fail parsing metadata.rb on older chef clients
+- Simplify Travis config and fix ChefDK 2.0 failures
+- Let permissions of template resources be configured through attributes
+- Fix CHEF-19 - Add prefix new_resource to several properties
+
 ## 6.0.1 (2017-02-28)
 
 - Fix Issue #126 multiple remote server configuration template which requires $ActionQueueFileName to be different for each remote server
