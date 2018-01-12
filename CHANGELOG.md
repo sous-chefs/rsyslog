@@ -2,6 +2,11 @@
 
 This file is used to list changes made in each version of the rsyslog cookbook.
 
+## 6.0.3 (2018-01-12)
+
+- Skip search if ['rsyslog']['server_search'] is empty
+- Fix FC108 error
+
 ## 6.0.2 (2017-07-04)
 
 - Updating README to reflect current Chef software version dependency and remove compat_resource cookbook dependency.
