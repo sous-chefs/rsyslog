@@ -16,7 +16,6 @@
 # limitations under the License.
 #
 
-property :name, String, name_attribute: true, required: true
 property :file, String, required: true
 property :priority, Integer, default: 99
 property :severity, String
