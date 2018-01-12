@@ -29,7 +29,7 @@ results = search(:node, node['rsyslog']['server_search']).map do |server|
     ipaddress = server['cloud']['local_ipv4']
   end
   ipaddress
-end
+end unless node['rsyslog']['server_search'].to_s.empty?
 server_ips = Array(node['rsyslog']['server_ip']) + Array(results)
 
 rsyslog_servers = []
