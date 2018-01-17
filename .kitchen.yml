@@ -58,6 +58,6 @@ suites:
   - name: server
     run_list:
       - recipe[rsyslog_test::server]
-  - name: input_file_provider
+  - name: input_file_resource
     run_list:
-      - recipe[rsyslog_test::input_file_provider]
+      - recipe[rsyslog_test::input_file_resource]
