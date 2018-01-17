@@ -2,6 +2,15 @@
 
 This file is used to list changes made in each version of the rsyslog cookbook.
 
+## 6.0.4 (2018-01-16)
+
+- Don't exclude any foodcritic rules
+- Remove the need for apt cookbook in testing
+- Remove omnios as a supported platform
+- Simplify platform support in the metadata
+- Update ignore files
+- Require Chef 12.7+
+
 ## 6.0.3 (2018-01-12)
 
 - Skip search if ['rsyslog']['server_search'] is empty
