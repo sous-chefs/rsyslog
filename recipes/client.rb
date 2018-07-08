@@ -53,9 +53,9 @@ else
   remote_type = node['rsyslog']['use_relp'] ? 'relp' : 'remote'
   template "#{node['rsyslog']['config_prefix']}/rsyslog.d/49-remote.conf" do
     source    "49-#{remote_type}.conf.erb"
-    owner     'root'
-    group     'root'
-    mode      '0644'
+    owner     node['rsyslog']['config_files']['owner']
+    group     node['rsyslog']['config_files']['group']
+    mode      node['rsyslog']['config_files']['mode']
     variables(servers: rsyslog_servers)
     notifies  :run, 'execute[validate_config]'
     notifies  :restart, "service[#{node['rsyslog']['service_name']}]"
