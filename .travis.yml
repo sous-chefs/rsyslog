@@ -23,7 +23,6 @@ env:
   - INSTANCE=default-ubuntu-1604
   - INSTANCE=default-centos-6
   - INSTANCE=default-centos-7
-  - INSTANCE=default-debian-7
   - INSTANCE=default-debian-8
   - INSTANCE=default-fedora-latest
   - INSTANCE=default-opensuse-leap
@@ -31,7 +30,6 @@ env:
   - INSTANCE=input-file-resource-ubuntu-1604
   - INSTANCE=input-file-resource-centos-6
   - INSTANCE=input-file-resource-centos-7
-  - INSTANCE=input-file-resource-debian-7
   - INSTANCE=input-file-resource-debian-8
   - INSTANCE=input-file-resource-fedora-latest
   - INSTANCE=input-file-resource-opensuse-leap
@@ -39,7 +37,6 @@ env:
   - INSTANCE=client-ubuntu-1604
   - INSTANCE=client-centos-6
   - INSTANCE=client-centos-7
-  - INSTANCE=client-debian-7
   - INSTANCE=client-debian-8
   - INSTANCE=client-fedora-latest
   - INSTANCE=client-opensuse-leap
@@ -47,7 +44,6 @@ env:
   - INSTANCE=server-ubuntu-1604
   - INSTANCE=server-centos-6
   - INSTANCE=server-centos-7
-  - INSTANCE=server-debian-7
   - INSTANCE=server-debian-8
   - INSTANCE=server-fedora-latest
   - INSTANCE=server-opensuse-leap
@@ -59,12 +55,12 @@ before_script:
   - cookstyle --version
   - foodcritic --version
 
-script: KITCHEN_LOCAL_YAML=.kitchen.dokken.yml kitchen verify ${INSTANCE}
+script: KITCHEN_LOCAL_YAML=kitchen.dokken.yml kitchen verify ${INSTANCE}
 
 matrix:
   include:
     - script:
       - chef exec delivery local all
-      env: 
+      env:
         - UNIT_AND_LINT=1
         - CHEF_FIPS=''
