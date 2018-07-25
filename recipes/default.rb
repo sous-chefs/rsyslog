@@ -35,6 +35,7 @@ directory node['rsyslog']['working_dir'] do
   owner node['rsyslog']['user']
   group node['rsyslog']['group']
   mode  '0700'
+  recursive true
 end
 
 execute 'validate_config' do
