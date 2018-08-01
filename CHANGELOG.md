@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version of the rsyslog cookbook.
 
+## 6.0.7 (2018-08-01)
+
+- Optional creation of default configuration file 50-default.conf
+
 ## 6.0.6 (2018-08-25)
 
 - Create working directory recursively
