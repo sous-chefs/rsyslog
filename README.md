@@ -72,6 +72,7 @@ See `attributes/default.rb` for default values.
 - `node['rsyslog']['custom_remote']` - Array of hashes for configuring custom remote server targets
 - `node['rsyslog']['additional_directives']` - Hash of additional directives and their values to place in the main rsyslog config file
 - `node['rsyslog']['local_host_name']` - permits to overwrite the system hostname with the one specified in the directive
+- `node['rsyslog']['default_conf_file']` - If false it skips the creation of default configuration file 50-default.conf
 
 ## Recipes
 
