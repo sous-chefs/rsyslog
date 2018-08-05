@@ -3,12 +3,11 @@
 
 Lint/AmbiguousRegexpLiteral:
   Exclude:
-    - 'test/integration/input_file_provider/serverspec/input_file_provider_spec.rb'
-    - 'test/integration/relp/serverspec/relp_spec.rb'
+    - 'test/**/*'
 
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles, AllowInnerSlashes.
 # SupportedStyles: slashes, percent_r, mixed
 Style/RegexpLiteral:
   Exclude:
-    - 'test/integration/input_file_provider/serverspec/input_file_provider_spec.rb'
+    - 'test/**/*'
