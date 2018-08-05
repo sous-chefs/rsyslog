@@ -22,7 +22,6 @@ $ActionSendStreamDriverPermittedPeer <%= node['rsyslog']['tls_permitted_peer'] %
 <% end -%>
 <% end -%>
 
-<% @servers.each do |server| -%>
 <%  if server['style'] == 'RainerScript' -%>
 <%=   server['logs'] ? server['logs'] : node['rsyslog']['logs_to_forward'] %> action(
 <%    server.each do |key,val| -%>
