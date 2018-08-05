@@ -1,11 +1,10 @@
 sudo: required
 dist: trusty
 
-# install the pre-release chef-dk.  Use chef-stable-trusty to install the stable release
 addons:
   apt:
     sources:
-      - chef-stable-trusty
+      - chef-current-trusty
     packages:
       - chefdk
 
@@ -20,61 +19,48 @@ services: docker
 
 env:
   matrix:
-  - INSTANCE=default-ubuntu-1204
   - INSTANCE=default-ubuntu-1404
   - INSTANCE=default-ubuntu-1604
   - INSTANCE=default-centos-6
   - INSTANCE=default-centos-7
-  - INSTANCE=default-debian-7
   - INSTANCE=default-debian-8
   - INSTANCE=default-fedora-latest
-  - INSTANCE=default-opensuse-132
-  - INSTANCE=default-opensuse-421
-  - INSTANCE=input-file-provider-ubuntu-1204
-  - INSTANCE=input-file-provider-ubuntu-1404
-  - INSTANCE=input-file-provider-ubuntu-1604
-  - INSTANCE=input-file-provider-centos-6
-  - INSTANCE=input-file-provider-centos-7
-  - INSTANCE=input-file-provider-debian-7
-  - INSTANCE=input-file-provider-debian-8
-  - INSTANCE=input-file-provider-fedora-latest
-  - INSTANCE=input-file-provider-opensuse-132
-  - INSTANCE=input-file-provider-opensuse-421
-  - INSTANCE=client-ubuntu-1204
+  - INSTANCE=default-opensuse-leap
+  - INSTANCE=input-file-resource-ubuntu-1404
+  - INSTANCE=input-file-resource-ubuntu-1604
+  - INSTANCE=input-file-resource-centos-6
+  - INSTANCE=input-file-resource-centos-7
+  - INSTANCE=input-file-resource-debian-8
+  - INSTANCE=input-file-resource-fedora-latest
+  - INSTANCE=input-file-resource-opensuse-leap
   - INSTANCE=client-ubuntu-1404
   - INSTANCE=client-ubuntu-1604
   - INSTANCE=client-centos-6
   - INSTANCE=client-centos-7
-  - INSTANCE=client-debian-7
   - INSTANCE=client-debian-8
   - INSTANCE=client-fedora-latest
-  - INSTANCE=client-opensuse-132
-  - INSTANCE=client-opensuse-421
-  - INSTANCE=server-ubuntu-1204
+  - INSTANCE=client-opensuse-leap
   - INSTANCE=server-ubuntu-1404
   - INSTANCE=server-ubuntu-1604
   - INSTANCE=server-centos-6
   - INSTANCE=server-centos-7
-  - INSTANCE=server-debian-7
   - INSTANCE=server-debian-8
   - INSTANCE=server-fedora-latest
-  - INSTANCE=server-opensuse-132
-  - INSTANCE=server-opensuse-421
+  - INSTANCE=server-opensuse-leap
 
 before_script:
   - sudo iptables -L DOCKER || ( echo "DOCKER iptables chain missing" ; sudo iptables -N DOCKER )
-  - eval "$(/opt/chefdk/bin/chef shell-init bash)"
-  - /opt/chefdk/embedded/bin/chef --version
-  - /opt/chefdk/embedded/bin/cookstyle --version
-  - /opt/chefdk/embedded/bin/foodcritic --version
+  - eval "$(chef shell-init bash)"
+  - chef --version
+  - cookstyle --version
+  - foodcritic --version
 
-script: KITCHEN_LOCAL_YAML=.kitchen.docker.yml /opt/chefdk/embedded/bin/kitchen verify ${INSTANCE}
+script: KITCHEN_LOCAL_YAML=kitchen.dokken.yml kitchen verify ${INSTANCE}
 
 matrix:
   include:
     - script:
-      - /opt/chefdk/bin/chef exec rake
+      - chef exec delivery local all
       env:
-      - UNIT_AND_LINT=1
-      - CHEF_FIPS=''
-
+        - UNIT_AND_LINT=1
+        - CHEF_FIPS=''

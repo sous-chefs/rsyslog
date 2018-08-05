@@ -2,7 +2,7 @@
 # Cookbook:: rsyslog
 # Recipe:: server
 #
-# Copyright:: 2009-2016, Chef Software, Inc.
+# Copyright:: 2009-2017, Chef Software, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -31,9 +31,9 @@ end
 
 template "#{node['rsyslog']['config_prefix']}/rsyslog.d/35-server-per-host.conf" do
   source   '35-server-per-host.conf.erb'
-  owner    'root'
-  group    'root'
-  mode     '0644'
+  owner    node['rsyslog']['config_files']['owner']
+  group    node['rsyslog']['config_files']['group']
+  mode     node['rsyslog']['config_files']['mode']
   notifies :run, 'execute[validate_config]'
   notifies :restart, "service[#{node['rsyslog']['service_name']}]"
 end

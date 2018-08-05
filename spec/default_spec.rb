@@ -250,7 +250,7 @@ describe 'rsyslog::default' do
 
   context 'COOK-3608 maillog regression test' do
     let(:chef_run) do
-      ChefSpec::ServerRunner.new(platform: 'redhat', version: '6.3').converge(described_recipe)
+      ChefSpec::ServerRunner.new(platform: 'centos', version: '6.9').converge(described_recipe)
     end
 
     it 'outputs mail.* to /var/log/maillog' do
@@ -258,9 +258,9 @@ describe 'rsyslog::default' do
     end
   end
 
-  context 'syslog service' do
+  context 'syslog service on rhel 5' do
     let(:chef_run) do
-      ChefSpec::ServerRunner.new(platform: 'redhat', version: '5.8').converge(described_recipe)
+      ChefSpec::ServerRunner.new(platform: 'centos', version: '5.11').converge(described_recipe)
     end
 
     it 'stops and starts the syslog service on RHEL' do
@@ -270,7 +270,7 @@ describe 'rsyslog::default' do
   end
 
   context 'system-log service' do
-    { 'omnios' => '151002', 'smartos' => 'joyent_20130111T180733Z' }.each do |p, pv|
+    { 'omnios' => '151018', 'smartos' => 'joyent_20130111T180733Z' }.each do |p, pv|
       let(:chef_run) do
         ChefSpec::ServerRunner.new(platform: p, version: pv).converge(described_recipe)
       end
@@ -283,7 +283,7 @@ describe 'rsyslog::default' do
 
   context 'on OmniOS' do
     let(:chef_run) do
-      ChefSpec::ServerRunner.new(platform: 'omnios', version: '151002').converge(described_recipe)
+      ChefSpec::ServerRunner.new(platform: 'omnios', version: '151018').converge(described_recipe)
     end
 
     let(:template) { chef_run.template('/var/svc/manifest/system/rsyslogd.xml') }

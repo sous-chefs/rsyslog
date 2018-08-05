@@ -2,7 +2,7 @@
 # Cookbook:: rsyslog
 # Attributes:: default
 #
-# Copyright:: 2009-2016, Chef Software, Inc.
+# Copyright:: 2009-2017, Chef Software, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -54,8 +54,10 @@ default['rsyslog']['allow_non_local']           = false
 default['rsyslog']['custom_remote']             = []
 default['rsyslog']['additional_directives']     = {}
 default['rsyslog']['templates']                 = %w()
+default['rsyslog']['default_conf_file']         = true
 
 # The most likely platform-specific attributes
+default['rsyslog']['package_name']              = 'rsyslog'
 default['rsyslog']['service_name']              = 'rsyslog'
 default['rsyslog']['user']                      = 'root'
 default['rsyslog']['group']                     = 'adm'
@@ -68,6 +70,9 @@ default['rsyslog']['dir_create_mode']           = '0755'
 default['rsyslog']['umask']                     = '0022'
 default['rsyslog']['dir_owner']                 = 'root'
 default['rsyslog']['dir_group']                 = 'adm'
+default['rsyslog']['config_files']['owner']     = 'root'
+default['rsyslog']['config_files']['group']     = 'root'
+default['rsyslog']['config_files']['mode']      = '0644'
 
 # platform specific attributes
 case node['platform']
