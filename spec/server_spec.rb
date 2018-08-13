@@ -9,8 +9,8 @@ describe 'rsyslog::server' do
 
   let(:service_resource) { 'service[rsyslog]' }
 
-  it "sets node['rsyslog']['server'] to true" do
-    expect(chef_run.node['rsyslog']['server']).to be(true)
+  it "sets node.run_state['rsyslog_server'] to true" do
+    expect(chef_run.node.run_state['rsyslog_server']).to be(true)
   end
 
   it 'includes the default recipe' do

@@ -11,3 +11,7 @@ end
 describe file('/etc/rsyslog.d/49-remote.conf') do
   it { should_not be_file }
 end
+
+describe file('/etc/rsyslog.d/49-remote.conf') do
+  it { should_not be_file }
+end

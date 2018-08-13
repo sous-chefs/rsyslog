@@ -17,8 +17,7 @@
 # limitations under the License.
 #
 
-# Manually set this attribute
-node.normal['rsyslog']['server'] = true
+node.run_state['rsyslog_server'] = true
 
 include_recipe 'rsyslog::default'
 

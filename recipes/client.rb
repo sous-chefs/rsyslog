@@ -18,7 +18,10 @@
 #
 
 # Do not run this recipe if the server attribute is set
-return if node['rsyslog']['server']
+if node.run_state['rsyslog_server']
+  Chef::Log.info('Running in server mode. Client recipe will not execute')
+  return true
+end
 include_recipe 'rsyslog::default'
 
 results = search(:node, node['rsyslog']['server_search']).map do |server|
@@ -62,7 +65,7 @@ else
     only_if   { node['rsyslog']['remote_logs'] }
   end
 
-  file "#{node['rsyslog']['config_prefix']}/rsyslog.d/server.conf" do
+  file "#{node['rsyslog']['config_prefix']}/rsyslog.d/35-server-per-host.conf" do
     action   :delete
     notifies :run, 'execute[validate_config]'
     notifies :restart, "service[#{node['rsyslog']['service_name']}]"

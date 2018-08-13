@@ -71,8 +71,8 @@ describe 'rsyslog::client' do
     end
   end
 
-  context '/etc/rsyslog.d/server.conf file' do
-    let(:file) { chef_run.file('/etc/rsyslog.d/server.conf') }
+  context '/etc/rsyslog.d/35-server-per-host.conf file' do
+    let(:file) { chef_run.file('/etc/rsyslog.d/35-server-per-host.conf') }
 
     it 'deletes the file' do
       expect(chef_run).to delete_file(file.path)
@@ -89,7 +89,7 @@ describe 'rsyslog::client' do
         end.converge(described_recipe)
       end
 
-      let(:file) { chef_run.file('/opt/local/etc/rsyslog.d/server.conf') }
+      let(:file) { chef_run.file('/opt/local/etc/rsyslog.d/35-server-per-host.conf') }
 
       it 'deletes the file' do
         expect(chef_run).to delete_file(file.path)
