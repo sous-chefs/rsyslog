@@ -43,6 +43,7 @@ See `attributes/default.rb` for default values.
 - `node['rsyslog']['group']` - Who should group-own the configuration files and directories
 - `node['rsyslog']['dir_owner']` - Who should own the log directories
 - `node['rsyslog']['dir_group']` - Who should group-own the log directories
+- `node['rsyslog']['config_dir']['mode']` -  Mode that should be set when creating the configuration directory
 - `node['rsyslog']['file_create_mode']` - Mode that should be set when creating log files
 - `node['rsyslog']['dir_create_mode']` - Mode that should be set when creating log directories
 - `node['rsyslog']['umask']` - Specify the processes umask
