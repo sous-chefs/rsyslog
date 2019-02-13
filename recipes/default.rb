@@ -64,7 +64,7 @@ template "#{node['rsyslog']['config_prefix']}/rsyslog.d/35-imfile.conf" do
   variables module_parameters: node['rsyslog']['imfile'] # Supported with Rainer script
   notifies  :run, 'execute[validate_config]'
   notifies  :restart, "service[#{node['rsyslog']['service_name']}]"
-  only_if   { node['rsyslog']['use_imfile'] === true }
+  only_if   { node['rsyslog']['use_imfile'] == true }
 end
 
 template "#{node['rsyslog']['config_prefix']}/rsyslog.d/50-default.conf" do
