@@ -242,12 +242,14 @@ describe 'rsyslog::default' do
   end
 
   context 'system-log service' do
-    cached(:chef_run) do
-      ChefSpec::ServerRunner.new(platform: 'smartos', version: '5.11').converge(described_recipe)
-    end
+    { 'omnios' => '151018', 'smartos' => '5.11' }.each do |p, pv|
+      cached(:chef_run) do
+        ChefSpec::ServerRunner.new(platform: p, version: pv).converge(described_recipe)
+      end
 
-    it "stops the system-log service on #{p}" do
-      expect(chef_run).to disable_service('system-log')
+      it "stops the system-log service on #{p}" do
+        expect(chef_run).to disable_service('system-log')
+      end
     end
   end
 
