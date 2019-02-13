@@ -84,7 +84,7 @@ describe 'rsyslog::default' do
 
     context 'on SmartOS' do
       let(:chef_run) do
-        ChefSpec::ServerRunner.new(platform: 'smartos', version: 'joyent_20130111T180733Z').converge(described_recipe)
+        ChefSpec::ServerRunner.new(platform: 'smartos', version: '5.11').converge(described_recipe)
       end
 
       let(:directory) { chef_run.directory('/opt/local/etc/rsyslog.d') }
@@ -150,7 +150,7 @@ describe 'rsyslog::default' do
 
     context 'on SmartOS' do
       let(:chef_run) do
-        ChefSpec::ServerRunner.new(platform: 'smartos', version: 'joyent_20130111T180733Z').converge(described_recipe)
+        ChefSpec::ServerRunner.new(platform: 'smartos', version: '5.11').converge(described_recipe)
       end
 
       let(:template) { chef_run.template('/opt/local/etc/rsyslog.conf') }
@@ -203,7 +203,7 @@ describe 'rsyslog::default' do
 
     context 'on SmartOS' do
       let(:chef_run) do
-        ChefSpec::ServerRunner.new(platform: 'smartos', version: 'joyent_20130111T180733Z').converge(described_recipe)
+        ChefSpec::ServerRunner.new(platform: 'smartos', version: '5.11').converge(described_recipe)
       end
 
       let(:template) { chef_run.template('/opt/local/etc/rsyslog.d/50-default.conf') }
@@ -253,7 +253,7 @@ describe 'rsyslog::default' do
   end
 
   context 'system-log service' do
-    { 'omnios' => '151018', 'smartos' => 'joyent_20130111T180733Z' }.each do |p, pv|
+    { 'omnios' => '151018', 'smartos' => '5.11' }.each do |p, pv|
       let(:chef_run) do
         ChefSpec::ServerRunner.new(platform: p, version: pv).converge(described_recipe)
       end

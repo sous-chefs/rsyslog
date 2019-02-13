@@ -56,7 +56,7 @@ describe 'rsyslog::server' do
 
     context 'on SmartOS' do
       let(:chef_run) do
-        ChefSpec::ServerRunner.new(platform: 'smartos', version: 'joyent_20130111T180733Z') do |node|
+        ChefSpec::ServerRunner.new(platform: 'smartos', version: '5.11') do |node|
           node.normal['rsyslog']['server'] = false
         end.converge(described_recipe)
       end
@@ -103,7 +103,7 @@ describe 'rsyslog::server' do
       end
 
       let(:chef_run) do
-        ChefSpec::ServerRunner.new(platform: 'smartos', version: 'joyent_20130111T180733Z') do |node|
+        ChefSpec::ServerRunner.new(platform: 'smartos', version: '5.11') do |node|
           node.normal['rsyslog']['server'] = false
         end.converge(described_recipe)
       end
