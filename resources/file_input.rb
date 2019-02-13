@@ -31,9 +31,9 @@ action :create do
     tag: new_resource.name,
     severity: new_resource.severity,
     facility: new_resource.facility,
-    input_parameters: new_resource.input_parameters
+    input_parameters: new_resource.input_parameters,
   }
-  vars['state_file'] = new_resource.name if node['rsyslog']['config_style'] === 'legacy'
+  vars['state_file'] = new_resource.name if node['rsyslog']['config_style'] == 'legacy'
   template "/etc/rsyslog.d/#{new_resource.priority}-#{new_resource.name}.conf" do
     mode '0664'
     owner node['rsyslog']['user']

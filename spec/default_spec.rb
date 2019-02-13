@@ -265,7 +265,7 @@ describe 'rsyslog::default' do
           node.normal['rsyslog']['imfile']['PollingInterval'] = 10
         end.converge(described_recipe)
       end
-      let(:template) { chef_run.template('/etc/rsyslog.d/35-imfile.conf')}
+      let(:template) { chef_run.template('/etc/rsyslog.d/35-imfile.conf') }
 
       it "node['rsyslog']['config_style'] will be 'legacy' by default" do
         expect(chef_run.node['rsyslog']['config_style']).to eq('legacy')
@@ -298,7 +298,7 @@ describe 'rsyslog::default' do
           node.normal['rsyslog']['imfile']['PollingInterval'] = 10
         end.converge(described_recipe)
       end
-      let(:template) { chef_run.template('/etc/rsyslog.d/35-imfile.conf')}
+      let(:template) { chef_run.template('/etc/rsyslog.d/35-imfile.conf') }
 
       it "node['rsyslog']['config_style'] will be nil by default" do
         expect(chef_run.node['rsyslog']['config_style']).to eq(nil)
