@@ -15,28 +15,34 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+extend Rsyslog::Helper
 
 property :file, String, required: true
 property :priority, Integer, default: 99
 property :severity, String
 property :facility, String
+property :input_parameters, Hash, default: {}
 property :cookbook_source, String, default: 'rsyslog'
-property :template_source, String, default: 'file-input.conf.erb'
+property :template_source, String, default: labeled_template('file-input.conf.erb', node['rsyslog']['config_style'])
 
 action :create do
-  log_name = new_resource.name
+  vars = {
+    file_name: new_resource.file,
+    tag: new_resource.name,
+    severity: new_resource.severity,
+    facility: new_resource.facility,
+    input_parameters: new_resource.input_parameters
+  }
+  vars['state_file'] = new_resource.name if node['rsyslog']['config_style'] === 'legacy'
   template "/etc/rsyslog.d/#{new_resource.priority}-#{new_resource.name}.conf" do
     mode '0664'
     owner node['rsyslog']['user']
     group node['rsyslog']['group']
     source new_resource.template_source
     cookbook new_resource.cookbook_source
-    variables 'file_name' => new_resource.file,
-              'tag' => log_name,
-              'state_file' => log_name,
-              'severity' => new_resource.severity,
-              'facility' => new_resource.facility
+    variables vars
     notifies :restart, "service[#{node['rsyslog']['service_name']}]", :delayed
+    only_if { node['rsyslog']['use_imfile'] }
   end
 
   service node['rsyslog']['service_name'] do

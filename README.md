@@ -87,6 +87,8 @@ See `attributes/default.rb` for default values.
 - `node['rsyslog']['default_conf_file']` - If false it skips the creation of default configuration file 50-default.conf
 - `node['rsyslog']['server_per_host_template']` - Template to use in the `rsyslog::server` recipe when creating the `35-server-per-host.conf` file
 - `node['rsyslog']['server_per_host_cookbook']` - Cookbook name to get the `node['rsyslog']['server_per_host_template']` template from
+- `node['rsyslog']['use_imfile']` - Use the `imfile` module to import local log files into syslog
+- `node['rsyslog']['imfile']['KEY']` - Set `imfile` module parameters of label `KEY` to value. e.g. `PollingInterval`. Consult rsyslog documentation for valid entries.
 
 ## Recipes
 
@@ -159,20 +161,17 @@ At this time, the server can only listen on UDP _or_ TCP.
 
 ## file_input
 
-Configures a [text file input monitor](http://www.rsyslog.com/doc/imfile.html) to push a log file into rsyslog. Rsyslog must be installed to use this custom resource either using your own wrapper cookbook or the rsyslog::default recipe
+Configures a [text file input monitor](http://www.rsyslog.com/doc/imfile.html) to push a log file into rsyslog. Rsyslog must be installed to use this custom resource either using your own wrapper cookbook or the rsyslog::default recipe.
+
+To enable, specify `node['rsyslog']['use_imfile'] = true` as a node attribute.
 
 Properties:
 
 - `name`: name of the resource, also used for the syslog tag. Required.
 - `file`: file path for input file to monitor. Required.
 - `priority`: config order priority. Defaults to `99`.
-- `severity`: syslog severity. Must be one of `emergency`, `alert`,
-- `critical`, `error`, `warning`, `notice`, `info` or `debug`. If
-- undefined, rsyslog interprets this as `notice`.
-- `facility`: syslog facility. Must be one of `auth`, `authpriv`,
-- `daemon`, `cron`, `ftp`, `lpr`, `kern`, `mail`, `news`, `syslog`,
-- `user`, `uucp`, `local0`, ... , `local7`. If undefined, rsyslog
-- interprets this as `local0`.
+- `severity`: syslog severity. Must be one of `emergency`, `alert`, `critical`, `error`, `warning`, `notice`, `info` or `debug`. If  undefined, rsyslog interprets this as `notice`.
+- `facility`: syslog facility. Must be one of `auth`, `authpriv`, `daemon`, `cron`, `ftp`, `lpr`, `kern`, `mail`, `news`, `syslog`, `user`, `uucp`, `local0`, ... , `local7`. If undefined, rsyslog interprets this as `local0`.
 - `cookbook_source`: cookbook containing the template. Defaults to `rsyslog`.
 - `template_source`: template file source. Defaults to `file-input.conf.erb`
 
