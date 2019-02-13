@@ -22,6 +22,7 @@ default['rsyslog']['default_log_dir']           = '/var/log'
 default['rsyslog']['log_dir']                   = '/srv/rsyslog'
 default['rsyslog']['working_dir']               = '/var/spool/rsyslog'
 default['rsyslog']['server']                    = false
+default['rsyslog']['use_imfile']                = false
 default['rsyslog']['use_relp']                  = false
 default['rsyslog']['relp_port']                 = 20_514
 default['rsyslog']['protocol']                  = 'tcp'
@@ -129,6 +130,9 @@ when 'rhel', 'fedora'
   if node['platform'] != 'amazon' && node['platform_version'].to_i >= 7
     default['rsyslog']['modules'] = %w(imuxsock imjournal)
     default['rsyslog']['additional_directives'] = { 'OmitLocalLogging' => 'on', 'IMJournalStateFile' => 'imjournal.state' }
+  else
+    # RainerScript is not well supported by default on older RHEL
+    default['rsyslog']['config_style'] = 'legacy'
   end
 else
   # format { facility => destination }

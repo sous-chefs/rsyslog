@@ -58,5 +58,10 @@ suites:
     run_list:
       - recipe[rsyslog_test::server]
   - name: input_file_resource
+    attributes:
+      rsyslog:
+        use_imfile: true
+        imfile:
+          PollingInterval: 10
     run_list:
       - recipe[rsyslog_test::input_file_resource]
