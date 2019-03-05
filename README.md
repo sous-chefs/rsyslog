@@ -73,7 +73,6 @@ See `attributes/default.rb` for default values.
 - `node['rsyslog']['additional_directives']` - Hash of additional directives and their values to place in the main rsyslog config file
 - `node['rsyslog']['local_host_name']` - permits to overwrite the system hostname with the one specified in the directive
 - `node['rsyslog']['default_conf_file']` - If false it skips the creation of default configuration file 50-default.conf
-- `node['rsyslog']['use_imfile']` - Use the `imfile` module to import local log files into syslog
 - `node['rsyslog']['imfile']['KEY']` - Set `imfile` module parameters of label `KEY` to value. e.g. `PollingInterval`. Consult rsyslog documentation for valid entries.
 
 ## Recipes
@@ -148,8 +147,6 @@ At this time, the server can only listen on UDP _or_ TCP.
 ## file_input
 
 Configures a [text file input monitor](http://www.rsyslog.com/doc/imfile.html) to push a log file into rsyslog. Rsyslog must be installed to use this custom resource either using your own wrapper cookbook or the rsyslog::default recipe.
-
-To enable, specify `node['rsyslog']['use_imfile'] = true` as a node attribute.
 
 Properties:
 

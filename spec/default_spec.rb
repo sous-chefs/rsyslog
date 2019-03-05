@@ -291,15 +291,18 @@ describe 'rsyslog::default' do
     end
   end
 
-  context "when node['rsyslog']['use_imfile'] is true" do
+  context 'when template[/etc/rsyslog.d/35-imfile.conf] receives :create' do
     context 'when on centos 6' do
       let(:chef_run) do
         ChefSpec::ServerRunner.new(platform: 'centos', version: '6') do |node|
-          node.normal['rsyslog']['use_imfile'] = true
           node.normal['rsyslog']['imfile']['PollingInterval'] = 10
         end.converge(described_recipe)
       end
       let(:template) { chef_run.template('/etc/rsyslog.d/35-imfile.conf') }
+
+      before do
+        template.run_action(:create)
+      end
 
       it "node['rsyslog']['config_style'] will be 'legacy' by default" do
         expect(chef_run.node['rsyslog']['config_style']).to eq('legacy')
@@ -328,11 +331,14 @@ describe 'rsyslog::default' do
     context 'when on ubuntu 16.04 ' do
       let(:chef_run) do
         ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '16.04') do |node|
-          node.normal['rsyslog']['use_imfile'] = true
           node.normal['rsyslog']['imfile']['PollingInterval'] = 10
         end.converge(described_recipe)
       end
       let(:template) { chef_run.template('/etc/rsyslog.d/35-imfile.conf') }
+
+      before do
+        template.run_action(:create)
+      end
 
       it "node['rsyslog']['config_style'] will be nil by default" do
         expect(chef_run.node['rsyslog']['config_style']).to eq(nil)

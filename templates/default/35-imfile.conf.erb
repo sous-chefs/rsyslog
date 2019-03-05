@@ -7,5 +7,5 @@
 module(load="imfile"
 <% @module_parameters.each do |key, value| -%>
        <%= "#{key}=\"#{value}\"" %>
-<% end %>
+<% end unless @module_parameters.nil? || @module_parameters.empty? %>
 )
