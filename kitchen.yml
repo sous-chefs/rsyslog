@@ -60,7 +60,6 @@ suites:
   - name: input_file_resource
     attributes:
       rsyslog:
-        use_imfile: true
         imfile:
           PollingInterval: 10
     run_list:
