@@ -23,7 +23,6 @@ default['rsyslog']['log_dir']                   = '/srv/rsyslog'
 default['rsyslog']['working_dir']               = '/var/spool/rsyslog'
 default['rsyslog']['working_dir_mode']          = '0700'
 default['rsyslog']['server']                    = false
-default['rsyslog']['use_imfile']                = false
 default['rsyslog']['use_relp']                  = false
 default['rsyslog']['relp_port']                 = 20_514
 default['rsyslog']['protocol']                  = 'tcp'
