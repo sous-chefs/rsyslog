@@ -41,12 +41,6 @@ action :create do
     source new_resource.template_source
     cookbook new_resource.cookbook_source
     variables vars
-    notifies :restart, "service[#{node['rsyslog']['service_name']}]", :delayed
-    only_if { node['rsyslog']['use_imfile'] }
-  end
-
-  service node['rsyslog']['service_name'] do
-    supports restart: true, status: true
-    action [:enable, :start]
+    notifies :create, "template[#{node['rsyslog']['config_prefix']}/rsyslog.d/35-imfile.conf]", :before
   end
 end

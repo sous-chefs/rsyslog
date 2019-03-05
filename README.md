@@ -87,7 +87,6 @@ See `attributes/default.rb` for default values.
 - `node['rsyslog']['default_conf_file']` - If false it skips the creation of default configuration file 50-default.conf
 - `node['rsyslog']['server_per_host_template']` - Template to use in the `rsyslog::server` recipe when creating the `35-server-per-host.conf` file
 - `node['rsyslog']['server_per_host_cookbook']` - Cookbook name to get the `node['rsyslog']['server_per_host_template']` template from
-- `node['rsyslog']['use_imfile']` - Use the `imfile` module to import local log files into syslog
 - `node['rsyslog']['imfile']['KEY']` - Set `imfile` module parameters of label `KEY` to value. e.g. `PollingInterval`. Consult rsyslog documentation for valid entries.
 
 ## Recipes
@@ -162,8 +161,6 @@ At this time, the server can only listen on UDP _or_ TCP.
 ## file_input
 
 Configures a [text file input monitor](http://www.rsyslog.com/doc/imfile.html) to push a log file into rsyslog. Rsyslog must be installed to use this custom resource either using your own wrapper cookbook or the rsyslog::default recipe.
-
-To enable, specify `node['rsyslog']['use_imfile'] = true` as a node attribute.
 
 Properties:
 
