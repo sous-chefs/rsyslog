@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version of the rsyslog cookbook.
 
+## 6.0.8 (2019-03-05)
+
+- Fix default group and dir-group for RHEL-derived linux config
+
 ## 6.0.7 (2018-08-01)
 
 - Optional creation of default configuration file 50-default.conf
