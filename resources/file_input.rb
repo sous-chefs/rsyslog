@@ -24,7 +24,19 @@ property :cookbook_source, String, default: 'rsyslog'
 property :template_source, String, default: 'file-input.conf.erb'
 
 action :create do
-  log_name = new_resource.name
+  create_template(:create)
+end
+
+action :delete do
+  create_template(:delete)
+end
+
+action_class do
+  def log_name
+    new_resource.name
+  end
+
+  def create_template(create_action)
   template "/etc/rsyslog.d/#{new_resource.priority}-#{new_resource.name}.conf" do
     mode '0664'
     owner node['rsyslog']['user']
@@ -36,11 +48,13 @@ action :create do
               'state_file' => log_name,
               'severity' => new_resource.severity,
               'facility' => new_resource.facility
+    action create_action
     notifies :restart, "service[#{node['rsyslog']['service_name']}]", :delayed
   end
 
   service node['rsyslog']['service_name'] do
     supports restart: true, status: true
     action [:enable, :start]
+  end
   end
 end
