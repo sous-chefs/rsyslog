@@ -2,7 +2,7 @@
 # Cookbook:: rsyslog
 # Attributes:: default
 #
-# Copyright:: 2009-2017, Chef Software, Inc.
+# Copyright:: 2009-2019, Chef Software, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -152,6 +152,6 @@ else
 end
 
 # rsyslog 3/4 do not support the new :omusrmsg:* format and need * instead
-if node['platform_family'] == 'rhel' && node['platform_version'].to_i < 6
+if platform_family?('rhel') && node['platform_version'].to_i < 6
   default['rsyslog']['default_facility_logs']['*.emerg'] = '*'
 end
