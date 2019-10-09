@@ -4,19 +4,22 @@ driver:
 provisioner:
   name: chef_zero
   deprecations_as_errors: true
+  chef_license: accept-no-persist
 
 platforms:
   - name: amazonlinux
     driver_config:
       box: mvbcoding/awslinux
+  - name: amazonlinux-2
   - name: centos-6
   - name: centos-7
+  - name: centos-8
   - name: debian-9
   - name: debian-10
   - name: fedora-29
-  - name: opensuse-leap-42
-  - name: ubuntu-14.04
+  - name: opensuse-leap-15
   - name: ubuntu-16.04
+  - name: ubuntu-18.04
 
 suites:
   - name: default
