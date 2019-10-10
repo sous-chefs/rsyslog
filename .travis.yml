@@ -61,3 +61,4 @@ matrix:
       env:
         - UNIT_AND_LINT=1
         - CHEF_FIPS=''
+        - CHEF_LICENSE=accept

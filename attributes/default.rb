@@ -93,7 +93,7 @@ end
 
 # platform family specific attributes
 case node['platform_family']
-when 'suse'
+when 'suse', 'opensuseleap'
   default['rsyslog']['service_name'] = 'syslog'
   default['rsyslog']['group'] = 'root'
   default['rsyslog']['default_facility_logs'] = {
