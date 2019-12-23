@@ -2,6 +2,17 @@
 
 This file is used to list changes made in each version of the rsyslog cookbook.
 
+## 7.0.0 (2019-12-23)
+
+- Update for Chef 15 license agreement and Chef Workstation - [@tas50](https://github.com/tas50)
+- Resolve Cookstyle 5.8 warnings - [@tas50](https://github.com/tas50)
+- Fixes spec tests locally and on travis-ci
+- Expand testing to the latest platformms - [@tas50](https://github.com/tas50)
+- Fix Amazon Linux 201X and 2.x support - [@tas50](https://github.com/tas50)
+- Fix opensuse failures - [@tas50](https://github.com/tas50)
+- Remove support for EOL RHEL 5
+- Require Chef Infra 13 or later
+
 ## 6.0.7 (2018-08-01)
 
 - Optional creation of default configuration file 50-default.conf

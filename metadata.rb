@@ -3,7 +3,7 @@ maintainer        'Chef Software, Inc.'
 maintainer_email  'cookbooks@chef.io'
 license           'Apache-2.0'
 description       'Installs and configures rsyslog'
-version           '6.0.7'
+version           '7.0.0'
 
 %w(ubuntu debian linuxmint redhat centos amazon scientific oracle fedora zlinux).each do |os|
   supports os
@@ -11,4 +11,4 @@ end
 
 source_url 'https://github.com/chef-cookbooks/rsyslog'
 issues_url 'https://github.com/chef-cookbooks/rsyslog/issues'
-chef_version '>= 12.7'
+chef_version '>= 13'

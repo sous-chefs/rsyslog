@@ -15,7 +15,7 @@ Installs and configures rsyslog to replace syslogd for client and/or server use.
 
 ### Chef
 
-- Chef 12.7+
+- Chef 13+
 
 ### Other
 
