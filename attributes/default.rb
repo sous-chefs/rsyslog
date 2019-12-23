@@ -150,8 +150,3 @@ else
     '*.emerg' => ':omusrmsg:*',
   }
 end
-
-# rsyslog 3/4 do not support the new :omusrmsg:* format and need * instead
-if platform_family?('rhel') && node['platform_version'].to_i < 6
-  default['rsyslog']['default_facility_logs']['*.emerg'] = '*'
-end
