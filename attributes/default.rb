@@ -113,7 +113,7 @@ when 'suse'
     'local4.*;local5.*' => "-#{node['rsyslog']['default_log_dir']}/localmessages",
     'local6.*;local7.*' => "-#{node['rsyslog']['default_log_dir']}/localmessages",
   }
-when 'rhel', 'fedora'
+when 'rhel', 'fedora', 'amazon'
   default['rsyslog']['working_dir'] = '/var/lib/rsyslog'
   # format { facility => destination }
   default['rsyslog']['default_facility_logs'] = {
@@ -125,8 +125,8 @@ when 'rhel', 'fedora'
     'uucp,news.crit' => "#{node['rsyslog']['default_log_dir']}/spooler",
     'local7.*' => "#{node['rsyslog']['default_log_dir']}/boot.log",
   }
-  # RHEL >= 7 and Fedora use journald in systemd. Amazon Linux doesn't.
-  if node['platform'] != 'amazon' && node['platform_version'].to_i >= 7
+  # journald is used in systemd
+  if node['init_package'] != 'systemd'
     default['rsyslog']['modules'] = %w(imuxsock imjournal)
     default['rsyslog']['additional_directives'] = { 'OmitLocalLogging' => 'on', 'IMJournalStateFile' => 'imjournal.state' }
   end
