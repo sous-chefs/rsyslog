@@ -5,9 +5,6 @@ Lint/AmbiguousRegexpLiteral:
   Exclude:
     - 'test/**/*'
 
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles, AllowInnerSlashes.
-# SupportedStyles: slashes, percent_r, mixed
 Style/RegexpLiteral:
   Exclude:
     - 'test/**/*'
