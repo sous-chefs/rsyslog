@@ -96,6 +96,7 @@ case node['platform_family']
 when 'suse'
   default['rsyslog']['service_name'] = 'syslog'
   default['rsyslog']['group'] = 'root'
+  default['rsyslog']['dir_group'] = 'trusted'
   default['rsyslog']['default_facility_logs'] = {
     '*.emerg' => ':omusrmsg:*',
     'mail.*' => "-#{node['rsyslog']['default_log_dir']}/mail.log",
