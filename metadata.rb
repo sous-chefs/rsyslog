@@ -5,7 +5,7 @@ license           'Apache-2.0'
 description       'Installs and configures rsyslog'
 version           '6.0.7'
 
-%w(ubuntu debian mint redhat centos amazon scientific oracle fedora zlinux).each do |os|
+%w(ubuntu debian linuxmint redhat centos amazon scientific oracle fedora zlinux).each do |os|
   supports os
 end
 
