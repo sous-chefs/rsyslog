@@ -127,7 +127,7 @@ when 'rhel', 'fedora', 'amazon'
     'local7.*' => "#{node['rsyslog']['default_log_dir']}/boot.log",
   }
   # journald is used in systemd
-  if node['init_package'] != 'systemd'
+  if node['init_package'] == 'systemd'
     default['rsyslog']['modules'] = %w(imuxsock imjournal)
     default['rsyslog']['additional_directives'] = { 'OmitLocalLogging' => 'on', 'IMJournalStateFile' => 'imjournal.state' }
   end
