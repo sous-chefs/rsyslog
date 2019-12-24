@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version of the rsyslog cookbook.
 
+## 7.0.1 (2019-12-23)
+
+- Fix the systemd detection logic - [@tas50](https://github.com/tas50)
+
 ## 7.0.0 (2019-12-23)
 
 - Update for Chef 15 license agreement and Chef Workstation - [@tas50](https://github.com/tas50)
