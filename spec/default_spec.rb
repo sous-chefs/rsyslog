@@ -241,17 +241,6 @@ describe 'rsyslog::default' do
     end
   end
 
-  context 'syslog service on rhel 5' do
-    let(:chef_run) do
-      ChefSpec::ServerRunner.new(platform: 'centos', version: '5.11').converge(described_recipe)
-    end
-
-    it 'stops and starts the syslog service on RHEL' do
-      expect(chef_run).to stop_service('syslog')
-      expect(chef_run).to disable_service('syslog')
-    end
-  end
-
   context 'system-log service' do
     let(:chef_run) do
       ChefSpec::ServerRunner.new(platform: 'smartos', version: '5.11').converge(described_recipe)
