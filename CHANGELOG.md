@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version of the rsyslog cookbook.
 
+## Unreleased
+
+- resolved cookstyle error: recipes/client.rb:44:7 refactor: `ChefCorrectness/ChefApplicationFatal`
+
 ## 7.0.1 (2019-12-23)
 
 - Fix the systemd detection logic - [@tas50](https://github.com/tas50)
