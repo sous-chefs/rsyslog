@@ -9,7 +9,7 @@ describe file('/etc/rsyslog.d/99-test-file.conf') do
 end
 
 describe file('/etc/rsyslog.d/99-test-file.conf') do
-  its(:content) { should match /InputFileName \/var\/log\/boot/ }
+  its(:content) { should match %r{InputFileName /var/log/boot} }
 end
 
 describe file('/etc/rsyslog.d/99-test-file.conf') do
