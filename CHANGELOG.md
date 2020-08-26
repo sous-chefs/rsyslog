@@ -4,6 +4,7 @@ This file is used to list changes made in each version of the rsyslog cookbook.
 
 ## Unreleased
 
+- resolved cookstyle error: spec/default_spec.rb:236:7 warning: `ChefDeprecations/DeprecatedChefSpecPlatform`
 - resolved cookstyle error: recipes/client.rb:44:7 refactor: `ChefCorrectness/ChefApplicationFatal`
 
 ## 7.0.1 (2019-12-23)
