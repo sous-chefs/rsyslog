@@ -233,7 +233,7 @@ describe 'rsyslog::default' do
 
   context 'COOK-3608 maillog regression test' do
     let(:chef_run) do
-      ChefSpec::ServerRunner.new(platform: 'centos', version: '6.9').converge(described_recipe)
+      ChefSpec::ServerRunner.new(platform: 'centos', version: '6').converge(described_recipe)
     end
 
     it 'outputs mail.* to /var/log/maillog' do
