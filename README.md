@@ -73,6 +73,8 @@ See `attributes/default.rb` for default values.
 - `node['rsyslog']['additional_directives']` - Hash of additional directives and their values to place in the main rsyslog config file
 - `node['rsyslog']['local_host_name']` - permits to overwrite the system hostname with the one specified in the directive
 - `node['rsyslog']['default_conf_file']` - If false it skips the creation of default configuration file 50-default.conf
+- `node['rsyslog']['server_per_host_template']` - Template to use in the `rsyslog::server` recipe when creating the `35-server-per-host.conf` file
+- `node['rsyslog']['server_per_host_cookbook']` - Cookbook name to get the `node['rsyslog']['server_per_host_template']` template from
 
 ## Recipes
 
