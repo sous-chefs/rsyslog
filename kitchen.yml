@@ -32,15 +32,15 @@ suites:
       rsyslog:
         use_relp: true
         custom_remote:
-            - server: 10.0.0.45
-              logs: auth.*,mail.*
-              port: 555
-              protocol: udp
-            - server: 10.1.1.33
-              logs: authpriv.*,cron.*,daemon.*
-              port: 654
-              protocol: tcp
-              remote_template: RSYSLOG_SyslogProtocol23Format
+          - server: 10.0.0.45
+            logs: auth.*,mail.*
+            port: 555
+            protocol: udp
+          - server: 10.1.1.33
+            logs: authpriv.*,cron.*,daemon.*
+            port: 654
+            protocol: tcp
+            remote_template: RSYSLOG_SyslogProtocol23Format
   - name: client
     run_list:
       - recipe[rsyslog_test::client]
@@ -48,15 +48,15 @@ suites:
       rsyslog:
         server_ip: 10.0.0.50
         custom_remote:
-            - server: 10.0.0.45
-              logs: auth.*,mail.*
-              port: 555
-              protocol: udp
-            - server: 10.1.1.33
-              logs: authpriv.*,cron.*,daemon.*
-              port: 654
-              protocol: tcp
-              remote_template: RSYSLOG_SyslogProtocol23Format
+          - server: 10.0.0.45
+            logs: auth.*,mail.*
+            port: 555
+            protocol: udp
+          - server: 10.1.1.33
+            logs: authpriv.*,cron.*,daemon.*
+            port: 654
+            protocol: tcp
+            remote_template: RSYSLOG_SyslogProtocol23Format
   - name: server
     run_list:
       - recipe[rsyslog_test::server]

@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - resolved cookstyle error: recipes/client.rb:44:7 refactor: `ChefCorrectness/ChefApplicationFatal`
 - Cookstyle fixes
 - ChefSpec fixes
+- Yamllint fixes
 
 ## 7.0.1 (2019-12-23)
 
