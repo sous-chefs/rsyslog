@@ -21,6 +21,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - ChefSpec fixes
 - Yamllint fixes
 
+### Added
+
+- Add mdlrc file
+
 ## 7.0.1 (2019-12-23)
 
 - Fix the systemd detection logic - [@tas50](https://github.com/tas50)
