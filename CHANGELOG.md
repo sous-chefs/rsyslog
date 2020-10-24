@@ -31,6 +31,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 
 - Remove Amazon Linux 1 testing
+- Remove EL 6 testing
 
 ## 7.0.1 (2019-12-23)
 
