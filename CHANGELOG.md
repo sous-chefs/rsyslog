@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Add mdlrc file
 
+### Removed
+
+- Remove Amazon Linux 1 testing
+
 ## 7.0.1 (2019-12-23)
 
 - Fix the systemd detection logic - [@tas50](https://github.com/tas50)
