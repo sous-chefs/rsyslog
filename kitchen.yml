@@ -29,6 +29,10 @@ suites:
   - name: relp
     run_list:
       - recipe[rsyslog::client]
+    verifier:
+      inspec_tests:
+        - name: rsyslog-default-integration-tests
+          path: test/integration/default
     attributes:
       rsyslog:
         use_relp: true
@@ -45,6 +49,10 @@ suites:
   - name: client
     run_list:
       - recipe[rsyslog_test::client]
+    verifier:
+      inspec_tests:
+        - name: rsyslog-default-integration-tests
+          path: test/integration/default
     attributes:
       rsyslog:
         server_ip: 10.0.0.50
@@ -61,6 +69,14 @@ suites:
   - name: server
     run_list:
       - recipe[rsyslog_test::server]
+    verifier:
+      inspec_tests:
+        - name: rsyslog-default-integration-tests
+          path: test/integration/default
   - name: input_file_resource
     run_list:
       - recipe[rsyslog_test::input_file_resource]
+    verifier:
+      inspec_tests:
+        - name: rsyslog-default-integration-tests
+          path: test/integration/default
