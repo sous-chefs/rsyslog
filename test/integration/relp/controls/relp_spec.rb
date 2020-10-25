@@ -1,5 +1,7 @@
 control 'relp' do
-  describe package 'rsyslog-relp' do
+  relp_pkg = os.family == 'suse' ? 'rsyslog-module-relp' : 'rsyslog-relp'
+
+  describe package relp_pkg do
     it { should be_installed }
   end
 

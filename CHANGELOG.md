@@ -24,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Cookstyle fixes
 - ChefSpec fixes
 - Yamllint fixes
+- Fix RELP on SuSE platforms
 
 ### Added
 
