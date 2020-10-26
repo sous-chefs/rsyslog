@@ -2,10 +2,39 @@
 
 This file is used to list changes made in each version of the rsyslog cookbook.
 
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
 ## Unreleased
+
+### Changed
+
+- Sous Chefs Adoption
+- Update Changelog to Sous Chefs
+- Update to use Sous Chefs GH workflow
+- Update README to sous-chefs
+- Update metadata.rb to Sous Chefs
+- Update test-kitchen to Sous Chefs
+- Migrate to InSpec for integration tests
+
+### Fixed
 
 - resolved cookstyle error: spec/default_spec.rb:236:7 warning: `ChefDeprecations/DeprecatedChefSpecPlatform`
 - resolved cookstyle error: recipes/client.rb:44:7 refactor: `ChefCorrectness/ChefApplicationFatal`
+- Cookstyle fixes
+- ChefSpec fixes
+- Yamllint fixes
+- Fix RELP on SuSE platforms
+
+### Added
+
+- Add mdlrc file
+- Add Ubuntu 20.04 testing
+
+### Removed
+
+- Remove Amazon Linux 1 testing
+- Remove EL 6 testing
 
 ## 7.0.1 (2019-12-23)
 

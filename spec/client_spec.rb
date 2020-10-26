@@ -1,14 +1,14 @@
 require 'spec_helper'
 
 describe 'rsyslog::client' do
-  let(:chef_run) do
+  cached(:chef_run) do
     ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '16.04') do |node|
       node.normal['rsyslog']['server_ip'] = server_ip
       node.normal['rsyslog']['custom_remote'] = custom_remote
     end.converge(described_recipe)
   end
 
-  let(:server_ip) { "10.#{rand(1..9)}.#{rand(1..9)}.50" }
+  cached(:server_ip) { "10.#{rand(1..9)}.#{rand(1..9)}.50" }
   let(:custom_remote) { [{ 'server' => '10.0.0.1', 'port' => 555, 'protocol' => 'tcp', 'logs' => 'auth.*,mail.*', 'remote_template' => 'RSYSLOG_SyslogProtocol23Format' }] }
   let(:service_resource) { 'service[rsyslog]' }
 
@@ -40,7 +40,7 @@ describe 'rsyslog::client' do
     end
 
     context 'on SmartOS' do
-      let(:chef_run) do
+      cached(:chef_run) do
         ChefSpec::ServerRunner.new(platform: 'smartos', version: '5.11') do |node|
           node.normal['rsyslog']['server_ip'] = server_ip
           node.normal['rsyslog']['custom_remote'] = custom_remote
@@ -83,7 +83,7 @@ describe 'rsyslog::client' do
     end
 
     context 'on SmartOS' do
-      let(:chef_run) do
+      cached(:chef_run) do
         ChefSpec::ServerRunner.new(platform: 'smartos', version: '5.11') do |node|
           node.normal['rsyslog']['server_ip'] = server_ip
         end.converge(described_recipe)

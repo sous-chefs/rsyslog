@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'rsyslog::default' do
-  let(:chef_run) do
+  cached(:chef_run) do
     ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '16.04').converge(described_recipe)
   end
 
@@ -12,7 +12,7 @@ describe 'rsyslog::default' do
   end
 
   context "when node['rsyslog']['relp'] is true" do
-    let(:chef_run) do
+    cached(:chef_run) do
       ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '16.04') do |node|
         node.normal['rsyslog']['use_relp'] = true
       end.converge(described_recipe)
@@ -25,7 +25,7 @@ describe 'rsyslog::default' do
 
   context "when node['rsyslog']['enable_tls'] is true" do
     context "when node['rsyslog']['tls_ca_file'] is not set" do
-      let(:chef_run) do
+      cached(:chef_run) do
         ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '16.04') do |node|
           node.normal['rsyslog']['enable_tls'] = true
         end.converge(described_recipe)
@@ -37,7 +37,7 @@ describe 'rsyslog::default' do
     end
 
     context "when node['rsyslog']['tls_ca_file'] is set" do
-      let(:chef_run) do
+      cached(:chef_run) do
         ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '16.04') do |node|
           node.normal['rsyslog']['enable_tls'] = true
           node.normal['rsyslog']['tls_ca_file'] = '/etc/path/to/ssl-ca.crt'
@@ -49,7 +49,7 @@ describe 'rsyslog::default' do
       end
 
       context "when protocol is not 'tcp'" do
-        let(:chef_run) do
+        cached(:chef_run) do
           ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '16.04') do |node|
             node.normal['rsyslog']['enable_tls'] = true
             node.normal['rsyslog']['tls_ca_file'] = '/etc/path/to/ssl-ca.crt'
@@ -83,7 +83,7 @@ describe 'rsyslog::default' do
     end
 
     context 'on SmartOS' do
-      let(:chef_run) do
+      cached(:chef_run) do
         ChefSpec::ServerRunner.new(platform: 'smartos', version: '5.11').converge(described_recipe)
       end
 
@@ -149,7 +149,7 @@ describe 'rsyslog::default' do
     end
 
     context 'on SmartOS' do
-      let(:chef_run) do
+      cached(:chef_run) do
         ChefSpec::ServerRunner.new(platform: 'smartos', version: '5.11').converge(described_recipe)
       end
 
@@ -202,7 +202,7 @@ describe 'rsyslog::default' do
     end
 
     context 'on SmartOS' do
-      let(:chef_run) do
+      cached(:chef_run) do
         ChefSpec::ServerRunner.new(platform: 'smartos', version: '5.11').converge(described_recipe)
       end
 
@@ -232,7 +232,7 @@ describe 'rsyslog::default' do
   end
 
   context 'COOK-3608 maillog regression test' do
-    let(:chef_run) do
+    cached(:chef_run) do
       ChefSpec::ServerRunner.new(platform: 'centos', version: '6').converge(described_recipe)
     end
 
@@ -242,7 +242,7 @@ describe 'rsyslog::default' do
   end
 
   context 'system-log service' do
-    let(:chef_run) do
+    cached(:chef_run) do
       ChefSpec::ServerRunner.new(platform: 'smartos', version: '5.11').converge(described_recipe)
     end
 

@@ -1,10 +1,8 @@
 require 'spec_helper'
 
 describe 'rsyslog::server' do
-  let(:chef_run) do
-    ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '16.04') do |node|
-      node.normal['rsyslog']['server'] = false
-    end.converge(described_recipe)
+  cached(:chef_run) do
+    ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '16.04').converge(described_recipe)
   end
 
   let(:service_resource) { 'service[rsyslog]' }
@@ -55,10 +53,8 @@ describe 'rsyslog::server' do
     end
 
     context 'on SmartOS' do
-      let(:chef_run) do
-        ChefSpec::ServerRunner.new(platform: 'smartos', version: '5.11') do |node|
-          node.normal['rsyslog']['server'] = false
-        end.converge(described_recipe)
+      cached(:chef_run) do
+        ChefSpec::ServerRunner.new(platform: 'smartos', version: '5.11').converge(described_recipe)
       end
 
       let(:template) { chef_run.template('/opt/local/etc/rsyslog.d/35-server-per-host.conf') }
@@ -83,8 +79,13 @@ describe 'rsyslog::server' do
   end
 
   context '/etc/rsyslog.d/49-remote.conf file' do
+    cached(:chef_run) do
+      ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '16.04').converge(described_recipe)
+    end
+
     before do
-      allow(File).to receive(:exist?).and_return(true)
+      allow(File).to receive(:exist?).and_call_original
+      allow(File).to receive(:exist?).with('/etc/rsyslog.d/49-remote.conf').and_return(true)
     end
 
     let(:file) { chef_run.file('/etc/rsyslog.d/49-remote.conf') }
@@ -98,14 +99,15 @@ describe 'rsyslog::server' do
     end
 
     context 'on SmartOS' do
-      before do
-        allow(File).to receive(:exist?).and_return(true)
-      end
-
-      let(:chef_run) do
+      cached(:chef_run) do
         ChefSpec::ServerRunner.new(platform: 'smartos', version: '5.11') do |node|
           node.normal['rsyslog']['server'] = false
         end.converge(described_recipe)
+      end
+
+      before do
+        allow(File).to receive(:exist?).and_call_original
+        allow(File).to receive(:exist?).with('/opt/local/etc/rsyslog.d/49-remote.conf').and_return(true)
       end
 
       let(:file) { chef_run.file('/opt/local/etc/rsyslog.d/49-remote.conf') }
