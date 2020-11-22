@@ -2,7 +2,7 @@
 # Cookbook:: rsyslog
 # Recipe:: default
 #
-# Copyright:: 2009-2017, Chef Software, Inc.
+# Copyright:: 2009-2019, Chef Software, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@
 #
 
 package node['rsyslog']['package_name']
-package "#{node['rsyslog']['package_name']}-relp" if node['rsyslog']['use_relp']
+package rsyslog_relp_package if node['rsyslog']['use_relp']
 
 if node['rsyslog']['enable_tls'] && node['rsyslog']['tls_ca_file']
   raise "Recipe rsyslog::default can not use 'enable_tls' with protocol '#{node['rsyslog']['protocol']}' (requires 'tcp')" unless node['rsyslog']['protocol'] == 'tcp'

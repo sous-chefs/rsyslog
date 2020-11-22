@@ -1,0 +1,6 @@
+---
+name: rsyslog-client-integration-tests
+title: Integration tests for the rsyslog cookbook
+summary: This InSpec profile contains integration tests for rsyslog cookbook
+supports:
+  - os-family: linux

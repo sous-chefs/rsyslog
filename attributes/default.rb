@@ -2,7 +2,7 @@
 # Cookbook:: rsyslog
 # Attributes:: default
 #
-# Copyright:: 2009-2017, Chef Software, Inc.
+# Copyright:: 2009-2019, Chef Software, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -96,6 +96,7 @@ case node['platform_family']
 when 'suse'
   default['rsyslog']['service_name'] = 'syslog'
   default['rsyslog']['group'] = 'root'
+  default['rsyslog']['dir_group'] = 'trusted'
   default['rsyslog']['default_facility_logs'] = {
     '*.emerg' => ':omusrmsg:*',
     'mail.*' => "-#{node['rsyslog']['default_log_dir']}/mail.log",
@@ -113,7 +114,7 @@ when 'suse'
     'local4.*;local5.*' => "-#{node['rsyslog']['default_log_dir']}/localmessages",
     'local6.*;local7.*' => "-#{node['rsyslog']['default_log_dir']}/localmessages",
   }
-when 'rhel', 'fedora'
+when 'rhel', 'fedora', 'amazon'
   default['rsyslog']['working_dir'] = '/var/lib/rsyslog'
   default['rsyslog']['group'] = 'root'
   default['rsyslog']['dir_group'] = 'root'
@@ -127,8 +128,8 @@ when 'rhel', 'fedora'
     'uucp,news.crit' => "#{node['rsyslog']['default_log_dir']}/spooler",
     'local7.*' => "#{node['rsyslog']['default_log_dir']}/boot.log",
   }
-  # RHEL >= 7 and Fedora use journald in systemd. Amazon Linux doesn't.
-  if node['platform'] != 'amazon' && node['platform_version'].to_i >= 7
+  # journald is used in systemd
+  if node['init_package'] == 'systemd'
     default['rsyslog']['modules'] = %w(imuxsock imjournal)
     default['rsyslog']['additional_directives'] = { 'OmitLocalLogging' => 'on', 'IMJournalStateFile' => 'imjournal.state' }
   end
@@ -151,9 +152,4 @@ else
     '*.=info;*.=notice;*.=warn;auth,authpriv.none;cron,daemon.none;mail,news.none' => "-#{node['rsyslog']['default_log_dir']}/messages",
     '*.emerg' => ':omusrmsg:*',
   }
-end
-
-# rsyslog 3/4 do not support the new :omusrmsg:* format and need * instead
-if node['platform_family'] == 'rhel' && node['platform_version'].to_i < 6
-  default['rsyslog']['default_facility_logs']['*.emerg'] = '*'
 end
