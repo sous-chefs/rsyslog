@@ -55,6 +55,8 @@ default['rsyslog']['custom_remote']             = []
 default['rsyslog']['additional_directives']     = {}
 default['rsyslog']['templates']                 = %w()
 default['rsyslog']['default_conf_file']         = true
+default['rsyslog']['server_per_host_template']  = '35-server-per-host.conf.erb'
+default['rsyslog']['server_per_host_cookbook']  = 'rsyslog'
 
 # The most likely platform-specific attributes
 default['rsyslog']['package_name']              = 'rsyslog'
