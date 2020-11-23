@@ -17,7 +17,6 @@ This file is used to list changes made in each version of the rsyslog cookbook.
 
 - Add an attribute for setting the mode on the configuration directory
 
-
 ## 7.1.0 (2020-10-26)
 
 ### Changed
