@@ -28,7 +28,7 @@ end
 directory "#{node['rsyslog']['config_prefix']}/rsyslog.d" do
   owner 'root'
   group 'root'
-  mode  '0755'
+  mode  node['rsyslog']['config_dir']['mode']
 end
 
 directory node['rsyslog']['working_dir'] do
