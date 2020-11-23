@@ -8,6 +8,16 @@ This file is used to list changes made in each version of the rsyslog cookbook.
 - Enhance imfile template management
 - Fix default group and dir-group for RHEL-derived linux config
 
+## 7.2.1 - *2020-11-23*
+
+- Fixed a bug during the release of 7.2.0
+  - Add an attribute for setting the mode on the configuration directory
+
+## 7.2.0 - *2020-11-23*
+
+- Add an attribute for setting the mode on the configuration directory
+
+
 ## 7.1.0 (2020-10-26)
 
 ### Changed
@@ -33,6 +43,7 @@ This file is used to list changes made in each version of the rsyslog cookbook.
 
 - Add mdlrc file
 - Add Ubuntu 20.04 testing
+- Add an attribute for setting the mode on the configuration directory
 
 ### Removed
 
