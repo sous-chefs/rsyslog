@@ -2,6 +2,8 @@
 
 This file is used to list changes made in each version of the rsyslog cookbook.
 
+## Unreleased
+
 ## 7.3.0 - *2020-11-23*
 
 - Enabled custom templates for rsyslog `35-server-per-host.conf` file.
