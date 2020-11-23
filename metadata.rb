@@ -1,14 +1,22 @@
 name              'rsyslog'
-maintainer        'Chef Software, Inc.'
-maintainer_email  'cookbooks@chef.io'
+maintainer        'Sous Chefs'
+maintainer_email  'help@sous-chefs.org'
 license           'Apache-2.0'
 description       'Installs and configures rsyslog'
-version           '7.0.1'
+version           '7.2.1'
+source_url        'https://github.com/sous-chefs/rsyslog'
+issues_url        'https://github.com/sous-chefs/rsyslog/issues'
+chef_version      '>= 13'
 
-%w(ubuntu debian linuxmint redhat centos amazon scientific oracle fedora zlinux).each do |os|
-  supports os
-end
-
-source_url 'https://github.com/chef-cookbooks/rsyslog'
-issues_url 'https://github.com/chef-cookbooks/rsyslog/issues'
-chef_version '>= 13'
+supports 'amazon'
+supports 'centos'
+supports 'debian'
+supports 'fedora'
+supports 'linuxmint'
+supports 'opensuseleap'
+supports 'oracle'
+supports 'redhat'
+supports 'scientific'
+supports 'suse'
+supports 'ubuntu'
+supports 'zlinux'

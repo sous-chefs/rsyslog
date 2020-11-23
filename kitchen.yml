@@ -3,23 +3,24 @@ driver:
 
 provisioner:
   name: chef_zero
+  enforce_idempotency: true
+  multiple_converge: 2
   deprecations_as_errors: true
-  chef_license: accept-no-persist
+
+verifier:
+  name: inspec
 
 platforms:
-  - name: amazonlinux
-    driver_config:
-      box: mvbcoding/awslinux
   - name: amazonlinux-2
-  - name: centos-6
   - name: centos-7
   - name: centos-8
   - name: debian-9
   - name: debian-10
-  - name: fedora-31
+  - name: fedora-latest
   - name: opensuse-leap-15
   - name: ubuntu-16.04
   - name: ubuntu-18.04
+  - name: ubuntu-20.04
 
 suites:
   - name: default
@@ -28,38 +29,54 @@ suites:
   - name: relp
     run_list:
       - recipe[rsyslog::client]
+    verifier:
+      inspec_tests:
+        - name: rsyslog-default-integration-tests
+          path: test/integration/default
     attributes:
       rsyslog:
         use_relp: true
         custom_remote:
-            - server: 10.0.0.45
-              logs: auth.*,mail.*
-              port: 555
-              protocol: udp
-            - server: 10.1.1.33
-              logs: authpriv.*,cron.*,daemon.*
-              port: 654
-              protocol: tcp
-              remote_template: RSYSLOG_SyslogProtocol23Format
+          - server: 10.0.0.45
+            logs: auth.*,mail.*
+            port: 555
+            protocol: udp
+          - server: 10.1.1.33
+            logs: authpriv.*,cron.*,daemon.*
+            port: 654
+            protocol: tcp
+            remote_template: RSYSLOG_SyslogProtocol23Format
   - name: client
     run_list:
       - recipe[rsyslog_test::client]
+    verifier:
+      inspec_tests:
+        - name: rsyslog-default-integration-tests
+          path: test/integration/default
     attributes:
       rsyslog:
         server_ip: 10.0.0.50
         custom_remote:
-            - server: 10.0.0.45
-              logs: auth.*,mail.*
-              port: 555
-              protocol: udp
-            - server: 10.1.1.33
-              logs: authpriv.*,cron.*,daemon.*
-              port: 654
-              protocol: tcp
-              remote_template: RSYSLOG_SyslogProtocol23Format
+          - server: 10.0.0.45
+            logs: auth.*,mail.*
+            port: 555
+            protocol: udp
+          - server: 10.1.1.33
+            logs: authpriv.*,cron.*,daemon.*
+            port: 654
+            protocol: tcp
+            remote_template: RSYSLOG_SyslogProtocol23Format
   - name: server
     run_list:
       - recipe[rsyslog_test::server]
+    verifier:
+      inspec_tests:
+        - name: rsyslog-default-integration-tests
+          path: test/integration/default
   - name: input_file_resource
     run_list:
       - recipe[rsyslog_test::input_file_resource]
+    verifier:
+      inspec_tests:
+        - name: rsyslog-default-integration-tests
+          path: test/integration/default

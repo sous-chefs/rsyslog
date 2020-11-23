@@ -4,9 +4,48 @@ This file is used to list changes made in each version of the rsyslog cookbook.
 
 ## Unreleased
 
+- Enabled custom templates for rsyslog `35-server-per-host.conf` file.
+
+## 7.2.1 - *2020-11-23*
+
+- Fixed a bug during the release of 7.2.0
+  - Add an attribute for setting the mode on the configuration directory
+
+## 7.2.0 - *2020-11-23*
+
+- Add an attribute for setting the mode on the configuration directory
+
+## 7.1.0 (2020-10-26)
+
+### Changed
+
+- Sous Chefs Adoption
+- Update Changelog to Sous Chefs
+- Update to use Sous Chefs GH workflow
+- Update README to sous-chefs
+- Update metadata.rb to Sous Chefs
+- Update test-kitchen to Sous Chefs
+- Migrate to InSpec for integration tests
+
+### Fixed
+
 - resolved cookstyle error: spec/default_spec.rb:236:7 warning: `ChefDeprecations/DeprecatedChefSpecPlatform`
 - resolved cookstyle error: recipes/client.rb:44:7 refactor: `ChefCorrectness/ChefApplicationFatal`
-- Enabled custom templates for rsyslog `35-server-per-host.conf` file.
+- Cookstyle fixes
+- ChefSpec fixes
+- Yamllint fixes
+- Fix RELP on SuSE platforms
+
+### Added
+
+- Add mdlrc file
+- Add Ubuntu 20.04 testing
+- Add an attribute for setting the mode on the configuration directory
+
+### Removed
+
+- Remove Amazon Linux 1 testing
+- Remove EL 6 testing
 
 ## 7.0.1 (2019-12-23)
 

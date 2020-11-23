@@ -75,6 +75,7 @@ default['rsyslog']['dir_group']                 = 'adm'
 default['rsyslog']['config_files']['owner']     = 'root'
 default['rsyslog']['config_files']['group']     = 'root'
 default['rsyslog']['config_files']['mode']      = '0644'
+default['rsyslog']['config_dir']['mode']        = '0755'
 
 # platform specific attributes
 case node['platform']
