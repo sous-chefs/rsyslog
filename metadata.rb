@@ -21,7 +21,3 @@ supports 'smartos'
 supports 'suse'
 supports 'ubuntu'
 supports 'zlinux'
-
-source_url 'https://github.com/chef-cookbooks/rsyslog'
-issues_url 'https://github.com/chef-cookbooks/rsyslog/issues'
-chef_version '>= 13'
