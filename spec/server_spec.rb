@@ -101,7 +101,7 @@ describe 'rsyslog::server' do
     context 'on SmartOS' do
       cached(:chef_run) do
         ChefSpec::ServerRunner.new(platform: 'smartos', version: '5.11') do |node|
-          node.normal['rsyslog']['server'] = false
+          node.override['rsyslog']['server'] = false
         end.converge(described_recipe)
       end
 

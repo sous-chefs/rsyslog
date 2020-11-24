@@ -35,7 +35,7 @@ $ModLoad <%= mod %>
 <% if node['rsyslog']['server'] -%>
   <% if node['rsyslog']['enable_tls'] && node['rsyslog']['tls_ca_file'] &&
         node['rsyslog']['tls_key_file'] && node['rsyslog']['tls_certificate_file'] -%>
-$DefaultNetstreamDriver gtls
+$DefaultNetstreamDriver <%= node['rsyslog']['tls_driver'] %>
 $DefaultNetstreamDriverCAFile <%= node['rsyslog']['tls_ca_file'] %>
 $DefaultNetstreamDriverCertFile <%= node['rsyslog']['tls_certificate_file'] %>
 $DefaultNetstreamDriverKeyFile <%= node['rsyslog']['tls_key_file'] %>
