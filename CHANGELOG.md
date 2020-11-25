@@ -3,6 +3,8 @@
 This file is used to list changes made in each version of the rsyslog cookbook.
 
 ## Unreleased
+- Bring default configuration for SmartOS inline with current distrubtion
+from pkgsrc and note SmartOS as a supported package.
 
 ## 7.5.0 - *2020-12-01*
 
