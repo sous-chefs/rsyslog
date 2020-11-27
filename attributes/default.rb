@@ -120,6 +120,8 @@ when 'suse'
   }
 when 'rhel', 'fedora', 'amazon'
   default['rsyslog']['working_dir'] = '/var/lib/rsyslog'
+  default['rsyslog']['group'] = 'root'
+  default['rsyslog']['dir_group'] = 'root'
   # format { facility => destination }
   default['rsyslog']['default_facility_logs'] = {
     '*.info;mail.none;authpriv.none;cron.none' => "#{node['rsyslog']['default_log_dir']}/messages",

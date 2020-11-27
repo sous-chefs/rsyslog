@@ -4,6 +4,10 @@ This file is used to list changes made in each version of the rsyslog cookbook.
 
 ## Unreleased
 
+- Remove remote.conf when no more remote servers
+- Enhance imfile template management
+- Fix default group and dir-group for RHEL-derived linux config
+
 ## 7.4.0 - *2020-11-25*
 
 ## 7.3.0 - *2020-11-23*
