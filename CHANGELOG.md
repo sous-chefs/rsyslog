@@ -8,6 +8,12 @@ This file is used to list changes made in each version of the rsyslog cookbook.
 - Enhance imfile template management
 - Fix default group and dir-group for RHEL-derived linux config
 
+## 7.4.0 - *2020-11-25*
+
+## 7.3.0 - *2020-11-23*
+
+- Enabled custom templates for rsyslog `35-server-per-host.conf` file.
+
 ## 7.2.1 - *2020-11-23*
 
 - Fixed a bug during the release of 7.2.0

@@ -71,6 +71,7 @@ See `attributes/default.rb` for default values.
 - `node['rsyslog']['rate_limit_burst']` - Value of the $SystemLogRateLimitBurst configuration directive in `/etc/rsyslog.conf`. Default is nil, leaving it to the platform default.
 - `node['rsyslog']['action_queue_max_disk_space']` - Max amount of disk space the disk-assisted queue is allowed to use ([more info](http://www.rsyslog.com/doc/queues.html)).
 - `node['rsyslog']['enable_tls']` - Whether or not to enable TLS encryption. When enabled, forces protocol to `tcp`. Default is `false`.
+- `node['rsyslog']['tls_driver']` -  Defaults to `ossl`.
 - `node['rsyslog']['tls_ca_file']` - Path to TLS CA file. Required for both server and clients.
 - `node['rsyslog']['tls_certificate_file']` - Path to TLS certificate file. Required for server, optional for clients.
 - `node['rsyslog']['tls_key_file']` - Path to TLS key file. Required for server, optional for clients.
@@ -82,6 +83,8 @@ See `attributes/default.rb` for default values.
 - `node['rsyslog']['additional_directives']` - Hash of additional directives and their values to place in the main rsyslog config file
 - `node['rsyslog']['local_host_name']` - permits to overwrite the system hostname with the one specified in the directive
 - `node['rsyslog']['default_conf_file']` - If false it skips the creation of default configuration file 50-default.conf
+- `node['rsyslog']['server_per_host_template']` - Template to use in the `rsyslog::server` recipe when creating the `35-server-per-host.conf` file
+- `node['rsyslog']['server_per_host_cookbook']` - Cookbook name to get the `node['rsyslog']['server_per_host_template']` template from
 
 ## Recipes
 

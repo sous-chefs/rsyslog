@@ -18,7 +18,7 @@
 #
 
 # Manually set this attribute
-node.default['rsyslog']['server'] = true
+node.override['rsyslog']['server'] = true
 
 include_recipe 'rsyslog::default'
 
@@ -30,7 +30,8 @@ directory node['rsyslog']['log_dir'] do
 end
 
 template "#{node['rsyslog']['config_prefix']}/rsyslog.d/35-server-per-host.conf" do
-  source   '35-server-per-host.conf.erb'
+  cookbook node['rsyslog']['server_per_host_cookbook']
+  source   node['rsyslog']['server_per_host_template']
   owner    node['rsyslog']['config_files']['owner']
   group    node['rsyslog']['config_files']['group']
   mode     node['rsyslog']['config_files']['mode']

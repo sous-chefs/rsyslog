@@ -20,6 +20,15 @@
 package node['rsyslog']['package_name']
 package rsyslog_relp_package if node['rsyslog']['use_relp']
 
+if node['rsyslog']['enable_tls']
+  case node['rsyslog']['tls_driver']
+  when 'gtls'
+    package "#{node['rsyslog']['package_name']}-gnutls"
+  when 'ossl'
+    package "#{node['rsyslog']['package_name']}-openssl"
+  end
+end
+
 if node['rsyslog']['enable_tls'] && node['rsyslog']['tls_ca_file']
   raise "Recipe rsyslog::default can not use 'enable_tls' with protocol '#{node['rsyslog']['protocol']}' (requires 'tcp')" unless node['rsyslog']['protocol'] == 'tcp'
   package "#{node['rsyslog']['package_name']}-gnutls"

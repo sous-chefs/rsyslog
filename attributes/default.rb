@@ -43,6 +43,7 @@ default['rsyslog']['default_remote_template']   = nil
 default['rsyslog']['rate_limit_interval']       = nil
 default['rsyslog']['rate_limit_burst']          = nil
 default['rsyslog']['enable_tls']                = false
+default['rsyslog']['tls_driver']                = 'ossl'
 default['rsyslog']['action_queue_max_disk_space'] = '1G'
 default['rsyslog']['tls_ca_file']               = nil
 default['rsyslog']['tls_certificate_file']      = nil
@@ -55,6 +56,8 @@ default['rsyslog']['custom_remote']             = []
 default['rsyslog']['additional_directives']     = {}
 default['rsyslog']['templates']                 = %w()
 default['rsyslog']['default_conf_file']         = true
+default['rsyslog']['server_per_host_template']  = '35-server-per-host.conf.erb'
+default['rsyslog']['server_per_host_cookbook']  = 'rsyslog'
 
 # The most likely platform-specific attributes
 default['rsyslog']['package_name']              = 'rsyslog'
