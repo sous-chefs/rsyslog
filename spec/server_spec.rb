@@ -22,7 +22,7 @@ describe 'rsyslog::server' do
       expect(chef_run).to create_directory('/srv/rsyslog')
     end
 
-    it 'is owned by root:root' do
+    it 'is owned by syslog:adm' do
       expect(directory.owner).to eq('syslog')
       expect(directory.group).to eq('adm')
     end

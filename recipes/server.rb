@@ -23,9 +23,9 @@ node.override['rsyslog']['server'] = true
 include_recipe 'rsyslog::default'
 
 directory node['rsyslog']['log_dir'] do
-  owner    node['rsyslog']['user']
-  group    node['rsyslog']['group']
-  mode     '0755'
+  owner    node['rsyslog']['dir_owner']
+  group    node['rsyslog']['dir_group']
+  mode     node['rsyslog']['dir_create_mode']
   recursive true
 end
 

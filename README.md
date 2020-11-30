@@ -35,6 +35,7 @@ See `attributes/default.rb` for default values.
 
 - `node['rsyslog']['log_dir']` - If the node is an rsyslog server, this specifies the directory where the logs should be stored.
 - `node['rsyslog']['working_dir']` - The temporary working directory where messages are buffered
+- `node['rsyslog']['working_dir_mode']` - The temporary working directory access mode
 - `node['rsyslog']['server']` - Determined automatically and set to true on the server.
 - `node['rsyslog']['server_ip']` - If not defined then search will be used to determine rsyslog server. Default is `nil`. This can be a string or an array.
 - `node['rsyslog']['server_search']` - Specify the criteria for the server search operation. Default is `role:loghost`.

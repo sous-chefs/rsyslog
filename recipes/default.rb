@@ -35,15 +35,15 @@ if node['rsyslog']['enable_tls'] && node['rsyslog']['tls_ca_file']
 end
 
 directory "#{node['rsyslog']['config_prefix']}/rsyslog.d" do
-  owner 'root'
-  group 'root'
+  owner node['rsyslog']['config_files']['owner']
+  group node['rsyslog']['config_files']['group']
   mode  node['rsyslog']['config_dir']['mode']
 end
 
 directory node['rsyslog']['working_dir'] do
   owner node['rsyslog']['user']
   group node['rsyslog']['group']
-  mode  '0700'
+  mode  node['rsyslog']['working_dir_mode']
   recursive true
 end
 
