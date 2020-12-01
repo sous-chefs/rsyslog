@@ -16,8 +16,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-::Chef::Resource::Template.include Rsyslog::Helper
-
 package node['rsyslog']['package_name']
 package rsyslog_relp_package if node['rsyslog']['use_relp']
 

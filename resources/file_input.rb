@@ -15,15 +15,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-extend Rsyslog::Helper
-
 property :file, String, required: true
 property :priority, Integer, default: 99
 property :severity, String
 property :facility, String
 property :input_parameters, Hash, default: {}
 property :cookbook_source, String, default: 'rsyslog'
-property :template_source, String, default: labeled_template('file-input.conf.erb', node['rsyslog']['config_style'])
+property :template_source, String, default: lazy { labeled_template('file-input.conf.erb', node['rsyslog']['config_style']) }
 
 action :create do
   vars = {
