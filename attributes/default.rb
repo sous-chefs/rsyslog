@@ -21,6 +21,7 @@ default['rsyslog']['local_host_name']           = nil
 default['rsyslog']['default_log_dir']           = '/var/log'
 default['rsyslog']['log_dir']                   = '/srv/rsyslog'
 default['rsyslog']['working_dir']               = '/var/spool/rsyslog'
+default['rsyslog']['working_dir_mode']          = '0700'
 default['rsyslog']['server']                    = false
 default['rsyslog']['use_relp']                  = false
 default['rsyslog']['relp_port']                 = 20_514
@@ -82,6 +83,7 @@ default['rsyslog']['config_dir']['mode']        = '0755'
 case node['platform']
 when 'ubuntu'
   default['rsyslog']['user'] = 'syslog'
+  default['rsyslog']['dir_owner'] = 'syslog'
   default['rsyslog']['group'] = 'adm'
   default['rsyslog']['priv_seperation'] = true
   default['rsyslog']['priv_group'] = 'syslog'
