@@ -87,7 +87,7 @@ when 'ubuntu'
   default['rsyslog']['priv_group'] = 'syslog'
 when 'smartos'
   default['rsyslog']['config_prefix'] = '/opt/local/etc'
-  # Note: remove imudp and imtcp since there are no default listeners on SmartOS
+  # NOTE: remove imudp and imtcp since there are no default listeners on SmartOS
   default['rsyslog']['modules'] = %w(immark imsolaris)
   default['rsyslog']['group'] = 'root'
 when 'omnios'
