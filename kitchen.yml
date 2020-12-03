@@ -74,6 +74,10 @@ suites:
         - name: rsyslog-default-integration-tests
           path: test/integration/default
   - name: input_file_resource
+    attributes:
+      rsyslog:
+        imfile:
+          PollingInterval: 10
     run_list:
       - recipe[rsyslog_test::input_file_resource]
     verifier:

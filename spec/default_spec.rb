@@ -242,18 +242,97 @@ describe 'rsyslog::default' do
   end
 
   context 'system-log service' do
-    cached(:chef_run) do
-      ChefSpec::ServerRunner.new(platform: 'smartos', version: '5.11').converge(described_recipe)
-    end
+    { 'omnios' => '151018', 'smartos' => '5.11' }.each do |p, pv|
+      cached(:chef_run) do
+        ChefSpec::ServerRunner.new(platform: p, version: pv).converge(described_recipe)
+      end
 
-    it "stops the system-log service on #{p}" do
-      expect(chef_run).to disable_service('system-log')
+      it "stops the system-log service on #{p}" do
+        expect(chef_run).to disable_service('system-log')
+      end
     end
   end
 
   context 'rsyslog service' do
     it 'starts and enables the service' do
       expect(chef_run).to start_service('rsyslog')
+    end
+  end
+
+  context 'when template[/etc/rsyslog.d/35-imfile.conf] receives :create' do
+    context 'when on centos 6' do
+      let(:chef_run) do
+        ChefSpec::ServerRunner.new(platform: 'centos', version: '6') do |node|
+          node.normal['rsyslog']['imfile']['PollingInterval'] = 10
+        end.converge(described_recipe)
+      end
+      let(:template) { chef_run.template('/etc/rsyslog.d/35-imfile.conf') }
+
+      before do
+        template.run_action(:create)
+      end
+
+      it "node['rsyslog']['config_style'] will be 'legacy' by default" do
+        expect(chef_run.node['rsyslog']['config_style']).to eq('legacy')
+      end
+      context '/etc/rsyslog.d/35-imfile.conf file' do
+        it 'will be create with legacy style syntax' do
+          expect(chef_run).to render_file(template.path).with_content('$ModLoad imfile')
+        end
+        it 'will NOT include module parameter PollingInterval' do
+          expect(chef_run).not_to render_file(template.path).with_content('PollingInterval')
+        end
+        it 'is owned by root:root' do
+          expect(template.owner).to eq('root')
+          expect(template.group).to eq('root')
+        end
+
+        it 'has 0644 permissions' do
+          expect(template.mode).to eq('0644')
+        end
+
+        it 'notifies restarting the service' do
+          expect(template).to notify(service_resource).to(:restart)
+        end
+      end
+    end
+    context 'when on ubuntu 16.04 ' do
+      let(:chef_run) do
+        ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '16.04') do |node|
+          node.normal['rsyslog']['imfile']['PollingInterval'] = 10
+        end.converge(described_recipe)
+      end
+      let(:template) { chef_run.template('/etc/rsyslog.d/35-imfile.conf') }
+
+      before do
+        template.run_action(:create)
+      end
+
+      it "node['rsyslog']['config_style'] will be nil by default" do
+        expect(chef_run.node['rsyslog']['config_style']).to eq(nil)
+      end
+
+      context '/etc/rsyslog.d/35-imfile.conf file' do
+        it 'will be created with Rainer style syntax' do
+          expect(chef_run).to render_file(template.path).with_content(/module\(load="imfile"/)
+        end
+
+        it 'will include module parameter PollingInterval' do
+          expect(chef_run).to render_file(template.path).with_content(/PollingInterval="10"/)
+        end
+        it 'is owned by root:root' do
+          expect(template.owner).to eq('root')
+          expect(template.group).to eq('root')
+        end
+
+        it 'has 0644 permissions' do
+          expect(template.mode).to eq('0644')
+        end
+
+        it 'notifies restarting the service' do
+          expect(template).to notify(service_resource).to(:restart)
+        end
+      end
     end
   end
 end

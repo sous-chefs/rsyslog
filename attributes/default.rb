@@ -149,6 +149,9 @@ when 'rhel', 'fedora', 'amazon'
   if node['init_package'] == 'systemd'
     default['rsyslog']['modules'] = %w(imuxsock imjournal)
     default['rsyslog']['additional_directives'] = { 'OmitLocalLogging' => 'on', 'IMJournalStateFile' => 'imjournal.state' }
+  else
+    # RainerScript is not well supported by default on older RHEL
+    default['rsyslog']['config_style'] = 'legacy'
   end
 else
   # format { facility => destination }

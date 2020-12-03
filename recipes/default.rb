@@ -16,7 +16,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 package node['rsyslog']['package_name']
 package rsyslog_relp_package if node['rsyslog']['use_relp']
 
@@ -61,6 +60,18 @@ template "#{node['rsyslog']['config_prefix']}/rsyslog.conf" do
   mode    node['rsyslog']['config_files']['mode']
   notifies :run, 'execute[validate_config]'
   notifies :restart, "service[#{node['rsyslog']['service_name']}]"
+end
+
+# Include imfile module
+template "#{node['rsyslog']['config_prefix']}/rsyslog.d/35-imfile.conf" do
+  source    labeled_template('35-imfile.conf.erb', node['rsyslog']['config_style'])
+  owner     node['rsyslog']['config_files']['owner']
+  group     node['rsyslog']['config_files']['group']
+  mode      node['rsyslog']['config_files']['mode']
+  variables module_parameters: node['rsyslog']['imfile'] # Supported with Rainer script
+  notifies  :run, 'execute[validate_config]'
+  notifies  :restart, "service[#{node['rsyslog']['service_name']}]"
+  action    :nothing
 end
 
 template "#{node['rsyslog']['config_prefix']}/rsyslog.d/50-default.conf" do
