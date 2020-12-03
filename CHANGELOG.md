@@ -4,9 +4,15 @@ This file is used to list changes made in each version of the rsyslog cookbook.
 
 ## Unreleased
 
+- Bring default configuration for SmartOS inline with current distribution from pkgsrc and note SmartOS as a supported package.
+
 ## 7.5.0 - *2020-12-01*
 
+- Fix log directory ownership
+
 ## 7.4.0 - *2020-11-25*
+
+- Add facility to choose TLS driver
 
 ## 7.3.0 - *2020-11-23*
 

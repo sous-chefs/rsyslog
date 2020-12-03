@@ -89,7 +89,8 @@ when 'ubuntu'
   default['rsyslog']['priv_group'] = 'syslog'
 when 'smartos'
   default['rsyslog']['config_prefix'] = '/opt/local/etc'
-  default['rsyslog']['modules'] = %w(immark imsolaris imtcp imudp)
+  # NOTE: remove imudp and imtcp since there are no default listeners on SmartOS
+  default['rsyslog']['modules'] = %w(immark imsolaris)
   default['rsyslog']['group'] = 'root'
 when 'omnios'
   default['rsyslog']['service_name'] = 'system/rsyslogd'
@@ -99,6 +100,18 @@ end
 
 # platform family specific attributes
 case node['platform_family']
+when 'smartos'
+  # These defaults match what is shipped in the pkgsrc rsyslog package
+  default['rsyslog']['default_facility_logs'] = {
+    '*.alert;kern.err;daemon.err' => ':omusrmsg:operator',
+    '*.alert' => ':omusrmsg:root',
+    '*.emerg' => ':omusrmsg:*',
+    '*.err;kern.notice;auth.notice' => '/dev/sysmsg',
+    '*.err;kern.debug;daemon.notice;mail.crit' => '/var/adm/messages',
+    'mail.debug' => "#{node['rsyslog']['default_log_dir']}/syslog",
+    'mail.info' => "#{node['rsyslog']['default_log_dir']}/maillog",
+    'auth.info' => "#{node['rsyslog']['default_log_dir']}/authlog",
+  }
 when 'suse'
   default['rsyslog']['service_name'] = 'syslog'
   default['rsyslog']['group'] = 'root'
