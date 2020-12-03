@@ -2,7 +2,7 @@
 
 This file is used to list changes made in each version of the rsyslog cookbook.
 
-## Unreleased
+## 8.0.0 - *2020-12-03*
 
 - Cookstyle fix
 - Two final references to `use_imfile` removed.
