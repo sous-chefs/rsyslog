@@ -4,6 +4,8 @@ This file is used to list changes made in each version of the rsyslog cookbook.
 
 ## Unreleased
 
+- Cookstyle Bot Auto Corrections with Cookstyle 7.5.3
+
 ## 8.0.0 - *2020-12-03*
 
 - Cookstyle fix

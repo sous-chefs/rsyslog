@@ -12,7 +12,7 @@ describe file('/etc/rsyslog.d/99-test-file.conf') do
   it { should exist }
   # Confirm that old behavior is corrected
   its(:content) { should_not match /\$ModLoad imfile/ }
-  its(:content) { should match /\/var\/log\/boot/ }
+  its(:content) { should match %r{/var/log/boot} }
   its(:content) { should match /test-file:/ }
 end
 
@@ -21,6 +21,6 @@ describe file('/etc/rsyslog.d/99-foo-log.conf') do
   it { should exist }
   # Confirm that old behavior is corrected
   its(:content) { should_not match /\$ModLoad imfile/ }
-  its(:content) { should match /\/var\/log\/foo\.log/ }
+  its(:content) { should match %r{/var/log/foo\.log} }
   its(:content) { should match /foo-log:/ }
 end
