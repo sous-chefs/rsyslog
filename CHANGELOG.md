@@ -2,7 +2,7 @@
 
 This file is used to list changes made in each version of the rsyslog cookbook.
 
-## Unreleased
+## 8.0.2 - *2021-04-14*
 
 - Add check for FreeBSD to prevent trying to install a RELP package
 
