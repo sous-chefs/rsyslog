@@ -17,7 +17,7 @@
 # limitations under the License.
 #
 package node['rsyslog']['package_name']
-package rsyslog_relp_package if node['rsyslog']['use_relp']
+package rsyslog_relp_package if node['rsyslog']['use_relp'] && !platform_family?('freebsd')
 
 if node['rsyslog']['enable_tls']
   case node['rsyslog']['tls_driver']
