@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'rsyslog::server' do
   let(:chef_run) do
-    ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '16.04') do |node|
+    ChefSpec::ServerRunner.new(platform: 'ubuntu') do |node|
       node.default['rsyslog']['server'] = false
     end.converge(described_recipe)
   end
@@ -56,7 +56,7 @@ describe 'rsyslog::server' do
 
     context 'on SmartOS' do
       cached(:chef_run) do
-        ChefSpec::ServerRunner.new(platform: 'smartos', version: '5.11') do |node|
+        ChefSpec::ServerRunner.new(platform: 'smartos') do |node|
           node.default['rsyslog']['server'] = false
         end.converge(described_recipe)
       end
@@ -84,7 +84,7 @@ describe 'rsyslog::server' do
 
   context '/etc/rsyslog.d/49-remote.conf file' do
     cached(:chef_run) do
-      ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '16.04').converge(described_recipe)
+      ChefSpec::ServerRunner.new(platform: 'ubuntu').converge(described_recipe)
     end
 
     before do
@@ -109,7 +109,7 @@ describe 'rsyslog::server' do
       end
 
       cached(:chef_run) do
-        ChefSpec::ServerRunner.new(platform: 'smartos', version: '5.11') do |node|
+        ChefSpec::ServerRunner.new(platform: 'smartos') do |node|
           node.override['rsyslog']['server'] = false
         end.converge(described_recipe)
       end

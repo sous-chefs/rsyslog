@@ -23,6 +23,8 @@ property :input_parameters, Hash, default: {}
 property :cookbook_source, String, default: 'rsyslog'
 property :template_source, String, default: lazy { labeled_template('file-input.conf.erb', node['rsyslog']['config_style']) }
 
+unified_mode true
+
 action :create do
   vars = {
     file_name: new_resource.file,
