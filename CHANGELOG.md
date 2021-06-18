@@ -2,7 +2,7 @@
 
 This file is used to list changes made in each version of the rsyslog cookbook.
 
-## Unreleased
+## 9.0.0 - *2021-06-18*
 
 - Chef 17 updates: enable `unified_mode` on all resources
 - Bump required Chef Infra Client to >= 15.3
