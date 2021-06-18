@@ -145,14 +145,8 @@ when 'rhel', 'fedora', 'amazon'
     'uucp,news.crit' => "#{node['rsyslog']['default_log_dir']}/spooler",
     'local7.*' => "#{node['rsyslog']['default_log_dir']}/boot.log",
   }
-  # journald is used in systemd
-  if node['init_package'] == 'systemd'
-    default['rsyslog']['modules'] = %w(imuxsock imjournal)
-    default['rsyslog']['additional_directives'] = { 'OmitLocalLogging' => 'on', 'IMJournalStateFile' => 'imjournal.state' }
-  else
-    # RainerScript is not well supported by default on older RHEL
-    default['rsyslog']['config_style'] = 'legacy'
-  end
+  default['rsyslog']['modules'] = %w(imuxsock imjournal)
+  default['rsyslog']['additional_directives'] = { 'OmitLocalLogging' => 'on', 'IMJournalStateFile' => 'imjournal.state' }
 else
   # format { facility => destination }
   default['rsyslog']['default_facility_logs'] = {

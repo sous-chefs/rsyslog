@@ -4,7 +4,13 @@ This file is used to list changes made in each version of the rsyslog cookbook.
 
 ## Unreleased
 
+- Chef 17 updates: enable `unified_mode` on all resources
+- Bump required Chef Infra Client to >= 15.3
+- Remove support and testing for RHEL 6 and Ubuntu 16.04
+
 ## 8.0.3 - *2021-06-01*
+
+- Standardise files with files in sous-chefs/repo-management
 
 ## 8.0.2 - *2021-04-14*
 

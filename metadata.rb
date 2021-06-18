@@ -6,7 +6,7 @@ description       'Installs and configures rsyslog'
 version           '8.0.3'
 source_url        'https://github.com/sous-chefs/rsyslog'
 issues_url        'https://github.com/sous-chefs/rsyslog/issues'
-chef_version      '>= 13'
+chef_version      '>= 15.3'
 
 supports 'amazon'
 supports 'centos'

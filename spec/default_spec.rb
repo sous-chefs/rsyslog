@@ -2,9 +2,8 @@ require 'spec_helper'
 
 describe 'rsyslog::default' do
   cached(:chef_run) do
-    ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '16.04').converge(described_recipe)
+    ChefSpec::ServerRunner.new(platform: 'ubuntu').converge(described_recipe)
   end
-
   let(:service_resource) { 'service[rsyslog]' }
 
   it 'installs the rsyslog part' do
@@ -13,7 +12,7 @@ describe 'rsyslog::default' do
 
   context "when node['rsyslog']['relp'] is true" do
     cached(:chef_run) do
-      ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '16.04') do |node|
+      ChefSpec::ServerRunner.new(platform: 'ubuntu') do |node|
         node.normal['rsyslog']['use_relp'] = true
       end.converge(described_recipe)
     end
@@ -26,7 +25,7 @@ describe 'rsyslog::default' do
   context "when node['rsyslog']['enable_tls'] is true" do
     context "when node['rsyslog']['tls_ca_file'] is not set" do
       cached(:chef_run) do
-        ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '16.04') do |node|
+        ChefSpec::ServerRunner.new(platform: 'ubuntu') do |node|
           node.normal['rsyslog']['enable_tls'] = true
         end.converge(described_recipe)
       end
@@ -38,7 +37,7 @@ describe 'rsyslog::default' do
 
     context "when node['rsyslog']['tls_ca_file'] is set" do
       cached(:chef_run) do
-        ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '16.04') do |node|
+        ChefSpec::ServerRunner.new(platform: 'ubuntu') do |node|
           node.normal['rsyslog']['enable_tls'] = true
           node.normal['rsyslog']['tls_ca_file'] = '/etc/path/to/ssl-ca.crt'
         end.converge(described_recipe)
@@ -50,7 +49,7 @@ describe 'rsyslog::default' do
 
       context "when protocol is not 'tcp'" do
         cached(:chef_run) do
-          ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '16.04') do |node|
+          ChefSpec::ServerRunner.new(platform: 'ubuntu') do |node|
             node.normal['rsyslog']['enable_tls'] = true
             node.normal['rsyslog']['tls_ca_file'] = '/etc/path/to/ssl-ca.crt'
             node.normal['rsyslog']['protocol'] = 'udp'
@@ -84,7 +83,7 @@ describe 'rsyslog::default' do
 
     context 'on SmartOS' do
       cached(:chef_run) do
-        ChefSpec::ServerRunner.new(platform: 'smartos', version: '5.11').converge(described_recipe)
+        ChefSpec::ServerRunner.new(platform: 'smartos').converge(described_recipe)
       end
 
       let(:directory) { chef_run.directory('/opt/local/etc/rsyslog.d') }
@@ -150,7 +149,7 @@ describe 'rsyslog::default' do
 
     context 'on SmartOS' do
       cached(:chef_run) do
-        ChefSpec::ServerRunner.new(platform: 'smartos', version: '5.11').converge(described_recipe)
+        ChefSpec::ServerRunner.new(platform: 'smartos').converge(described_recipe)
       end
 
       let(:template) { chef_run.template('/opt/local/etc/rsyslog.conf') }
@@ -203,7 +202,7 @@ describe 'rsyslog::default' do
 
     context 'on SmartOS' do
       cached(:chef_run) do
-        ChefSpec::ServerRunner.new(platform: 'smartos', version: '5.11').converge(described_recipe)
+        ChefSpec::ServerRunner.new(platform: 'smartos').converge(described_recipe)
       end
 
       let(:template) { chef_run.template('/opt/local/etc/rsyslog.d/50-default.conf') }
@@ -233,7 +232,7 @@ describe 'rsyslog::default' do
 
   context 'COOK-3608 maillog regression test' do
     cached(:chef_run) do
-      ChefSpec::ServerRunner.new(platform: 'centos', version: '6').converge(described_recipe)
+      ChefSpec::ServerRunner.new(platform: 'centos').converge(described_recipe)
     end
 
     it 'outputs mail.* to /var/log/maillog' do
@@ -260,9 +259,9 @@ describe 'rsyslog::default' do
   end
 
   context 'when template[/etc/rsyslog.d/35-imfile.conf] receives :create' do
-    context 'when on centos 6' do
+    context 'when on centos' do
       let(:chef_run) do
-        ChefSpec::ServerRunner.new(platform: 'centos', version: '6') do |node|
+        ChefSpec::ServerRunner.new(platform: 'centos') do |node|
           node.normal['rsyslog']['imfile']['PollingInterval'] = 10
         end.converge(described_recipe)
       end
@@ -272,15 +271,12 @@ describe 'rsyslog::default' do
         template.run_action(:create)
       end
 
-      it "node['rsyslog']['config_style'] will be 'legacy' by default" do
-        expect(chef_run.node['rsyslog']['config_style']).to eq('legacy')
-      end
       context '/etc/rsyslog.d/35-imfile.conf file' do
-        it 'will be create with legacy style syntax' do
-          expect(chef_run).to render_file(template.path).with_content('$ModLoad imfile')
+        it do
+          expect(chef_run).to_not render_file(template.path).with_content('$ModLoad imfile')
         end
-        it 'will NOT include module parameter PollingInterval' do
-          expect(chef_run).not_to render_file(template.path).with_content('PollingInterval')
+        it do
+          expect(chef_run).to render_file(template.path).with_content('PollingInterval')
         end
         it 'is owned by root:root' do
           expect(template.owner).to eq('root')
@@ -296,9 +292,9 @@ describe 'rsyslog::default' do
         end
       end
     end
-    context 'when on ubuntu 16.04 ' do
+    context 'when on ubuntu' do
       let(:chef_run) do
-        ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '16.04') do |node|
+        ChefSpec::ServerRunner.new(platform: 'ubuntu') do |node|
           node.normal['rsyslog']['imfile']['PollingInterval'] = 10
         end.converge(described_recipe)
       end
