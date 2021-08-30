@@ -4,6 +4,8 @@ This file is used to list changes made in each version of the rsyslog cookbook.
 
 ## Unreleased
 
+- Standardise files with files in sous-chefs/repo-management
+
 ## 9.0.0 - *2021-06-18*
 
 - Chef 17 updates: enable `unified_mode` on all resources
