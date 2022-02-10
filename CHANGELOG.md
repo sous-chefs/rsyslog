@@ -4,6 +4,8 @@ This file is used to list changes made in each version of the rsyslog cookbook.
 
 ## Unreleased
 
+- Standardise files with files in sous-chefs/repo-management
+
 ## 9.0.2 - *2022-02-08*
 
 - Remove delivery folder
