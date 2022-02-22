@@ -44,7 +44,11 @@ default['rsyslog']['default_remote_template']   = nil
 default['rsyslog']['rate_limit_interval']       = nil
 default['rsyslog']['rate_limit_burst']          = nil
 default['rsyslog']['enable_tls']                = false
-default['rsyslog']['tls_driver']                = 'ossl'
+default['rsyslog']['tls_driver']                = if platform_family?('rhel') && platform_version.to_i == 7
+                                                    'gtls'
+                                                  else
+                                                    'ossl'
+                                                  end
 default['rsyslog']['action_queue_max_disk_space'] = '1G'
 default['rsyslog']['tls_ca_file']               = nil
 default['rsyslog']['tls_certificate_file']      = nil

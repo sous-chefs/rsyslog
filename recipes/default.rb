@@ -24,13 +24,14 @@ if node['rsyslog']['enable_tls']
   when 'gtls'
     package "#{node['rsyslog']['package_name']}-gnutls"
   when 'ossl'
+    raise "#{node['rsyslog']['package_name']}-openssl is not available for CentOS 7 -- use gnutls instead (node['rsyslog']['tls_driver'] = 'gtls')" if platform_family?('rhel') && platform_version.to_i == 7
+
     package "#{node['rsyslog']['package_name']}-openssl"
   end
 end
 
-if node['rsyslog']['enable_tls'] && node['rsyslog']['tls_ca_file']
-  raise "Recipe rsyslog::default can not use 'enable_tls' with protocol '#{node['rsyslog']['protocol']}' (requires 'tcp')" unless node['rsyslog']['protocol'] == 'tcp'
-  package "#{node['rsyslog']['package_name']}-gnutls"
+if node['rsyslog']['enable_tls'] && node['rsyslog']['tls_ca_file'] && node['rsyslog']['protocol'] != 'tcp'
+  raise "Recipe rsyslog::default can not use 'enable_tls' with protocol '#{node['rsyslog']['protocol']}' (requires 'tcp')"
 end
 
 directory "#{node['rsyslog']['config_prefix']}/rsyslog.d" do
@@ -81,14 +82,10 @@ template "#{node['rsyslog']['config_prefix']}/rsyslog.d/50-default.conf" do
   mode    node['rsyslog']['config_files']['mode']
   notifies :run, 'execute[validate_config]'
   notifies :restart, "service[#{node['rsyslog']['service_name']}]"
-end unless node['rsyslog']['default_conf_file'] == false
+  only_if { node['rsyslog']['default_conf_file'] }
+end
 
-# syslog needs to be stopped before rsyslog can be started on RHEL versions before 6.0
-if platform_family?('rhel') && node['platform_version'].to_i < 6
-  service 'syslog' do
-    action [:stop, :disable]
-  end
-elsif platform_family?('smartos', 'omnios')
+if platform_family?('smartos', 'omnios')
   # syslog needs to be stopped before rsyslog can be started on SmartOS, OmniOS
   service 'system-log' do
     action :disable
