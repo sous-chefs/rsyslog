@@ -11,20 +11,23 @@ verifier:
   name: inspec
 
 platforms:
+  - name: almalinux-8
   - name: amazonlinux-2
   - name: centos-7
-  - name: centos-8
-  - name: debian-9
+  - name: centos-stream-8
   - name: debian-10
+  - name: debian-11
   - name: fedora-latest
   - name: opensuse-leap-15
-  - name: ubuntu-18.04
-  - name: ubuntu-20.04
+  - name: rockylinux-8
+  - name: ubuntu-1804
+  - name: ubuntu-2004
 
 suites:
   - name: default
     run_list:
       - recipe[rsyslog::default]
+
   - name: relp
     run_list:
       - recipe[rsyslog::client]
@@ -45,6 +48,7 @@ suites:
             port: 654
             protocol: tcp
             remote_template: RSYSLOG_SyslogProtocol23Format
+
   - name: client
     run_list:
       - recipe[rsyslog_test::client]
@@ -65,6 +69,7 @@ suites:
             port: 654
             protocol: tcp
             remote_template: RSYSLOG_SyslogProtocol23Format
+
   - name: server
     run_list:
       - recipe[rsyslog_test::server]
@@ -72,6 +77,7 @@ suites:
       inspec_tests:
         - name: rsyslog-default-integration-tests
           path: test/integration/default
+
   - name: input_file_resource
     attributes:
       rsyslog:
