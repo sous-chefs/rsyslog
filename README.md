@@ -16,11 +16,12 @@ This cookbook is maintained by the Sous Chefs. The Sous Chefs are a community of
 
 ### Platforms
 
-- Debian/Ubuntu
-- RHEL/CentOS/Scientific/Amazon/Oracle
+- CentOS 7+ (incl. Rocky & Alma)
+- Debian 10+
 - Fedora
-- OpenSUSE
-- SmartOS
+- OpenSUSE Leap
+- SmartOS / OmniOS
+- Ubuntu 18.04+
 
 ### Chef
 
@@ -114,8 +115,10 @@ You can use `node['rsyslog']['custom_config']` to define custom entries for send
 Example:
 
 ```ruby
-node['rsyslog']['custom_remote'] = [{ 'server' => '10.10.4.4', 'port' => '567', 'logs' => 'auth.*,mail.*', 'protocol' => 'udp', 'remote_template' => 'RSYSLOG_SyslogProtocol23Format'},
-                                    { 'server' => '10.0.0.3', 'port' => '555', 'logs' => 'authpriv,daemon.*' } ]
+node['rsyslog']['custom_remote'] = [
+  { 'server' => '10.10.4.4', 'port' => '567', 'logs' => 'auth.*,mail.*', 'protocol' => 'udp', 'remote_template' => 'RSYSLOG_SyslogProtocol23Format'},
+  { 'server' => '10.0.0.3', 'port' => '555', 'logs' => 'authpriv,daemon.*' }
+]
 ```
 
 The server key is required; if other keys are left out, the default global values will be used (eg `node['rsyslog']['port']` will be used if 'port' is omitted)
@@ -190,7 +193,7 @@ A `base` role (e.g., roles/base.rb), applied to all nodes so they are syslog cli
 
 ```ruby
 name "base"
-description "Base role applied to all nodes
+description "Base role applied to all nodes"
 run_list("recipe[rsyslog::client]")
 ```
 
