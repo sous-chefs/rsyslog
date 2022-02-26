@@ -2,6 +2,8 @@
 
 This file is used to list changes made in each version of the rsyslog cookbook.
 
+## Unreleased
+
 ## 9.1.0 - *2022-02-26*
 
 - Use `gnutls` for TLS support on CentOS 7
