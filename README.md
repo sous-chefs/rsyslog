@@ -49,7 +49,7 @@ See `attributes/default.rb` for default values.
 - `node['rsyslog']['priv_seperation']` - Whether to use privilege separation or not.
 - `node['rsyslog']['priv_user']` - User to run as when using privilege separation. Defult is `node['rsyslog']['user']`
 - `node['rsyslog']['priv_group']` - Group to run as when using privilege separation. Defult is `node['rsyslog']['group']`
-- `node['rsyslog']['max_message_size']` - Specify the maximum allowed message size. Default is 2k.
+- `node['rsyslog']['max_message_size']` - Specify the maximum allowed message size. Default is 2k. Specifying 'nil' or 'false' will not generate the associated directive in the configuration at all.
 - `node['rsyslog']['user']` - Who should own the configuration files and directories
 - `node['rsyslog']['group']` - Who should group-own the configuration files and directories
 - `node['rsyslog']['dir_owner']` - Who should own the log directories
