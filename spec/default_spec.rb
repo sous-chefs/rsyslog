@@ -21,7 +21,7 @@ describe 'rsyslog::default' do
     default_attributes['rsyslog']['max_message_size'] = nil
 
     it do
-      is_expected.to_not render_file('/etc/rsyslog.conf').with_content(%r{\$MaxMessageSize \s+}mix)
+      is_expected.to_not render_file('/etc/rsyslog.conf').with_content(/\$MaxMessageSize \s+/mix)
     end
   end
 
