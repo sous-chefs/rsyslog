@@ -17,6 +17,14 @@ describe 'rsyslog::default' do
     end
   end
 
+  context "when node['rsyslog']['max_message_size'] is nil" do
+    default_attributes['rsyslog']['max_message_size'] = nil
+
+    it do
+      is_expected.to_not render_file('/etc/rsyslog.conf').with_content(%r{\$MaxMessageSize \s+}mix)
+    end
+  end
+
   context "when node['rsyslog']['enable_tls'] is true" do
     default_attributes['rsyslog']['enable_tls'] = true
 
