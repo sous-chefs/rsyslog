@@ -2,6 +2,8 @@
 
 This file is used to list changes made in each version of the rsyslog cookbook.
 
+## Unreleased
+
 ## 9.2.0 - *2022-09-27*
 
 - Allow omitting $MaxMessageSize from config
