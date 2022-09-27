@@ -4,6 +4,8 @@ This file is used to list changes made in each version of the rsyslog cookbook.
 
 ## Unreleased
 
+- Allow omitting $MaxMessageSize from config
+
 ## 9.1.0 - *2022-02-26*
 
 - Use `gnutls` for TLS support on CentOS 7

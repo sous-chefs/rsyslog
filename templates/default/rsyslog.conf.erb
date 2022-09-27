@@ -15,7 +15,9 @@ $LocalHostName <%= node['rsyslog']['local_host_name'] %>
 #
 # Set max message size
 #
+<% if node['rsyslog']['max_message_size'] -%>
 $MaxMessageSize <%= node['rsyslog']['max_message_size'] %>
+<% end %>
 
 #
 # Preserve FQDN
