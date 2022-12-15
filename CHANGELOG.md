@@ -10,8 +10,6 @@ This file is used to list changes made in each version of the rsyslog cookbook.
 
 - Allow omitting $MaxMessageSize from config
 
-Standardise files with files in sous-chefs/repo-management
-
 ## 9.1.0 - *2022-02-26*
 
 - Use `gnutls` for TLS support on CentOS 7
@@ -76,7 +74,7 @@ Standardise files with files in sous-chefs/repo-management
 ## 7.2.1 - *2020-11-23*
 
 - Fixed a bug during the release of 7.2.0
-  - Add an attribute for setting the mode on the configuration directory
+   - Add an attribute for setting the mode on the configuration directory
 
 ## 7.2.0 - *2020-11-23*
 
