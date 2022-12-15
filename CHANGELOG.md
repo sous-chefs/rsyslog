@@ -4,6 +4,8 @@ This file is used to list changes made in each version of the rsyslog cookbook.
 
 ## Unreleased
 
+- Standardise files with files in sous-chefs/repo-management
+
 ## 9.2.0 - *2022-09-27*
 
 - Allow omitting $MaxMessageSize from config
@@ -72,7 +74,7 @@ This file is used to list changes made in each version of the rsyslog cookbook.
 ## 7.2.1 - *2020-11-23*
 
 - Fixed a bug during the release of 7.2.0
-  - Add an attribute for setting the mode on the configuration directory
+   - Add an attribute for setting the mode on the configuration directory
 
 ## 7.2.0 - *2020-11-23*
 
