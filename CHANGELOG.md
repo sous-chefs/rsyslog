@@ -2,7 +2,7 @@
 
 This file is used to list changes made in each version of the rsyslog cookbook.
 
-## Unreleased
+## 9.2.3 - *2023-02-15*
 
 ## 9.2.2 - *2023-02-14*
 
