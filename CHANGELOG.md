@@ -289,7 +289,7 @@ Standardise files with files in sous-chefs/repo-management
 - Move the include for /etc/rsyslog.d/ to the very end of the rsyslog.conf config
 - Added the ability to bind to a specific IP when running the server on UDP with node['rsyslog']['bind']
 - Sync the comments in the rsyslog.conf file with the latest upstream rsyslog release
-- Change emerg to log to :omusrmsg: _vs._ on modern rsyslog releases to avoid deprecation warnings
+- Change emerg to log to :omusrmsg: *vs.* on modern rsyslog releases to avoid deprecation warnings
 
 ## v.2.0.0 (2015-05-18)
 
