@@ -50,6 +50,7 @@ default['rsyslog']['tls_driver']                = if platform_family?('rhel') &&
                                                     'ossl'
                                                   end
 default['rsyslog']['action_queue_max_disk_space'] = '1G'
+default['rsyslog']['tcp_max_sessions']          = 200
 default['rsyslog']['tls_ca_file']               = nil
 default['rsyslog']['tls_certificate_file']      = nil
 default['rsyslog']['tls_key_file']              = nil
