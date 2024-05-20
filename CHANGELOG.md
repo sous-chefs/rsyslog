@@ -6,7 +6,16 @@ This file is used to list changes made in each version of the rsyslog cookbook.
 
 Standardise files with files in sous-chefs/repo-management
 
-Standardise files with files in sous-chefs/repo-management
+## 9.2.21 - *2024-05-02*
+
+## 9.2.20 - *2024-05-02*
+
+## 9.2.19 - *2024-02-02*
+
+## 9.2.18 - *2024-02-02*
+
+Make `$InputTCPMaxSessions` configurable via
+`node['rsyslog']['tcp_max_sessions']` attribute.
 
 ## 9.2.17 - *2023-12-21*
 

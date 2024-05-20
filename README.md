@@ -73,6 +73,7 @@ See `attributes/default.rb` for default values.
 - `node['rsyslog']['rate_limit_interval']` - Value of the $SystemLogRateLimitInterval configuration directive in `/etc/rsyslog.conf`. Default is nil, leaving it to the platform default.
 - `node['rsyslog']['rate_limit_burst']` - Value of the $SystemLogRateLimitBurst configuration directive in `/etc/rsyslog.conf`. Default is nil, leaving it to the platform default.
 - `node['rsyslog']['action_queue_max_disk_space']` - Max amount of disk space the disk-assisted queue is allowed to use ([more info](http://www.rsyslog.com/doc/queues.html)).
+- `node['rsyslog']['tcp_max_sessions']` - Maximum number of TCP sessions (ie. clients) this rsyslog server will handle. Default is 200.
 - `node['rsyslog']['enable_tls']` - Whether or not to enable TLS encryption. When enabled, forces protocol to `tcp`. Default is `false`.
 - `node['rsyslog']['tls_driver']` -  Defaults to `ossl`.
 - `node['rsyslog']['tls_ca_file']` - Path to TLS CA file. Required for both server and clients.

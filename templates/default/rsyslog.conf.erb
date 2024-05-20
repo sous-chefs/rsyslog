@@ -44,6 +44,7 @@ $DefaultNetstreamDriverKeyFile <%= node['rsyslog']['tls_key_file'] %>
 
 $ModLoad imtcp
 
+$InputTCPMaxSessions <%= node['rsyslog']['tcp_max_sessions'] || 200 %>
 $InputTCPServerStreamDriverMode 1 # run driver in TLS-only mode
 $InputTCPServerStreamDriverAuthMode <%= node['rsyslog']['tls_auth_mode'] || 'anon' %>
 $InputTCPServerRun <%= node['rsyslog']['port'] %>
@@ -51,6 +52,7 @@ $InputTCPServerRun <%= node['rsyslog']['port'] %>
   <% else -%>
 <% if node['rsyslog']['protocol'] =~ /tcp/ %>
   $ModLoad imtcp
+  $InputTCPMaxSessions <%= node['rsyslog']['tcp_max_sessions'] || 200 %>
   $InputTCPServerRun <%= node['rsyslog']['port'] %>
 <% end -%>
 <% if node['rsyslog']['protocol'] =~ /udp/ %>
