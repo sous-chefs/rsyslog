@@ -4,6 +4,8 @@ This file is used to list changes made in each version of the rsyslog cookbook.
 
 ## Unreleased
 
+Standardise files with files in sous-chefs/repo-management
+
 ## 9.2.21 - *2024-05-02*
 
 ## 9.2.20 - *2024-05-02*
