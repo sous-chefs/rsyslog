@@ -2,6 +2,8 @@
 
 This file is used to list changes made in each version of the rsyslog cookbook.
 
+## Unreleased
+
 ## 9.2.22 - *2024-05-22*
 
 Standardise files with files in sous-chefs/repo-management
