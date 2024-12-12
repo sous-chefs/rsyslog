@@ -4,6 +4,9 @@ This file is used to list changes made in each version of the rsyslog cookbook.
 
 ## Unreleased
 
+- Update rsyslog.conf template to support newer platforms
+- Update platforms tested in CI
+
 ## 9.2.25 - *2024-12-04*
 
 ## 9.2.24 - *2024-11-18*
@@ -385,12 +388,12 @@ Fixing bug fix in rsyslog.conf
 
 ### Bug
 
-- **[COOK-4256](https://tickets.opscode.com/browse/COOK-4256)** - Fix syntax errors in default.conf on rhel
+- [COOK-4256] - Fix syntax errors in default.conf on rhel
 
 ### New Feature
 
-- **[COOK-4022](https://tickets.opscode.com/browse/COOK-4022)** - Add use_local_ipv4 option to allow selecting internal interface on cloud systems
-- **[COOK-4018](https://tickets.opscode.com/browse/COOK-4018)** - rsyslog TLS encryption support
+- [COOK-4022] - Add use_local_ipv4 option to allow selecting internal interface on cloud systems
+- [COOK-4018] - rsyslog TLS encryption support
 
 ## v1.10.2
 
@@ -400,44 +403,44 @@ No change. Version bump for toolchain.
 
 ### New Feature
 
-- **[COOK-4021](https://tickets.opscode.com/browse/COOK-4021)** - Allow specifying default templates for local and remote
+- [COOK-4021] - Allow specifying default templates for local and remote
 
 ### Improvement
 
-- **[COOK-3876](https://tickets.opscode.com/browse/COOK-3876)** - Cater for setting rate limits
+- [COOK-3876] - Cater for setting rate limits
 
 ## v1.9.0
 
 ### New Feature
 
-- **[COOK-3736](https://tickets.opscode.com/browse/COOK-3736)** - Support OmniOS
+- [COOK-3736] - Support OmniOS
 
 ### Improvement
 
-- **[COOK-3609](https://tickets.opscode.com/browse/COOK-3609)** - Add actionqueue to remote rsyslog configurations
+- [COOK-3609] - Add actionqueue to remote rsyslog configurations
 
 ### Bug
 
-- **[COOK-3608](https://tickets.opscode.com/browse/COOK-3608)** - Add 50-default template knobs
-- **[COOK-3600](https://tickets.opscode.com/browse/COOK-3600)** - SmartOS support
+- [COOK-3608] - Add 50-default template knobs
+- [COOK-3600] - SmartOS support
 
 ## v1.8.0
 
 ### Improvement
 
-- **[COOK-3573](https://tickets.opscode.com/browse/COOK-3573)** - Add Test Kitchen, Specs, and Travis CI
+- [COOK-3573] - Add Test Kitchen, Specs, and Travis CI
 
 ### New Feature
 
-- **[COOK-3435](https://tickets.opscode.com/browse/COOK-3435)** - Add support for relp
+- [COOK-3435] - Add support for relp
 
 ## v1.7.0
 
 ### Improvement
 
-- **[COOK-3253](https://tickets.opscode.com/browse/COOK-3253)** - Enable repeated message reduction
-- **[COOK-3190](https://tickets.opscode.com/browse/COOK-3190)** - Allow specifying which logs to send to remote server
-- **[COOK-2355](https://tickets.opscode.com/browse/COOK-2355)** - Support forwarding events to more than one server
+- [COOK-3253] - Enable repeated message reduction
+- [COOK-3190] - Allow specifying which logs to send to remote server
+- [COOK-2355] - Support forwarding events to more than one server
 
 ## v1.6.0
 

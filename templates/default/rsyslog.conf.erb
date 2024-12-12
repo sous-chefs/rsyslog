@@ -30,7 +30,14 @@ $PreserveFQDN <%= node['rsyslog']['preserve_fqdn'] %>
 
 <% if node['rsyslog']['modules'] && !node['rsyslog']['modules'].empty? %>
   <% [*node['rsyslog']['modules']].each do |mod| %>
-$ModLoad <%= mod %>
+  <% case mod -%>
+  <% when 'imuxsock' -%>
+module(load="imuxsock" SysSock.Use="off")
+  <% when 'imjournal' -%>
+module(load="imjournal" UsePid="system" StateFile="imjournal.state")
+  <% else -%>
+module(load="<%= mod %>")
+  <% end %>
   <% end %>
 <% end %>
 
@@ -42,23 +49,24 @@ $DefaultNetstreamDriverCAFile <%= node['rsyslog']['tls_ca_file'] %>
 $DefaultNetstreamDriverCertFile <%= node['rsyslog']['tls_certificate_file'] %>
 $DefaultNetstreamDriverKeyFile <%= node['rsyslog']['tls_key_file'] %>
 
-$ModLoad imtcp
+module(load="imtcp"
+  MaxSessions="<%= node['rsyslog']['tcp_max_sessions'] || 200 %>"
+  StreamDriver.Mode="1"
+  StreamDriver.AuthMode="<%= node['rsyslog']['tls_auth_mode'] || 'anon' %>")
+input(type="imtcp" Port="<%= node['rsyslog']['port'] %>")
 
-$InputTCPMaxSessions <%= node['rsyslog']['tcp_max_sessions'] || 200 %>
-$InputTCPServerStreamDriverMode 1 # run driver in TLS-only mode
-$InputTCPServerStreamDriverAuthMode <%= node['rsyslog']['tls_auth_mode'] || 'anon' %>
-$InputTCPServerRun <%= node['rsyslog']['port'] %>
 # Provide <%= node['rsyslog']['protocol'].upcase %> log reception
   <% else -%>
 <% if node['rsyslog']['protocol'] =~ /tcp/ %>
-  $ModLoad imtcp
-  $InputTCPMaxSessions <%= node['rsyslog']['tcp_max_sessions'] || 200 %>
-  $InputTCPServerRun <%= node['rsyslog']['port'] %>
+module(load="imtcp"
+  MaxSessions="<%= node['rsyslog']['tcp_max_sessions'] || 200 %>")
+input(type="imtcp" Port="<%= node['rsyslog']['port'] %>")
 <% end -%>
 <% if node['rsyslog']['protocol'] =~ /udp/ %>
-  $ModLoad imudp
-  $UDPServerAddress <%= node['rsyslog']['bind'] %>
-  $UDPServerRun <%= node['rsyslog']['port'] %>
+module(load="imudp")
+input(type="imudp"
+  Address="<%= node['rsyslog']['bind'] %>"
+  Port="<%= node['rsyslog']['port'] %>")
 <% end -%>
   <% end -%>
 <% end -%>

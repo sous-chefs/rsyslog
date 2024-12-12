@@ -16,12 +16,12 @@ This cookbook is maintained by the Sous Chefs. The Sous Chefs are a community of
 
 ### Platforms
 
-- CentOS 7+ (incl. Rocky & Alma)
-- Debian 10+
+- CentOS 8+ (incl. Rocky & Alma)
+- Debian 11+
 - Fedora
 - OpenSUSE Leap
 - SmartOS / OmniOS
-- Ubuntu 18.04+
+- Ubuntu 20.04+
 
 ### Chef
 
@@ -105,7 +105,7 @@ Uses `node['rsyslog']['server_ip']` or Chef search (in that precedence order) to
 
 You can use `node['rsyslog']['custom_config']` to define custom entries for sending logs to remote servers. Available attributes:
 
-```
+```ruby
     'server': Ip/hostname of remote syslog server (Required)
     'port': Port to send logs to
     'logs': Syslog log facilities to send (auth, authpriv, daemon, etc)
@@ -160,9 +160,9 @@ For example, to change this to just the hostname, set the attribute `node['rsysl
 
 At this time, the server can only listen on UDP _or_ TCP.
 
-# Resources
+## Resources
 
-## file_input
+### file_input
 
 Configures a [text file input monitor](http://www.rsyslog.com/doc/imfile.html) to push a log file into rsyslog. Rsyslog must be installed to use this custom resource either using your own wrapper cookbook or the rsyslog::default recipe.
 
@@ -176,7 +176,7 @@ Properties:
 - `cookbook_source`: cookbook containing the template. Defaults to `rsyslog`.
 - `template_source`: template file source. Defaults to `file-input.conf.erb`
 
-# Usage
+## Usage
 
 Use `recipe[rsyslog]` to install and start rsyslog as a basic configured service for standalone systems.
 

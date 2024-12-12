@@ -2,8 +2,8 @@
 # Local modifications will be overwritten
 
 <% if node['rsyslog']['use_relp'] -%>
-$ModLoad imrelp
-$InputRELPServerRun <%= node['rsyslog']['relp_port'] %>
+module(load="imrelp")
+input(type="imrelp" port="<%= node['rsyslog']['relp_port'] %>")
 <% end -%>
 $DirGroup <%= node['rsyslog']['group'] %>
 $DirCreateMode 0755
