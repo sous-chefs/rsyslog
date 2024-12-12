@@ -2,6 +2,8 @@
 
 This file is used to list changes made in each version of the rsyslog cookbook.
 
+## Unreleased
+
 ## 10.0.0 - *2024-12-12*
 
 - Update rsyslog.conf template to support newer platforms
