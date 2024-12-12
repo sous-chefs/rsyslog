@@ -151,7 +151,7 @@ when 'rhel', 'fedora', 'amazon'
     'local7.*' => "#{node['rsyslog']['default_log_dir']}/boot.log",
   }
   default['rsyslog']['modules'] = %w(imuxsock imjournal)
-  default['rsyslog']['additional_directives'] = { 'OmitLocalLogging' => 'on', 'IMJournalStateFile' => 'imjournal.state' }
+  default['rsyslog']['additional_directives'] = { 'IMJournalStateFile' => 'imjournal.state' }
 else
   # format { facility => destination }
   default['rsyslog']['default_facility_logs'] = {

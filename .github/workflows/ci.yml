@@ -24,22 +24,27 @@ jobs:
       matrix:
         os:
           - almalinux-8
-          - amazonlinux-2
-          - centos-7
-          - centos-stream-8
-          - debian-10
+          - almalinux-9
+          - amazonlinux-2023
+          - centos-stream-9
+          - centos-stream-10
           - debian-11
-          - fedora-latest
+          - debian-12
           - opensuse-leap-15
           - rockylinux-8
-          - ubuntu-1804
+          - rockylinux-9
           - ubuntu-2004
+          - ubuntu-2204
+          - ubuntu-2404
         suite:
           - client
           - default
           - input-file-resource
           - relp
           - server
+        exclude:
+          - os: amazonlinux-2023
+            suite: relp
       fail-fast: false
 
     steps:
@@ -47,6 +52,12 @@ jobs:
         uses: actions/checkout@v4 # v4
       - name: Install Chef
         uses: actionshub/chef-install@3.0.1
+      - name: Disable apparmor for rsyslog
+        run: |
+          set -x
+          sudo apt-get update
+          sudo apt-get -y install apparmor-profiles
+          sudo apparmor_parser -R /etc/apparmor.d/usr.sbin.rsyslogd
       - name: Dokken
         uses: actionshub/test-kitchen@3.0.0
         env:
