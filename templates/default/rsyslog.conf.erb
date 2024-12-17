@@ -30,9 +30,8 @@ $PreserveFQDN <%= node['rsyslog']['preserve_fqdn'] %>
 
 <% if node['rsyslog']['modules'] && !node['rsyslog']['modules'].empty? %>
   <% [*node['rsyslog']['modules']].each do |mod| %>
-module(load="<%= mod %>"<%- if node['rsyslog']["#{mod}_directives"] 
-                              node['rsyslog']["#{mod}_directives"].each do |k, v| -%> <%= k %>="<%= v %>"<% end %>)
-                        <%- end -%>
+module(load="<%= mod %>"<%- node['rsyslog']["#{mod}_directives"]&.each { |k, v| <%= k %>="<%= v %>" })
+  <%- end -%>
  <%- end -%>
 <% end %>
 
