@@ -74,6 +74,7 @@ default['rsyslog']['priv_seperation']           = false
 default['rsyslog']['priv_user']                 = nil
 default['rsyslog']['priv_group']                = nil
 default['rsyslog']['modules']                   = %w(imuxsock imklog)
+default['rsyslog']['imuxsock_directives']       = { 'SysSock.Use' => 'off' }
 default['rsyslog']['file_create_mode']          = '0640'
 default['rsyslog']['dir_create_mode']           = '0755'
 default['rsyslog']['umask']                     = '0022'
@@ -151,7 +152,7 @@ when 'rhel', 'fedora', 'amazon'
     'local7.*' => "#{node['rsyslog']['default_log_dir']}/boot.log",
   }
   default['rsyslog']['modules'] = %w(imuxsock imjournal)
-  default['rsyslog']['additional_directives'] = { 'IMJournalStateFile' => 'imjournal.state' }
+  default['rsyslog']['imjournal_directives'] = { 'UsePid' => 'system', 'StateFile' => 'imjournal.state' }
 else
   # format { facility => destination }
   default['rsyslog']['default_facility_logs'] = {

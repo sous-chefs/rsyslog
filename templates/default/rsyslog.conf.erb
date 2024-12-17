@@ -30,15 +30,10 @@ $PreserveFQDN <%= node['rsyslog']['preserve_fqdn'] %>
 
 <% if node['rsyslog']['modules'] && !node['rsyslog']['modules'].empty? %>
   <% [*node['rsyslog']['modules']].each do |mod| %>
-  <% case mod -%>
-  <% when 'imuxsock' -%>
-module(load="imuxsock" SysSock.Use="off")
-  <% when 'imjournal' -%>
-module(load="imjournal" UsePid="system" StateFile="imjournal.state")
-  <% else -%>
-module(load="<%= mod %>")
-  <% end %>
-  <% end %>
+module(load="<%= mod %>"<%- if node['rsyslog']["#{mod}_directives"] 
+                              node['rsyslog']["#{mod}_directives"].each do |k, v| -%> <%= k %>="<%= v %>"<% end %>)
+                        <%- end -%>
+ <%- end -%>
 <% end %>
 
 <% if node['rsyslog']['server'] -%>
