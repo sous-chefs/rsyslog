@@ -2,6 +2,8 @@
 
 This file is used to list changes made in each version of the rsyslog cookbook.
 
+## Unreleased
+
 ## 11.0.0 - *2024-12-18*
 
 Allow module parameters to be configurable by attributes
