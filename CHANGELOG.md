@@ -4,6 +4,9 @@ This file is used to list changes made in each version of the rsyslog cookbook.
 
 ## Unreleased
 
+Allow module parameters to be configurable by attributes
+e.g.`node['rsyslog']['imuxsock_directives']`
+
 ## 10.0.0 - *2024-12-12*
 
 - Update rsyslog.conf template to support newer platforms

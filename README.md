@@ -90,6 +90,8 @@ See `attributes/default.rb` for default values.
 - `node['rsyslog']['server_per_host_template']` - Template to use in the `rsyslog::server` recipe when creating the `35-server-per-host.conf` file
 - `node['rsyslog']['server_per_host_cookbook']` - Cookbook name to get the `node['rsyslog']['server_per_host_template']` template from
 - `node['rsyslog']['imfile']['KEY']` - Set `imfile` module parameters of label `KEY` to value. e.g. `PollingInterval`. Consult rsyslog documentation for valid entries.
+- `node['rsyslog']['modules']` - Array of modules to load in the main rsyslog config filex
+- `node['rsyslog']['<module>_directives']` - Hash of module directives and their values that apply to each `node['rsyslog']['modules']` when the module is loaded
 
 ## Recipes
 
