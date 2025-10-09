@@ -32,10 +32,8 @@ results = search(:node, node['rsyslog']['server_search']).map do |server|
 end unless node['rsyslog']['server_search'].to_s.empty?
 server_ips = Array(node['rsyslog']['server_ip']) + Array(results)
 
-rsyslog_servers = []
-
-server_ips.each do |ip|
-  rsyslog_servers << { 'server' => ip, 'port' => node['rsyslog']['port'], 'logs' => node['rsyslog']['logs_to_forward'], 'protocol' => node['rsyslog']['protocol'], 'remote_template' => node['rsyslog']['default_remote_template'] }
+rsyslog_servers = server_ips.map do |ip|
+  { 'server' => ip, 'port' => node['rsyslog']['port'], 'logs' => node['rsyslog']['logs_to_forward'], 'protocol' => node['rsyslog']['protocol'], 'remote_template' => node['rsyslog']['default_remote_template'] }
 end
 
 unless node['rsyslog']['custom_remote'].empty? || node['rsyslog']['custom_remote'].first.empty?
