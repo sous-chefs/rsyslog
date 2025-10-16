@@ -5,6 +5,11 @@ This file is used to list changes made in each version of the rsyslog cookbook.
 Standardise files with files in sous-chefs/repo-management
 Standardise files with files in sous-chefs/repo-management
 
+## Unreleased
+
+Standardise files with files in sous-chefs/repo-management
+
+
 ## [11.0.2](https://github.com/sous-chefs/rsyslog/compare/11.0.1...v11.0.2) (2025-10-16)
 
 
