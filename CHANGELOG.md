@@ -5,6 +5,13 @@ This file is used to list changes made in each version of the rsyslog cookbook.
 Standardise files with files in sous-chefs/repo-management
 Standardise files with files in sous-chefs/repo-management
 
+## [11.0.2](https://github.com/sous-chefs/rsyslog/compare/11.0.1...v11.0.2) (2025-10-16)
+
+
+### Bug Fixes
+
+* **ci:** Update workflows to use release pipeline ([#245](https://github.com/sous-chefs/rsyslog/issues/245)) ([61c4d96](https://github.com/sous-chefs/rsyslog/commit/61c4d96aaba5cd6b36d16eb56c39ba65f67c0ce2))
+
 ## 11.0.0 - *2024-12-18*
 
 Allow module parameters to be configurable by attributes
