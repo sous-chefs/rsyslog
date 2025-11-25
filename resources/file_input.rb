@@ -35,9 +35,9 @@ action :create do
   }
   vars['state_file'] = new_resource.name if node['rsyslog']['config_style'] == 'legacy'
   template "/etc/rsyslog.d/#{new_resource.priority}-#{new_resource.name}.conf" do
-    mode '0664'
-    owner node['rsyslog']['user']
-    group node['rsyslog']['group']
+    mode    node['rsyslog']['config_files']['mode']
+    owner   node['rsyslog']['config_files']['owner']
+    group   node['rsyslog']['config_files']['group']
     source new_resource.template_source
     cookbook new_resource.cookbook_source
     variables vars
