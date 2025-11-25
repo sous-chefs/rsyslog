@@ -15,6 +15,7 @@ Standardise files with files in sous-chefs/repo-management
 
 ### Bug Fixes
 
+* align file input resource file permissions ([#248](https://github.com/sous-chefs/rsyslog/issues/248)) ([9a5151d](https://github.com/sous-chefs/rsyslog/commit/9a5151daf1d5886977bd2a8bffac284e8909d0cf))
 * **ci:** Update workflows to use release pipeline ([#245](https://github.com/sous-chefs/rsyslog/issues/245)) ([61c4d96](https://github.com/sous-chefs/rsyslog/commit/61c4d96aaba5cd6b36d16eb56c39ba65f67c0ce2))
 * **provider:** since Ubuntu 15.04 should use Systemd ([b45accd](https://github.com/sous-chefs/rsyslog/commit/b45accd6dc3b9bab5b1f118695c3972b9b062363))
 * **provider:** since Ubuntu 15.04 should use Systemd ([d058403](https://github.com/sous-chefs/rsyslog/commit/d058403269d199bf3d22255aa5f0db8690a60f9c))
