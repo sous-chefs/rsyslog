@@ -5,6 +5,20 @@ This file is used to list changes made in each version of the rsyslog cookbook.
 Standardise files with files in sous-chefs/repo-management
 Standardise files with files in sous-chefs/repo-management
 
+## [11.1.0](https://github.com/sous-chefs/rsyslog/compare/v11.0.2...v11.1.0) (2025-11-25)
+
+
+### Features
+
+* Allow $MaxMessageSize to be omitted from configuraton ([c9b3f4b](https://github.com/sous-chefs/rsyslog/commit/c9b3f4bdb4af858ebc21522421dfe4d19339bd00))
+
+
+### Bug Fixes
+
+* **ci:** Update workflows to use release pipeline ([#245](https://github.com/sous-chefs/rsyslog/issues/245)) ([61c4d96](https://github.com/sous-chefs/rsyslog/commit/61c4d96aaba5cd6b36d16eb56c39ba65f67c0ce2))
+* **provider:** since Ubuntu 15.04 should use Systemd ([b45accd](https://github.com/sous-chefs/rsyslog/commit/b45accd6dc3b9bab5b1f118695c3972b9b062363))
+* **provider:** since Ubuntu 15.04 should use Systemd ([d058403](https://github.com/sous-chefs/rsyslog/commit/d058403269d199bf3d22255aa5f0db8690a60f9c))
+
 ## [11.0.2](https://github.com/sous-chefs/rsyslog/compare/11.0.1...v11.0.2) (2025-10-16)
 
 
