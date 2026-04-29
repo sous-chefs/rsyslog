@@ -25,6 +25,15 @@ action :create do
     action :create
   end
 
+  execute 'validate_config' do
+    command "rsyslogd -N 1 -f #{rsyslog_config_file}"
+    action :nothing
+  end
+
+  systemd_unit rsyslog_service_unit do
+    action :nothing
+  end
+
   directory new_resource.log_dir do
     owner effective_dir_owner(new_resource)
     group effective_dir_group(new_resource)

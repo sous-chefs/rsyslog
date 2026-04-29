@@ -31,6 +31,25 @@ action :create do
     tag: new_resource.input_name,
   }
 
+  execute 'validate_config' do
+    command "rsyslogd -N 1 -f #{rsyslog_config_file}"
+    action :nothing
+  end
+
+  systemd_unit rsyslog_service_unit do
+    action :nothing
+  end
+
+  template ::File.join(rsyslog_config_dir, '35-imfile.conf') do
+    cookbook 'rsyslog'
+    source labeled_template('35-imfile.conf.erb', new_resource.config_style)
+    owner new_resource.config_file_owner
+    group new_resource.config_file_group
+    mode new_resource.config_file_mode
+    variables module_parameters: new_resource.imfile_parameters
+    action :create_if_missing
+  end
+
   template ::File.join(rsyslog_config_dir, "#{new_resource.priority}-#{new_resource.input_name}.conf") do
     mode new_resource.config_file_mode
     owner new_resource.config_file_owner
@@ -38,7 +57,8 @@ action :create do
     source template_source
     cookbook new_resource.cookbook_source
     variables variables
-    notifies :create, "template[#{::File.join(rsyslog_config_dir, '35-imfile.conf')}]", :before
+    notifies :run, 'execute[validate_config]'
+    notifies :restart, "systemd_unit[#{rsyslog_service_unit}]"
   end
 end
 

@@ -108,8 +108,6 @@ action :create do
     group new_resource.config_file_group
     mode new_resource.config_file_mode
     variables module_parameters: new_resource.imfile_parameters
-    notifies :run, 'execute[validate_config]'
-    notifies :restart, "systemd_unit[#{rsyslog_service_unit}]"
     action :nothing
   end
 
