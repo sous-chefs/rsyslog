@@ -38,16 +38,16 @@ Source builds are not supported by these resources. Install rsyslog from distrib
 
 ## References
 
-* https://docs.rsyslog.com/doc/installation/packages.html
-* https://www.rsyslog.com/downloads/
-* https://www.rsyslog.com/ubuntu-repository/
-* https://endoflife.date/ubuntu
-* https://endoflife.date/debian
-* https://endoflife.date/rhel
-* https://endoflife.date/amazon-linux
-* https://endoflife.date/centos-stream
-* https://endoflife.date/almalinux
-* https://endoflife.date/rocky-linux
-* https://endoflife.date/oracle-linux
-* https://endoflife.date/fedora
-* https://endoflife.date/opensuse
+* <https://docs.rsyslog.com/doc/installation/packages.html>
+* <https://www.rsyslog.com/downloads/>
+* <https://www.rsyslog.com/ubuntu-repository/>
+* <https://endoflife.date/ubuntu>
+* <https://endoflife.date/debian>
+* <https://endoflife.date/rhel>
+* <https://endoflife.date/amazon-linux>
+* <https://endoflife.date/centos-stream>
+* <https://endoflife.date/almalinux>
+* <https://endoflife.date/rocky-linux>
+* <https://endoflife.date/oracle-linux>
+* <https://endoflife.date/fedora>
+* <https://endoflife.date/opensuse>

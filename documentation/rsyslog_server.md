@@ -4,20 +4,20 @@ Configures an rsyslog server that receives remote logs and writes per-host log f
 
 ## Actions
 
-| Action | Description |
-|--------|-------------|
+| Action    | Description                                                                   |
+| --------- | ----------------------------------------------------------------------------- |
 | `:create` | Installs/configures rsyslog as a server and renders per-host config. Default. |
-| `:delete` | Removes server config, log directory, and base service artifacts. |
+| `:delete` | Removes server config, log directory, and base service artifacts.             |
 
 ## Properties
 
-| Property | Type | Default | Description |
-|----------|------|---------|-------------|
-| `log_dir` | String | `'/srv/rsyslog'` | Root directory for received logs. |
-| `per_host_dir` | String | `'%$YEAR%/%$MONTH%/%$DAY%/%HOSTNAME%'` | Per-host path template. |
-| `allow_non_local` | true, false | `false` | Whether non-local messages continue to lower-numbered rules. |
-| `server_per_host_template` | String | `'35-server-per-host.conf.erb'` | Template source for per-host config. |
-| `server_per_host_cookbook` | String | `'rsyslog'` | Cookbook containing the per-host template. |
+| Property                   | Type        | Default                                | Description                                                  |
+| -------------------------- | ----------- | -------------------------------------- | ------------------------------------------------------------ |
+| `log_dir`                  | String      | `'/srv/rsyslog'`                       | Root directory for received logs.                            |
+| `per_host_dir`             | String      | `'%$YEAR%/%$MONTH%/%$DAY%/%HOSTNAME%'` | Per-host path template.                                      |
+| `allow_non_local`          | true, false | `false`                                | Whether non-local messages continue to lower-numbered rules. |
+| `server_per_host_template` | String      | `'35-server-per-host.conf.erb'`        | Template source for per-host config.                         |
+| `server_per_host_cookbook` | String      | `'rsyslog'`                            | Cookbook containing the per-host template.                   |
 
 Also accepts the shared rsyslog configuration properties from `rsyslog_service`.
 
