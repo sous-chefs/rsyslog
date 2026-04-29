@@ -1,3 +1,7 @@
+# frozen_string_literal: true
+
+include_controls 'default'
+
 control 'server' do
   describe file '/etc/rsyslog.conf' do
     it { should be_file }
