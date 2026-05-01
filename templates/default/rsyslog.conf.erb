@@ -9,59 +9,58 @@
 #
 # Set hostname
 #
-<% if node['rsyslog']['local_host_name'] -%>
-$LocalHostName <%= node['rsyslog']['local_host_name'] %>
+<% if @local_host_name -%>
+$LocalHostName <%= @local_host_name %>
 <% end %>
 #
 # Set max message size
 #
-<% if node['rsyslog']['max_message_size'] -%>
-$MaxMessageSize <%= node['rsyslog']['max_message_size'] %>
+<% if @max_message_size -%>
+$MaxMessageSize <%= @max_message_size %>
 <% end %>
 
 #
 # Preserve FQDN
 #
-$PreserveFQDN <%= node['rsyslog']['preserve_fqdn'] %>
+$PreserveFQDN <%= @preserve_fqdn %>
 
 #################
 #### MODULES ####
 #################
 
-<% if node['rsyslog']['modules'] && !node['rsyslog']['modules'].empty? %>
-  <% [*node['rsyslog']['modules']].each do |mod| %>
+<% if @modules && !@modules.empty? %>
+  <% [*@modules].each do |mod| %>
     <% params = []%>
-    <% node['rsyslog']["#{mod}_directives"]&.each {|k, v| params.push("#{k}=\"#{v}\"")} %>
+    <% @module_directives.fetch(mod, {}).each {|k, v| params.push("#{k}=\"#{v}\"")} %>
 module(load="<%= mod %>" <%= params.join(' ') -%>) 
   <%- end -%>
 <% end %>
 
-<% if node['rsyslog']['server'] -%>
-  <% if node['rsyslog']['enable_tls'] && node['rsyslog']['tls_ca_file'] &&
-        node['rsyslog']['tls_key_file'] && node['rsyslog']['tls_certificate_file'] -%>
-$DefaultNetstreamDriver <%= node['rsyslog']['tls_driver'] %>
-$DefaultNetstreamDriverCAFile <%= node['rsyslog']['tls_ca_file'] %>
-$DefaultNetstreamDriverCertFile <%= node['rsyslog']['tls_certificate_file'] %>
-$DefaultNetstreamDriverKeyFile <%= node['rsyslog']['tls_key_file'] %>
+<% if @server -%>
+  <% if @enable_tls && @tls_ca_file && @tls_key_file && @tls_certificate_file -%>
+$DefaultNetstreamDriver <%= @tls_driver %>
+$DefaultNetstreamDriverCAFile <%= @tls_ca_file %>
+$DefaultNetstreamDriverCertFile <%= @tls_certificate_file %>
+$DefaultNetstreamDriverKeyFile <%= @tls_key_file %>
 
 module(load="imtcp"
-  MaxSessions="<%= node['rsyslog']['tcp_max_sessions'] || 200 %>"
+  MaxSessions="<%= @tcp_max_sessions || 200 %>"
   StreamDriver.Mode="1"
-  StreamDriver.AuthMode="<%= node['rsyslog']['tls_auth_mode'] || 'anon' %>")
-input(type="imtcp" Port="<%= node['rsyslog']['port'] %>")
+  StreamDriver.AuthMode="<%= @tls_auth_mode || 'anon' %>")
+input(type="imtcp" Port="<%= @port %>")
 
-# Provide <%= node['rsyslog']['protocol'].upcase %> log reception
+# Provide <%= @protocol.upcase %> log reception
   <% else -%>
-<% if node['rsyslog']['protocol'] =~ /tcp/ %>
+<% if @protocol =~ /tcp/ %>
 module(load="imtcp"
-  MaxSessions="<%= node['rsyslog']['tcp_max_sessions'] || 200 %>")
-input(type="imtcp" Port="<%= node['rsyslog']['port'] %>")
+  MaxSessions="<%= @tcp_max_sessions || 200 %>")
+input(type="imtcp" Port="<%= @port %>")
 <% end -%>
-<% if node['rsyslog']['protocol'] =~ /udp/ %>
+<% if @protocol =~ /udp/ %>
 module(load="imudp")
 input(type="imudp"
-  Address="<%= node['rsyslog']['bind'] %>"
-  Port="<%= node['rsyslog']['port'] %>")
+  Address="<%= @bind %>"
+  Port="<%= @port %>")
 <% end -%>
   <% end -%>
 <% end -%>
@@ -70,12 +69,12 @@ input(type="imudp"
 #### GLOBAL DIRECTIVES ####
 ###########################
 
-<% if node["rsyslog"]["default_file_template"] -%>
+<% if @default_file_template -%>
 #
 # Default log format template
 #
-$ActionFileDefaultTemplate <%= node["rsyslog"]["default_file_template"] %>
-<% elsif !node["rsyslog"]["high_precision_timestamps"] -%>
+$ActionFileDefaultTemplate <%= @default_file_template %>
+<% elsif !@high_precision_timestamps -%>
 #
 # Use traditional timestamp format.
 # To enable high precision timestamps, comment out the following line.
@@ -83,8 +82,8 @@ $ActionFileDefaultTemplate <%= node["rsyslog"]["default_file_template"] %>
 $ActionFileDefaultTemplate RSYSLOG_TraditionalFileFormat
 <% end -%>
 
-<% if node['rsyslog']['templates'] && !node['rsyslog']['templates'].empty? -%>
-<% [*node['rsyslog']['templates']].each do |template| %>
+<% if @templates && !@templates.empty? -%>
+<% [*@templates].each do |template| %>
 #
 # Additional Log templates
 #
@@ -92,50 +91,50 @@ $Template <%= template %>
 <% end %>
 <% end %>
 # Filter duplicated messages
-$RepeatedMsgReduction <%= node['rsyslog']['repeated_msg_reduction'] %>
+$RepeatedMsgReduction <%= @repeated_msg_reduction %>
 
 #
 # Set temporary directory to buffer syslog queue
 #
-$WorkDirectory <%= node['rsyslog']['working_dir'] %>
+$WorkDirectory <%= @working_dir %>
 
 #
 # Set the default permissions for all log files.
 #
-$Umask <%= node['rsyslog']['umask'] %>
-$FileOwner <%= node['rsyslog']['user'] %>
-$FileGroup <%= node['rsyslog']['group'] %>
-$FileCreateMode <%= node['rsyslog']['file_create_mode'] %>
-$DirOwner <%= node['rsyslog']['dir_owner'] %>
-$DirGroup <%= node['rsyslog']['dir_group'] %>
-$DirCreateMode <%= node['rsyslog']['dir_create_mode'] %>
+$Umask <%= @umask %>
+$FileOwner <%= @user %>
+$FileGroup <%= @group %>
+$FileCreateMode <%= @file_create_mode %>
+$DirOwner <%= @dir_owner %>
+$DirGroup <%= @dir_group %>
+$DirCreateMode <%= @dir_create_mode %>
 
-<% if node['rsyslog']['priv_seperation'] %>
-$PrivDropToUser <%= node['rsyslog']['priv_user'] || node['rsyslog']['user'] %>
-$PrivDropToGroup <%= node['rsyslog']['priv_group'] || node['rsyslog']['group'] %>
+<% if @priv_seperation %>
+$PrivDropToUser <%= @priv_user || @user %>
+$PrivDropToGroup <%= @priv_group || @group %>
 <% end %>
-<% unless node['rsyslog']['rate_limit_interval'].nil? %>
+<% unless @rate_limit_interval.nil? %>
 #
 # Set the amount of time that is being measured for rate limiting
 #
-$SystemLogRateLimitInterval <%= node['rsyslog']['rate_limit_interval'] %>
+$SystemLogRateLimitInterval <%= @rate_limit_interval %>
 <% end %>
-<% unless node['rsyslog']['rate_limit_burst'].nil? %>
+<% unless @rate_limit_burst.nil? %>
 #
 # Set the amount of messages, that have to occur in the time limit of
 #   SystemLogRateLimitInterval, to trigger rate limiting
 #
-$SystemLogRateLimitBurst <%= node['rsyslog']['rate_limit_burst'] %>
+$SystemLogRateLimitBurst <%= @rate_limit_burst %>
 <% end %>
 
 #
 # Set other directives
 #
-<% node['rsyslog']['additional_directives'].each_pair do |k,v| %>
+<% @additional_directives.each_pair do |k,v| %>
 $<%= k %> <%= v %>
 <% end %>
 
 #
-# Include all config files in <%= node['rsyslog']['config_prefix'] %>/rsyslog.d/
+# Include all config files in <%= @config_prefix %>/rsyslog.d/
 #
-$IncludeConfig <%= node['rsyslog']['config_prefix'] %>/rsyslog.d/*.conf
+$IncludeConfig <%= @config_prefix %>/rsyslog.d/*.conf

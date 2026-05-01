@@ -1,0 +1,10 @@
+---
+name: input_file
+title: Integration tests for rsyslog file inputs
+summary: This InSpec profile contains file input tests for rsyslog cookbook
+maintainer: Sous Chefs
+license: Apache-2.0
+version: 1.0.0
+depends:
+  - name: default
+    path: test/integration/default

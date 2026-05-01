@@ -9,10 +9,11 @@ name: ci
 
 jobs:
   lint-unit:
-    uses: sous-chefs/.github/.github/workflows/lint-unit.yml@main
+    uses: sous-chefs/.github/.github/workflows/lint-unit.yml@6.0.0
     permissions:
       actions: write
       checks: write
+      contents: read
       pull-requests: write
       statuses: write
       issues: write
@@ -23,23 +24,18 @@ jobs:
     strategy:
       matrix:
         os:
-          - almalinux-8
           - almalinux-9
           - amazonlinux-2023
           - centos-stream-9
-          - centos-stream-10
-          - debian-11
           - debian-12
-          - opensuse-leap-15
-          - rockylinux-8
+          - fedora-latest
           - rockylinux-9
-          - ubuntu-2004
           - ubuntu-2204
           - ubuntu-2404
         suite:
           - client
           - default
-          - input-file-resource
+          - input-file
           - relp
           - server
         exclude:
@@ -50,8 +46,8 @@ jobs:
     steps:
       - name: Check out code
         uses: actions/checkout@v6
-      - name: Install Chef
-        uses: actionshub/chef-install@6.0.0
+      - name: Install Cinc Workstation
+        uses: sous-chefs/.github/.github/actions/install-workstation@6.0.0
       - name: Disable apparmor for rsyslog
         run: |
           set -x
