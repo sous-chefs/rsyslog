@@ -59,21 +59,26 @@ x-verifiers:
 
 suites:
   - name: default
+    named_run_list: default
     run_list: *default_run_list
     verifier: *default_verifier
 
   - name: relp
+    named_run_list: relp
     run_list: *relp_run_list
     verifier: *relp_verifier
 
   - name: client
+    named_run_list: client
     run_list: *client_run_list
     verifier: *client_verifier
 
   - name: server
+    named_run_list: server
     run_list: *server_run_list
     verifier: *server_verifier
 
   - name: input-file
+    named_run_list: input_file
     run_list: *input_file_run_list
     verifier: *input_file_verifier
