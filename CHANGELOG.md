@@ -5,6 +5,22 @@ This file is used to list changes made in each version of the rsyslog cookbook.
 Standardise files with files in sous-chefs/repo-management
 Standardise files with files in sous-chefs/repo-management
 
+## [12.0.0](https://github.com/sous-chefs/rsyslog/compare/v11.1.0...v12.0.0) (2026-08-15)
+
+
+### ⚠ BREAKING CHANGES
+
+* migrate rsyslog to custom resources ([#256](https://github.com/sous-chefs/rsyslog/issues/256))
+
+### Features
+
+* migrate rsyslog to custom resources ([#256](https://github.com/sous-chefs/rsyslog/issues/256)) ([d22ccb7](https://github.com/sous-chefs/rsyslog/commit/d22ccb794d7273c209e7336615bc40108f8e7437))
+
+
+### Bug Fixes
+
+* migrate to Policyfile and map Kitchen suites ([#262](https://github.com/sous-chefs/rsyslog/issues/262)) ([4cc6b70](https://github.com/sous-chefs/rsyslog/commit/4cc6b70ad2998d0cf2d8bc08b7619d01dbeb3768))
+
 ## [11.1.0](https://github.com/sous-chefs/rsyslog/compare/v11.0.2...v11.1.0) (2025-11-25)
 
 
