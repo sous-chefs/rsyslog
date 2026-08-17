@@ -4,10 +4,14 @@ Configures rsyslog to forward logs to remote syslog servers.
 
 ## Actions
 
-| Action    | Description                                                                |
-| --------- | -------------------------------------------------------------------------- |
-| `:create` | Installs/configures rsyslog and renders remote forwarding config. Default. |
-| `:delete` | Removes client forwarding config and the base service artifacts.           |
+| Action     | Description                                                                |
+| ---------- | -------------------------------------------------------------------------- |
+| `:create`  | Installs/configures rsyslog and renders remote forwarding config. Default. |
+| `:delete`  | Removes client forwarding config and the base service artifacts.           |
+| `:start`   | Starts the rsyslog systemd unit.                                           |
+| `:stop`    | Stops the rsyslog systemd unit.                                            |
+| `:restart` | Restarts the rsyslog systemd unit.                                         |
+| `:reload`  | Reloads the rsyslog systemd unit.                                          |
 
 ## Properties
 
