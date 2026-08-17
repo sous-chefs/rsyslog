@@ -52,4 +52,14 @@ describe 'rsyslog_client' do
 
     it { expect { chef_run }.to raise_error(RuntimeError, /no IP/) }
   end
+
+  context 'restart action' do
+    recipe do
+      rsyslog_client 'default' do
+        action :restart
+      end
+
+      it { is_expected.to restart_service('rsyslog.service') }
+    end
+  end
 end

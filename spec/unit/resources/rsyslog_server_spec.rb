@@ -38,4 +38,14 @@ describe 'rsyslog_server' do
       is_expected.to render_file('/etc/rsyslog.conf').with_content('Port="5514"')
     end
   end
+
+  context 'restart action' do
+    recipe do
+      rsyslog_server 'default' do
+        action :restart
+      end
+
+      it { is_expected.to restart_service('rsyslog.service') }
+    end
+  end
 end
