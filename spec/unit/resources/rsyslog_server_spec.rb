@@ -39,13 +39,43 @@ describe 'rsyslog_server' do
     end
   end
 
+  context 'start action' do
+    recipe do
+      rsyslog_server 'default' do
+        action :start
+      end
+    end
+
+    it { is_expected.to start_systemd_unit('rsyslog.service') }
+  end
+
+  context 'stop action' do
+    recipe do
+      rsyslog_server 'default' do
+        action :stop
+      end
+    end
+
+    it { is_expected.to stop_systemd_unit('rsyslog.service') }
+  end
+
   context 'restart action' do
     recipe do
       rsyslog_server 'default' do
         action :restart
       end
-
-      it { is_expected.to restart_service('rsyslog.service') }
     end
+
+    it { is_expected.to restart_systemd_unit('rsyslog.service') }
+  end
+
+  context 'reload action' do
+    recipe do
+      rsyslog_server 'default' do
+        action :reload
+      end
+    end
+
+    it { is_expected.to reload_systemd_unit('rsyslog.service') }
   end
 end

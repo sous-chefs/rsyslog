@@ -71,13 +71,43 @@ describe 'rsyslog_service' do
     it { is_expected.to render_file('/etc/rsyslog.d/50-default.conf').with_content('mail.*    -/var/log/maillog') }
   end
 
+  context 'start action' do
+    recipe do
+      rsyslog_service 'default' do
+        action :start
+      end
+    end
+
+    it { is_expected.to start_systemd_unit('rsyslog.service') }
+  end
+
+  context 'stop action' do
+    recipe do
+      rsyslog_service 'default' do
+        action :stop
+      end
+    end
+
+    it { is_expected.to stop_systemd_unit('rsyslog.service') }
+  end
+
   context 'restart action' do
     recipe do
       rsyslog_service 'default' do
         action :restart
       end
-
-      it { is_expected.to restart_service('rsyslog.service') }
     end
+
+    it { is_expected.to restart_systemd_unit('rsyslog.service') }
+  end
+
+  context 'reload action' do
+    recipe do
+      rsyslog_service 'default' do
+        action :reload
+      end
+    end
+
+    it { is_expected.to reload_systemd_unit('rsyslog.service') }
   end
 end
