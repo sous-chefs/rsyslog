@@ -85,3 +85,27 @@ action :delete do
     action :delete
   end
 end
+
+action :start do
+  systemd_unit rsyslog_service_unit do
+    action :start
+  end
+end
+
+action :stop do
+  systemd_unit rsyslog_service_unit do
+    action :stop
+  end
+end
+
+action :restart do
+  systemd_unit rsyslog_service_unit do
+    action :restart
+  end
+end
+
+action :reload do
+  systemd_unit rsyslog_service_unit do
+    action :reload
+  end
+end
