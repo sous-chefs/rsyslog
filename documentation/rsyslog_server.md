@@ -4,10 +4,14 @@ Configures an rsyslog server that receives remote logs and writes per-host log f
 
 ## Actions
 
-| Action    | Description                                                                   |
-| --------- | ----------------------------------------------------------------------------- |
-| `:create` | Installs/configures rsyslog as a server and renders per-host config. Default. |
-| `:delete` | Removes server config, log directory, and base service artifacts.             |
+| Action     | Description                                                                   |
+| ---------- | ----------------------------------------------------------------------------- |
+| `:create`  | Installs/configures rsyslog as a server and renders per-host config. Default. |
+| `:delete`  | Removes server config, log directory, and base service artifacts.             |
+| `:start`   | Starts the rsyslog systemd unit.                                              |
+| `:stop`    | Stops the rsyslog systemd unit.                                               |
+| `:restart` | Restarts the rsyslog systemd unit.                                            |
+| `:reload`  | Reloads the rsyslog systemd unit.                                             |
 
 ## Properties
 
