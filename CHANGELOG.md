@@ -5,6 +5,13 @@ This file is used to list changes made in each version of the rsyslog cookbook.
 Standardise files with files in sous-chefs/repo-management
 Standardise files with files in sous-chefs/repo-management
 
+## [12.1.0](https://github.com/sous-chefs/rsyslog/compare/v12.0.0...v12.1.0) (2026-09-09)
+
+
+### Features
+
+* Add service actions to client and server resources ([#266](https://github.com/sous-chefs/rsyslog/issues/266)) ([9682fee](https://github.com/sous-chefs/rsyslog/commit/9682fee0f00ae4080111bb436d62ecd0734406ea))
+
 ## [12.0.0](https://github.com/sous-chefs/rsyslog/compare/v11.1.0...v12.0.0) (2026-08-15)
 
 
